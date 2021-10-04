@@ -75,5 +75,4 @@ object Util {
             this[i] = ((boundRange * (this[i] - minValue)) / valueRange) + lowerBound
         }
     }
-
 }

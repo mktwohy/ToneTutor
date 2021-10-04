@@ -18,8 +18,8 @@ data class Harmonic(var freq: Double, var mag: Double)
  * @property fft A List<Double> that holds the Fourier transform of the audio signal
  * @property harmonics
  */
-class AudioSamp(
-    audioData: MutableList<Double>,
+class AudioBuffer(
+    audioData: MutableList<Double>
 ): MutableList<Double> by audioData {
     constructor(): this(emptyList<Double>().toMutableList())
 
@@ -32,10 +32,13 @@ class AudioSamp(
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
 
-    fun dropAndAdd(audioData: List<Double>): AudioSamp {
-        var d = this.drop(audioData.size).toMutableList()
+    companion object{
+
+    }
+    fun dropAndAdd(audioData: List<Double>): AudioBuffer {
+        val d = this.drop(audioData.size).toMutableList()
         d.addAll(audioData)
-        return AudioSamp(d)
+        return AudioBuffer(d)
     }
 
     /**
@@ -44,7 +47,7 @@ class AudioSamp(
      * @param start The start time measured from the beginning of the sample in seconds
      * @param size The number of samples in the subsample
      */
-    fun subSample(start: Double, size: Int): AudioSamp {
+    fun subSample(start: Double, size: Int): AudioBuffer {
         // Calculate the nearest starting index.
         val startIndex = (start * SAMPLE_RATE).roundToInt()
         val endIndex = startIndex+size
@@ -58,7 +61,7 @@ class AudioSamp(
      * @param start The start time measured from the beginning of the sample in seconds
      * @param duration The total elapsed time of the subsample
      */
-    fun subSample(start: Double, duration: Double): AudioSamp {
+    fun subSample(start: Double, duration: Double): AudioBuffer {
         val start_index = Math.round(start*SAMPLE_RATE).toInt()
         val end_index = (start_index + duration*SAMPLE_RATE).toInt()
 
@@ -69,9 +72,7 @@ class AudioSamp(
         val s = SAMPLE_RATE.toDouble()
         return arange(1/s,this.size/s,1/s)
     }
-    /**
-     * The fourier transform of the audio data
-     */
+    /** The fourier transform of the audio data */
     private fun calcFFT(): List<Double> {
         val fd = this.toDoubleArray()
         DoubleFFT_1D(fd.size.toLong()).realForward(fd)
@@ -80,16 +81,12 @@ class AudioSamp(
         }.toList()
     }
 
-    /**
-     * The frequencies associated with fft
-     */
+    /** The frequencies associated with fft */
     private fun calcFreq(): List<Double> {
         return arange(fft.size.toDouble()).map {it*SAMPLE_RATE/(fft.size*2)}
     }
 
-    /**
-     * The harmonics extracted from the fourier transform
-     */
+    /** The harmonics extracted from the fourier transform */
     private fun calcHarmonics(): List<Harmonic> {
         data class Stuff(val freq: List<Double>, val mag: List<Double>)
 
@@ -108,7 +105,7 @@ class AudioSamp(
 
     /** The pitch (fundamental frequency) of the audio sample */
     private fun calcPitch(): Double {
-        val calcScores = twm_score(harmonics)
+        val calcScores = twmScore(harmonics)
         val pass1 = arange(-29.0, 7.0).map { n -> 440 * 2.0.pow(n / 12) }
             .map { Harmonic(it, calcScores(it)) }
             .minByOrNull { it.mag }?.freq as Double
@@ -138,8 +135,8 @@ class AudioSamp(
         return fingerprint.asSequence().map { it.freq*it.mag }.sum()
     }
 
-    operator fun get(index: IntRange): AudioSamp {
-        return AudioSamp(index.map { this[it] }.toMutableList())
+    operator fun get(index: IntRange): AudioBuffer {
+        return AudioBuffer(index.map { this[it] }.toMutableList())
     }
 }
 

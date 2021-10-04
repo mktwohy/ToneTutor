@@ -22,11 +22,11 @@ import kotlin.math.roundToLong
  *
  * @return A function that takes a fundamental frequency as input and returns the score
  */
-fun twm_score(harmonics: List<Harmonic>,
-              p: Double = 0.2,
-              q: Double = 1.4,
-              r: Double =1.0,
-              mtopOnly: Boolean = false, ptomOnly: Boolean = false): (Double) -> Double {
+fun twmScore(harmonics: List<Harmonic>,
+             p: Double = 0.2,
+             q: Double = 1.4,
+             r: Double = 1.0,
+             mtopOnly: Boolean = false, ptomOnly: Boolean = false): (Double) -> Double {
 
     // Calculate the predicted harmonics of the fundamental frequency
     val maxFreq = harmonics.maxByOrNull { it.freq }?.freq ?: 0.0
