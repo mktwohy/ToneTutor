@@ -7,7 +7,7 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
-fun Color.mix(that: Color) =
+operator fun Color.plus(that: Color) =
     Color(
         this.red/2 + that.red/2,
         this.green/2 + that.green/2,
@@ -15,8 +15,7 @@ fun Color.mix(that: Color) =
         this.alpha/2 + that.alpha/2
     )
 
-operator fun Color.plus(that: Color) = this.mix(that)
-
+/** Converts frequency to closest note estimate*/
 fun Double.toNote(): Note{
     val notes = Note.toList()
     var i = 0
@@ -33,23 +32,23 @@ fun Double.toNote(): Note{
     return if(lowerErr < upperErr) lowerNote else upperNote
 }
 
-fun logd(message: Any){ Log.d("m_tag",message.toString()) }
+fun logd(message: Any){ Log.d("myTag",message.toString()) }
 
 fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double> {
-    val lstart: Double
-    val lstop: Double
+    val lStart: Double
+    val lStop: Double
 
     if (stop == null) {
-        lstart = 0.0
-        lstop = start-1.0
+        lStart = 0.0
+        lStop = start-1.0
     }
     else {
-        lstart = start
-        lstop = stop
+        lStart = start
+        lStop = stop
     }
 
-    val num = ((lstop-lstart)/step).roundToInt() + 1
-    return List(num) { index -> step*index + lstart }
+    val num = ((lStop-lStart)/step).roundToInt() + 1
+    return List(num) { index -> step*index + lStart }
 }
 
 fun poly(x: List<Double>, y: List<Double>): Harmonic {

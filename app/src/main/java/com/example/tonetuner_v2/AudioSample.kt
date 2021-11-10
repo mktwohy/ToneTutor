@@ -14,12 +14,15 @@ data class Harmonic(var freq: Double, var mag: Double)
  * @constructor other tasty stuff
  * @property fft A List<Double> that holds the Fourier transform of the audio signal
  * @property harmonics
+ * @author gtruch
  */
 class AudioSample(
-    audioData: MutableList<Double>
+    audioData: MutableList<Double>,
+    val sampleRate: Int = SAMPLE_RATE
 ): MutableList<Double> by audioData {
     constructor(): this(emptyList<Double>().toMutableList())
 
+    // ToDo: is lazy delegation necessary here? I think get() would suffice.
     val time        by lazy { calcTime() }
     val fft         by lazy { calcFFT() }
     val harmonics   by lazy { calcHarmonics() }
@@ -29,7 +32,7 @@ class AudioSample(
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
 
-    // Are you creating a new object every time you drop and add?
+    // ToDo: This should not create a new object every time.
     fun dropAndAdd(audioData: List<Double>): AudioSample {
         val d = this.drop(audioData.size).toMutableList()
         d.addAll(audioData)
@@ -44,7 +47,7 @@ class AudioSample(
      */
     fun subSample(start: Double, size: Int): AudioSample {
         // Calculate the nearest starting index.
-        val startIndex = (start * SAMPLE_RATE).roundToInt()
+        val startIndex = (start * sampleRate).roundToInt()
         val endIndex = startIndex+size
 
         return this[startIndex..endIndex]
@@ -57,14 +60,14 @@ class AudioSample(
      * @param duration The total elapsed time of the subsample
      */
     fun subSample(start: Double, duration: Double): AudioSample {
-        val start_index = Math.round(start*SAMPLE_RATE).toInt()
-        val end_index = (start_index + duration*SAMPLE_RATE).toInt()
+        val start_index = Math.round(start*sampleRate).toInt()
+        val end_index = (start_index + duration*sampleRate).toInt()
 
         return this[start_index..end_index]
     }
 
     private fun calcTime(): List<Double> {
-        val s = SAMPLE_RATE.toDouble()
+        val s = sampleRate.toDouble()
         return arange(1/s,this.size/s,1/s)
     }
     /** The fourier transform of the audio data */
@@ -78,7 +81,7 @@ class AudioSample(
 
     /** The frequencies associated with fft */
     private fun calcFreq(): List<Double> {
-        return arange(fft.size.toDouble()).map {it*SAMPLE_RATE/(fft.size*2)}
+        return arange(fft.size.toDouble()).map {it*sampleRate/(fft.size*2)}
     }
 
     /** The harmonics extracted from the fourier transform */
@@ -121,7 +124,7 @@ class AudioSample(
         val p = pitch
         return arange(1.0,15.0)
             .map { h ->
-                val i = Math.round(h*p*fft.size*2/SAMPLE_RATE).toInt()
+                val i = Math.round(h*p*fft.size*2/sampleRate).toInt()
                 Harmonic(h, quadInterp(h*p, freq.slice(i-1..i+1), fft.slice(i-1..i+1)))
             }
     }

@@ -6,15 +6,17 @@ import android.media.MediaRecorder
 import android.util.Log
 import com.example.tonetuner_v2.Constants.BUFFER_SIZE
 import com.example.tonetuner_v2.Constants.SAMPLE_RATE
-
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
 /**
- * AudioProc.java - Opens the microphone and buffers audio data
+ * Opens the microphone and buffers audio data
  * @author gtruch
  */
-class AudioCapture : Runnable {
+class AudioCapture(
+    val sampleRate: Int = SAMPLE_RATE,
+    val bufferSize: Int = BUFFER_SIZE,
+) : Runnable {
     private var record: AudioRecord? = null
     private var recordThread: Thread? = null
     private var running = false
@@ -23,23 +25,25 @@ class AudioCapture : Runnable {
     init {
         /** Open the microphone and create the recording thread.*/
 
-        record = AudioRecord(MediaRecorder.AudioSource.DEFAULT,SAMPLE_RATE,
+        // Todo: Figure out how to properly get permissions from user
+        record = AudioRecord(
+            MediaRecorder.AudioSource.DEFAULT,
+            sampleRate,
             AudioFormat.CHANNEL_IN_MONO,
             AudioFormat.ENCODING_PCM_FLOAT,
-            BUFFER_SIZE)
+            bufferSize)
 
         recordThread = Thread(this)
     }
 
-    /**
-     * Begin capturing and buffering audio
-     */
+    /** Begin capturing and buffering audio */
     fun startCapture() {
         running = true
         recordThread?.start()
     }
 
 
+    // Todo: don't use getAudioData(). Instead, make audioData an attributes with get()
     /**
      * Retrieve audio data from the buffer.
      * @param n The number of elements to take
@@ -64,7 +68,7 @@ class AudioCapture : Runnable {
 
         Log.v("AudioProc", "Start recording")
 
-        val audioBuffer = FloatArray(BUFFER_SIZE)
+        val audioBuffer = FloatArray(bufferSize)
         while (running) {
 
             // Fetch data from the microphone
