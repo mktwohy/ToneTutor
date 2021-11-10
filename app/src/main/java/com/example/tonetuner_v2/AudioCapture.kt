@@ -20,14 +20,13 @@ class AudioCapture(
     private var record: AudioRecord? = null
     private var recordThread: Thread? = null
     private var running = false
-    // Todo I made the size of queue equal to bufferSize (before, it was 4096). is this correct?
     private val queue: BlockingQueue<Double> = ArrayBlockingQueue(bufferSize)
 
     init {
         /** Open the microphone and create the recording thread.*/
 
         // todo: Figure out how to properly get permissions from user
-        // todo: fix "Error code -20 when initializing native AudioRecord object"
+            // This works now, but I'm not sure why this is still red underlined
         record = AudioRecord(
             MediaRecorder.AudioSource.DEFAULT,
             sampleRate,
@@ -46,6 +45,7 @@ class AudioCapture(
 
 
     // Todo: don't use getAudioData(). Instead, make audioData an attributes with get()
+        // eh... this might be fine since you input your size
     /**
      * Retrieve audio data from the buffer.
      * @param n The number of elements to take
