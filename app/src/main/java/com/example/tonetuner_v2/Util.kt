@@ -2,12 +2,32 @@ package com.example.tonetuner_v2
 
 import android.util.Log
 import androidx.compose.ui.graphics.Color
+import java.util.concurrent.BlockingQueue
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+/** Similar to offer(), but, if there is no space, it removes an element to make room */
+fun <T> BlockingQueue<T>.forcedOffer(element: T){
+    if(remainingCapacity() == 0) poll()
+    offer(element)
+}
+
+fun List<List<Double>>.sumLists(): List<Double> =
+    when(size){
+        0 -> listOf()
+        1 -> this[0]
+        else -> List(this.minOf { it.size } ){ index ->
+            var sum = 0.0
+            for(list in this){
+                sum += list[index]
+            }
+            sum
+        }
+    }
 
 operator fun Color.plus(that: Color) =
     Color(

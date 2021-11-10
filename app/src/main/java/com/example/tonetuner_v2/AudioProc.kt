@@ -1,8 +1,9 @@
 package com.example.tonetuner_v2
 
-import com.example.tonetuner_v2.AppModel.BUFFER_SIZE
-import java.lang.Double.sum
-import java.util.*
+import com.example.tonetuner_v2.AppModel.FFT_QUEUE_SIZE
+import com.example.tonetuner_v2.AppModel.PITCH_QUEUE_SIZE
+import com.example.tonetuner_v2.AppModel.PROC_BUFFER_SIZE
+import com.example.tonetuner_v2.AppModel.QUALITY_QUEUE_SIZE
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
@@ -10,34 +11,27 @@ import java.util.concurrent.BlockingQueue
  * Threaded wrapper class for AudioSample. It continually pulls data from AudioCapture and fills
  * AudioSample. This ensures that attributes [fft], [pitch], and [quality] are always up-to-date
  *
- * @param[audioCapture]    A reference to an AudioProc thread that is capturing raw
- *                      audio data from the mic
- * @param[signalQueue]  A reference to a queue to put the processed audio data
- * @author gtruch
+ * @param[audioCapture] [AudioCapture] audio capture for getting mic input
+ * @author gtruch and Michael Twohy
  */
 class AudioProc(
     val audioCapture: AudioCapture,
-    val bufferSize: Int = BUFFER_SIZE,
+    val bufferSize: Int = PROC_BUFFER_SIZE,
 ) : Runnable {
 
     private val signalQueue: BlockingQueue<Double> = ArrayBlockingQueue(bufferSize)
-    private val numAvg = 5
-    private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(numAvg)
-    private val pitchQueue:     BlockingQueue<Double> = ArrayBlockingQueue(numAvg)
-    private val qualityQueue:   BlockingQueue<Double> = ArrayBlockingQueue(numAvg)
+    private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
+    private val pitchQueue:     BlockingQueue<Double> = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
+    private val qualityQueue:   BlockingQueue<Double> = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
     private var running = false
 
-    // todo not sure how to do fft, since it's not a single number
     val fft: List<Double>
-        get() = fftQueue.toList().sumLists().map { it/numAvg }
+        get() = fftQueue.toList().sumLists().map { it/FFT_QUEUE_SIZE }
     val pitch: Double
         get() = pitchQueue.average()
     val quality: Double
         get() = qualityQueue.average()
 
-    // Todo: Add fft, pitch, and quality as attributes. idk how to do that while being thread-safe
-    // Perhaps the solution would be that run() updates a blockingQueue, and whenever an attribute
-    // calls get(), it takes the average?
     init {
         running = true
         Thread(this).start()
@@ -45,18 +39,17 @@ class AudioProc(
 
     override fun run() {
         // todo should I use bufferSize rather than frame?
-        val frame = 2048 // Number of samples in one frame of audio data
         var audioSample = AudioSample()            // Audio signal processor
 //        val qualityQueue: LinkedList<Double> = LinkedList()
 //        val pitchQueue: LinkedList<Double> = LinkedList()
         val threshold = .01
         val pitchDefault = 0.123456
         val qualityDefault = 3.0
-        val fftDefault = List(BUFFER_SIZE){ 0.0 } // TEMPORARY SIZE
+        val fftDefault = List(512){ 0.0 } // TEMPORARY SIZE
 
         while (running) {
-            // Fetch 2048 elements from the audioCapture
-            val audioData = audioCapture.getAudioData(frame)
+            // Fetch [frame] elements from the audioCapture
+            val audioData = audioCapture.getAudioData(bufferSize)
 
             // Feed them to the audioSample
             audioSample = audioSample.dropAndAdd(audioData)
@@ -103,24 +96,6 @@ class AudioProc(
                 signalQueue.offer(accum/avg_q.size());
 */
         }
-    }
-}
-
-fun <T>BlockingQueue<T>.forcedOffer(element: T){
-    if(remainingCapacity() == 0) poll()
-    offer(element)
-}
-
-fun List<List<Double>>.sumLists(): List<Double>
-    = when(size){
-        0 -> listOf()
-        1 -> this[0]
-        else -> List(this.minOf { it.size } ){ index ->
-            var sum = 0.0
-            for(list in this){
-                sum += list[index]
-            }
-            sum
     }
 }
 

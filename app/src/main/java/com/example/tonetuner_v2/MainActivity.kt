@@ -19,16 +19,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 object AppModel{
+    // State
     var fft by mutableStateOf(listOf<Float>())
     var pitch by mutableStateOf(123.45)
     var quality by mutableStateOf(123.45)
     var currentNote by mutableStateOf(Note.A_4)
 
-    const val BUFFER_SIZE = 4096
-    const val SAMPLE_RATE = 44100
+    // Settings (requires app restart)
+    const val PROC_BUFFER_SIZE      = 512    // values < 512 cause crash
+    const val CAPTURE_BUFFER_SIZE   = 512
+    const val SAMPLE_RATE           = 44100
+    const val UI_LAG                = 10L
+    const val FFT_QUEUE_SIZE        = 5
+    const val QUALITY_QUEUE_SIZE    = 10
+    const val PITCH_QUEUE_SIZE      = 40
+
 }
 
-// Todo: Redo this entire activity so that it makes use of AudioProc
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +64,9 @@ class MainActivity : ComponentActivity() {
                     pitch = audioProc.pitch
                     currentNote = pitch.toNote()
                     quality = audioProc.quality
-                    fft = audioProc.fft.map { it.toFloat() }
+                    fft = audioProc.fft.map { it.toFloat() - 1 }
+                    Thread.sleep(UI_LAG)
                 }
-                Thread.sleep(10)
             }
         }.start()
 
@@ -75,6 +82,10 @@ class MainActivity : ComponentActivity() {
                 Text(
                     text = "Freq: ${AppModel.pitch.toString().substring(0, 3)} " +
                             "\nNote: ${AppModel.currentNote}",
+                    color = Color.White
+                )
+                Text(
+                    text = "Quality: ${AppModel.quality.toString().substring(0, 3)} ",
                     color = Color.White
                 )
 
