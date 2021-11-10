@@ -5,6 +5,7 @@ import org.jtransforms.fft.DoubleFFT_1D
 import java.lang.Math.log
 import kotlin.math.pow
 import kotlin.math.roundToInt
+import kotlin.math.sqrt
 
 data class Harmonic(var freq: Double, var mag: Double)
 
@@ -77,7 +78,7 @@ class AudioSample(
         val fd = this.toDoubleArray()
         DoubleFFT_1D(fd.size.toLong()).realForward(fd)
         return fd.toList().asSequence().chunked(2).map {
-            Math.sqrt(it[0].pow(2) + it[1].pow(2))
+            sqrt(it[0].pow(2) + it[1].pow(2))
         }.toList()
     }
 
