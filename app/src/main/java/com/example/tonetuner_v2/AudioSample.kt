@@ -20,6 +20,7 @@ class AudioSample(
     audioData: MutableList<Double>,
     val sampleRate: Int = SAMPLE_RATE
 ): MutableList<Double> by audioData {
+    // Todo: improper usage of constructor. Use default parameter instead.
     constructor(): this(emptyList<Double>().toMutableList())
 
     // ToDo: is lazy delegation necessary here? I think get() would suffice.
@@ -60,16 +61,17 @@ class AudioSample(
      * @param duration The total elapsed time of the subsample
      */
     fun subSample(start: Double, duration: Double): AudioSample {
-        val start_index = Math.round(start*sampleRate).toInt()
-        val end_index = (start_index + duration*sampleRate).toInt()
+        val startIndex = (start * sampleRate).roundToInt()
+        val endIndex = (startIndex + duration*sampleRate).toInt()
 
-        return this[start_index..end_index]
+        return this[startIndex..endIndex]
     }
 
     private fun calcTime(): List<Double> {
         val s = sampleRate.toDouble()
         return arange(1/s,this.size/s,1/s)
     }
+
     /** The fourier transform of the audio data */
     private fun calcFFT(): List<Double> {
         val fd = this.toDoubleArray()
@@ -86,16 +88,16 @@ class AudioSample(
 
     /** The harmonics extracted from the fourier transform */
     private fun calcHarmonics(): List<Harmonic> {
-        data class Stuff(val freq: List<Double>, val mag: List<Double>)
+        data class Spectrum(val freqs: List<Double>, val mags: List<Double>)
 
         val maxMag = fft.maxOrNull() as Double
         return fft.slice(0 until fft.size - 2).asSequence()
             .mapIndexed { index, _ ->
-                Stuff(freq.slice(index..index + 2), fft.slice(index..index + 2))
+                Spectrum(freq.slice(index..index + 2), fft.slice(index..index + 2))
             }.filter {
-                it.mag[0] < it.mag[1] && it.mag[2] < it.mag[1]
+                it.mags[0] < it.mags[1] && it.mags[2] < it.mags[1]
             }.map {
-                poly(it.freq, it.mag)
+                poly(it.freqs, it.mags)
             }.filter {
                 it.mag / maxMag > 0.04
             }.toList()

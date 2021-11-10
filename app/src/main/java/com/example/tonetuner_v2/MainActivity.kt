@@ -24,6 +24,7 @@ object AppModel{
     var currentNote by mutableStateOf(Note.A_4)
 }
 
+// Todo: Redo this entire activity so that it makes use of AudioProc
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,31 +82,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-}
-
-
-@Composable
-fun NoteList(modifier: Modifier, freq: Double, closestNote: Note){
-    val listState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
-
-    LazyRow(
-        modifier = modifier,
-        state = listState,
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-
-    ){
-        coroutineScope.launch {
-            listState.animateScrollToItem(Note.toList().indexOf(closestNote))
-        }
-        items(96){
-            Text(
-                text = "${Note.toList()[it]}",
-                color = Color.White,
-                fontSize = 40.sp
-            )
-        }
-    }
 }
 
 val audioCapture = AudioCapture()
