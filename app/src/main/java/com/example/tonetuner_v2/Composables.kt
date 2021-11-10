@@ -75,7 +75,7 @@ fun XYPlot(
 }
 
 @Composable
-fun NoteList(modifier: Modifier, freq: Double, closestNote: Note){
+fun NoteList(modifier: Modifier, closestNote: Note){
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 

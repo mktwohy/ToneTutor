@@ -4,8 +4,8 @@ import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.util.Log
-import com.example.tonetuner_v2.Constants.BUFFER_SIZE
-import com.example.tonetuner_v2.Constants.SAMPLE_RATE
+import com.example.tonetuner_v2.AppModel.BUFFER_SIZE
+import com.example.tonetuner_v2.AppModel.SAMPLE_RATE
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 

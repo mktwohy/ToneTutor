@@ -1,6 +1,6 @@
 package com.example.tonetuner_v2
 
-import com.example.tonetuner_v2.Constants.SAMPLE_RATE
+import com.example.tonetuner_v2.AppModel.SAMPLE_RATE
 import org.jtransforms.fft.DoubleFFT_1D
 import java.lang.Math.log
 import kotlin.math.pow

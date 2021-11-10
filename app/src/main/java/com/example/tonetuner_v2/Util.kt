@@ -6,6 +6,8 @@ import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+import kotlin.system.measureNanoTime
+import kotlin.system.measureTimeMillis
 
 operator fun Color.plus(that: Color) =
     Color(
@@ -32,7 +34,29 @@ fun Double.toNote(): Note{
     return if(lowerErr < upperErr) lowerNote else upperNote
 }
 
-fun logd(message: Any){ Log.d("myTag",message.toString()) }
+fun logd(message: Any){ Log.d("m_tag",message.toString()) }
+
+fun logTime(title: String = "", block: () -> Unit){
+    measureTimeMillis { block() }.also { logd("$title $it ms") }
+}
+
+fun avgTimeMillis(repeat: Int, block: () -> Unit): Double {
+    val times = mutableListOf<Long>()
+    repeat(repeat){
+        measureTimeMillis{ block() }
+            .also{ times += it }
+    }
+    return times.average()
+}
+
+fun avgTimeNano(repeat: Int, block: () -> Any?): Double {
+    val times = mutableListOf<Long>()
+    repeat(repeat){
+        measureNanoTime{ block() }
+            .also{ times += it }
+    }
+    return times.average()
+}
 
 fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double> {
     val lStart: Double

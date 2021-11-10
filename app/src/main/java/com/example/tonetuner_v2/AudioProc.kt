@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2
 
-import com.example.tonetuner_v2.Constants.BUFFER_SIZE
+import com.example.tonetuner_v2.AppModel.BUFFER_SIZE
+import java.lang.Double.sum
 import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
@@ -20,15 +21,15 @@ class AudioProc(
 ) : Runnable {
 
     private val signalQueue: BlockingQueue<Double> = ArrayBlockingQueue(bufferSize)
-    private val numAvg = 10
-    private val fftQueue:       BlockingQueue<Double> = ArrayBlockingQueue(numAvg)
+    private val numAvg = 5
+    private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(numAvg)
     private val pitchQueue:     BlockingQueue<Double> = ArrayBlockingQueue(numAvg)
     private val qualityQueue:   BlockingQueue<Double> = ArrayBlockingQueue(numAvg)
     private var running = false
 
     // todo not sure how to do fft, since it's not a single number
-//    val fft: List<Double>
-//        get() = fftQueue.toList()
+    val fft: List<Double>
+        get() = fftQueue.toList().sumLists().map { it/numAvg }
     val pitch: Double
         get() = pitchQueue.average()
     val quality: Double
@@ -51,6 +52,7 @@ class AudioProc(
         val threshold = .01
         val pitchDefault = 0.123456
         val qualityDefault = 3.0
+        val fftDefault = List(BUFFER_SIZE){ 0.0 } // TEMPORARY SIZE
 
         while (running) {
             // Fetch 2048 elements from the audioCapture
@@ -59,7 +61,7 @@ class AudioProc(
             // Feed them to the audioSample
             audioSample = audioSample.dropAndAdd(audioData)
 
-            val fft = audioSample.fft
+//            val fft = audioSample.fft
 //            plot.update(fft.toTypedArray(), length = fft.size / 8)
 
             // Calculate the tone score
@@ -76,15 +78,14 @@ class AudioProc(
 //                pitchQueue.add(pitchDefault)
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
-
+                fftQueue.forcedOffer(fftDefault)
             } else {
 //                qualityQueue.add(audioSample.benya)
 //                pitchQueue.add(audioSample.pitch)
                 qualityQueue.forcedOffer(audioSample.benya)
                 pitchQueue.forcedOffer(audioSample.pitch)
-
+                fftQueue.forcedOffer(audioSample.fft)
             }
-
 
 //            if (qualityQueue.size > numAvg) {
 //                qualityQueue.remove()
@@ -109,3 +110,18 @@ fun <T>BlockingQueue<T>.forcedOffer(element: T){
     if(remainingCapacity() == 0) poll()
     offer(element)
 }
+
+fun List<List<Double>>.sumLists(): List<Double>
+    = when(size){
+        0 -> listOf()
+        1 -> this[0]
+        else -> List(this.minOf { it.size } ){ index ->
+            var sum = 0.0
+            for(list in this){
+                sum += list[index]
+            }
+            sum
+    }
+}
+
+
