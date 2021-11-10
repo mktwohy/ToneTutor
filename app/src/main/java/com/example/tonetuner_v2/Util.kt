@@ -1,78 +1,135 @@
 package com.example.tonetuner_v2
 
 import android.util.Log
+import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 //sampleRate / duration of time bins
 
-object Util {
-    fun logd(message: Any){ Log.d("m_tag",message.toString()) }
+fun logd(message: Any){ Log.d("m_tag",message.toString()) }
 
-    fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double> {
-        val lstart: Double
-        val lstop: Double
+fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double> {
+    val lstart: Double
+    val lstop: Double
 
-        if (stop == null) {
-            lstart = 0.0
-            lstop = start-1.0
-        }
-        else {
-            lstart = start
-            lstop = stop
-        }
-
-        val num = ((lstop-lstart)/step).roundToInt() + 1
-        return List(num) { index -> step*index + lstart }
+    if (stop == null) {
+        lstart = 0.0
+        lstop = start-1.0
+    }
+    else {
+        lstart = start
+        lstop = stop
     }
 
-    fun poly(x: List<Double>, y: List<Double>): Harmonic {
-        val coef = polyFit(x,y)
-        val a = coef[0]
-        val b = coef[1]
-        val c = coef[2]
+    val num = ((lstop-lstart)/step).roundToInt() + 1
+    return List(num) { index -> step*index + lstart }
+}
 
-        return Harmonic(-b/(2*a), c-b.pow(2)/(4*a))
+fun poly(x: List<Double>, y: List<Double>): Harmonic {
+    val coef = polyFit(x,y)
+    val a = coef[0]
+    val b = coef[1]
+    val c = coef[2]
+
+    return Harmonic(-b/(2*a), c-b.pow(2)/(4*a))
+}
+
+fun quadInterp(x: Double, xVals: List<Double>, yVals: List<Double>): Double {
+    val coef = polyFit(xVals,yVals)
+    return coef[0]*x.pow(2)+coef[1]*x+coef[2]
+}
+
+fun polyFit(x: List<Double>, y: List<Double> ) : List<Double> {
+    val denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
+    val a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
+    val b = (x[2].pow(2) * (y[0] - y[1]) + x[1].pow(2) * (y[2] - y[0]) + x[0].pow(2) * (y[1] - y[2])) / denom
+    val c = (x[1]*x[2]*(x[1]-x[2])*y[0]+x[2] * x[0] * (x[2] - x[0]) * y[1] + x[0] * x[1] * (x[0] - x[1]) * y[2]) / denom
+
+    return listOf(a,b,c)
+}
+
+
+fun MutableList<Float>.normalize(
+    lowerBound: Float = -1f,
+    upperBound: Float = 1f
+) {
+    //Check that array isn't empty
+    if (isEmpty()) return
+
+    val minValue   = this.minByOrNull { it }!!
+    val maxValue   = this.maxByOrNull { it }!!
+    val valueRange = (maxValue - minValue).toFloat()
+    val boundRange = (upperBound - lowerBound).toFloat()
+
+    //Check that array isn't already normalized
+    // (I would use in range, but this produces excess memory)
+    if ((minValue == 0f && maxValue == 0f)
+        || (maxValue <= upperBound && maxValue > upperBound
+                && minValue >= lowerBound && minValue < lowerBound)) {
+        return
     }
 
-    fun quadInterp(x: Double, xVals: List<Double>, yVals: List<Double>): Double {
-        val coef = polyFit(xVals,yVals)
-        return coef[0]*x.pow(2)+coef[1]*x+coef[2]
+    //Normalize
+    for (i in indices) {
+        this[i] = ((boundRange * (this[i] - minValue)) / valueRange) + lowerBound
     }
+}
 
-    fun polyFit(x: List<Double>, y: List<Double> ) : List<Double> {
-        val denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
-        val a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
-        val b = (x[2].pow(2) * (y[0] - y[1]) + x[1].pow(2) * (y[2] - y[0]) + x[0].pow(2) * (y[1] - y[2])) / denom
-        val c = (x[1]*x[2]*(x[1]-x[2])*y[0]+x[2] * x[0] * (x[2] - x[0]) * y[1] + x[0] * x[1] * (x[0] - x[1]) * y[2]) / denom
+/**
+ * Generates a function to calculate Two Way Mismatch scores for pitch detection of an audio signal.
+ *
+ *     Pitch detection algorithm described in:
+ *          Maher and Beauchamp (1994). "Fundamental frequency estimation of
+ *          musical signals using a two-way mismatch procedure," Journal of the
+ *          Acoustical Society of America 95, 2254
+ *
+ * @param harmonics List of harmonics extracted from the fft
+ * @param p Optional.  Adjustable parameter for the score calculation
+ *          Default = 0.1
+ * @param q Optional.  Adjustable parameter for the score calculation
+ *          Default = 1.4
+ * @param r Optional.  Adjustable parameter for the score calculation
+ *          Default = 1.0
+ *
+ * @return A function that takes a fundamental frequency as input and returns the score
+ */
+fun twmScore(harmonics: List<Harmonic>,
+             p: Double = 0.2,
+             q: Double = 1.4,
+             r: Double = 1.0,
+             mtopOnly: Boolean = false, ptomOnly: Boolean = false): (Double) -> Double {
 
-        return listOf(a,b,c)
-    }
+    // Calculate the predicted harmonics of the fundamental frequency
+    val maxFreq = harmonics.maxByOrNull { it.freq }?.freq ?: 0.0
+    val maxMag = harmonics.maxByOrNull { it.mag }?.mag ?: 0.0
 
+    // Create the lambda
+    return { fund ->
+        val numHarmonics = (maxFreq / fund).roundToLong()
 
-    fun MutableList<Float>.normalize(
-        lowerBound: Float = -1f,
-        upperBound: Float = 1f
-    ) {
-        //Check that array isn't empty
-        if (isEmpty()) return
+        // Generate the harmonics of the given fundamental
+        val predictedHarmonics = arange(start = fund, stop = numHarmonics * fund, step = fund)
 
-        val minValue   = this.minByOrNull { it }!!
-        val maxValue   = this.maxByOrNull { it }!!
-        val valueRange = (maxValue - minValue).toFloat()
-        val boundRange = (upperBound - lowerBound).toFloat()
+        // Error based on the distance between each predicted harmonic and its closest measured harmonic
+        val err_ptom = predictedHarmonics.map { ph ->
+            val h = harmonics.minByOrNull { abs(ph - it.freq) } ?: Harmonic(0.0, 0.0)
+            val df = abs(ph - h.freq)
+            df * h.freq.pow(-p) + (h.mag / maxMag) * (q * df * h.freq.pow(-p) - r)
+        }.sum()
 
-        //Check that array isn't already normalized
-        // (I would use in range, but this produces excess memory)
-        if ((minValue == 0f && maxValue == 0f)
-            || (maxValue <= upperBound && maxValue > upperBound
-                    && minValue >= lowerBound && minValue < lowerBound)) {
-            return
-        }
+        // Error based on the distance between each measured harmonic and its closest predicted harmonic
+        val err_mtop = harmonics.map { h ->
+            val ph = predictedHarmonics.minByOrNull {Math.abs(h.freq - it)} ?: 0.0
+            val df = Math.abs(h.freq-ph)
+            df * h.freq.pow(-p) + (h.mag / maxMag) *(q * df * h.freq.pow(-p) - r)
+        }.sum()
 
-        //Normalize
-        for (i in indices) {
-            this[i] = ((boundRange * (this[i] - minValue)) / valueRange) + lowerBound
+        when{
+            ptomOnly -> err_ptom
+            mtopOnly -> err_mtop
+            else     -> err_ptom / numHarmonics + (0.33) * err_mtop / harmonics.size
         }
     }
 }

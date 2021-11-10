@@ -1,9 +1,6 @@
 package com.example.tonetuner_v2
 
 import com.example.tonetuner_v2.Constants.SAMPLE_RATE
-import com.example.tonetuner_v2.Util.arange
-import com.example.tonetuner_v2.Util.quadInterp
-import com.example.tonetuner_v2.Util.poly
 import org.jtransforms.fft.DoubleFFT_1D
 import java.lang.Math.log
 import kotlin.math.pow
@@ -18,7 +15,7 @@ data class Harmonic(var freq: Double, var mag: Double)
  * @property fft A List<Double> that holds the Fourier transform of the audio signal
  * @property harmonics
  */
-class AudioBuffer(
+class AudioSample(
     audioData: MutableList<Double>
 ): MutableList<Double> by audioData {
     constructor(): this(emptyList<Double>().toMutableList())
@@ -35,10 +32,10 @@ class AudioBuffer(
     companion object{
 
     }
-    fun dropAndAdd(audioData: List<Double>): AudioBuffer {
+    fun dropAndAdd(audioData: List<Double>): AudioSample {
         val d = this.drop(audioData.size).toMutableList()
         d.addAll(audioData)
-        return AudioBuffer(d)
+        return AudioSample(d)
     }
 
     /**
@@ -47,7 +44,7 @@ class AudioBuffer(
      * @param start The start time measured from the beginning of the sample in seconds
      * @param size The number of samples in the subsample
      */
-    fun subSample(start: Double, size: Int): AudioBuffer {
+    fun subSample(start: Double, size: Int): AudioSample {
         // Calculate the nearest starting index.
         val startIndex = (start * SAMPLE_RATE).roundToInt()
         val endIndex = startIndex+size
@@ -61,7 +58,7 @@ class AudioBuffer(
      * @param start The start time measured from the beginning of the sample in seconds
      * @param duration The total elapsed time of the subsample
      */
-    fun subSample(start: Double, duration: Double): AudioBuffer {
+    fun subSample(start: Double, duration: Double): AudioSample {
         val start_index = Math.round(start*SAMPLE_RATE).toInt()
         val end_index = (start_index + duration*SAMPLE_RATE).toInt()
 
@@ -135,8 +132,8 @@ class AudioBuffer(
         return fingerprint.asSequence().map { it.freq*it.mag }.sum()
     }
 
-    operator fun get(index: IntRange): AudioBuffer {
-        return AudioBuffer(index.map { this[it] }.toMutableList())
+    operator fun get(index: IntRange): AudioSample {
+        return AudioSample(index.map { this[it] }.toMutableList())
     }
 }
 

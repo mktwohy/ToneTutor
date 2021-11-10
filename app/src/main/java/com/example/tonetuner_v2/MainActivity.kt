@@ -4,32 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.animateScrollBy
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tonetuner_v2.Constants.BUFFER_SIZE
-import com.example.tonetuner_v2.Util.logd
-import com.example.tonetuner_v2.Util.normalize
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 object AppModel{
     var fft by mutableStateOf(listOf<Float>())
@@ -63,6 +50,7 @@ class MainActivity : ComponentActivity() {
         Thread{
             while(true){
                 recordAudio()
+                Thread.sleep(25)
             }
         }.start()
 
@@ -84,9 +72,10 @@ class MainActivity : ComponentActivity() {
 
                 NoteList(
                     modifier = Modifier
-                        .fillMaxWidth(0.25f)
+                        .fillMaxWidth(0.5f)
                         .border(2.dp, Color.White),
-                    currentNote = AppModel.currentNote
+                    closestNote = AppModel.currentNote,
+                    freq = AppModel.pitch
                 )
             }
         }
@@ -96,9 +85,9 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun NoteList(modifier: Modifier, currentNote: Note){
+fun NoteList(modifier: Modifier, freq: Double, closestNote: Note){
     val listState = rememberLazyListState()
-    val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
 
     LazyRow(
         modifier = modifier,
@@ -106,6 +95,9 @@ fun NoteList(modifier: Modifier, currentNote: Note){
         horizontalArrangement = Arrangement.spacedBy(10.dp),
 
     ){
+        coroutineScope.launch {
+            listState.animateScrollToItem(Note.notes.indexOf(closestNote))
+        }
         items(96){
             Text(
                 text = "${Note.notes[it]}",
@@ -120,7 +112,7 @@ val audioCapture = AudioCapture()
 
 val pitches = mutableListOf<Double>()
 fun recordAudio(){
-    var audioBuffer = AudioBuffer()
+    var audioBuffer = AudioSample()
 
     // Fetch samples from the AudioCapture
     val samples = audioCapture.getAudioData(BUFFER_SIZE)
@@ -131,6 +123,8 @@ fun recordAudio(){
 
     //Calculate FFT
     AppModel.fft = audioBuffer.fft
+//        .asSequence()
+//        .filterIndexed { index, d -> index % 2 == 0 }
         .map { it.toFloat() }
         .toMutableList()
         .also { it.normalize() }
@@ -140,7 +134,6 @@ fun recordAudio(){
     if(pitches.size >= 10){
         AppModel.pitch = pitches.average()
         AppModel.currentNote = AppModel.pitch.toNote()
-
         pitches.clear()
     }
 

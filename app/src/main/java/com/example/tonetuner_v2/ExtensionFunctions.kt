@@ -1,7 +1,6 @@
 package com.example.tonetuner_v2
 
 import androidx.compose.ui.graphics.Color
-import com.example.tonetuner_v2.Util.logd
 import kotlin.math.abs
 
 
