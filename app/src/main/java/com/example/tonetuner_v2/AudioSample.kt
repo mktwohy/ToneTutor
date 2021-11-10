@@ -29,9 +29,7 @@ class AudioSample(
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
 
-    companion object{
-
-    }
+    // Are you creating a new object every time you drop and add?
     fun dropAndAdd(audioData: List<Double>): AudioSample {
         val d = this.drop(audioData.size).toMutableList()
         d.addAll(audioData)

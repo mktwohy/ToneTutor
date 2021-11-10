@@ -96,11 +96,11 @@ fun NoteList(modifier: Modifier, freq: Double, closestNote: Note){
 
     ){
         coroutineScope.launch {
-            listState.animateScrollToItem(Note.notes.indexOf(closestNote))
+            listState.animateScrollToItem(Note.toList().indexOf(closestNote))
         }
         items(96){
             Text(
-                text = "${Note.notes[it]}",
+                text = "${Note.toList()[it]}",
                 color = Color.White,
                 fontSize = 40.sp
             )
@@ -136,17 +136,4 @@ fun recordAudio(){
         AppModel.currentNote = AppModel.pitch.toNote()
         pitches.clear()
     }
-
-
-
-
-//    val fft = audioBuffer.fft.map { it.toFloat() }
-
-//    logd(fft)
-//    with(AppModel.fft){
-//        this.clear()
-//        for(i in this.indices){
-//            this.add(fft[i])
-//        }
-//    }
 }

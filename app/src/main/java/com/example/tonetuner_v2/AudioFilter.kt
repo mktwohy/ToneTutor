@@ -11,11 +11,9 @@ import java.util.concurrent.BlockingQueue
  * @param[plot]         A reference to a Plot object for plotting the FFT etc.
  * @param[signalQueue]  A reference to a queue to put the processed audio data
  */
-class AudioFilter(val audioProc: AudioProc,
-                  val plot: Plot,
-                  //val meterActivity: MeterActivity,
-                  val signalQueue: BlockingQueue<Double>,
-                  val mainActivity: MainActivity
+class AudioFilter(
+    val audioCapture: AudioCapture,
+    val signalQueue: BlockingQueue<Double>,
 ) : Runnable {
 
     var running = false
@@ -27,23 +25,22 @@ class AudioFilter(val audioProc: AudioProc,
 
     override fun run() {
         val frame = 2048                        // Number of samples in one frame of audio data
-        var audioSamp = AudioSamp()             // Audio signal processor
+        var audioSample = AudioSample()            // Audio signal processor
         val qualityQueue: LinkedList<Double> = LinkedList()
         val pitchQueue: LinkedList<Double> = LinkedList()
         val numAvg = 10
         val threshold = .01
 
         while (running) {
+            // Fetch 2048 elements from the audioCapture
+            val audioData = audioCapture.getAudioData(frame)
 
-            // Fetch 2048 elements from the audioproc
-            var d = audioProc.getAudioData(frame)
-
-            // Feed them to the audiosamp
-            audioSamp = audioSamp.dropAndAdd(d)
+            // Feed them to the audioSample
+            audioSample = audioSample.dropAndAdd(audioData)
 
             // Get and plot the fft
-            val fft = audioSamp.fft
-            plot.update(fft.toTypedArray(), length = fft.size / 8)
+            val fft = audioSample.fft
+//            plot.update(fft.toTypedArray(), length = fft.size / 8)
 
             // Calculate the tone score
 //            val p = audioSamp.pitch
@@ -54,12 +51,12 @@ class AudioFilter(val audioProc: AudioProc,
 //            val benya = audioSamp.benya
 //            val pitch = audioSamp.pitch
 
-            if (audioSamp.maxOrNull() ?: 0.0 < threshold) {
+            if (audioSample.maxOrNull() ?: 0.0 < threshold) {
                 qualityQueue.add(3.0)
                 pitchQueue.add(0.0)
             } else {
-                qualityQueue.add(audioSamp.benya)
-                pitchQueue.add(audioSamp.pitch)
+                qualityQueue.add(audioSample.benya)
+                pitchQueue.add(audioSample.pitch)
             }
 
 
@@ -69,10 +66,9 @@ class AudioFilter(val audioProc: AudioProc,
             }
 
 
-            mainActivity.updateQuality(qualityQueue.average())
-            mainActivity.updatePitch(pitchQueue.average())
+//            mainActivity.updateQuality(qualityQueue.average())
+//            mainActivity.updatePitch(pitchQueue.average())
             signalQueue.offer(qualityQueue.average())
-
 
             /*
             if (max_amplitude < threshold)
@@ -80,8 +76,6 @@ class AudioFilter(val audioProc: AudioProc,
             else
                 signalQueue.offer(accum/avg_q.size());
 */
-
-
         }
     }
 }

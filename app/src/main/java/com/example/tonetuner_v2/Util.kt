@@ -1,12 +1,37 @@
 package com.example.tonetuner_v2
 
 import android.util.Log
+import androidx.compose.ui.graphics.Color
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
-//sampleRate / duration of time bins
+fun Color.mix(that: Color) =
+    Color(
+        this.red/2 + that.red/2,
+        this.green/2 + that.green/2,
+        this.blue/2 + that.blue/2,
+        this.alpha/2 + that.alpha/2
+    )
+
+operator fun Color.plus(that: Color) = this.mix(that)
+
+fun Double.toNote(): Note{
+    val notes = Note.toList()
+    var i = 0
+    while(i < notes.size && this >= notes[i].freq) {
+        i++
+    }
+
+    val lowerNote = notes[i]
+    val upperNote = notes[i+1]
+
+    val lowerErr = abs(this - lowerNote.freq)
+    val upperErr = abs(upperNote.freq - this)
+
+    return if(lowerErr < upperErr) lowerNote else upperNote
+}
 
 fun logd(message: Any){ Log.d("m_tag",message.toString()) }
 
