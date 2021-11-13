@@ -18,13 +18,9 @@ data class Harmonic(var freq: Double, var mag: Double)
  * @author gtruch
  */
 class AudioSample(
-    audioData: MutableList<Double>,
+    audioData: MutableList<Double> = mutableListOf(),
     val sampleRate: Int = SAMPLE_RATE
 ): MutableList<Double> by audioData {
-    // Todo: improper usage of constructor. Use default parameter instead.
-    constructor(): this(emptyList<Double>().toMutableList())
-
-    // ToDo: is lazy delegation necessary here? I think get() would suffice.
     val time        by lazy { calcTime() }
     val fft         by lazy { calcFFT() }
     val harmonics   by lazy { calcHarmonics() }
@@ -35,6 +31,8 @@ class AudioSample(
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
 
     // ToDo: This should not create a new object every time.
+    // todo: achieve same laziness with more memory efficiency
+        // whenever data is updated, set attrs to null
     fun dropAndAdd(audioData: List<Double>): AudioSample {
         val d = this.drop(audioData.size).toMutableList()
         d.addAll(audioData)

@@ -37,6 +37,8 @@ class AudioProc(
         Thread(this).start()
     }
 
+    //todo add method to stop thread
+
     override fun run() {
         // todo should I use bufferSize rather than frame?
         var audioSample = AudioSample()            // Audio signal processor

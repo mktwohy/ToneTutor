@@ -118,7 +118,6 @@ fun polyFit(x: List<Double>, y: List<Double> ) : List<Double> {
     return listOf(a,b,c)
 }
 
-
 fun MutableList<Float>.normalize(
     lowerBound: Float = -1f,
     upperBound: Float = 1f

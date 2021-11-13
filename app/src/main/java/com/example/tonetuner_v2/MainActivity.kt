@@ -33,7 +33,6 @@ object AppModel{
     const val FFT_QUEUE_SIZE        = 5
     const val QUALITY_QUEUE_SIZE    = 10
     const val PITCH_QUEUE_SIZE      = 40
-
 }
 
 class MainActivity : ComponentActivity() {
@@ -88,7 +87,6 @@ class MainActivity : ComponentActivity() {
                     text = "Quality: ${AppModel.quality.toString().substring(0, 3)} ",
                     color = Color.White
                 )
-
                 NoteList(
                     modifier = Modifier
                         .fillMaxWidth(0.5f)

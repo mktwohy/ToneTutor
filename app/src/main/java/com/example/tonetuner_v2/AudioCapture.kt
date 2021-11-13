@@ -43,9 +43,6 @@ class AudioCapture(
         recordThread?.start()
     }
 
-
-    // Todo: don't use getAudioData(). Instead, make audioData an attributes with get()
-        // eh... this might be fine since you input your size
     /**
      * Retrieve audio data from the buffer.
      * @param n The number of elements to take
@@ -80,8 +77,8 @@ class AudioCapture(
             // Put data into the blocking queue
             audioBuffer.forEach { queue.offer(it.toDouble()) }
 
-
-            recordThread?.isAlive
+            // Todo if something broke, uncomment this:
+            // recordThread?.isAlive
         }
         record?.stop()
         record?.release()
