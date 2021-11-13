@@ -11,11 +11,11 @@ import java.util.concurrent.BlockingQueue
  * Threaded wrapper class for AudioSample. It continually pulls data from AudioCapture and fills
  * AudioSample. This ensures that attributes [fft], [pitch], and [quality] are always up-to-date
  *
- * @param[audioCapture] [AudioCapture] audio capture for getting mic input
+ * @param[audioSource] [AudioCapture] audio capture for getting mic input
  * @author gtruch and Michael Twohy
  */
 class AudioProc(
-    val audioCapture: AudioCapture,
+    val audioSource: AudioSource,
     val bufferSize: Int = PROC_BUFFER_SIZE,
 ) : Runnable {
 
@@ -51,7 +51,7 @@ class AudioProc(
 
         while (running) {
             // Fetch [frame] elements from the audioCapture
-            val audioData = audioCapture.getAudioData(bufferSize)
+            val audioData = audioSource.getAudio(bufferSize)
 
             // Feed them to the audioSample
             audioSample = audioSample.dropAndAdd(audioData)

@@ -16,7 +16,7 @@ import java.util.concurrent.BlockingQueue
 class AudioCapture(
     val sampleRate: Int = SAMPLE_RATE,
     val bufferSize: Int = CAPTURE_BUFFER_SIZE,
-) : Runnable {
+) : Runnable, AudioSource {
     private var record: AudioRecord? = null
     private var recordThread: Thread? = null
     private var running = false
@@ -48,7 +48,7 @@ class AudioCapture(
      * @param n The number of elements to take
      * @return An ArrayList of data elements
      */
-    fun getAudioData(bufferSize: Int) =
+    override fun getAudio(bufferSize: Int) =
         List<Double>(bufferSize) { queue.take() }
 
 
