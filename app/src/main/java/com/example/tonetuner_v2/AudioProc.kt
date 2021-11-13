@@ -18,11 +18,9 @@ class AudioProc(
     val audioSource: AudioSource,
     val bufferSize: Int = PROC_BUFFER_SIZE,
 ) : Runnable {
-
-    private val signalQueue: BlockingQueue<Double> = ArrayBlockingQueue(bufferSize)
     private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
-    private val pitchQueue:     BlockingQueue<Double> = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
-    private val qualityQueue:   BlockingQueue<Double> = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
+    private val pitchQueue:     BlockingQueue<Double>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
+    private val qualityQueue:   BlockingQueue<Double>       = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
     private var running = false
 
     val fft: List<Double>
@@ -40,63 +38,30 @@ class AudioProc(
     //todo add method to stop thread
 
     override fun run() {
-        // todo should I use bufferSize rather than frame?
-        var audioSample = AudioSample()            // Audio signal processor
-//        val qualityQueue: LinkedList<Double> = LinkedList()
-//        val pitchQueue: LinkedList<Double> = LinkedList()
+        // todo once audioSample is properly mutable, make it a public property
+        var audioSample = AudioSample()
         val threshold = .01
         val pitchDefault = 0.123456
         val qualityDefault = 3.0
-        val fftDefault = List(512){ 0.0 } // TEMPORARY SIZE
+        val fftDefault = List(512){ 0.0 }
 
         while (running) {
-            // Fetch [frame] elements from the audioCapture
+            // Fetch [bufferSize] elements from the audioCapture
             val audioData = audioSource.getAudio(bufferSize)
 
             // Feed them to the audioSample
             audioSample = audioSample.dropAndAdd(audioData)
 
-//            val fft = audioSample.fft
-//            plot.update(fft.toTypedArray(), length = fft.size / 8)
-
-            // Calculate the tone score
-//            val p = audioSamp.pitch
-//            System.out.println(String.format("Fund: %03.2f Benyas: %.2f",
-//                    audioSamp.pitch, audioSamp.benya))
-
-
-//            val benya = audioSamp.benya
-//            val pitch = audioSamp.pitch
-
+            // Calculate audioSample attributes and add them to their respective queue
             if (audioSample.maxOrNull() ?: 0.0 < threshold) {
-//                qualityQueue.add(qualityDefault)
-//                pitchQueue.add(pitchDefault)
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
                 fftQueue.forcedOffer(fftDefault)
             } else {
-//                qualityQueue.add(audioSample.benya)
-//                pitchQueue.add(audioSample.pitch)
                 qualityQueue.forcedOffer(audioSample.benya)
                 pitchQueue.forcedOffer(audioSample.pitch)
                 fftQueue.forcedOffer(audioSample.fft)
             }
-
-//            if (qualityQueue.size > numAvg) {
-//                qualityQueue.remove()
-//                pitchQueue.remove()
-//            }
-
-//            mainActivity.updateQuality(qualityQueue.average())
-//            mainActivity.updatePitch(pitchQueue.average())
-            signalQueue.offer(qualityQueue.average())
-
-            /*
-            if (max_amplitude < threshold)
-                signalQueue.offer(3.0);
-            else
-                signalQueue.offer(accum/avg_q.size());
-*/
         }
     }
 }
