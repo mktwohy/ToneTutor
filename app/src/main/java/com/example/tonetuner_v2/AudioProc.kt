@@ -6,7 +6,6 @@ import com.example.tonetuner_v2.AppModel.PROC_BUFFER_SIZE
 import com.example.tonetuner_v2.AppModel.QUALITY_QUEUE_SIZE
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
-
 /**
  * Threaded wrapper class for AudioSample. It continually pulls data from AudioCapture and fills
  * AudioSample. This ensures that attributes [fft], [pitch], and [quality] are always up-to-date
