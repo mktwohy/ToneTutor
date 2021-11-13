@@ -48,7 +48,8 @@ class AudioCapture(
      * @param n The number of elements to take
      * @return An ArrayList of data elements
      */
-    val getAudioData = { n: Int -> (0 until n).map { queue.take() } }
+    fun getAudioData(bufferSize: Int) =
+        List<Double>(bufferSize) { queue.take() }
 
 
     /**
