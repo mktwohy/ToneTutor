@@ -36,10 +36,10 @@ android {
     buildFeatures {
         compose true
     }
-//    composeOptions {
-//        kotlinCompilerExtensionVersion compose_version
-//        kotlinCompilerVersion '1.5.10'
-//    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion '1.5.10'
+    }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -62,6 +62,5 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
-    implementation 'com.github.mktwohy:SignalLib:366a3688f8'
     implementation files('libs/JTransforms-3.1-with-dependencies.jar')
 }

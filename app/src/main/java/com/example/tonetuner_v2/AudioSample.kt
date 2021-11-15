@@ -7,7 +7,6 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
-data class Harmonic(var freq: Double, var mag: Double)
 
 /**
  * An Audio Sample class to hold and process audio data
@@ -92,9 +91,7 @@ class AudioSample(
 
     /** The harmonics extracted from the fourier transform */
     private fun calcHarmonics(): List<Harmonic> {
-        data class Spectrum(val freqs: List<Double>, val mags: List<Double>)
-
-        val maxMag = fft.maxOrNull() as Double
+        val maxMag = fft.maxOrNull() ?: 0.0
         return fft.slice(0 until fft.size - 2).asSequence()
             .mapIndexed { index, _ ->
                 Spectrum(freq.slice(index..index + 2), fft.slice(index..index + 2))
@@ -109,12 +106,19 @@ class AudioSample(
 
     /** The pitch (fundamental frequency) of the audio sample */
     private fun calcPitch(): Double {
+        // Generate function for comparing different fundamental frequencies
         val calcScores = twmScore(harmonics)
-        val pass1 = arange(-29.0, 7.0).map { n -> 440 * 2.0.pow(n / 12) }
-            .map { Harmonic(it, calcScores(it)) }
+
+        // todo what do each of these steps do?
+        val pass1 = arange(-29.0, 7.0)      // generate range from -29.0..7.0
+            .map { 440 * 2.0.pow(it / 12) }         // ????
+            .map { Harmonic(it, calcScores(it)) }       //
             .minByOrNull { it.mag }?.freq as Double
+
         val n = 12 * log(pass1 / 440.0) / log(2.0)
-        return arange(n - 1, n + 1, 0.1).map { n -> 440 * 2.0.pow(n / 12) }
+
+        return arange(n - 1, n + 1, 0.1)
+            .map { 440 * 2.0.pow(it / 12) }
             .map { Harmonic(it, calcScores(it)) }
             .minByOrNull { it.mag }?.freq as Double
     }

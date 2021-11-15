@@ -91,8 +91,8 @@ fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double
         lStop = stop
     }
 
-    val num = ((lStop-lStart)/step).roundToInt() + 1
-    return List(num) { index -> step*index + lStart }
+    val size = ((lStop-lStart)/step).roundToInt() + 1
+    return List(size) { index -> step*index + lStart }
 }
 
 fun poly(x: List<Double>, y: List<Double>): Harmonic {
@@ -166,7 +166,9 @@ fun twmScore(harmonics: List<Harmonic>,
              p: Double = 0.2,
              q: Double = 1.4,
              r: Double = 1.0,
-             mtopOnly: Boolean = false, ptomOnly: Boolean = false): (Double) -> Double {
+             mtopOnly: Boolean = false,
+             ptomOnly: Boolean = false
+): (Double) -> Double {
 
     // Calculate the predicted harmonics of the fundamental frequency
     val maxFreq = harmonics.maxByOrNull { it.freq }?.freq ?: 0.0
