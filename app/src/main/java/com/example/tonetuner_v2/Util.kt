@@ -2,6 +2,8 @@ package com.example.tonetuner_v2
 
 import android.util.Log
 import androidx.compose.ui.graphics.Color
+import com.example.tonetuner_v2.Note.Companion.minus
+import com.example.tonetuner_v2.Note.Companion.plus
 import java.util.concurrent.BlockingQueue
 import kotlin.math.abs
 import kotlin.math.pow
@@ -10,9 +12,22 @@ import kotlin.math.roundToLong
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
+/**
+ * like toString(), but it returns a substring a desired length. The end is padded with
+ * zeros if needed.
+ */
+fun Double.toString(length: Int) =
+    this.toString().padEnd(length, '0').substring(0, length)
+
+
 /** Similar to offer(), but, if there is no space, it removes an element to make room */
 fun <T> BlockingQueue<T>.forcedOffer(element: T){
     if(remainingCapacity() == 0) poll()
+    offer(element)
+}
+
+fun <T> BlockingQueue<T>.clearAndOffer(element: T){
+    clear()
     offer(element)
 }
 
@@ -39,19 +54,34 @@ operator fun Color.plus(that: Color) =
 
 /** Converts frequency to closest note estimate*/
 fun Double.toNote(): Note{
-    val notes = Note.toList()
-    var i = 0
-    while(i < notes.size && this >= notes[i].freq) {
-        i++
+    // find the lower estimate for the note
+    var upperEst = Note.A_0
+    while(upperEst.freq < this && upperEst != Note.Gs8){
+        upperEst += 1
     }
 
-    val lowerNote = notes[i]
-    val upperNote = notes[i+1]
+    // get the upper estimate for the note
+    val lowerEst = upperEst - 1
 
-    val lowerErr = abs(this - lowerNote.freq)
-    val upperErr = abs(upperNote.freq - this)
+    val upperErr = abs(upperEst.freq - this)
+    val lowerErr = abs(lowerEst.freq - this)
 
-    return if(lowerErr < upperErr) lowerNote else upperNote
+    return if(upperErr < lowerErr) upperEst else lowerEst
+}
+
+/** Converts frequency to the closest note and its error (cents) */
+fun Double.toNoteAndCents(): Pair<Note, Int>{
+    val note = this.toNote()
+    val hzError = this - note.freq
+    val centsError =
+        if(hzError > 0){
+            val hzToNextNote = (note + 1).freq - note.freq
+            (100 * hzError/hzToNextNote).toInt()
+        } else{
+            val hzToPrevNote =  note.freq - (note - 1).freq
+            (100 * hzError/hzToPrevNote).toInt()
+        }
+    return Pair(note, centsError)
 }
 
 fun logd(message: Any){ Log.d("m_tag",message.toString()) }
@@ -190,8 +220,8 @@ fun twmScore(harmonics: List<Harmonic>,
 
         // Error based on the distance between each measured harmonic and its closest predicted harmonic
         val err_mtop = harmonics.map { h ->
-            val ph = predictedHarmonics.minByOrNull {Math.abs(h.freq - it)} ?: 0.0
-            val df = Math.abs(h.freq-ph)
+            val ph = predictedHarmonics.minByOrNull { abs(h.freq - it) } ?: 0.0
+            val df = abs(h.freq-ph)
             df * h.freq.pow(-p) + (h.mag / maxMag) *(q * df * h.freq.pow(-p) - r)
         }.sum()
 

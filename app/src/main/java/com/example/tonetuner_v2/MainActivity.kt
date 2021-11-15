@@ -23,7 +23,8 @@ object AppModel{
     var fft by mutableStateOf(listOf<Float>())
     var pitch by mutableStateOf(123.45)
     var quality by mutableStateOf(123.45)
-    var currentNote by mutableStateOf(Note.A_4)
+    var note by mutableStateOf(Note.A_4)
+    var cents by mutableStateOf(0)
 
     // Settings (requires app restart)
     const val PROC_BUFFER_SIZE      = 512    // values < 512 cause crash
@@ -58,12 +59,15 @@ class MainActivity : ComponentActivity() {
         requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
 
         Thread{
+
             while(true){
                 with(AppModel){
+                    val tunerData = pitch.toNoteAndCents()
                     pitch = audioProc.pitch
-                    currentNote = pitch.toNote()
                     quality = audioProc.quality
                     fft = audioProc.fft.map { it.toFloat() - 1 }
+                    note = tunerData.first
+                    cents = tunerData.second
                     Thread.sleep(UI_LAG)
                 }
             }
@@ -79,20 +83,24 @@ class MainActivity : ComponentActivity() {
                     y = AppModel.fft
                 )
                 Text(
-                    text = "Freq: ${AppModel.pitch.toString().substring(0, 3)} " +
-                            "\nNote: ${AppModel.currentNote}",
+                    text = "Pitch: ${AppModel.pitch.toString(5)}",
                     color = Color.White
                 )
+//                Text(
+//                    text = "Note: ${AppModel.note}",
+//                    color = Color.White
+//                )
                 Text(
-                    text = "Quality: ${AppModel.quality.toString().substring(0, 3)} ",
+                    text = "Quality: ${AppModel.quality.toString(4)}",
                     color = Color.White
                 )
-                NoteList(
-                    modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .border(2.dp, Color.White),
-                    closestNote = AppModel.currentNote,
-                )
+//                NoteList(
+//                    modifier = Modifier
+//                        .fillMaxWidth(0.5f)
+//                        .border(2.dp, Color.White),
+//                    closestNote = AppModel.currentNote,
+//                )
+                Tuner(note = AppModel.note, cents = AppModel.cents)
             }
         }
     }

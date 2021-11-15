@@ -7,7 +7,6 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
-
 /**
  * An Audio Sample class to hold and process audio data
  *
@@ -18,13 +17,14 @@ import kotlin.math.sqrt
  */
 class AudioSample(
     audioData: MutableList<Double> = mutableListOf(),
-    val sampleRate: Int = SAMPLE_RATE
+    val sampleRate: Int = SAMPLE_RATE,
+    var pitchAlgo: (List<Harmonic>) -> Double = twmPitchAlgo
 ): MutableList<Double> by audioData {
     val time        by lazy { calcTime() }
     val fft         by lazy { calcFFT() }
     val harmonics   by lazy { calcHarmonics() }
     val freq        by lazy { calcFreq() }
-    val pitch       by lazy { calcPitch() }
+    val pitch       by lazy { pitchAlgo.invoke(harmonics) }
     val fingerprint by lazy { calcFingerprint() }
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
@@ -104,24 +104,6 @@ class AudioSample(
             }.toList()
     }
 
-    /** The pitch (fundamental frequency) of the audio sample */
-    private fun calcPitch(): Double {
-        // Generate function for comparing different fundamental frequencies
-        val calcScores = twmScore(harmonics)
-
-        // todo what do each of these steps do?
-        val pass1 = arange(-29.0, 7.0)      // generate range from -29.0..7.0
-            .map { 440 * 2.0.pow(it / 12) }         // ????
-            .map { Harmonic(it, calcScores(it)) }       //
-            .minByOrNull { it.mag }?.freq as Double
-
-        val n = 12 * log(pass1 / 440.0) / log(2.0)
-
-        return arange(n - 1, n + 1, 0.1)
-            .map { 440 * 2.0.pow(it / 12) }
-            .map { Harmonic(it, calcScores(it)) }
-            .minByOrNull { it.mag }?.freq as Double
-    }
 
     /** Calculate the harmonic fingerprint normalized to the total power */
     private fun calcFingerprint(): List<Harmonic> {
@@ -134,7 +116,7 @@ class AudioSample(
         val p = pitch
         return arange(1.0,15.0)
             .map { h ->
-                val i = Math.round(h*p*fft.size*2/sampleRate).toInt()
+                val i = (h * p * fft.size * 2 / sampleRate).roundToInt()
                 Harmonic(h, quadInterp(h*p, freq.slice(i-1..i+1), fft.slice(i-1..i+1)))
             }
     }

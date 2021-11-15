@@ -1,12 +1,10 @@
 package com.example.tonetuner_v2
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -17,6 +15,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import java.lang.StringBuilder
+
+@Composable
+fun Tuner(
+    note: Note,
+    cents: Int
+){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = note.toString(), color = Color.White)
+        LinearProgressIndicator(
+            progress = cents/50f
+        )
+
+    }
+}
 
 @Composable
 fun FftPlot(
