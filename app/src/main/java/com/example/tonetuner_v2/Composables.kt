@@ -20,6 +20,8 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import kotlin.math.ln
+import kotlin.math.pow
 
 @Composable
 fun Meter(
@@ -58,63 +60,47 @@ fun Meter(
 
 @Composable
 fun Tuner(
-    note: Note,
+    note: Note?,
     cents: Int,
     hz: Double,
 ){
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Row {
             Text(
                 text = "Pitch: ${hz.toString(5)}",
                 color = Color.White
             )
-            LinearProgressIndicator(hz.toFloat()/Note.B_8.freq)
-            Text(text = "$note",color = Color.White)
-            Text(text = "$cents",color = Color.White)
-            Meter(
-                modifier = Modifier.fillMaxWidth(0.25f).fillMaxHeight(0.25f),
-                needleValue = cents/50f
-            )
+            LinearProgressIndicator( (hz.toFloat() + Note.C_0.freq) / Note.B_8.freq )
         }
+
+
+        Text(text = "$note",color = Color.White)
+        Meter(
+            modifier = Modifier
+                .fillMaxWidth(0.25f)
+                .fillMaxHeight(0.25f),
+            needleValue = cents/50f
+        )
+        Text(text = "$cents",color = Color.White)
+    }
 }
 
 @Composable
 fun QualityMeter(
     quality: Double
 ){
-    Text(
-        text = "Quality: ${quality.toString(4)}",
-        color = Color.White
-    )
-    LinearProgressIndicator(quality.toFloat()/7f)
-}
-
-@Composable
-fun FftPlot(
-    modifier: Modifier,
-    harmonics: List<Harmonic>,
-    color: Color = Color.Green,
-    strokeWidth: Float = 3f
-){
-    XYPlot(
-        modifier = modifier,
-        x = harmonics.map { it.freq.toFloat() },
-        y = harmonics.map { it.mag.toFloat() },
-        color = color,
-        strokeWidth = strokeWidth
-    )
-}
-
-@Composable
-fun XYPlot(
-    modifier: Modifier,
-    x: List<Float>,
-    y: List<Float>,
-    color: Color = Color.Green,
-    strokeWidth: Float = 3f
-){
+    Row {
+        Text(
+            text = "Quality: ${quality.toString(4)}",
+            color = Color.White
+        )
+        LinearProgressIndicator(quality.toFloat()/7f)
+    }
 
 }
+
 
 @Composable
 fun XYPlot(
@@ -131,11 +117,11 @@ fun XYPlot(
                 drawLine(
                     start = Offset(
                         x = i * size.width / (y.size-1),
-                        y = (y[i] * -1 * size.height/2) + (size.height/2)
+                        y = size.height - (y[i] * size.height)
                     ),
                     end = Offset(
                         x = (i+1) * size.width / (y.size-1),
-                        y = (y[i+1] * -1 * size.height/2) + (size.height/2)
+                        y = size.height - (y[i+1] * size.height)
                     ),
                     color = color,
                     strokeWidth = strokeWidth

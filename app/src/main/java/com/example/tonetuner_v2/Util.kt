@@ -5,12 +5,14 @@ import androidx.compose.ui.graphics.Color
 import com.example.tonetuner_v2.Note.Companion.minus
 import com.example.tonetuner_v2.Note.Companion.plus
 import java.util.concurrent.BlockingQueue
-import kotlin.math.abs
-import kotlin.math.pow
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
+import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+//from https://psychology.wikia.org/wiki/Pitch_perception
+fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
+
+
 
 /**
  * like toString(), but it returns a substring a desired length. The end is padded with
@@ -53,14 +55,17 @@ operator fun Color.plus(that: Color) =
     )
 
 /** Converts frequency to closest note estimate*/
-fun Double.toNote(): Note{
-    // find the lower estimate for the note
-    var upperEst = Note.A_0
+fun Double.toNote(): Note?{
+    // check if frequency is out of bounds
+    if(this < Note.C_0.freq || this > Note.B_8.freq) return null
+
+    // find the upper estimate for the note
+    var upperEst = Note.Cs0
     while(upperEst.freq < this && upperEst != Note.B_8){
         upperEst += 1
     }
 
-    // get the upper estimate for the note
+    // get the lower estimate for the note
     val lowerEst = upperEst - 1
 
     val upperErr = abs(upperEst.freq - this)
@@ -70,16 +75,21 @@ fun Double.toNote(): Note{
 }
 
 /** Converts frequency to the closest note and its error (cents) */
-fun Double.toNoteAndCents(): Pair<Note, Int>{
-    val note = this.toNote()
+fun Double.toNoteAndCents(): Pair<Note?, Int>{
+    val note = this.toNote() ?: return Pair(null, 0)
     val hzError = this - note.freq
+
     val centsError =
         if(hzError > 0){
             val hzToNextNote = (note + 1).freq - note.freq
             (100 * hzError/hzToNextNote).toInt()
         } else{
-            val hzToPrevNote =  note.freq - (note - 1).freq
-            (100 * hzError/hzToPrevNote).toInt()
+            if(note == Note.C_0){ 0 }
+            else{
+                val hzToPrevNote =  note.freq - (note - 1).freq
+                (100 * hzError/hzToPrevNote).toInt()
+            }
+
         }
     return Pair(note, centsError)
 }

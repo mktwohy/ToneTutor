@@ -20,7 +20,7 @@ object AppModel{
     var fft by mutableStateOf(listOf<Float>())
     var pitch by mutableStateOf(123.45)
     var quality by mutableStateOf(123.45)
-    var note by mutableStateOf(Note.A_4)
+    var note by mutableStateOf<Note?>(null)
     var cents by mutableStateOf(0)
 
     // Settings (requires app restart)
@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
                     val tunerData = pitch.toNoteAndCents()
                     pitch = audioProc.pitch
                     quality = audioProc.quality
-                    fft = audioProc.fft.map { it.toFloat() - 1 }
+                    fft = audioProc.fft.map { it.toFloat() }
                     note = tunerData.first
                     cents = tunerData.second
                     Thread.sleep(UI_LAG)
@@ -84,25 +84,7 @@ class MainActivity : ComponentActivity() {
 //
 //            }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                XYPlot(
-                    modifier = Modifier
-                        .fillMaxHeight(0.8f)
-                        .fillMaxWidth()
-                        .border(2.dp, Color.White),
-                    y = AppModel.fft
-                )
 
-//                Text(
-//                    text = "Note: ${AppModel.note}",
-//                    color = Color.White
-//                )
-
-//                NoteList(
-//                    modifier = Modifier
-//                        .fillMaxWidth(0.5f)
-//                        .border(2.dp, Color.White),
-//                    closestNote = AppModel.currentNote,
-//                )
                 Tuner(
                     note    = AppModel.note,
                     cents   = AppModel.cents,
@@ -110,6 +92,13 @@ class MainActivity : ComponentActivity() {
                 )
                 QualityMeter(
                     quality = AppModel.quality
+                )
+                XYPlot(
+                    modifier = Modifier
+                        .fillMaxHeight(0.8f)
+                        .fillMaxWidth()
+                        .border(2.dp, Color.White),
+                    y = AppModel.fft
                 )
             }
         }
