@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2
 
 import com.example.tonetuner_v2.AppModel.FFT_QUEUE_SIZE
+import com.example.tonetuner_v2.AppModel.NOISE_THRESHOLD
 import com.example.tonetuner_v2.AppModel.PITCH_QUEUE_SIZE
 import com.example.tonetuner_v2.AppModel.PROC_BUFFER_SIZE
 import com.example.tonetuner_v2.AppModel.QUALITY_QUEUE_SIZE
@@ -39,9 +40,8 @@ class AudioProc(
     override fun run() {
         // todo once audioSample is properly mutable, make it a public property
         var audioSample = AudioSample(pitchAlgo = testAlgo)
-        val threshold = .01
         val pitchDefault = 0.0
-        val qualityDefault = 3.0
+        val qualityDefault = 3.5
         val fftDefault = List(512){ 0.0 }
 
         while (running) {
@@ -52,7 +52,7 @@ class AudioProc(
             audioSample = audioSample.dropAndAdd(audioData)
 
             // Calculate audioSample attributes and add them to their respective queue
-            if (audioSample.maxOrNull() ?: 0.0 < threshold) {
+            if (audioSample.maxOrNull() ?: 0.0 < NOISE_THRESHOLD) {
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
                 fftQueue.forcedOffer(fftDefault)

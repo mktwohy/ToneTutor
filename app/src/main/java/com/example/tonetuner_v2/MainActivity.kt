@@ -24,13 +24,14 @@ object AppModel{
     var cents by mutableStateOf(0)
 
     // Settings (requires app restart)
-    const val PROC_BUFFER_SIZE      = 512    // values < 512 cause crash
-    const val CAPTURE_BUFFER_SIZE   = 512
+    const val PROC_BUFFER_SIZE      = 1024    // values < 512 cause crash
+    const val CAPTURE_BUFFER_SIZE   = 1024
     const val SAMPLE_RATE           = 44100
     const val UI_LAG                = 15L
     const val FFT_QUEUE_SIZE        = 5
     const val QUALITY_QUEUE_SIZE    = 10
-    const val PITCH_QUEUE_SIZE      = 20
+    const val PITCH_QUEUE_SIZE      = 10
+    const val NOISE_THRESHOLD       = 0.01f
 }
 
 class MainActivity : ComponentActivity() {
@@ -48,9 +49,9 @@ class MainActivity : ComponentActivity() {
             ) { isGranted: Boolean ->
                 if (isGranted) {
                     audioCapture.startCapture()
-                    logd("Yes!")
+                    logd("Capture Started")
                 } else {
-                    logd("No!")
+                    logd("Microphone Permission Denied")
                 }
             }
         requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
@@ -62,7 +63,7 @@ class MainActivity : ComponentActivity() {
                     val tunerData = pitch.toNoteAndCents()
                     pitch = audioProc.pitch
                     quality = audioProc.quality
-                    fft = audioProc.fft.map { it.toFloat() }
+                    fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
                     note = tunerData.first
                     cents = tunerData.second
                     Thread.sleep(UI_LAG)
@@ -71,18 +72,6 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
-//            Box(
-//                modifier = Modifier.fillMaxSize(),
-//                contentAlignment = Alignment.Center
-//            ){
-//                Meter(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .fillMaxHeight(0.25f)
-//                        .border(color = Color.White, width = 2.dp)
-//                )
-//
-//            }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
                 Tuner(
@@ -98,7 +87,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxHeight(0.8f)
                         .fillMaxWidth()
                         .border(2.dp, Color.White),
-                    y = AppModel.fft
+                    y = AppModel.fft,
                 )
             }
         }
