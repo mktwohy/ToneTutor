@@ -56,7 +56,7 @@ operator fun Color.plus(that: Color) =
 fun Double.toNote(): Note{
     // find the lower estimate for the note
     var upperEst = Note.A_0
-    while(upperEst.freq < this && upperEst != Note.Gs8){
+    while(upperEst.freq < this && upperEst != Note.B_8){
         upperEst += 1
     }
 

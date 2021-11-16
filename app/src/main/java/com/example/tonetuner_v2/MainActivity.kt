@@ -6,10 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -30,10 +27,10 @@ object AppModel{
     const val PROC_BUFFER_SIZE      = 512    // values < 512 cause crash
     const val CAPTURE_BUFFER_SIZE   = 512
     const val SAMPLE_RATE           = 44100
-    const val UI_LAG                = 10L
+    const val UI_LAG                = 15L
     const val FFT_QUEUE_SIZE        = 5
     const val QUALITY_QUEUE_SIZE    = 10
-    const val PITCH_QUEUE_SIZE      = 40
+    const val PITCH_QUEUE_SIZE      = 20
 }
 
 class MainActivity : ComponentActivity() {
@@ -74,6 +71,18 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
+//            Box(
+//                modifier = Modifier.fillMaxSize(),
+//                contentAlignment = Alignment.Center
+//            ){
+//                Meter(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .fillMaxHeight(0.25f)
+//                        .border(color = Color.White, width = 2.dp)
+//                )
+//
+//            }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 XYPlot(
                     modifier = Modifier
@@ -82,25 +91,26 @@ class MainActivity : ComponentActivity() {
                         .border(2.dp, Color.White),
                     y = AppModel.fft
                 )
-                Text(
-                    text = "Pitch: ${AppModel.pitch.toString(5)}",
-                    color = Color.White
-                )
+
 //                Text(
 //                    text = "Note: ${AppModel.note}",
 //                    color = Color.White
 //                )
-                Text(
-                    text = "Quality: ${AppModel.quality.toString(4)}",
-                    color = Color.White
-                )
+
 //                NoteList(
 //                    modifier = Modifier
 //                        .fillMaxWidth(0.5f)
 //                        .border(2.dp, Color.White),
 //                    closestNote = AppModel.currentNote,
 //                )
-                Tuner(note = AppModel.note, cents = AppModel.cents)
+                Tuner(
+                    note    = AppModel.note,
+                    cents   = AppModel.cents,
+                    hz      = AppModel.pitch
+                )
+                QualityMeter(
+                    quality = AppModel.quality
+                )
             }
         }
     }
