@@ -39,7 +39,7 @@ class AudioProc(
 
     override fun run() {
         // todo once audioSample is properly mutable, make it a public property
-        var audioSample = AudioSample(pitchAlgo = testAlgo)
+        var audioSample = AudioSample(pitchAlgo = PitchAlgorithms.twm)
         val pitchDefault = 0.0
         val qualityDefault = 3.5
         val fftDefault = List(512){ 0.0 }

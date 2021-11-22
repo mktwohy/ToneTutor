@@ -18,7 +18,7 @@ import kotlin.math.sqrt
 class AudioSample(
     audioData: MutableList<Double> = mutableListOf(),
     val sampleRate: Int = SAMPLE_RATE,
-    var pitchAlgo: (List<Harmonic>) -> Double = twmPitchAlgo
+    var pitchAlgo: (List<Harmonic>) -> Double = PitchAlgorithms.twm
 ): MutableList<Double> by audioData {
     val time        by lazy { calcTime() }
     val fft         by lazy { calcFFT() }

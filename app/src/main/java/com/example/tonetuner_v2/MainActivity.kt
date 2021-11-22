@@ -15,6 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+/*
+
+ */
+
 object AppModel{
     // State
     var fft by mutableStateOf(listOf<Float>())
@@ -73,7 +77,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
                 Tuner(
                     note    = AppModel.note,
                     cents   = AppModel.cents,

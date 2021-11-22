@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import kotlin.math.ln
 
-@Preview
 @Composable
 fun Meter(
     modifier: Modifier = Modifier,
