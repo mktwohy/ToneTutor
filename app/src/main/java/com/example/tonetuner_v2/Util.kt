@@ -2,8 +2,9 @@ package com.example.tonetuner_v2
 
 import android.util.Log
 import androidx.compose.ui.graphics.Color
-import com.example.tonetuner_v2.Note.Companion.minus
-import com.example.tonetuner_v2.Note.Companion.plus
+import com.example.signallib.Note
+import com.example.signallib.Note.Companion.plus
+import com.example.signallib.Note.Companion.minus
 import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
@@ -12,15 +13,12 @@ import kotlin.system.measureTimeMillis
 //from https://psychology.wikia.org/wiki/Pitch_perception
 fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
 
-
-
 /**
  * like toString(), but it returns a substring a desired length. The end is padded with
  * zeros if needed.
  */
 fun Double.toString(length: Int) =
     this.toString().padEnd(length, '0').substring(0, length)
-
 
 /** Similar to offer(), but, if there is no space, it removes an element to make room */
 fun <T> BlockingQueue<T>.forcedOffer(element: T){

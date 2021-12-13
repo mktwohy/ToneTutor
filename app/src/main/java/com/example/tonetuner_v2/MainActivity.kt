@@ -2,6 +2,7 @@ package com.example.tonetuner_v2
 
 import android.Manifest
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,10 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-
-/*
-
- */
+import com.example.signallib.Note
 
 object AppModel{
     // State
@@ -42,9 +40,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // todo store these in app state
         // create audio processing objects
-        val audioCapture    = AudioCapture()
-        val audioProc       = AudioProc(audioCapture)
+//        val audioSource: AudioSource    = AudioCapture()
+        val audioSource: AudioSource    = SignalManagerWrapper()
+        val audioProc                   = AudioProc(audioSource)
 
         // request audio permissions. the app will begin recording audio
         val requestPermissionLauncher =
@@ -52,7 +52,13 @@ class MainActivity : ComponentActivity() {
                 ActivityResultContracts.RequestPermission()
             ) { isGranted: Boolean ->
                 if (isGranted) {
-                    audioCapture.startCapture()
+                    if (audioSource is AudioCapture) {
+                        audioSource.startCapture()
+                    }
+                    if (audioSource is SignalManagerWrapper){
+                        audioSource.notes = setOf(Note.A_4)
+                        audioSource.signalSettings.harmonicSeries.generateRandom()
+                    }
                     logd("Capture Started")
                 } else {
                     logd("Microphone Permission Denied")
@@ -60,8 +66,9 @@ class MainActivity : ComponentActivity() {
             }
         requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
 
+        // todo extract this out to a method
+        // update loop
         Thread{
-
             while(true){
                 with(AppModel){
                     val tunerData = pitch.toNoteAndCents()

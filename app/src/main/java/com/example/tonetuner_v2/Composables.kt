@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
+import com.example.signallib.Note
 import kotlinx.coroutines.launch
 import kotlin.math.ln
 
