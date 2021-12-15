@@ -1,5 +1,7 @@
 package com.example.tonetuner_v2.ui.theme
 
+import android.graphics.Paint
+import android.graphics.Typeface
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -26,3 +28,11 @@ val Typography = Typography(
     )
     */
 )
+
+val noteTextPaint = Paint().apply {
+    isAntiAlias = true
+    textSize = 40f
+    color = android.graphics.Color.WHITE
+    typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD)
+    textAlign = Paint.Align.CENTER
+}

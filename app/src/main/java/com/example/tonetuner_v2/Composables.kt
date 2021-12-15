@@ -16,18 +16,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.signallib.Note
+import com.example.tonetuner_v2.ui.theme.noteTextPaint
 import kotlinx.coroutines.launch
 import kotlin.math.ln
 
@@ -79,17 +78,21 @@ fun TapeMeter(
         // draw gradient
         Box(
             Modifier
-                .size(this.maxWidth  + 1.dp - (cellWidthDP.times(2f)), this.maxHeight)
+                .size(this.maxWidth + 1.dp - (cellWidthDP.times(2f)), this.maxHeight)
                 .background(
                     Brush.horizontalGradient(
                         colors = listOf(
-                            Color.Black, Color.Gray, Color.Transparent, Color.Gray, Color.Black),
+                            Color.Black, Color.Gray, Color.Transparent, Color.Gray, Color.Black
+                        ),
                         tileMode = TileMode.Repeated
                     )
                 ),
         )
         // draw "tape"
-        Row(Modifier.fillMaxSize().offset(offset)) {
+        Row(
+            Modifier
+                .fillMaxSize()
+                .offset(offset)) {
             for (i in minValue..maxValue){
                 Box(
                     modifier = Modifier
@@ -100,7 +103,6 @@ fun TapeMeter(
                     val text = if (!allowNegatives && i < 0) "" else "$i"
                     Text(text = text, color = Color.Black)
                 }
-
             }
         }
         // draw walls of window
@@ -129,7 +131,7 @@ fun TapeMeter(
 }
 
 @Composable
-fun Meter(
+fun Gauge(
     modifier: Modifier = Modifier,
     needleValue: Float = 0f,
     arcAngle: Float = 150f,
@@ -179,9 +181,75 @@ fun Meter(
     }
 
 }
+@Composable
+fun CircularTunerTest(modifier: Modifier){
+    var note by remember { mutableStateOf(Note.A_4) }
+    var cents by remember { mutableStateOf(0) }
+    var hz by remember { mutableStateOf(Note.A_4.freq) }
+
+    CircularTuner(modifier = modifier, note = Note.A_4, centsErr = 0)
+}
+
+fun Note.enharmonicEqual(other: Note)
+    = this.name[0] == other.name[0]
+
+fun Note.toPrettyString(): String{
+    val s = "$this"
+    val sharp = s[1] == 's'
+    return if (sharp) "${s[0]}#" else "${s[0]}"
+}
+
+
+// todo what if you could turn off certain notes? it would limit what notes the pitch algo tests
+@Composable
+fun CircularTuner(
+    modifier: Modifier = Modifier,
+    note: Note?,
+    centsErr: Int,
+    nullNoteMessage: String = "N/A"
+) {
+
+    Canvas(modifier = modifier){
+        val radius = this.size.minDimension/2
+        val innerRadius = radius * 0.65f
+        val pieSliceInnerAngle = 360f/12f
+
+        drawCircle(
+            color = Color.DarkGray,
+            radius = radius,
+        )
+        drawCircle(
+            color = Color.Gray,
+            radius = innerRadius,
+        )
+        for (i in 0 until 12){
+            val centerSliceAngle = i * pieSliceInnerAngle
+            val rightSliceAngle = centerSliceAngle + (pieSliceInnerAngle / 2)
+            rotate(rightSliceAngle){
+                drawLine(
+                    color = Color.Gray,
+                    start = Offset(this.center.x, this.center.y - innerRadius),
+                    end   = Offset(this.center.x, this.center.y - radius),
+                    strokeWidth = 4f
+                )
+            }
+            rotate(centerSliceAngle){
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        Note.notes[i].toPrettyString(),
+                        this.center.x,
+                        this.center.y - (radius + innerRadius)/2,
+                        noteTextPaint
+                    )
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
-fun Tuner(
+fun GaugeTuner(
     note: Note?,
     cents: Int,
     hz: Double,
@@ -192,7 +260,7 @@ fun Tuner(
             text = if(note == null) nullNoteMessage else "$note",
             color = Color.White
         )
-        Meter(
+        Gauge(
             modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .fillMaxHeight(0.15f),

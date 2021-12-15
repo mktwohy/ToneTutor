@@ -7,10 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Slider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -64,31 +60,32 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Tuner(
-                    note    = AppModel.note,
-                    cents   = AppModel.cents,
-                    hz      = AppModel.pitch,
-                    nullNoteMessage = "Too Quiet"
-                )
-                QualityMeter(
-                    quality = AppModel.quality
-                )
-                TapeMeter(
-                    modifier = Modifier.fillMaxWidth().fillMaxSize(.1f),
-                    value    = AppModel.quality,
-                    range    = 5,
-                    allowNegatives = false
-                )
-                XYPlot(
-                    modifier = Modifier
-                        .fillMaxHeight(0.8f)
-                        .fillMaxWidth()
-                        .border(2.dp, Color.White),
-                    y = AppModel.fft,
-                )
-            }
+//            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+//                GaugeTuner(
+//                    note    = AppModel.note,
+//                    cents   = AppModel.cents,
+//                    hz      = AppModel.pitch,
+//                    nullNoteMessage = "Too Quiet"
+//                )
+//                QualityMeter(
+//                    quality = AppModel.quality
+//                )
+//                TapeMeter(
+//                    modifier = Modifier.fillMaxWidth().fillMaxSize(.1f),
+//                    value    = AppModel.quality,
+//                    range    = 5,
+//                    allowNegatives = false
+//                )
+//                XYPlot(
+//                    modifier = Modifier
+//                        .fillMaxHeight(0.8f)
+//                        .fillMaxWidth()
+//                        .border(2.dp, Color.White),
+//                    y = AppModel.fft,
+//                )
+//            }
 //            TestTapeMeter()
+            CircularTunerTest(modifier = Modifier.fillMaxSize())
 
         }
     }
