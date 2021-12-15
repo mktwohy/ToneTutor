@@ -66,7 +66,6 @@ fun TapeMeter(
     val maxValue = value.toInt() + range
     val numElements = 2 * range + 1
 
-
     BoxWithConstraints(
         modifier = modifier
             .border(2.dp, Color.Black)
@@ -79,7 +78,7 @@ fun TapeMeter(
 
         // draw gradient
         Box(
-            modifier = Modifier
+            Modifier
                 .size(this.maxWidth  + 1.dp - (cellWidthDP.times(2f)), this.maxHeight)
                 .background(
                     Brush.horizontalGradient(
@@ -90,10 +89,7 @@ fun TapeMeter(
                 ),
         )
         // draw "tape"
-        Row(
-            Modifier
-                .fillMaxSize()
-                .offset(offset)) {
+        Row(Modifier.fillMaxSize().offset(offset)) {
             for (i in minValue..maxValue){
                 Box(
                     modifier = Modifier
@@ -108,9 +104,7 @@ fun TapeMeter(
             }
         }
         // draw walls of window
-        Canvas(
-            modifier = Modifier.fillMaxSize()
-        ){
+        Canvas(Modifier.fillMaxSize()){
             val cellWidthFloat = this.size.width / numElements
 
             drawLine(
