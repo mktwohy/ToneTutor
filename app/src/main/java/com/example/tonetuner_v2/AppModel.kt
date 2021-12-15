@@ -8,8 +8,8 @@ import com.example.signallib.Note
 object AppModel{
     // State
     var fft by mutableStateOf(listOf<Float>())
-    var pitch by mutableStateOf(123.45)
-    var quality by mutableStateOf(123.45)
+    var pitch by mutableStateOf(0.0)
+    var quality by mutableStateOf(0.0)
     var note by mutableStateOf<Note?>(null)
     var cents by mutableStateOf(0)
 
@@ -21,5 +21,5 @@ object AppModel{
     const val FFT_QUEUE_SIZE        = 5
     const val QUALITY_QUEUE_SIZE    = 10
     const val PITCH_QUEUE_SIZE      = 10
-    const val NOISE_THRESHOLD       = 0.01f
+    const val NOISE_THRESHOLD       = 0.03f
 }

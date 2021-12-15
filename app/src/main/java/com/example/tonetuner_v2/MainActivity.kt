@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Slider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -67,14 +68,17 @@ class MainActivity : ComponentActivity() {
                 Tuner(
                     note    = AppModel.note,
                     cents   = AppModel.cents,
-                    hz      = AppModel.pitch
+                    hz      = AppModel.pitch,
+                    nullNoteMessage = "Too Quiet"
                 )
                 QualityMeter(
                     quality = AppModel.quality
                 )
                 TapeMeter(
-                    modifier = Modifier.fillMaxWidth().fillMaxSize(.2f),
-                    value    = AppModel.quality
+                    modifier = Modifier.fillMaxWidth().fillMaxSize(.1f),
+                    value    = AppModel.quality,
+                    range    = 5,
+                    allowNegatives = false
                 )
                 XYPlot(
                     modifier = Modifier
@@ -84,6 +88,8 @@ class MainActivity : ComponentActivity() {
                     y = AppModel.fft,
                 )
             }
+//            TestTapeMeter()
+
         }
     }
 

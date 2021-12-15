@@ -1,5 +1,6 @@
 package com.example.tonetuner_v2
 
+import com.example.signallib.amplitudeToVolume
 import com.example.tonetuner_v2.AppModel.SAMPLE_RATE
 import org.jtransforms.fft.DoubleFFT_1D
 import java.lang.Math.log
@@ -90,6 +91,7 @@ class AudioSample(
         return arange(fft.size.toDouble()).map {it*sampleRate/(fft.size*2)}
     }
 
+    //todo does this work correctly? you're creating a list of Spectrums
     /** The harmonics extracted from the fourier transform */
     private fun calcHarmonics(): List<Harmonic> {
         val maxMag = fft.maxOrNull() ?: 0.0
@@ -102,7 +104,8 @@ class AudioSample(
                 poly(it.freqs, it.mags)
             }.filter {
                 it.mag / maxMag > 0.04
-            }.toList()
+            }
+            .toList()
     }
 
 
