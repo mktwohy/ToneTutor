@@ -2,7 +2,6 @@ package com.example.tonetuner_v2
 
 import android.Manifest
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,8 +41,8 @@ class MainActivity : ComponentActivity() {
 
         // todo store these in app state
         // create audio processing objects
-//        val audioSource: AudioSource    = AudioCapture()
-        val audioSource: AudioSource    = SignalManagerWrapper()
+        val audioSource: AudioSource    = AudioCapture()
+//        val audioSource: AudioSource    = SignalManagerWrapper()
         val audioProc                   = AudioProc(audioSource)
 
         // request audio permissions. the app will begin recording audio
@@ -91,6 +90,10 @@ class MainActivity : ComponentActivity() {
                 )
                 QualityMeter(
                     quality = AppModel.quality
+                )
+                TapeMeter(
+                    modifier = Modifier.fillMaxWidth().fillMaxSize(.2f),
+                    value    = AppModel.quality
                 )
                 XYPlot(
                     modifier = Modifier

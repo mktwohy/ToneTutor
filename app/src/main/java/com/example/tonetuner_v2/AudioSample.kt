@@ -29,6 +29,7 @@ class AudioSample(
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
 
+    // todo: I don't think drop and add works correctly. Whenever you drop, you end up deleting the whole list
     // todo: This should not create a new object every time.
     // todo: achieve same laziness with more memory efficiency
         // whenever data is updated, set attrs to null

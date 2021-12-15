@@ -1,9 +1,12 @@
 package com.example.tonetuner_v2
 
+
+import android.graphics.Paint
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -20,15 +23,81 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
-import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
 import com.example.signallib.Note
 import kotlinx.coroutines.launch
 import kotlin.math.ln
+
+@Preview
+@Composable
+fun TapeMeter(
+    modifier: Modifier = Modifier
+//        .fillMaxWidth()
+//        .fillMaxHeight(0.1f)
+    ,
+    value: Double = 1.9,
+    range: Int = 5
+){
+    if(value.isNaN()) return
+    val minValue = value.toInt() - range
+    val maxValue = value.toInt() + range
+    val numElements = 2 * range + 1
+
+
+    BoxWithConstraints(
+        modifier = modifier
+            .border(2.dp, Color.Black)
+            .background(Color.White)
+    ) {
+        val cellHeight  = this.maxHeight
+        val cellWidth   = this.maxWidth / numElements
+        val offset      = (cellWidth * (value - value.toInt()).toFloat()).times(-1f)
+
+        Row(Modifier.fillMaxSize().offset(offset)) {
+            for (i in minValue..maxValue){
+                Box(
+                    modifier = Modifier
+                        .size(cellWidth, cellHeight)
+                        .border(1.dp, Color.Black),
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(text = "$i", color = Color.Black)
+                }
+
+            }
+        }
+        Canvas(
+            modifier = Modifier.fillMaxSize()
+        ){
+            drawLine(
+                color   = Color.Red,
+                start   = Offset(this.size.width/2, 0f),
+                end     = Offset(this.size.width/2, this.size.height),
+                strokeWidth = 2f
+            )
+//        drawIntoCanvas {
+//            val paint = Paint()
+//            paint.apply {
+//                isAntiAlias = true
+//                textSize = 55f
+//                textAlign = Paint.Align.CENTER
+//            }
+//            it.nativeCanvas.drawText(
+//                "hello world!",
+//                this.size.width/2,
+//                this.size.height/2,
+//                paint
+//            )
+//        }
+        }
+    }
+
+}
 
 @Composable
 fun Meter(
