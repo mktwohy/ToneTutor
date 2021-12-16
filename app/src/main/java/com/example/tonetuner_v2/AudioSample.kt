@@ -1,9 +1,7 @@
 package com.example.tonetuner_v2
 
-import com.example.signallib.amplitudeToVolume
 import com.example.tonetuner_v2.AppModel.SAMPLE_RATE
 import org.jtransforms.fft.DoubleFFT_1D
-import java.lang.Math.log
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -24,7 +22,7 @@ class AudioSample(
     val time        by lazy { calcTime() }
     val fft         by lazy { calcFFT() }
     val harmonics   by lazy { calcHarmonics() }
-    val freq        by lazy { calcFreq() }
+    val fftFreq     by lazy { calcFftFreq() }
     val pitch       by lazy { pitchAlgo.invoke(harmonics) }
     val fingerprint by lazy { calcFingerprint() }
     val benya       by lazy { calcBenya() }
@@ -86,8 +84,8 @@ class AudioSample(
         }.toList()
     }
 
-    /** The frequencies associated with fft */
-    private fun calcFreq(): List<Double> {
+    /** The frequencies associated with fft (list size: 1024 */
+    private fun calcFftFreq(): List<Double> {
         return arange(fft.size.toDouble()).map {it*sampleRate/(fft.size*2)}
     }
 
@@ -97,7 +95,7 @@ class AudioSample(
         val maxMag = fft.maxOrNull() ?: 0.0
         return fft.slice(0 until fft.size - 2).asSequence()
             .mapIndexed { index, _ ->
-                Spectrum(freq.slice(index..index + 2), fft.slice(index..index + 2))
+                Spectrum(fftFreq.slice(index..index + 2), fft.slice(index..index + 2))
             }.filter {
                 it.mags[0] < it.mags[1] && it.mags[2] < it.mags[1]
             }.map {
@@ -111,19 +109,27 @@ class AudioSample(
 
     /** Calculate the harmonic fingerprint normalized to the total power */
     private fun calcFingerprint(): List<Harmonic> {
-        val norm = nonNormalizedFingerprint.asSequence().map { it.mag }.sum()
+        val norm = nonNormalizedFingerprint.map { it.mag }.sum()
         return nonNormalizedFingerprint.map { Harmonic(it.freq,it.mag/norm) }
     }
 
+    // quadInterp throws exception: java.lang.IndexOutOfBoundsException: toIndex = 1033
+    // I don't know why, but halving the initial range fixes the bug
     /** Calculate the harmonic fingerprint */
-    private fun calcNonNormalizedFingerprint(): List<Harmonic> {
-        val p = pitch
-        return arange(1.0, AppModel.NUM_HARMONICS.toDouble())
-            .map { h ->
-                val i = (h * p * fft.size * 2 / sampleRate).roundToInt()
-                Harmonic(h, quadInterp(h*p, freq.slice(i-1..i+1), fft.slice(i-1..i+1)))
+    private fun calcNonNormalizedFingerprint(): List<Harmonic>
+        = (1..AppModel.NUM_HARMONICS/2).map { h ->
+            val i = (h * pitch * fft.size * 2 / sampleRate).roundToInt()
+                Harmonic(
+                    h.toDouble(),
+                    quadInterp(
+                        h * pitch,
+                        fftFreq.slice(i-1..i+1),
+                        fft.slice(i-1..i+1)
+                    )
+                )
             }
-    }
+
+
 
     private fun calcBenya(): Double {
         return fingerprint.asSequence().map { it.freq*it.mag }.sum()

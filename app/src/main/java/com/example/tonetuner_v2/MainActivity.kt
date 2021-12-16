@@ -13,18 +13,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.signallib.Note
+import com.example.signallib.Note.Companion.plus
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
+//    var curNote = Note.F_5
     private fun audioSourceGenerateRandom(audioSource: SignalManagerWrapper){
         audioSource.notes = setOf(AppModel.NOTE_RANGE.random())
+//        curNote += 1
+//        audioSource.notes = setOf(curNote)
         audioSource.pitchBend = Random.nextDouble(-0.5, 0.5).toFloat()
+//        audioSource.pitchBend = 0.0f
         audioSource.signalSettings.harmonicSeries.generateRandom()
     }
 
 //    val audioSource: AudioSource    = AudioCapture()
-    val audioSource: AudioSource    = SignalManagerWrapper()
-    val audioProc                   = AudioProc(audioSource)
+    val audioSource = SignalManagerWrapper(AppModel.NUM_HARMONICS) as AudioSource
+    val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,13 +2,13 @@ package com.example.tonetuner_v2
 
 import com.example.signallib.*
 
-class SignalManagerWrapper: AudioSource {
+class SignalManagerWrapper(numHarmonics: Int): AudioSource {
     var notes = setOf(Note.A_4)
     var pitchBend = 0f
     var amp = 1f
 
     val signalSettings = SignalSettings(
-        harmonicSeries = HarmonicSeries(20),
+        harmonicSeries = HarmonicSeries(numHarmonics),
         waveShape = WaveShape.SINE,
         sampleRate = AppModel.SAMPLE_RATE,
         bufferSize = AppModel.CAPTURE_BUFFER_SIZE

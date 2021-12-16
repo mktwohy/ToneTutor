@@ -17,6 +17,7 @@ import java.util.concurrent.BlockingQueue
 class AudioProc(
     val audioSource: AudioSource,
     val bufferSize: Int = PROC_BUFFER_SIZE,
+    val pitchAlgo: (List<Harmonic>) -> Double
 ) : Runnable {
     private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
     private val pitchQueue:     BlockingQueue<Double>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
@@ -39,7 +40,7 @@ class AudioProc(
 
     override fun run() {
         // todo once audioSample is properly mutable, make it a public property
-        var audioSample = AudioSample(pitchAlgo = PitchAlgorithms.twm)
+        var audioSample = AudioSample(pitchAlgo = pitchAlgo)
         val pitchDefault = 0.0
         val qualityDefault = 0.0
         val fftDefault = List(512){ 0.0 }
