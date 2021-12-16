@@ -27,8 +27,12 @@ class MainActivity : ComponentActivity() {
         audioSource.signalSettings.harmonicSeries.generateRandom()
     }
 
-//    val audioSource: AudioSource    = AudioCapture()
-    val audioSource = SignalManagerWrapper(AppModel.NUM_HARMONICS) as AudioSource
+
+    val audioSource =
+        if (AppModel.TEST_MODE)
+            SignalManagerWrapper(AppModel.NUM_HARMONICS)
+        else
+            AudioCapture()
     val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
 
     override fun onCreate(savedInstanceState: Bundle?) {
