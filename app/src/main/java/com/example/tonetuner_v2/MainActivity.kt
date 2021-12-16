@@ -60,38 +60,39 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
-//            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                GaugeTuner(
-//                    note    = AppModel.note,
-//                    cents   = AppModel.cents,
-//                    hz      = AppModel.pitch,
-//                    nullNoteMessage = "Too Quiet"
-//                )
-//                QualityMeter(
-//                    quality = AppModel.quality
-//                )
-//                TapeMeter(
-//                    modifier = Modifier.fillMaxWidth().fillMaxSize(.1f),
-//                    value    = AppModel.quality,
-//                    range    = 5,
-//                    allowNegatives = false
-//                )
-//                XYPlot(
-//                    modifier = Modifier
-//                        .fillMaxHeight(0.8f)
-//                        .fillMaxWidth()
-//                        .border(2.dp, Color.White),
-//                    y = AppModel.fft,
-//                )
-//            }
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+                CircularTuner(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.3f),
+                    note = AppModel.note,
+                    centsErr = AppModel.cents
+                )
+                TapeMeter(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.2f)
+                        .border(2.dp, Color.White),
+                    value    = AppModel.quality,
+                    range    = 5,
+                    allowNegatives = false
+                )
+                XYPlot(
+                    modifier = Modifier
+                        .fillMaxHeight(0.8f)
+                        .fillMaxWidth()
+                        .border(2.dp, Color.White),
+                    y = AppModel.fft,
+                )
+            }
 //            TestTapeMeter()
-            CircularTunerTest()
+//            CircularTunerTest()
 
-//            CircularTuner(
-//                modifier = Modifier.fillMaxSize(),
-//                note = AppModel.note,
-//                centsErr = AppModel.cents
-//            )
+
         }
     }
 

@@ -27,6 +27,8 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.signallib.Note
+import com.example.signallib.Note.Companion.minus
+import com.example.signallib.Note.Companion.plus
 import com.example.tonetuner_v2.ui.theme.noteTextPaint
 import kotlinx.coroutines.launch
 import kotlin.math.ln
@@ -198,19 +200,25 @@ fun CircularTunerTest(){
             centsErr = sliderToCents()
         )
         Text(
-            text = "Note: ${note.toPrettyString()} \nCents: ${sliderToCents()}",
+            text = "Note: $note \nCents: ${sliderToCents()}",
             color = Color.White,
             fontSize = 24.sp
         )
 
         Spacer(modifier = Modifier.fillMaxHeight(0.25f))
 
-        Button(onClick = { note = Note.random() }) {
-            Text(
-                text = "Random Note",
-                color = Color.White
-            )
+        Row{
+            Button(onClick = { note -= 1 }) {
+                Text(text = "Prev Note", color = Color.White)
+            }
+            Button(onClick = { note = Note.random() }) {
+                Text(text = "Random Note", color = Color.White)
+            }
+            Button(onClick = { note += 1 }) {
+                Text(text = "Prev Note", color = Color.White)
+            }
         }
+
 
         Spacer(modifier = Modifier.fillMaxHeight(0.25f))
 
@@ -234,73 +242,85 @@ fun CircularTuner(
     modifier: Modifier = Modifier,
     note: Note?,
     centsErr: Int,
-    nullNoteMessage: String = "N/A"
 ) {
     val pieSliceInnerAngle = 360f/12f
 
-    Canvas(modifier = modifier){
-        val radius = this.size.minDimension/2
-        val innerRadius = radius * 0.65f
+    Box(modifier){
+        Canvas(modifier = Modifier.fillMaxSize()){
+            val radius = this.size.minDimension/2
+            val innerRadius = radius * 0.65f
+            val centerRadius = radius * 0.2f
 
-        drawCircle(
-            color = Color.DarkGray,
-            radius = radius,
-        )
-        drawCircle(
-            color = Color.Gray,
-            radius = innerRadius,
-        )
-        for (i in 0 until 12){
-            val centerSliceAngle = i * pieSliceInnerAngle
-            val rightSliceAngle = centerSliceAngle + (pieSliceInnerAngle / 2)
-            logd("${Note.notes[i]}: $centerSliceAngle")
-            rotate(rightSliceAngle){
-                drawLine(
-                    color = Color.Gray,
-                    start = Offset(this.center.x, this.center.y - innerRadius),
-                    end   = Offset(this.center.x, this.center.y - radius),
-                    strokeWidth = 4f
-                )
+            drawCircle(
+                color = Color.DarkGray,
+                radius = radius,
+            )
+            drawCircle(
+                color = Color.Gray,
+                radius = innerRadius,
+            )
+            for (i in 0 until 12){
+                val centerSliceAngle = i * pieSliceInnerAngle
+                val rightSliceAngle = centerSliceAngle + (pieSliceInnerAngle / 2)
+                logd("${Note.notes[i]}: $centerSliceAngle")
+                rotate(rightSliceAngle){
+                    drawLine(
+                        color = Color.Gray,
+                        start = Offset(this.center.x, this.center.y - innerRadius),
+                        end   = Offset(this.center.x, this.center.y - radius),
+                        strokeWidth = 4f
+                    )
+                }
+                rotate(centerSliceAngle){
+                    drawIntoCanvas {
+                        it.nativeCanvas.drawText(
+                            Note.notes[i].toPrettyString(),
+                            this.center.x,
+                            this.center.y - (radius + innerRadius)/2,
+                            noteTextPaint
+                        )
+                    }
+                }
             }
-            rotate(centerSliceAngle){
-                drawIntoCanvas {
-                    it.nativeCanvas.drawText(
-                        Note.notes[i].toPrettyString(),
-                        this.center.x,
-                        this.center.y - (radius + innerRadius)/2,
-                        noteTextPaint
+            if (note != null){
+                val tunerAngle =
+                    when(note.toPrettyString()){
+                        "C"     -> 0f
+                        "C#"    -> 30f
+                        "D"     -> 60f
+                        "D#"    -> 90f
+                        "E"     -> 120f
+                        "F"     -> 150f
+                        "F#"    -> 180f
+                        "G"     -> 210f
+                        "G#"    -> 240f
+                        "A"     -> 270f
+                        "A#"    -> 300f
+                        "B"     -> 330f
+                        else    -> Float.NaN
+                    } + (centsErr / 100f * pieSliceInnerAngle)
+
+                rotate(tunerAngle){
+                    drawLine(
+                        color = Color.Green,
+                        start = this.center,
+                        end   = Offset(this.center.x, this.center.y - radius),
+                        strokeWidth = 4f
                     )
                 }
             }
+            drawCircle(
+                color = Color.DarkGray,
+                radius = centerRadius,
+            )
         }
         if (note != null){
-            val tunerAngle =
-                when(note.toPrettyString()){
-                    "C"     -> 0f
-                    "C#"    -> 30f
-                    "D"     -> 60f
-                    "D#"    -> 90f
-                    "E"     -> 120f
-                    "F"     -> 150f
-                    "F#"    -> 180f
-                    "G"     -> 210f
-                    "G#"    -> 240f
-                    "A"     -> 270f
-                    "A#"    -> 300f
-                    "B"     -> 330f
-                    else    -> Float.NaN
-                } + (centsErr / 100f * pieSliceInnerAngle)
-
-            rotate(tunerAngle){
-                drawLine(
-                    color = Color.Green,
-                    start = this.center,
-                    end   = Offset(this.center.x, this.center.y - radius),
-                    strokeWidth = 4f
-                )
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+                Text(text = note.name[2].toString(), color = Color.White)
             }
         }
     }
+
 }
 
 

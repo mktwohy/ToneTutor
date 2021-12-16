@@ -14,11 +14,11 @@ object AppModel{
     var cents by mutableStateOf(0)
 
     // Settings (requires app restart)
-    const val PROC_BUFFER_SIZE      = 1024    // values < 512 cause crash
-    const val CAPTURE_BUFFER_SIZE   = 1024
+    const val PROC_BUFFER_SIZE      = 2048    // values < 512 cause crash
+    const val CAPTURE_BUFFER_SIZE   = 2048
     const val SAMPLE_RATE           = 44100
     const val UI_LAG                = 15L
-    const val FFT_QUEUE_SIZE        = 5
+    const val FFT_QUEUE_SIZE        = 3
     const val QUALITY_QUEUE_SIZE    = 10
     const val PITCH_QUEUE_SIZE      = 10
     const val NOISE_THRESHOLD       = 0.03f
