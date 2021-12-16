@@ -262,7 +262,7 @@ fun CircularTuner(
             if (note != null){
                 drawPieNeedle(
                     angle = calcTunerAngle(note, centsErr),
-                    sweepAngle = 360f/12,
+                    sweepAngle = 360f/24,
                     radius = outerRadius,
                     color = Color.Green
                 )
@@ -312,13 +312,19 @@ fun DrawScope.drawPieNeedle(
     color: Color,
     center: Offset = this.center
 ){
+    val topLeft = Offset(
+        sin(sweepAngle.toDegree() / 2) * radius,
+        cos(sweepAngle.toDegree() / 2) * radius
+    )
+
     rotate(angle){
         drawArc(
+//            topLeft = center,
             color = color,
-            startAngle = 270f - (sweepAngle / 2),
-            sweepAngle = sweepAngle ,
+            startAngle = 270f - (sweepAngle / 2f),
+            sweepAngle = sweepAngle,
             useCenter = true,
-            alpha = 0.5f
+            alpha = 0.4f
         )
     }
 }

@@ -22,8 +22,8 @@ object PitchAlgorithms{
             .minByOrNull { it.second }?.first!!
 
         // define the range of frequencies that are in that note ( +- 1/2 semitone)
-        val minFreq = ((noteEst - 1).freq + noteEst.freq) / 2f
-        val maxFreq = ((noteEst + 1).freq + noteEst.freq) / 2f
+        val minFreq = ((noteEst - 1).freq + noteEst.freq) / 2f // 50 cents  flat
+        val maxFreq = ((noteEst + 1).freq + noteEst.freq) / 2f  // 50 cents sharp
 
         // refine closest note's frequency and return
         arange(minFreq.toDouble(), maxFreq.toDouble(), 0.1)
