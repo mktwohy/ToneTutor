@@ -1,9 +1,11 @@
 package com.example.tonetuner_v2
 
-import com.example.signallib.Note
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
+import com.example.signallib.Note.Companion.minus
+import com.example.signallib.Note.Companion.plus
+
 
 // Should I store this as an enum class?
 
@@ -14,27 +16,19 @@ object PitchAlgorithms{
         // Generate function for comparing different fundamental frequencies
         val calcScores = twmScore(harmonics)
 
-        // todo what do each of these steps do?
-//        val pass1 = arange(-29.0, 7.0)      // generate range from -29.0..7.0
-//            .map { 440 * 2.0.pow(it / 12) }         // ????
-//            .map { Harmonic(it, calcScores(it)) }       //
-//            .minByOrNull { it.mag }?.freq as Double
+        // estimate the closest note
+        val noteEst = AppModel.NOTE_RANGE
+            .map { it to calcScores(it.freq.toDouble()) }
+            .minByOrNull { it.second }?.first!!
 
-        // pass 1 tests it against each not
-        val pass1 = AppModel.NOTE_RANGE
-            .map { Harmonic(it.freq.toDouble(), calcScores(it.freq.toDouble())) }
-            .minByOrNull { it.mag }?.freq as Double
+        // define the range of frequencies that are in that note ( +- 1/2 semitone)
+        val minFreq = ((noteEst - 1).freq + noteEst.freq) / 2f
+        val maxFreq = ((noteEst + 1).freq + noteEst.freq) / 2f
 
-        //val n = 12 * Math.log(pass1 / 440.0) / Math.log(2.0)
-//        logd("pass1: $pass1 n: $n")
-
-        // return
-        arange(pass1 - 1, pass1 + 1, 0.1)
-//            .map { 440 * 2.0.pow(it / 12) }
-            .map { Harmonic(it, calcScores(it)) }
-            .minByOrNull { it.mag }?.freq as Double
-
-
+        // refine closest note's frequency and return
+        arange(minFreq.toDouble(), maxFreq.toDouble(), 0.1)
+            .map { it to calcScores(it) }
+            .minByOrNull { it.second}?.first!!
     }
 
     val test: (List<Harmonic>) -> Double = { 440.0 }

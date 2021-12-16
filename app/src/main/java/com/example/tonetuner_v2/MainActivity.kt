@@ -22,8 +22,8 @@ class MainActivity : ComponentActivity() {
         audioSource.signalSettings.harmonicSeries.generateRandom()
     }
 
-    val audioSource: AudioSource    = AudioCapture()
-//    val audioSource: AudioSource    = SignalManagerWrapper()
+//    val audioSource: AudioSource    = AudioCapture()
+    val audioSource: AudioSource    = SignalManagerWrapper()
     val audioProc                   = AudioProc(audioSource)
 
     override fun onCreate(savedInstanceState: Bundle?) {
