@@ -1,5 +1,6 @@
 package com.example.tonetuner_v2
 
+import com.example.signallib.Note
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
@@ -14,18 +15,26 @@ object PitchAlgorithms{
         val calcScores = twmScore(harmonics)
 
         // todo what do each of these steps do?
-        val pass1 = arange(-29.0, 7.0)      // generate range from -29.0..7.0
-            .map { 440 * 2.0.pow(it / 12) }         // ????
-            .map { Harmonic(it, calcScores(it)) }       //
+//        val pass1 = arange(-29.0, 7.0)      // generate range from -29.0..7.0
+//            .map { 440 * 2.0.pow(it / 12) }         // ????
+//            .map { Harmonic(it, calcScores(it)) }       //
+//            .minByOrNull { it.mag }?.freq as Double
+
+        // pass 1 tests it against each not
+        val pass1 = AppModel.NOTE_RANGE
+            .map { Harmonic(it.freq.toDouble(), calcScores(it.freq.toDouble())) }
             .minByOrNull { it.mag }?.freq as Double
 
-        val n = 12 * Math.log(pass1 / 440.0) / Math.log(2.0)
+        //val n = 12 * Math.log(pass1 / 440.0) / Math.log(2.0)
+//        logd("pass1: $pass1 n: $n")
 
         // return
-        arange(n - 1, n + 1, 0.1)
-            .map { 440 * 2.0.pow(it / 12) }
+        arange(pass1 - 1, pass1 + 1, 0.1)
+//            .map { 440 * 2.0.pow(it / 12) }
             .map { Harmonic(it, calcScores(it)) }
             .minByOrNull { it.mag }?.freq as Double
+
+
     }
 
     val test: (List<Harmonic>) -> Double = { 440.0 }

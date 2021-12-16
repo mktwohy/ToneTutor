@@ -118,7 +118,7 @@ class AudioSample(
     /** Calculate the harmonic fingerprint */
     private fun calcNonNormalizedFingerprint(): List<Harmonic> {
         val p = pitch
-        return arange(1.0,15.0)
+        return arange(1.0, AppModel.NUM_HARMONICS.toDouble())
             .map { h ->
                 val i = (h * p * fft.size * 2 / sampleRate).roundToInt()
                 Harmonic(h, quadInterp(h*p, freq.slice(i-1..i+1), fft.slice(i-1..i+1)))

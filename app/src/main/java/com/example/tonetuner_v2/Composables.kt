@@ -262,7 +262,6 @@ fun CircularTuner(
             for (i in 0 until 12){
                 val centerSliceAngle = i * pieSliceInnerAngle
                 val rightSliceAngle = centerSliceAngle + (pieSliceInnerAngle / 2)
-                logd("${Note.notes[i]}: $centerSliceAngle")
                 rotate(rightSliceAngle){
                     drawLine(
                         color = Color.Gray,

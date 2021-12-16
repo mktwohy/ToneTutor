@@ -16,14 +16,14 @@ import com.example.signallib.Note
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
-    fun audioSourceGenerateRandom(audioSource: SignalManagerWrapper){
-        audioSource.notes = setOf(Note.random())
+    private fun audioSourceGenerateRandom(audioSource: SignalManagerWrapper){
+        audioSource.notes = setOf(AppModel.NOTE_RANGE.random())
         audioSource.pitchBend = Random.nextDouble(-0.5, 0.5).toFloat()
         audioSource.signalSettings.harmonicSeries.generateRandom()
     }
 
-//    val audioSource: AudioSource    = AudioCapture()
-    val audioSource: AudioSource    = SignalManagerWrapper()
+    val audioSource: AudioSource    = AudioCapture()
+//    val audioSource: AudioSource    = SignalManagerWrapper()
     val audioProc                   = AudioProc(audioSource)
 
     override fun onCreate(savedInstanceState: Bundle?) {
