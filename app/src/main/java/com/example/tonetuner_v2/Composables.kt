@@ -10,6 +10,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
 import androidx.compose.material.Text
@@ -182,16 +183,43 @@ fun Gauge(
 
 }
 @Composable
-fun CircularTunerTest(modifier: Modifier){
+fun CircularTunerTest(){
     var note by remember { mutableStateOf(Note.A_4) }
-    var cents by remember { mutableStateOf(0) }
-    var hz by remember { mutableStateOf(Note.A_4.freq) }
+    var sliderState by remember { mutableStateOf(0.5f) }
+    
+    fun sliderToCents() = ((sliderState - 0.5f) * 200).toInt()
+    
+    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        CircularTuner(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.5f),
+            note = note,
+            centsErr = sliderToCents()
+        )
+        Text(
+            text = "Note: ${note.toPrettyString()} \nCents: ${sliderToCents()}",
+            color = Color.White,
+            fontSize = 24.sp
+        )
 
-    CircularTuner(modifier = modifier, note = Note.A_4, centsErr = 0)
+        Spacer(modifier = Modifier.fillMaxHeight(0.25f))
+
+        Button(onClick = { note = Note.random() }) {
+            Text(
+                text = "Random Note",
+                color = Color.White
+            )
+        }
+
+        Spacer(modifier = Modifier.fillMaxHeight(0.25f))
+
+        Slider(value = sliderState, onValueChange = { sliderState = it })
+    }
 }
 
 fun Note.enharmonicEqual(other: Note)
-    = this.name[0] == other.name[0]
+    = this.toPrettyString() == other.toPrettyString()
 
 fun Note.toPrettyString(): String{
     val s = "$this"
@@ -208,11 +236,11 @@ fun CircularTuner(
     centsErr: Int,
     nullNoteMessage: String = "N/A"
 ) {
+    val pieSliceInnerAngle = 360f/12f
 
     Canvas(modifier = modifier){
         val radius = this.size.minDimension/2
         val innerRadius = radius * 0.65f
-        val pieSliceInnerAngle = 360f/12f
 
         drawCircle(
             color = Color.DarkGray,
@@ -225,6 +253,7 @@ fun CircularTuner(
         for (i in 0 until 12){
             val centerSliceAngle = i * pieSliceInnerAngle
             val rightSliceAngle = centerSliceAngle + (pieSliceInnerAngle / 2)
+            logd("${Note.notes[i]}: $centerSliceAngle")
             rotate(rightSliceAngle){
                 drawLine(
                     color = Color.Gray,
@@ -242,6 +271,33 @@ fun CircularTuner(
                         noteTextPaint
                     )
                 }
+            }
+        }
+        if (note != null){
+            val tunerAngle =
+                when(note.toPrettyString()){
+                    "C"     -> 0f
+                    "C#"    -> 30f
+                    "D"     -> 60f
+                    "D#"    -> 90f
+                    "E"     -> 120f
+                    "F"     -> 150f
+                    "F#"    -> 180f
+                    "G"     -> 210f
+                    "G#"    -> 240f
+                    "A"     -> 270f
+                    "A#"    -> 300f
+                    "B"     -> 330f
+                    else    -> Float.NaN
+                } + (centsErr / 100f * pieSliceInnerAngle)
+
+            rotate(tunerAngle){
+                drawLine(
+                    color = Color.Green,
+                    start = this.center,
+                    end   = Offset(this.center.x, this.center.y - radius),
+                    strokeWidth = 4f
+                )
             }
         }
     }

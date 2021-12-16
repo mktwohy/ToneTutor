@@ -85,8 +85,13 @@ class MainActivity : ComponentActivity() {
 //                )
 //            }
 //            TestTapeMeter()
-            CircularTunerTest(modifier = Modifier.fillMaxSize())
+            CircularTunerTest()
 
+//            CircularTuner(
+//                modifier = Modifier.fillMaxSize(),
+//                note = AppModel.note,
+//                centsErr = AppModel.cents
+//            )
         }
     }
 
