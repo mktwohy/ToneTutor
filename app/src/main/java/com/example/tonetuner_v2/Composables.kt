@@ -19,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -311,19 +312,12 @@ fun DrawScope.drawPieNeedle(
     color: Color,
     center: Offset = this.center
 ){
-    // find x,y of "unit circle"
-    val x = sin(sweepAngle.toDegree() / 2) * radius
-    val y = cos(sweepAngle.toDegree() / 2) * radius
-
     rotate(angle){
-        drawPath(
-            path = Path().apply {
-                moveTo(center.x, center.y)
-                lineTo(center.x - x, center.y - y)
-                lineTo(center.x + x, center.y - y)
-//            close()
-            },
+        drawArc(
             color = color,
+            startAngle = 270f - (sweepAngle / 2),
+            sweepAngle = sweepAngle ,
+            useCenter = true,
             alpha = 0.5f
         )
     }
