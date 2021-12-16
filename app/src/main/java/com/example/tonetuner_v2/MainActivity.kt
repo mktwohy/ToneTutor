@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
         // update loop
         Thread{
             while(true){
-                if (counter == 300 && audioSource is SignalManagerWrapper){
+                if (counter == 20 && audioSource is SignalManagerWrapper){
                     audioSourceGenerateRandom(audioSource)
                     counter = 0
                 }

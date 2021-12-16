@@ -113,13 +113,13 @@ class AudioSample(
         return nonNormalizedFingerprint.map { Harmonic(it.freq,it.mag/norm) }
     }
 
-    // quadInterp throws exception: java.lang.IndexOutOfBoundsException: toIndex = 1033
-    // I don't know why, but halving the initial range fixes the bug
     /** Calculate the harmonic fingerprint */
     private fun calcNonNormalizedFingerprint(): List<Harmonic>
         = (1..AppModel.NUM_HARMONICS).map { h ->
             val i = (h * pitch * fft.size * 2 / sampleRate).roundToInt()
-            if (i > 1024) Harmonic(0.0,0.0) else
+            if (i > fftFreq.size - 2)
+                Harmonic(0.0,0.0)
+            else
                 Harmonic(
                     h.toDouble(),
                     quadInterp(
