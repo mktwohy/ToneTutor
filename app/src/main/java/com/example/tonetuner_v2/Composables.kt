@@ -236,13 +236,13 @@ fun CircularTuner(
 ) {
     Box(modifier){
         Canvas(modifier = Modifier.fillMaxSize()){
-            val radius = this.size.minDimension/2
-            val innerRadius = radius * 0.65f
-            val centerRadius = radius * 0.2f
+            val outerRadius = this.size.minDimension/2
+            val innerRadius = outerRadius * 0.65f
+            val centerRadius = outerRadius * 0.2f
 
             drawPie(
                 numSlices = 12,
-                radius = radius,
+                radius = outerRadius,
                 circleColor = Color.DarkGray,
                 lineColor = Color.LightGray
             )
@@ -252,19 +252,17 @@ fun CircularTuner(
             )
             drawElementsInCircle(
                 elements = Note.toList(octave = 1),
-                radius = (radius + innerRadius)/2,
+                radius = (outerRadius + innerRadius)/2,
                 textPaint = noteTextPaint,
                 customToString = { it.toPrettyString() }
             )
             if (note != null){
-                rotate(calcTunerAngle(note, centsErr)){
-                    drawLine(
-                        color = Color.Green,
-                        start = this.center,
-                        end   = Offset(this.center.x, this.center.y - radius),
-                        strokeWidth = 4f
-                    )
-                }
+                drawPieNeedle(
+                    angle = calcTunerAngle(note, centsErr),
+                    sweepAngle = 0f,
+                    radius = outerRadius,
+                    color = Color.Green
+                )
             }
             drawCircle(
                 color = Color.DarkGray,
@@ -272,12 +270,17 @@ fun CircularTuner(
             )
         }
         if (note != null){
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-                Text(text = note.name[2].toString(), color = Color.White)
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = note.name[2].toString(),
+                    color = Color.White
+                )
             }
         }
     }
-
 }
 
 fun calcTunerAngle(note: Note, cents: Int) =
@@ -296,6 +299,31 @@ fun calcTunerAngle(note: Note, cents: Int) =
         "B"     -> 330f
         else    -> Float.NaN
 } + (cents / 100f * 360f/12)
+
+fun DrawScope.drawPieNeedle(
+    angle: Float,
+    sweepAngle: Float,
+    radius: Float,
+    color: Color,
+    center: Offset = this.center
+){
+    rotate(angle){
+//        drawPath(
+//            path = Path().apply {
+//                moveTo(center.x, center.y)
+//                lineTo(center.x, center.y - radius)
+//                close()
+//            },
+//            color = color
+//        )
+        drawLine(
+            color = Color.Green,
+            start = this.center,
+            end   = Offset(this.center.x, this.center.y - radius),
+            strokeWidth = 4f
+        )
+    }
+}
 
 fun DrawScope.drawPie(
     numSlices: Int,
