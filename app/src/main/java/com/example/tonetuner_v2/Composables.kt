@@ -226,16 +226,6 @@ fun CircularTunerTest(){
     }
 }
 
-fun Note.enharmonicEqual(other: Note)
-    = this.toPrettyString() == other.toPrettyString()
-
-fun Note.toPrettyString(): String{
-    val s = "$this"
-    val sharp = s[1] == 's'
-    return if (sharp) "${s[0]}#" else "${s[0]}"
-}
-
-
 // todo what if you could turn off certain notes? it would limit what notes the pitch algo tests
 @Composable
 fun CircularTuner(

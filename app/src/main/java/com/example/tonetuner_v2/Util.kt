@@ -10,6 +10,15 @@ import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
+fun Note.enharmonicEqual(other: Note)
+        = this.toPrettyString() == other.toPrettyString()
+
+fun Note.toPrettyString(): String{
+    val s = "$this"
+    val sharp = s[1] == 's'
+    return if (sharp) "${s[0]}#" else "${s[0]}"
+}
+
 //from https://psychology.wikia.org/wiki/Pitch_perception
 fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
 

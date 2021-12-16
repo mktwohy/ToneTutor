@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
             SignalManagerWrapper(AppModel.NUM_HARMONICS)
         else
             AudioCapture()
+
     val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
 
     override fun onCreate(savedInstanceState: Bundle?) {
