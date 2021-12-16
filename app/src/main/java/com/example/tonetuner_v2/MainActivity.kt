@@ -86,46 +86,46 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceAround
-            ) {
-                if (audioSource is SignalManagerWrapper){
-                    Text(
-                        text = "Note: ${audioSource.notes.toString().substring(1..3)} " +
-                                "\nPitch Bend: ${(audioSource.pitchBend * 100).toInt()} cents",
-                        color = Color.White
-                    )
-                }
-
-
-                CircularTuner(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f),
-                    note = AppModel.note,
-                    centsErr = AppModel.cents
-                )
-                TapeMeter(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.2f)
-                        .border(2.dp, Color.White),
-                    value    = AppModel.quality,
-                    range    = 5,
-                    allowNegatives = false
-                )
-                XYPlot(
-                    modifier = Modifier
-                        .fillMaxHeight(0.8f)
-                        .fillMaxWidth()
-                        .border(2.dp, Color.White),
-                    y = AppModel.fft,
-                )
-            }
+//            Column(
+//                modifier = Modifier.fillMaxSize(),
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.SpaceAround
+//            ) {
+//                if (audioSource is SignalManagerWrapper){
+//                    Text(
+//                        text = "Note: ${audioSource.notes.toString().substring(1..3)} " +
+//                                "\nPitch Bend: ${(audioSource.pitchBend * 100).toInt()} cents",
+//                        color = Color.White
+//                    )
+//                }
+//
+//
+//                CircularTuner(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .fillMaxHeight(0.3f),
+//                    note = AppModel.note,
+//                    centsErr = AppModel.cents
+//                )
+//                TapeMeter(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .fillMaxHeight(0.2f)
+//                        .border(2.dp, Color.White),
+//                    value    = AppModel.quality,
+//                    range    = 5,
+//                    allowNegatives = false
+//                )
+//                XYPlot(
+//                    modifier = Modifier
+//                        .fillMaxHeight(0.8f)
+//                        .fillMaxWidth()
+//                        .border(2.dp, Color.White),
+//                    y = AppModel.fft,
+//                )
+//            }
 //            TestTapeMeter()
-//            CircularTunerTest()
+            CircularTunerTest()
 
 
         }

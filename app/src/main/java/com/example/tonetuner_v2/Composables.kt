@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2
 
 
+import android.graphics.Paint
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -233,63 +234,30 @@ fun CircularTuner(
     note: Note?,
     centsErr: Int,
 ) {
-    val pieSliceInnerAngle = 360f/12f
-
     Box(modifier){
         Canvas(modifier = Modifier.fillMaxSize()){
             val radius = this.size.minDimension/2
             val innerRadius = radius * 0.65f
             val centerRadius = radius * 0.2f
 
-            drawCircle(
-                color = Color.DarkGray,
+            drawPie(
+                numSlices = 12,
                 radius = radius,
+                circleColor = Color.DarkGray,
+                lineColor = Color.LightGray
             )
             drawCircle(
                 color = Color.Gray,
                 radius = innerRadius,
             )
-            for (i in 0 until 12){
-                val centerSliceAngle = i * pieSliceInnerAngle
-                val rightSliceAngle = centerSliceAngle + (pieSliceInnerAngle / 2)
-                rotate(rightSliceAngle){
-                    drawLine(
-                        color = Color.Gray,
-                        start = Offset(this.center.x, this.center.y - innerRadius),
-                        end   = Offset(this.center.x, this.center.y - radius),
-                        strokeWidth = 4f
-                    )
-                }
-                rotate(centerSliceAngle){
-                    drawIntoCanvas {
-                        it.nativeCanvas.drawText(
-                            Note.notes[i].toPrettyString(),
-                            this.center.x,
-                            this.center.y - (radius + innerRadius)/2,
-                            noteTextPaint
-                        )
-                    }
-                }
-            }
+            drawElementsInCircle(
+                elements = Note.toList(octave = 1),
+                radius = (radius + innerRadius)/2,
+                textPaint = noteTextPaint,
+                customToString = { it.toPrettyString() }
+            )
             if (note != null){
-                val tunerAngle =
-                    when(note.toPrettyString()){
-                        "C"     -> 0f
-                        "C#"    -> 30f
-                        "D"     -> 60f
-                        "D#"    -> 90f
-                        "E"     -> 120f
-                        "F"     -> 150f
-                        "F#"    -> 180f
-                        "G"     -> 210f
-                        "G#"    -> 240f
-                        "A"     -> 270f
-                        "A#"    -> 300f
-                        "B"     -> 330f
-                        else    -> Float.NaN
-                    } + (centsErr / 100f * pieSliceInnerAngle)
-
-                rotate(tunerAngle){
+                rotate(calcTunerAngle(note, centsErr)){
                     drawLine(
                         color = Color.Green,
                         start = this.center,
@@ -312,6 +280,77 @@ fun CircularTuner(
 
 }
 
+fun calcTunerAngle(note: Note, cents: Int) =
+    when(note.toPrettyString()){
+        "C"     -> 0f
+        "C#"    -> 30f
+        "D"     -> 60f
+        "D#"    -> 90f
+        "E"     -> 120f
+        "F"     -> 150f
+        "F#"    -> 180f
+        "G"     -> 210f
+        "G#"    -> 240f
+        "A"     -> 270f
+        "A#"    -> 300f
+        "B"     -> 330f
+        else    -> Float.NaN
+} + (cents / 100f * 360f/12)
+
+fun DrawScope.drawPie(
+    numSlices: Int,
+    radius: Float,
+    circleColor: Color,
+    lineColor: Color,
+    strokeWidth: Float = 4f
+){
+    drawCircle(
+        color = circleColor,
+        radius = radius,
+    )
+
+    val pieSliceInnerAngle = 360f/numSlices
+    for (i in 0 until numSlices){
+        val rotateAngle = (i * pieSliceInnerAngle) + (pieSliceInnerAngle / 2)
+        rotate(rotateAngle){
+            drawLine(
+                color = lineColor,
+                start = this.center,
+                end   = Offset(this.center.x, this.center.y - radius),
+                strokeWidth = strokeWidth
+            )
+        }
+    }
+}
+
+fun <T>DrawScope.drawElementsInCircle(
+    elements: List<T>,
+    radius: Float,
+    textPaint: Paint,
+    customToString: ((T) -> String)? = null
+){
+    val pieSliceInnerAngle = 360f/12f
+
+    for (i in elements.indices){
+        val centerSliceAngle = i * pieSliceInnerAngle
+        val text: String =
+            if (customToString == null)
+                elements[i].toString()
+            else
+                customToString(elements[i])
+
+        rotate(centerSliceAngle){
+            drawIntoCanvas {
+                it.nativeCanvas.drawText(
+                    text,
+                    this.center.x,
+                    this.center.y - radius,
+                    textPaint
+                )
+            }
+        }
+    }
+}
 
 @Composable
 fun GaugeTuner(
