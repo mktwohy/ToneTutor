@@ -2,6 +2,7 @@ package com.example.tonetuner_v2
 
 
 import android.graphics.Paint
+import android.graphics.Rect
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -33,6 +34,8 @@ import com.example.signallib.Note.Companion.plus
 import com.example.tonetuner_v2.ui.theme.noteTextPaint
 import kotlinx.coroutines.launch
 import kotlin.math.ln
+import kotlin.math.sin
+import kotlin.math.tan
 
 @Composable
 fun TestTapeMeter(){
@@ -259,7 +262,7 @@ fun CircularTuner(
             if (note != null){
                 drawPieNeedle(
                     angle = calcTunerAngle(note, centsErr),
-                    sweepAngle = 0f,
+                    sweepAngle = 360f/12,
                     radius = outerRadius,
                     color = Color.Green
                 )
@@ -307,20 +310,19 @@ fun DrawScope.drawPieNeedle(
     color: Color,
     center: Offset = this.center
 ){
+    val xOffset = tan(sweepAngle/2) / (Math.PI.toFloat()) * radius
+    logd(xOffset)
+
     rotate(angle){
-//        drawPath(
-//            path = Path().apply {
-//                moveTo(center.x, center.y)
-//                lineTo(center.x, center.y - radius)
-//                close()
-//            },
-//            color = color
-//        )
-        drawLine(
-            color = Color.Green,
-            start = this.center,
-            end   = Offset(this.center.x, this.center.y - radius),
-            strokeWidth = 4f
+        drawPath(
+            path = Path().apply {
+                moveTo(center.x, center.y)
+                lineTo(center.x - xOffset, center.y - radius)
+                lineTo(center.x + xOffset, center.y - radius)
+//            close()
+            },
+            color = color,
+            alpha = 0.5f
         )
     }
 }
