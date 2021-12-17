@@ -78,6 +78,9 @@ class MainActivity : ComponentActivity() {
                     note = tunerData.first
                     cents = tunerData.second
 
+                    val fp = audioProc.fingerPrint
+                    logd("${fp.size}: $fp")
+
                     if(audioSource is SignalManagerWrapper) counter += 1
 
                     Thread.sleep(UI_LAG)

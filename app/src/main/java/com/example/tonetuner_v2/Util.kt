@@ -44,11 +44,30 @@ fun <T> BlockingQueue<T>.clearAndOffer(element: T){
     offer(element)
 }
 
+
+
+
+fun List<List<Harmonic>>.sumLists(): List<Harmonic> =
+    when(size){
+        0 -> listOf()
+        1 -> this[0]
+        else -> this
+            .flatten()
+            .groupBy { it.freq }
+            .map { group -> Harmonic(
+                    group.key,
+                    group.value.sumOf { it.mag }
+                )
+            }
+    }
+
+@JvmName("sumListsDouble")
 fun List<List<Double>>.sumLists(): List<Double> =
     when(size){
         0 -> listOf()
         1 -> this[0]
-        else -> List(this.minOf { it.size } ){ index ->
+        else ->
+            List(this.minOf { it.size } ){ index ->
             var sum = 0.0
             for(list in this){
                 sum += list[index]

@@ -23,6 +23,6 @@ object AppModel{
     const val PITCH_QUEUE_SIZE      = 10
     const val NOISE_THRESHOLD       = 0.03f
     const val NUM_HARMONICS         = 20
-    const val TEST_MODE             = true
+    const val TEST_MODE             = false
     val NOTE_RANGE = Note.toList(Note.E_1, Note.E_6) // bass E string to guitar high E string
 }

@@ -109,7 +109,7 @@ class AudioSample(
 
     /** Calculate the harmonic fingerprint normalized to the total power */
     private fun calcFingerprint(): List<Harmonic> {
-        val norm = nonNormalizedFingerprint.map { it.mag }.sum()
+        val norm = nonNormalizedFingerprint.map { it.mag }.maxOf { it }
         return nonNormalizedFingerprint.map { Harmonic(it.freq,it.mag/norm) }
     }
 

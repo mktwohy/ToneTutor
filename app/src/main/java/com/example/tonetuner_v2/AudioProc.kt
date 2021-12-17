@@ -2,6 +2,7 @@ package com.example.tonetuner_v2
 
 import com.example.tonetuner_v2.AppModel.FFT_QUEUE_SIZE
 import com.example.tonetuner_v2.AppModel.NOISE_THRESHOLD
+import com.example.tonetuner_v2.AppModel.NUM_HARMONICS
 import com.example.tonetuner_v2.AppModel.PITCH_QUEUE_SIZE
 import com.example.tonetuner_v2.AppModel.PROC_BUFFER_SIZE
 import com.example.tonetuner_v2.AppModel.QUALITY_QUEUE_SIZE
@@ -20,6 +21,7 @@ class AudioProc(
     val pitchAlgo: (List<Harmonic>) -> Double
 ) : Runnable {
     private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
+    private val fingerPrintQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
     private val pitchQueue:     BlockingQueue<Double>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
     private val qualityQueue:   BlockingQueue<Double>       = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
     private var running = false
@@ -30,6 +32,9 @@ class AudioProc(
         get() = pitchQueue.average()
     val quality: Double
         get() = qualityQueue.average()
+    val fingerPrint: List<Harmonic>
+        get() = fingerPrintQueue.toList().sumLists()
+
 
     init {
         running = true
@@ -44,6 +49,7 @@ class AudioProc(
         val pitchDefault = 0.0
         val qualityDefault = 0.0
         val fftDefault = List(512){ 0.0 }
+        val fingerPrintDefault = List(NUM_HARMONICS){ Harmonic(0.0, 0.0 ) }
 
         while (running) {
             // Fetch [bufferSize] elements from the audioCapture
@@ -57,10 +63,11 @@ class AudioProc(
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
                 fftQueue.forcedOffer(fftDefault)
+                fingerPrintQueue.forcedOffer(fingerPrintDefault)
             } else {
                 qualityQueue.forcedOffer(audioSample.benya)
                 pitchQueue.forcedOffer(audioSample.pitch)
-                fftQueue.forcedOffer(audioSample.fft)
+                fingerPrintQueue.forcedOffer(audioSample.fingerprint)
             }
         }
     }
