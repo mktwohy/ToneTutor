@@ -188,6 +188,7 @@ fun Gauge(
     }
 
 }
+
 @Composable
 fun CircularTunerTest(){
     var note by remember { mutableStateOf(Note.A_4) }
@@ -262,7 +263,7 @@ fun CircularTuner(
             if (note != null){
                 drawPieNeedle(
                     angle = calcTunerAngle(note, centsErr),
-                    sweepAngle = 360f/24,
+                    sweepAngle = 360f/12,
                     radius = outerRadius,
                     color = Color.Green
                 )
@@ -288,22 +289,24 @@ fun CircularTuner(
 
 fun calcTunerAngle(note: Note, cents: Int) =
     when(note.toPrettyString()){
-        "C"     -> 0f
-        "C#"    -> 30f
-        "D"     -> 60f
-        "D#"    -> 90f
-        "E"     -> 120f
-        "F"     -> 150f
-        "F#"    -> 180f
-        "G"     -> 210f
-        "G#"    -> 240f
-        "A"     -> 270f
-        "A#"    -> 300f
-        "B"     -> 330f
+        "D#"    -> 0f
+        "E"     -> 30f
+        "F"     -> 60f
+        "F#"    -> 90f
+        "G"     -> 120f
+        "G#"    -> 150f
+        "A"     -> 180f
+        "A#"    -> 210f
+        "B"     -> 240f
+        "C"     -> 270f
+        "C#"    -> 300f
+        "D"     -> 330f
         else    -> Float.NaN
 } + (cents / 100f * 360f/12)
 
-fun Float.toDegree() = this * Math.PI.toFloat() / 180
+fun Float.toRadian() = this * Math.PI.toFloat() / 180
+
+fun Float.toDegree() = this * 180 / Math.PI.toFloat()
 
 fun DrawScope.drawPieNeedle(
     angle: Float,
@@ -312,21 +315,29 @@ fun DrawScope.drawPieNeedle(
     color: Color,
     center: Offset = this.center
 ){
+    val a = (sweepAngle/2).toRadian()
+    logd(a)
     val topLeft = Offset(
-        sin(sweepAngle.toDegree() / 2) * radius,
-        cos(sweepAngle.toDegree() / 2) * radius
+        center.x - (sin(a) * radius),
+        center.y - (cos(a) * radius)
     )
-
+    drawCircle(
+        color = Color.DarkGray,
+        radius = 10f,
+        center = topLeft
+    )
     rotate(angle){
         drawArc(
-//            topLeft = center,
+//            topLeft = topLeft,
+//            size = this.size,
             color = color,
-            startAngle = 270f - (sweepAngle / 2f),
+            startAngle = - (sweepAngle/2),
             sweepAngle = sweepAngle,
             useCenter = true,
             alpha = 0.4f
         )
     }
+
 }
 
 fun DrawScope.drawPie(
@@ -461,7 +472,10 @@ fun XYPlot(
 }
 
 @Composable
-fun NoteList(modifier: Modifier, note: Note?){
+fun NoteList(
+    modifier: Modifier,
+    note: Note?
+){
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
