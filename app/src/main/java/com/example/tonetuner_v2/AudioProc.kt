@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2
 
 import com.example.tonetuner_v2.AppModel.FFT_QUEUE_SIZE
+import com.example.tonetuner_v2.AppModel.FINGERPRINT_QUEUE_SIZE
 import com.example.tonetuner_v2.AppModel.NOISE_THRESHOLD
 import com.example.tonetuner_v2.AppModel.NUM_HARMONICS
 import com.example.tonetuner_v2.AppModel.PITCH_QUEUE_SIZE
@@ -21,7 +22,7 @@ class AudioProc(
     val pitchAlgo: (List<Harmonic>) -> Double
 ) : Runnable {
     private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
-    private val fingerPrintQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
+    private val fingerPrintQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FINGERPRINT_QUEUE_SIZE)
     private val pitchQueue:     BlockingQueue<Double>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
     private val qualityQueue:   BlockingQueue<Double>       = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
     private var running = false
@@ -33,7 +34,15 @@ class AudioProc(
     val quality: Double
         get() = qualityQueue.average()
     val fingerPrint: List<Harmonic>
-        get() = fingerPrintQueue.toList().sumLists()
+        get() = fingerPrintQueue
+            .toList()
+            .sumLists()
+            .apply {
+                val max = this.maxByOrNull { it.mag }?.mag ?: 1.0
+                if(max > 1.0)
+                    this.forEach{ it.mag /= max }
+            }
+
 
 
     init {

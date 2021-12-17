@@ -76,9 +76,6 @@ class MainActivity : ComponentActivity() {
                     note = tunerData.first
                     cents = tunerData.second
 
-                    val fp = audioProc.fingerPrint
-                    logd("${fp.size}: $fp")
-
                     if(audioSource is SignalManagerWrapper) counter += 1
 
                     Thread.sleep(UI_LAG)
@@ -87,6 +84,7 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
+            val color = if(AppModel.note != null) Color.Green else Color.Gray
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -121,12 +119,14 @@ class MainActivity : ComponentActivity() {
                         .fillMaxWidth()
                         .border(2.dp, Color.White),
                     y = AppModel.fft,
+                    color = color
                 )
                 FingerPrint(
                     modifier = Modifier
                         .fillMaxSize()
                         .border(2.dp, Color.White),
-                    fingerPrint = AppModel.fingerPrint
+                    fingerPrint = AppModel.fingerPrint,
+                    color = color
                 )
             }
 

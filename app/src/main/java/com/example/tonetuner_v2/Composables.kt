@@ -421,7 +421,6 @@ fun QualityMeter(
     }
 }
 
-
 @Composable
 fun XYPlot(
     modifier: Modifier = Modifier,
@@ -445,7 +444,7 @@ fun XYPlot(
                         x = (i+1) * size.width / (y.size-1),
                         y = size.height - (y[i+1] * size.height)
                     ),
-                    color = if(AppModel.note != null) color else Color.Gray,
+                    color = color,
                     strokeWidth = strokeWidth
                 )
             }
@@ -471,7 +470,6 @@ fun FingerPrint(
             .fillMaxWidth()
         ) {
             val barWidth = this.size.width / bars.size
-            val color = if(AppModel.note != null) color else Color.Gray
 
             for(i in bars.indices){
                 val barHeight = bars[i] * this.size.height

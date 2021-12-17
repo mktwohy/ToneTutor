@@ -20,10 +20,11 @@ object AppModel{
     const val SAMPLE_RATE           = 44100
     const val UI_LAG                = 15L
     const val FFT_QUEUE_SIZE        = 3
+    const val FINGERPRINT_QUEUE_SIZE= 3
     const val QUALITY_QUEUE_SIZE    = 10
     const val PITCH_QUEUE_SIZE      = 10
     const val NOISE_THRESHOLD       = 0.03f
-    const val NUM_HARMONICS         = 20
-    const val TEST_MODE             = false
+    const val NUM_HARMONICS         = 30
+    const val TEST_MODE             = true
     val NOTE_RANGE = Note.toList(Note.E_1, Note.E_6) // bass E string to guitar high E string
 }

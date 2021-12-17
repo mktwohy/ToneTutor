@@ -79,14 +79,16 @@ class AudioSample(
     private fun calcFFT(): List<Double> {
         val fd = this.toDoubleArray()
         DoubleFFT_1D(fd.size.toLong()).realForward(fd)
-        return fd.toList().asSequence().chunked(2).map {
-            sqrt(it[0].pow(2) + it[1].pow(2))
-        }.toList()
+        return fd
+            .asSequence()
+            .chunked(2)
+            .map { sqrt(it[0].pow(2) + it[1].pow(2)) }
+            .toList()
     }
 
     /** The frequencies associated with fft (list size: 1024 */
     private fun calcFftFreq(): List<Double> {
-        return arange(fft.size.toDouble()).map {it*sampleRate/(fft.size*2)}
+        return arange(fft.size.toDouble()).map { it*sampleRate/(fft.size*2) }
     }
 
     //todo does this work correctly? you're creating a list of Spectrums
@@ -109,8 +111,8 @@ class AudioSample(
 
     /** Calculate the harmonic fingerprint normalized to the total power */
     private fun calcFingerprint(): List<Harmonic> {
-        val norm = nonNormalizedFingerprint.map { it.mag }.maxOf { it }
-        return nonNormalizedFingerprint.map { Harmonic(it.freq,it.mag/norm) }
+        val norm = nonNormalizedFingerprint.map { it.mag }.sum() // todo shouldn't this be maxOf { it } ?
+        return nonNormalizedFingerprint.map { Harmonic(it.freq,it.mag / norm) }
     }
 
     /** Calculate the harmonic fingerprint */
@@ -133,7 +135,7 @@ class AudioSample(
 
 
     private fun calcBenya(): Double {
-        return fingerprint.asSequence().map { it.freq*it.mag }.sum()
+        return fingerprint.map { it.freq*it.mag }.sum()
     }
 
     operator fun get(index: IntRange): AudioSample {
