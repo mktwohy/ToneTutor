@@ -110,7 +110,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxHeight(0.3f)
                         .border(2.dp, Color.White),
                     value    = AppModel.quality,
-                    range    = 5,
+                    range    = 3,
                     allowNegatives = false
                 )
                 XYPlot(
