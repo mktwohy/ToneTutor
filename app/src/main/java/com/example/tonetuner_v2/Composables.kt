@@ -304,10 +304,6 @@ fun calcTunerAngle(note: Note, cents: Int) =
         else    -> Float.NaN
 } + (cents / 100f * 360f/12)
 
-fun Float.toRadian() = this * Math.PI.toFloat() / 180
-
-fun Float.toDegree() = this * 180 / Math.PI.toFloat()
-
 fun DrawScope.drawPieNeedle(
     angle: Float,
     sweepAngle: Float,
@@ -328,29 +324,6 @@ fun DrawScope.drawPieNeedle(
     }
 
 }
-
-@Preview(showBackground = true)
-@Composable
-fun CanvasDrawExample() {
-    Canvas(modifier = Modifier.fillMaxSize()) {
-        drawRect(Color.Blue, topLeft = Offset(0f, 0f), size = Size(this.size.width, 55f))
-        drawCircle(Color.Red, center = Offset(50f, 200f), radius = 40f)
-        drawLine(
-            Color.Green, Offset(20f, 0f),
-            Offset(200f, 200f), strokeWidth = 5f
-        )
-
-        drawArc(
-            Color.White,
-            0f,
-            60f,
-            useCenter = true,
-            size = Size(300f, 300f),
-            topLeft = Offset(-150f, -150f)
-        )
-    }
-}
-
 
 fun DrawScope.drawPie(
     numSlices: Int,

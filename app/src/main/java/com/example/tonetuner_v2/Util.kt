@@ -19,6 +19,10 @@ fun Note.toPrettyString(): String{
     return if (sharp) "${s[0]}#" else "${s[0]}"
 }
 
+fun Float.toRadian() = this * Math.PI.toFloat() / 180
+
+fun Float.toDegree() = this * 180 / Math.PI.toFloat()
+
 //from https://psychology.wikia.org/wiki/Pitch_perception
 fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
 
