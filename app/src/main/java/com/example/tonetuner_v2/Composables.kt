@@ -19,13 +19,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.signallib.Note
@@ -315,23 +315,12 @@ fun DrawScope.drawPieNeedle(
     color: Color,
     center: Offset = this.center
 ){
-    val a = (sweepAngle/2).toRadian()
-    logd(a)
-    val topLeft = Offset(
-        center.x - (sin(a) * radius),
-        center.y - (cos(a) * radius)
-    )
-    drawCircle(
-        color = Color.DarkGray,
-        radius = 10f,
-        center = topLeft
-    )
     rotate(angle){
         drawArc(
-//            topLeft = topLeft,
-//            size = this.size,
+            topLeft = Offset(center.x - radius, center.y - radius),
+            size = Size(radius*2, radius*2),
             color = color,
-            startAngle = - (sweepAngle/2),
+            startAngle = -1f * (sweepAngle / 2f),
             sweepAngle = sweepAngle,
             useCenter = true,
             alpha = 0.4f
@@ -339,6 +328,29 @@ fun DrawScope.drawPieNeedle(
     }
 
 }
+
+@Preview(showBackground = true)
+@Composable
+fun CanvasDrawExample() {
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        drawRect(Color.Blue, topLeft = Offset(0f, 0f), size = Size(this.size.width, 55f))
+        drawCircle(Color.Red, center = Offset(50f, 200f), radius = 40f)
+        drawLine(
+            Color.Green, Offset(20f, 0f),
+            Offset(200f, 200f), strokeWidth = 5f
+        )
+
+        drawArc(
+            Color.White,
+            0f,
+            60f,
+            useCenter = true,
+            size = Size(300f, 300f),
+            topLeft = Offset(-150f, -150f)
+        )
+    }
+}
+
 
 fun DrawScope.drawPie(
     numSlices: Int,
