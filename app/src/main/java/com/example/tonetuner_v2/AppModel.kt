@@ -8,6 +8,7 @@ import com.example.signallib.Note
 object AppModel{
     // State
     var fft by mutableStateOf(listOf<Float>())
+    var fingerPrint by mutableStateOf(listOf<Harmonic>())
     var pitch by mutableStateOf(0.0)
     var quality by mutableStateOf(0.0)
     var note by mutableStateOf<Note?>(null)

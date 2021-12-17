@@ -25,17 +25,15 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.signallib.Note
 import com.example.signallib.Note.Companion.minus
 import com.example.signallib.Note.Companion.plus
+import com.example.tonetuner_v2.AppModel.NUM_HARMONICS
 import com.example.tonetuner_v2.ui.theme.noteTextPaint
 import kotlinx.coroutines.launch
-import kotlin.math.cos
 import kotlin.math.ln
-import kotlin.math.sin
 
 @Composable
 fun TestTapeMeter(){
@@ -431,26 +429,60 @@ fun XYPlot(
     color: Color = Color.Green,
     strokeWidth: Float = 3f,
 ) {
-    if(y.isNotEmpty()){
-        Box(modifier = modifier, contentAlignment = Alignment.Center){
-            Canvas(modifier = Modifier
-                .fillMaxHeight(0.9f)
-                .fillMaxWidth()
-            ) {
-                for(i in 0..y.size-2){
-                    drawLine(
-                        start = Offset(
-                            x = i * size.width / (y.size-1),
-                            y = size.height - (y[i] * size.height)
-                        ),
-                        end = Offset(
-                            x = (i+1) * size.width / (y.size-1),
-                            y = size.height - (y[i+1] * size.height)
-                        ),
-                        color = if(AppModel.note != null) color else Color.Red,
-                        strokeWidth = strokeWidth
-                    )
-                }
+    if(y.isEmpty()) return
+    Box(modifier = modifier, contentAlignment = Alignment.Center){
+        Canvas(modifier = Modifier
+            .fillMaxHeight(0.9f)
+            .fillMaxWidth()
+        ) {
+            for(i in 0..y.size-2){
+                drawLine(
+                    start = Offset(
+                        x = i * size.width / (y.size-1),
+                        y = size.height - (y[i] * size.height)
+                    ),
+                    end = Offset(
+                        x = (i+1) * size.width / (y.size-1),
+                        y = size.height - (y[i+1] * size.height)
+                    ),
+                    color = if(AppModel.note != null) color else Color.Gray,
+                    strokeWidth = strokeWidth
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun FingerPrint(
+    modifier: Modifier = Modifier,
+    fingerPrint: List<Harmonic>,
+    color: Color = Color.Green,
+    strokeWidth: Float = 3f,
+) {
+    if(fingerPrint.isEmpty()) return
+
+    val f = fingerPrint.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
+    val bars = List(NUM_HARMONICS){ i -> f[i] ?: 0f }
+
+    Box(modifier = modifier, contentAlignment = Alignment.Center){
+        Canvas(modifier = Modifier
+            .fillMaxHeight(0.9f)
+            .fillMaxWidth()
+        ) {
+            val barWidth = this.size.width / bars.size
+            val color = if(AppModel.note != null) color else Color.Gray
+
+            for(i in bars.indices){
+                val barHeight = bars[i] * this.size.height
+                drawRect(
+                    topLeft = Offset(
+                        (i / bars.size.toFloat()) * this.size.width,
+                        this.size.height - barHeight
+                    ),
+                    color = color,
+                    size = Size(barWidth, barHeight)
+                )
             }
         }
     }

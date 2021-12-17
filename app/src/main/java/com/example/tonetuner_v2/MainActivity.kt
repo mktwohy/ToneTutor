@@ -12,8 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.signallib.Note
-import com.example.signallib.Note.Companion.plus
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -73,7 +71,7 @@ class MainActivity : ComponentActivity() {
                     val tunerData = pitch.toNoteAndCents()
                     pitch = audioProc.pitch
                     quality = audioProc.quality
-//                    fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
+                    fingerPrint = audioProc.fingerPrint
                     fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
                     note = tunerData.first
                     cents = tunerData.second
@@ -119,12 +117,19 @@ class MainActivity : ComponentActivity() {
                 )
                 XYPlot(
                     modifier = Modifier
-                        .fillMaxHeight(0.8f)
+                        .fillMaxHeight(0.5f)
                         .fillMaxWidth()
                         .border(2.dp, Color.White),
                     y = AppModel.fft,
                 )
+                FingerPrint(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .border(2.dp, Color.White),
+                    fingerPrint = AppModel.fingerPrint
+                )
             }
+
 //            TestTapeMeter()
 //            CircularTunerTest()
         }
