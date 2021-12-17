@@ -67,6 +67,7 @@ class AudioProc(
             } else {
                 qualityQueue.forcedOffer(audioSample.benya)
                 pitchQueue.forcedOffer(audioSample.pitch)
+                fftQueue.forcedOffer(audioSample.fft)
                 fingerPrintQueue.forcedOffer(audioSample.fingerprint)
             }
         }
