@@ -1,10 +1,13 @@
 package com.example.tonetuner_v2
 
+import com.example.signallib.Note.Companion.bend
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
 import com.example.signallib.Note.Companion.minus
 import com.example.signallib.Note.Companion.plus
+import com.example.signallib.SignalEngine
+import com.example.signallib.SignalManager
 
 
 // Should I store this as an enum class?
@@ -22,8 +25,8 @@ object PitchAlgorithms{
             .minByOrNull { it.second }?.first!!
 
         // define the range of frequencies that are in that note ( +- 1/2 semitone)
-        val minFreq = ((noteEst - 1).freq + noteEst.freq) / 2f // 50 cents  flat
-        val maxFreq = ((noteEst + 1).freq + noteEst.freq) / 2f  // 50 cents sharp
+        val minFreq = noteEst.bend(-0.50f) // 50 cents  flat
+        val maxFreq = noteEst.bend(0.50f)  // 50 cents sharp
 
         // refine closest note's frequency and return
         arange(minFreq.toDouble(), maxFreq.toDouble(), 0.1)

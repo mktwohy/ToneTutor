@@ -113,14 +113,14 @@ class MainActivity : ComponentActivity() {
                     range    = 3,
                     allowNegatives = false
                 )
-                XYPlot(
-                    modifier = Modifier
-                        .fillMaxHeight(0.5f)
-                        .fillMaxWidth()
-                        .border(2.dp, Color.White),
-                    y = AppModel.fft,
-                    color = color
-                )
+//                XYPlot(
+//                    modifier = Modifier
+//                        .fillMaxHeight(0.5f)
+//                        .fillMaxWidth()
+//                        .border(2.dp, Color.White),
+//                    y = AppModel.fft,
+//                    color = color
+//                )
                 FingerPrint(
                     modifier = Modifier
                         .fillMaxSize()
@@ -130,8 +130,8 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-//            TestTapeMeter()
-//            CircularTunerTest()
+            TestTapeMeter()
+            CircularTunerTest()
         }
     }
 
