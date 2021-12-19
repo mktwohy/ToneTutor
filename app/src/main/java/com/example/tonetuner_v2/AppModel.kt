@@ -1,5 +1,6 @@
 package com.example.tonetuner_v2
 
+import androidx.compose.animation.core.animate
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,8 +22,8 @@ object AppModel{
     const val UI_LAG                = 15L
     const val FFT_QUEUE_SIZE        = 7
     const val FINGERPRINT_QUEUE_SIZE= 7
-    const val QUALITY_QUEUE_SIZE    = 10
-    const val PITCH_QUEUE_SIZE      = 10
+    const val QUALITY_QUEUE_SIZE    = 30
+    const val PITCH_QUEUE_SIZE      = 3
     const val NOISE_THRESHOLD       = 0.03f
     const val NUM_HARMONICS         = 25
     const val TEST_MODE             = false

@@ -121,17 +121,20 @@ class MainActivity : ComponentActivity() {
 //                    y = AppModel.fft,
 //                    color = color
 //                )
-                FingerPrint(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .border(2.dp, Color.White),
-                    fingerPrint = AppModel.fingerPrint,
-                    color = color
+                BarChart(
+                    modifier = Modifier.fillMaxSize(),
+                    barValues = AppModel.fingerPrint.toFingerPrint(),
+                    xTicks = List(AppModel.NUM_HARMONICS){ i -> if (i == 0) 'f' else i+1 },
+                    yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
+                    barColor = Color.Green,
+                    tickColor = Color.White
                 )
             }
 
-            TestTapeMeter()
-            CircularTunerTest()
+//            TestTapeMeter()
+//            CircularTunerTest()
+
+
         }
     }
 

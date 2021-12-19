@@ -5,10 +5,17 @@ import androidx.compose.ui.graphics.Color
 import com.example.signallib.Note
 import com.example.signallib.Note.Companion.plus
 import com.example.signallib.Note.Companion.minus
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+fun List<Harmonic>.toFingerPrint(): List<Float> {
+    val f = this.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
+    return List(AppModel.NUM_HARMONICS){ i -> f[i] ?: 0f }
+}
 
 fun Note.enharmonicEqual(other: Note)
         = this.toPrettyString() == other.toPrettyString()
@@ -18,6 +25,23 @@ fun Note.toPrettyString(): String{
     val sharp = s[1] == 's'
     return if (sharp) "${s[0]}#" else "${s[0]}"
 }
+
+fun ClosedRange<Float>.toList(step: Float): List<Float>{
+    val df = DecimalFormat("#.#")
+    df.roundingMode = RoundingMode.HALF_DOWN
+    val size = ((endInclusive - start) / step).roundToInt() + 1
+    return List(size) { index ->
+        (step * index + start).also { df.format(it) }
+    }
+}
+
+fun main() {
+    val df = DecimalFormat("#.##")
+    df.roundingMode = RoundingMode.HALF_DOWN
+    val answer = df.format(0.9000004)
+    println(answer)
+}
+
 
 fun Float.toRadian() = this * Math.PI.toFloat() / 180
 

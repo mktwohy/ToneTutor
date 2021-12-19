@@ -450,6 +450,129 @@ fun XYPlot(
 }
 
 @Composable
+fun YAxis(
+    modifier: Modifier,
+    ticks: List<Any>,
+    color: Color = Color.White
+){
+    BoxWithConstraints(modifier = modifier) {
+        val tickWidth = this.maxWidth
+        val tickHeight = this.maxHeight / ticks.size
+        Column {
+            for (t in ticks.reversed()){
+                Box(
+                    modifier = Modifier.size(tickWidth, tickHeight),
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(
+                        text = t.toString(),
+                        color = color
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun XAxis(
+    modifier: Modifier = Modifier,
+    ticks: List<Any> = listOf('f',1,2,3,4,5,6,7,8,9,10),
+    color: Color = Color.White
+){
+    BoxWithConstraints(modifier = modifier) {
+        val tickWidth = this.maxWidth / ticks.size
+        val tickHeight = this.maxHeight
+        Row {
+           for (t in ticks){
+               Box(
+                   modifier = Modifier.size(tickWidth, tickHeight),
+                   contentAlignment = Alignment.Center
+               ){
+                   Text(
+                       text = t.toString(),
+                       color = color
+                   )
+               }
+           }
+        }
+    }
+}
+
+@Composable
+fun BarChartNoAxis(
+    modifier: Modifier,
+    barValues: List<Float>,
+    barColor: Color
+){
+    Box(modifier = modifier, contentAlignment = Alignment.Center){
+        Canvas(modifier = Modifier
+            .fillMaxHeight(0.9f)
+            .fillMaxWidth()
+        ) {
+            val barWidth = this.size.width / barValues.size
+
+            for(i in barValues.indices){
+                val barHeight = barValues[i] * this.size.height
+                drawRect(
+                    topLeft = Offset(
+                        (i / barValues.size.toFloat()) * this.size.width,
+                        this.size.height - barHeight
+                    ),
+                    color = barColor,
+                    size = Size(barWidth, barHeight),
+                )
+                drawRect(
+                    topLeft = Offset(
+                        (i / barValues.size.toFloat()) * this.size.width,
+                        this.size.height - barHeight
+                    ),
+                    color = Color.Black,
+                    size = Size(barWidth, barHeight),
+                    style = Stroke(1f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun BarChart(
+    modifier: Modifier,
+    barValues: List<Float>,
+    xTicks: List<Any>,
+    yTicks: List<Any>,
+    tickColor: Color,
+    barColor: Color
+){
+
+    BoxWithConstraints(modifier) {
+        Row{
+            YAxis(
+                modifier = Modifier
+                    .fillMaxHeight(0.95f)
+                    .fillMaxWidth(0.1f),
+                ticks = yTicks
+            )
+            Column {
+                BarChartNoAxis(
+                    modifier = Modifier
+                        .fillMaxHeight(0.95f)
+                        .fillMaxWidth(),
+                    barValues = barValues,
+                    barColor = barColor
+                )
+                XAxis(
+                    modifier = Modifier.fillMaxSize(),
+                    ticks = xTicks,
+                    color = tickColor
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun FingerPrint(
     modifier: Modifier = Modifier,
     fingerPrint: List<Harmonic>,
