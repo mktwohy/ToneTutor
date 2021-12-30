@@ -275,7 +275,7 @@ fun CircularTuner(
                 contentAlignment = Alignment.Center
             ){
                 Text(
-                    text = note.name[2].toString(),
+                    text = note.octave.toString(),
                     color = Color.White
                 )
             }
