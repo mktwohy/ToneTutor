@@ -38,23 +38,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // request audio permissions. the app will begin recording audio
-        val requestPermissionLauncher =
-            registerForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) { isGranted: Boolean ->
-                if (isGranted) {
-                    if (audioSource is AudioCapture) {
-                        audioSource.startCapture()
-                    }
-                    if (audioSource is SignalManagerWrapper){
-                        audioSourceGenerateRandom(audioSource)
-                    }
-                    logd("Capture Started")
-                } else {
-                    logd("Microphone Permission Denied")
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                if (audioSource is AudioCapture) {
+                    audioSource.startCapture()
                 }
+                if (audioSource is SignalManagerWrapper){
+                    audioSourceGenerateRandom(audioSource)
+                }
+                logd("Capture Started")
+            } else {
+                logd("Microphone Permission Denied")
             }
-        requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+        }.launch(Manifest.permission.RECORD_AUDIO)
 
         // todo extract this out to a method
 
