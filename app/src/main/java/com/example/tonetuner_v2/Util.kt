@@ -17,9 +17,6 @@ fun List<Harmonic>.toFingerPrint(): List<Float> {
     return List(AppModel.NUM_HARMONICS){ i -> f[i] ?: 0f }
 }
 
-fun Note.toPrettyString() =
-    this.pitchClass.name.replace('s', '#')
-
 fun ClosedRange<Float>.toList(step: Float): List<Float>{
     val df = DecimalFormat("#.#")
     df.roundingMode = RoundingMode.HALF_DOWN

@@ -28,6 +28,7 @@ import com.example.signallib.enums.PitchClass.*
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.plus
 import com.example.signallib.enums.Note.Companion.minus
+import com.example.signallib.enums.PitchClass
 import com.example.tonetuner_v2.AppModel.NUM_HARMONICS
 import com.example.tonetuner_v2.ui.theme.noteTextPaint
 import kotlinx.coroutines.launch
@@ -251,10 +252,10 @@ fun CircularTuner(
                 radius = innerRadius,
             )
             drawElementsInCircle(
-                elements = Note.toList(octave = 1),
+                elements = PitchClass.classes,
                 radius = (outerRadius + innerRadius)/2,
                 textPaint = noteTextPaint,
-                customToString = { it.toPrettyString() }
+                customToString = { it.name.replace('s','#') }
             )
             if (note != null){
                 drawPieNeedle(
@@ -297,7 +298,7 @@ fun calcTunerAngle(note: Note, cents: Int) =
         C    -> 270f
         Cs   -> 300f
         D    -> 330f
-} + (cents / 100f * 360f/12)
+    } + (cents / 100f * 360f/12)
 
 fun DrawScope.drawPieNeedle(
     angle: Float,
