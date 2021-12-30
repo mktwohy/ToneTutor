@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.signallib.enums.PitchClass.*
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.plus
 import com.example.signallib.enums.Note.Companion.minus
@@ -283,20 +284,19 @@ fun CircularTuner(
 }
 
 fun calcTunerAngle(note: Note, cents: Int) =
-    when(note.toPrettyString()){
-        "D#"    -> 0f
-        "E"     -> 30f
-        "F"     -> 60f
-        "F#"    -> 90f
-        "G"     -> 120f
-        "G#"    -> 150f
-        "A"     -> 180f
-        "A#"    -> 210f
-        "B"     -> 240f
-        "C"     -> 270f
-        "C#"    -> 300f
-        "D"     -> 330f
-        else    -> Float.NaN
+    when(note.pitchClass){
+        Ds   -> 0f
+        E    -> 30f
+        F    -> 60f
+        Fs   -> 90f
+        G    -> 120f
+        Gs   -> 150f
+        A    -> 180f
+        As   -> 210f
+        B    -> 240f
+        C    -> 270f
+        Cs   -> 300f
+        D    -> 330f
 } + (cents / 100f * 360f/12)
 
 fun DrawScope.drawPieNeedle(

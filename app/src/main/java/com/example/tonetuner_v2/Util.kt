@@ -17,14 +17,8 @@ fun List<Harmonic>.toFingerPrint(): List<Float> {
     return List(AppModel.NUM_HARMONICS){ i -> f[i] ?: 0f }
 }
 
-fun Note.enharmonicEqual(other: Note)
-        = this.toPrettyString() == other.toPrettyString()
-
-fun Note.toPrettyString(): String{
-    val s = "$this"
-    val sharp = s[1] == 's'
-    return if (sharp) "${s[0]}#" else "${s[0]}"
-}
+fun Note.toPrettyString() =
+    this.pitchClass.name.replace('s', '#')
 
 fun ClosedRange<Float>.toList(step: Float): List<Float>{
     val df = DecimalFormat("#.#")
@@ -34,14 +28,6 @@ fun ClosedRange<Float>.toList(step: Float): List<Float>{
         (step * index + start).also { df.format(it) }
     }
 }
-
-fun main() {
-    val df = DecimalFormat("#.##")
-    df.roundingMode = RoundingMode.HALF_DOWN
-    val answer = df.format(0.9000004)
-    println(answer)
-}
-
 
 fun Float.toRadian() = this * Math.PI.toFloat() / 180
 
@@ -67,9 +53,6 @@ fun <T> BlockingQueue<T>.clearAndOffer(element: T){
     clear()
     offer(element)
 }
-
-
-
 
 fun List<List<Harmonic>>.sumLists(): List<Harmonic> =
     when(size){
