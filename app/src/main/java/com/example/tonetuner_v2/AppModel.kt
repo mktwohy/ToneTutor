@@ -4,7 +4,7 @@ import androidx.compose.animation.core.animate
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.example.signallib.Note
+import com.example.signallib.enums.Note
 
 object AppModel{
     // State

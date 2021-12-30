@@ -2,9 +2,9 @@ package com.example.tonetuner_v2
 
 import android.util.Log
 import androidx.compose.ui.graphics.Color
-import com.example.signallib.Note
-import com.example.signallib.Note.Companion.plus
-import com.example.signallib.Note.Companion.minus
+import com.example.signallib.enums.Note
+import com.example.signallib.enums.Note.Companion.minus
+import com.example.signallib.enums.Note.Companion.plus
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.concurrent.BlockingQueue

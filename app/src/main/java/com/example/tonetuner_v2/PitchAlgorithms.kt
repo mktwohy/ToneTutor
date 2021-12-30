@@ -1,13 +1,10 @@
 package com.example.tonetuner_v2
 
-import com.example.signallib.Note.Companion.bend
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
-import com.example.signallib.Note.Companion.minus
-import com.example.signallib.Note.Companion.plus
-import com.example.signallib.SignalEngine
-import com.example.signallib.SignalManager
+
+import com.example.signallib.enums.Note.Companion.bend
 
 
 // Should I store this as an enum class?

@@ -1,6 +1,8 @@
 package com.example.tonetuner_v2
 
 import com.example.signallib.*
+import com.example.signallib.enums.Note
+import com.example.signallib.enums.WaveShape
 
 class SignalManagerWrapper(numHarmonics: Int): AudioSource {
     var notes = setOf(Note.A_4)

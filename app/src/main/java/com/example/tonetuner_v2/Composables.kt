@@ -24,9 +24,9 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.signallib.Note
-import com.example.signallib.Note.Companion.minus
-import com.example.signallib.Note.Companion.plus
+import com.example.signallib.enums.Note
+import com.example.signallib.enums.Note.Companion.plus
+import com.example.signallib.enums.Note.Companion.minus
 import com.example.tonetuner_v2.AppModel.NUM_HARMONICS
 import com.example.tonetuner_v2.ui.theme.noteTextPaint
 import kotlinx.coroutines.launch
