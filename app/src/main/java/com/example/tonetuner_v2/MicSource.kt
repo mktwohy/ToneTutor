@@ -13,7 +13,7 @@ import java.util.concurrent.BlockingQueue
  * Opens the microphone and buffers audio data
  * @author gtruch
  */
-class AudioCapture(
+class MicSource(
     val sampleRate: Int = SAMPLE_RATE,
     val bufferSize: Int = CAPTURE_BUFFER_SIZE,
 ) : Runnable, AudioSource {

@@ -13,7 +13,7 @@ import java.util.concurrent.BlockingQueue
  * Threaded wrapper class for AudioSample. It continually pulls data from AudioCapture and fills
  * AudioSample. This ensures that attributes [fft], [pitch], and [quality] are always up-to-date
  *
- * @param[audioSource] [AudioCapture] audio capture for getting mic input
+ * @param[audioSource] [MicSource] audio capture for getting mic input
  * @author gtruch and Michael Twohy
  */
 class AudioProc(

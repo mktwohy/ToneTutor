@@ -12,27 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
-//    var curNote = Note.F_5
-    private fun audioSourceGenerateRandom(audioSource: SignalManagerWrapper){
-        audioSource.notes = setOf(AppModel.NOTE_RANGE.random())
-//        curNote += 1
-//        audioSource.notes = setOf(curNote)
-        audioSource.pitchBend = Random.nextDouble(-0.5, 0.5).toFloat()
-//        audioSource.pitchBend = 0.0f
-        audioSource.signalSettings.harmonicSeries.generateRandom()
-    }
-
-
-    val audioSource =
+    private val audioSource =
         if (AppModel.TEST_MODE)
-            SignalManagerWrapper(AppModel.NUM_HARMONICS)
+            SignalSource(AppModel.NUM_HARMONICS)
         else
-            AudioCapture()
+            MicSource()
 
-    val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
+    private val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +30,11 @@ class MainActivity : ComponentActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                if (audioSource is AudioCapture) {
+                if (audioSource is MicSource) {
                     audioSource.startCapture()
                 }
-                if (audioSource is SignalManagerWrapper){
-                    audioSourceGenerateRandom(audioSource)
+                if (audioSource is SignalSource){
+                    audioSource.generateRandom()
                 }
                 logd("Capture Started")
             } else {
@@ -54,30 +42,20 @@ class MainActivity : ComponentActivity() {
             }
         }.launch(Manifest.permission.RECORD_AUDIO)
 
-        // todo extract this out to a method
-
         var counter = 0
-        // update loop
         Thread{
             while(true){
-                if (counter == 300 && audioSource is SignalManagerWrapper){
-                    audioSourceGenerateRandom(audioSource)
-                    counter = 0
+                if(audioSource is SignalSource) {
+                    if (counter == 300){
+                        audioSource.generateRandom()
+                        counter = 0
+                    }
+                    else{
+                        counter += 1
+                    }
                 }
-
-                with(AppModel){
-                    val tunerData = pitch.toNoteAndCents()
-                    pitch = audioProc.pitch
-                    quality = audioProc.quality
-                    fingerPrint = audioProc.fingerPrint
-                    fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
-                    note = tunerData.first
-                    cents = tunerData.second
-
-                    if(audioSource is SignalManagerWrapper) counter += 1
-
-                    Thread.sleep(UI_LAG)
-                }
+                AppModel.update(audioProc)
+                Thread.sleep(AppModel.UI_LAG)
             }
         }.start()
 
@@ -88,7 +66,7 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceAround
             ) {
-                if (audioSource is SignalManagerWrapper){
+                if (audioSource is SignalSource){
                     Text(
                         text = "Note: ${audioSource.notes.toString().substring(1..3)} " +
                                 "\nBend: ${(audioSource.pitchBend * 100).toInt()} cents",
@@ -111,14 +89,6 @@ class MainActivity : ComponentActivity() {
                     range    = 3,
                     allowNegatives = false
                 )
-//                XYPlot(
-//                    modifier = Modifier
-//                        .fillMaxHeight(0.5f)
-//                        .fillMaxWidth()
-//                        .border(2.dp, Color.White),
-//                    y = AppModel.fft,
-//                    color = color
-//                )
                 BarChart(
                     modifier = Modifier.fillMaxSize(),
                     barValues = AppModel.fingerPrint.toFingerPrint(),
@@ -128,11 +98,6 @@ class MainActivity : ComponentActivity() {
                     tickColor = Color.White
                 )
             }
-
-//            TestTapeMeter()
-//            CircularTunerTest()
-
-
         }
     }
 
