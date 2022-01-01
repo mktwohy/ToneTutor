@@ -5,12 +5,36 @@ import androidx.compose.ui.graphics.Color
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.minus
 import com.example.signallib.enums.Note.Companion.plus
+import org.jetbrains.kotlinx.multik.api.math.cumSum
+import org.jetbrains.kotlinx.multik.api.mk
+import org.jetbrains.kotlinx.multik.api.ndarray
+import org.jetbrains.kotlinx.multik.api.ndarrayOf
+import org.jetbrains.kotlinx.multik.ndarray.operations.forEach
+import org.jetbrains.kotlinx.multik.ndarray.operations.forEachMultiIndexed
+import org.jetbrains.kotlinx.multik.ndarray.operations.map
+import org.jetbrains.kotlinx.multik.ndarray.operations.mapMultiIndexed
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+fun Int.fact() =
+    (1..this).reduce { acc, i -> acc * i }
+
+fun combinations(n: Int, k: Int) =
+    n.fact() / k.fact() * (n - k).fact()
+
+fun getAllOrderedPairs(l1: List<Any>, l2: List<Any>): List<Pair<Any, Any>>{
+    val pairs = mutableListOf<Pair<Any, Any>>()
+    for (i in l1){
+        for (j in l2){
+            pairs.add(i to j)
+        }
+    }
+    return pairs
+}
 
 fun List<Harmonic>.toFingerPrint(): List<Float> {
     val f = this.map { it.freq.toInt() to it.mag.toFloat() }.toMap()

@@ -7,17 +7,6 @@ import androidx.compose.runtime.setValue
 import com.example.signallib.enums.Note
 
 object AppModel{
-    fun update(audioProc: AudioProc){
-        pitch       = audioProc.pitch
-        quality     = audioProc.quality
-        fingerPrint = audioProc.fingerPrint
-        fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
-
-        val (newNote, newCents) = pitch.toNoteAndCents()
-        note = newNote
-        cents = newCents
-    }
-
     // State
     var fft by mutableStateOf(listOf<Float>())
     var fingerPrint by mutableStateOf(listOf<Harmonic>())
@@ -39,9 +28,15 @@ object AppModel{
     const val NUM_HARMONICS         = 25
     const val TEST_MODE             = false
     val NOTE_RANGE = Note.toList(Note.C_1, Note.E_6) // drop C (bass) high E string (guitar)
+
+    fun update(audioProc: AudioProc){
+        pitch       = audioProc.pitch
+        quality     = audioProc.quality
+        fingerPrint = audioProc.fingerPrint
+        fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
+
+        val (newNote, newCents) = pitch.toNoteAndCents()
+        note = newNote
+        cents = newCents
+    }
 }
-
-
-/*
-buffer size of
- */

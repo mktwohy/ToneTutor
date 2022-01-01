@@ -63,6 +63,8 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
 
+    implementation "org.jetbrains.kotlinx:multik-api:0.1.1"
+    implementation "org.jetbrains.kotlinx:multik-default:0.1.1"
     implementation files('libs/JTransforms-3.1-with-dependencies.jar')
     implementation files('libs/SignalLib_v1.2.0-alpha.aar')
 }

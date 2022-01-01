@@ -12,6 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.signallib.enums.HarmonicFilter
+import com.example.signallib.enums.Note
+import com.example.signallib.enums.WaveShape
+import java.util.*
 
 class MainActivity : ComponentActivity() {
     private val audioSource =
@@ -21,6 +25,17 @@ class MainActivity : ComponentActivity() {
             MicSource()
 
     private val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
+
+    private val pitchTests: Queue<PitchTest> = createPitchTests(
+        notes = AppModel.NOTE_RANGE,
+        pitchBends = listOf(-0.25f, 0f, 0.25f),
+        amps = listOf(1f),
+        waveShapes = WaveShape.values().toList(),
+        decayRates = listOf(0f),
+        floors = listOf(0f),
+        ceilings = listOf(1f),
+        filters = HarmonicFilter.values().toList()
+    ) as LinkedList<PitchTest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +62,6 @@ class MainActivity : ComponentActivity() {
             while(true){
                 if(audioSource is SignalSource) {
                     if (counter == 300){
-                        audioSource.generateRandom()
                         counter = 0
                     }
                     else{
