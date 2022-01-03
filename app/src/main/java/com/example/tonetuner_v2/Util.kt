@@ -5,14 +5,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.minus
 import com.example.signallib.enums.Note.Companion.plus
-import org.jetbrains.kotlinx.multik.api.math.cumSum
-import org.jetbrains.kotlinx.multik.api.mk
-import org.jetbrains.kotlinx.multik.api.ndarray
-import org.jetbrains.kotlinx.multik.api.ndarrayOf
-import org.jetbrains.kotlinx.multik.ndarray.operations.forEach
-import org.jetbrains.kotlinx.multik.ndarray.operations.forEachMultiIndexed
-import org.jetbrains.kotlinx.multik.ndarray.operations.map
-import org.jetbrains.kotlinx.multik.ndarray.operations.mapMultiIndexed
+import com.example.tonetuner_v2.app.AppModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.concurrent.BlockingQueue
@@ -54,7 +47,7 @@ fun Float.toRadian() = this * Math.PI.toFloat() / 180
 
 fun Float.toDegree() = this * 180 / Math.PI.toFloat()
 
-//from https://psychology.wikia.org/wiki/Pitch_perception
+/** from https://psychology.wikia.org/wiki/Pitch_perception */
 fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
 
 /**
@@ -192,6 +185,8 @@ fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double
     val size = ((lStop-lStart)/step).roundToInt() + 1
     return List(size) { index -> step*index + lStart }
 }
+
+data class Harmonic(var freq: Double, var mag: Double)
 
 fun poly(x: List<Double>, y: List<Double>): Harmonic {
     val coef = polyFit(x,y)

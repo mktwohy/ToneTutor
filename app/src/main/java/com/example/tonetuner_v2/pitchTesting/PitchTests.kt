@@ -1,14 +1,9 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.pitchTesting
 
-import android.util.FloatMath
 import com.example.signallib.HarmonicSeries
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.Note
-import com.example.signallib.enums.Note.Companion.toList
 import com.example.signallib.enums.WaveShape
-import com.example.tonetuner_v2.PitchTest.*
-import org.jetbrains.kotlinx.multik.api.mk
-import org.jetbrains.kotlinx.multik.api.ndarray
 import java.util.*
 
 sealed class PitchTest{
@@ -54,7 +49,15 @@ fun createPitchTests(
             for (amp in amps){
                 for (waveShape in waveShapes){
                     for (hsUpdate in harmonicSeriesUpdates){
-                        tests.add(SignalPitchTest(note, pitchBend, amp, waveShape, hsUpdate))
+                        tests.add(
+                            PitchTest.SignalPitchTest(
+                                note,
+                                pitchBend,
+                                amp,
+                                waveShape,
+                                hsUpdate
+                            )
+                        )
                     }
                 }
             }

@@ -1,21 +1,24 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.app
 
 import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.WaveShape
+import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
+import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
+import com.example.tonetuner_v2.audio.audioSources.MicSource
+import com.example.tonetuner_v2.audio.audioSources.SignalSource
+import com.example.tonetuner_v2.logd
+import com.example.tonetuner_v2.pitchTesting.PitchTest
+import com.example.tonetuner_v2.pitchTesting.createPitchTests
 import com.example.tonetuner_v2.ui.navigation.NavMain
-import java.util.*
 
 class MainActivity : ComponentActivity() {
     private val audioSource =
@@ -26,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
     private val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
 
-    private val pitchTests: Queue<PitchTest> = createPitchTests(
+    private val pitchTests = createPitchTests(
         notes = AppModel.NOTE_RANGE,
         pitchBends = listOf(-0.25f, 0f, 0.25f),
         amps = listOf(1f),

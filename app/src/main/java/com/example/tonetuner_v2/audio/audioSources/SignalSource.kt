@@ -1,8 +1,9 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.audio.audioSources
 
 import com.example.signallib.*
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape
+import com.example.tonetuner_v2.app.AppModel
 import kotlin.random.Random
 
 class SignalSource(numHarmonics: Int): AudioSource {

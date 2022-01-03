@@ -1,12 +1,14 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.audio.audioProcessing
 
-import com.example.tonetuner_v2.AppModel.FFT_QUEUE_SIZE
-import com.example.tonetuner_v2.AppModel.FINGERPRINT_QUEUE_SIZE
-import com.example.tonetuner_v2.AppModel.NOISE_THRESHOLD
-import com.example.tonetuner_v2.AppModel.NUM_HARMONICS
-import com.example.tonetuner_v2.AppModel.PITCH_QUEUE_SIZE
-import com.example.tonetuner_v2.AppModel.PROC_BUFFER_SIZE
-import com.example.tonetuner_v2.AppModel.QUALITY_QUEUE_SIZE
+import com.example.tonetuner_v2.*
+import com.example.tonetuner_v2.app.AppModel.FFT_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppModel.NOISE_THRESHOLD
+import com.example.tonetuner_v2.app.AppModel.NUM_HARMONICS
+import com.example.tonetuner_v2.app.AppModel.PITCH_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppModel.PROC_BUFFER_SIZE
+import com.example.tonetuner_v2.app.AppModel.QUALITY_QUEUE_SIZE
+import com.example.tonetuner_v2.audio.audioSources.AudioSource
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 /**

@@ -1,6 +1,8 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.audio.audioProcessing
 
-import com.example.tonetuner_v2.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.*
+import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
 import org.jtransforms.fft.DoubleFFT_1D
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -91,9 +93,12 @@ class AudioSample(
         return arange(fft.size.toDouble()).map { it*sampleRate/(fft.size*2) }
     }
 
+
     //todo does this work correctly? you're creating a list of Spectrums
     /** The harmonics extracted from the fourier transform */
     private fun calcHarmonics(): List<Harmonic> {
+        data class Spectrum(val freqs: List<Double>, val mags: List<Double>)
+
         val maxMag = fft.maxOrNull() ?: 0.0
         return fft.slice(0 until fft.size - 2).asSequence()
             .mapIndexed { index, _ ->

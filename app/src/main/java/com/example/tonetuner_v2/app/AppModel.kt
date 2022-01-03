@@ -1,10 +1,13 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.app
 
-import androidx.compose.animation.core.animate
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.signallib.enums.Note
+import com.example.tonetuner_v2.Harmonic
+import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
+import com.example.tonetuner_v2.normalize
+import com.example.tonetuner_v2.toNoteAndCents
 
 object AppModel{
     // State

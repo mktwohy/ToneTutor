@@ -1,10 +1,13 @@
-package com.example.tonetuner_v2
+package com.example.tonetuner_v2.audio.audioProcessing
 
 import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.roundToLong
 
 import com.example.signallib.enums.Note.Companion.bend
+import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.Harmonic
+import com.example.tonetuner_v2.arange
 
 
 // Should I store this as an enum class?
@@ -72,11 +75,11 @@ object PitchAlgorithms{
      * @return A function that takes a fundamental frequency as input and returns the score
      */
     private fun twmScore(harmonics: List<Harmonic>,
-                 p: Double = 0.2,
-                 q: Double = 1.4,
-                 r: Double = 1.0,
-                 mtopOnly: Boolean = false,
-                 ptomOnly: Boolean = false
+                         p: Double = 0.2,
+                         q: Double = 1.4,
+                         r: Double = 1.0,
+                         mtopOnly: Boolean = false,
+                         ptomOnly: Boolean = false
     ): (Double) -> Double {
 
         // Calculate the predicted harmonics of the fundamental frequency
