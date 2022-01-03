@@ -29,7 +29,7 @@ object AppModel{
     const val TEST_MODE             = false
     val NOTE_RANGE = Note.toList(Note.C_1, Note.E_6) // drop C (bass) high E string (guitar)
 
-    fun update(audioProc: AudioProc){
+    fun updateAppModel(audioProc: AudioProc){
         pitch       = audioProc.pitch
         quality     = audioProc.quality
         fingerPrint = audioProc.fingerPrint

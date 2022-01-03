@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.signallib.enums.HarmonicFilter
-import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape
 import java.util.*
 
@@ -35,7 +34,7 @@ class MainActivity : ComponentActivity() {
         floors = listOf(0f),
         ceilings = listOf(1f),
         filters = HarmonicFilter.values().toList()
-    ) as LinkedList<PitchTest>
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +61,20 @@ class MainActivity : ComponentActivity() {
             while(true){
                 if(audioSource is SignalSource) {
                     if (counter == 300){
+                        val test = pitchTests.poll() as PitchTest.SignalPitchTest
+
+                        audioSource.notes = setOf(test.note)
+                        audioSource.pitchBend = test.pitchBend
+                        audioSource.amp = test.amp
+                        audioSource.signalSettings.waveShape = test.waveShape
+                        test.updateHarmonicSeries(audioSource.signalSettings.harmonicSeries)
                         counter = 0
                     }
                     else{
                         counter += 1
                     }
                 }
-                AppModel.update(audioProc)
+                AppModel.updateAppModel(audioProc)
                 Thread.sleep(AppModel.UI_LAG)
             }
         }.start()

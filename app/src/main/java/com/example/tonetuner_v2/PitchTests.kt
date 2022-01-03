@@ -9,6 +9,7 @@ import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.PitchTest.*
 import org.jetbrains.kotlinx.multik.api.mk
 import org.jetbrains.kotlinx.multik.api.ndarray
+import java.util.*
 
 sealed class PitchTest{
     data class SignalPitchTest(
@@ -29,7 +30,7 @@ fun createPitchTests(
     floors: List<Float>,
     ceilings: List<Float>,
     filters: List<HarmonicFilter>
-): List<PitchTest>{
+): Queue<PitchTest> {
     // todo this is super ugly, but I don't know how else to do it
 
     val harmonicSeriesUpdates = mutableListOf<(HarmonicSeries) -> Unit>()
@@ -46,7 +47,7 @@ fun createPitchTests(
         }
     }
 
-    val tests = mutableListOf<PitchTest>()
+    val tests = LinkedList<PitchTest>()
 
     for (note in notes){
         for (pitchBend in pitchBends){
@@ -60,7 +61,7 @@ fun createPitchTests(
         }
     }
 
-    return tests.toList()
+    return tests
 }
 
 //private fun initPitchTests(): MutableList<PitchTest> {
