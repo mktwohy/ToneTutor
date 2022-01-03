@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.WaveShape
+import com.example.tonetuner_v2.ui.navigation.NavMain
 import java.util.*
 
 class MainActivity : ComponentActivity() {
@@ -80,44 +81,17 @@ class MainActivity : ComponentActivity() {
         }.start()
 
         setContent {
-            val color = if(AppModel.note != null) Color.Green else Color.Gray
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceAround
-            ) {
-                if (audioSource is SignalSource){
-                    Text(
-                        text = "Note: ${audioSource.notes.toString().substring(1..3)} " +
-                                "\nBend: ${(audioSource.pitchBend * 100).toInt()} cents",
-                        color = Color.White
-                    )
-                }
-                CircularTuner(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f),
-                    note = AppModel.note,
-                    centsErr = AppModel.cents
-                )
-                TapeMeter(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f)
-                        .border(2.dp, Color.White),
-                    value    = AppModel.quality,
-                    range    = 3,
-                    allowNegatives = false
-                )
-                BarChart(
-                    modifier = Modifier.fillMaxSize(),
-                    barValues = AppModel.fingerPrint.toFingerPrint(),
-                    xTicks = List(AppModel.NUM_HARMONICS){ i -> if (i == 0) 'f' else i+1 },
-                    yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
-                    barColor = Color.Green,
-                    tickColor = Color.White
+            if (audioSource is SignalSource){
+                Text(
+                    text = "Note: ${audioSource.notes.toString().substring(1..3)} " +
+                            "\nBend: ${(audioSource.pitchBend * 100).toInt()} cents",
+                    color = Color.White
                 )
             }
+            NavMain(
+                modifier = Modifier.fillMaxSize(),
+                color = if(AppModel.note != null) Color.Green else Color.Gray
+            )
         }
     }
 
