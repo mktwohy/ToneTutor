@@ -79,9 +79,9 @@ class AudioSample(
 
     /** The fourier transform of the audio data */
     private fun calcFFT(): List<Float> {
-        val fd = this.toFloatArray()
-        FloatFFT_1D(fd.size.toLong()).realForward(fd)
-        return fd
+        val fwdTransform = this.toFloatArray()
+        FloatFFT_1D(fwdTransform.size.toLong()).realForward(fwdTransform)
+        return fwdTransform
             .asSequence()
             .chunked(2)
             .map { sqrt(it[0].pow(2) + it[1].pow(2)) }
