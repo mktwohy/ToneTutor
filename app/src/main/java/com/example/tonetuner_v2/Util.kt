@@ -92,7 +92,10 @@ fun <T> List<List<T>>.elementsAtIndex(index: Int): List<T> {
 }
 
 fun <T> List<List<T>>.groupByIndex() =
-    List(this.maxOf { it.size } ){ this.elementsAtIndex(it) }
+    if (this.isEmpty())
+        listOf()
+    else
+        List(this.maxOf { it.size } ){ this.elementsAtIndex(it) }
 
 @JvmName("sumListsDouble")
 fun List<List<Double>>.sumLists(): List<Double> =

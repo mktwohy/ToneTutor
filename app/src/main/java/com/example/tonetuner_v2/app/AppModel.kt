@@ -9,6 +9,8 @@ import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.normalize
 import com.example.tonetuner_v2.normalizeBySum
 import com.example.tonetuner_v2.toNoteAndCents
+import com.example.tonetuner_v2.ui.navigation.MainLayout
+import com.example.tonetuner_v2.ui.navigation.MainLayout.SpectrumType.*
 
 object AppModel{
     // State
@@ -18,6 +20,8 @@ object AppModel{
     var quality by mutableStateOf(0.0)
     var note by mutableStateOf<Note?>(null)
     var cents by mutableStateOf(0)
+
+    var spectrumType by mutableStateOf(FFT)
 
     // Settings (requires app restart)
     const val PROC_BUFFER_SIZE      = 2048    // values < 512 cause crash
@@ -32,6 +36,10 @@ object AppModel{
     const val NUM_HARMONICS         = 25
     const val TEST_MODE             = false
     val NOTE_RANGE = Note.toList(Note.C_1, Note.E_6) // drop C (bass) high E string (guitar)
+
+    fun changeSpectrumType(){
+        spectrumType = if (spectrumType == FFT) FINGERPRINT else FFT
+    }
 
     fun updateAppModel(audioProc: AudioProc){
         pitch       = audioProc.pitch

@@ -1,12 +1,15 @@
 package com.example.tonetuner_v2.ui.navigation
 
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.ui.composables.old.XYPlot
@@ -16,16 +19,26 @@ fun DetailScreen(
     name: String?,
     navController: NavController
 ){
-    Button(
-        modifier = Modifier.fillMaxWidth().fillMaxHeight(0.1f),
-        onClick = {
-            navController.navigate(Screen.MainScreen.route)
+    Column {
+        Button(
+            onClick = {
+                navController.navigate(Screen.MainScreen.route)
+            }
+        ) {
+            Text(text = "Back")
         }
-    ) {
-        Text(text = "$name, click here to go back to main")
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "SETTINGS SCREEN",
+                color = Color.White,
+                fontSize = 50.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+
     }
-    XYPlot(
-        modifier = Modifier.fillMaxSize(),
-        y = AppModel.fft
-    )
+
 }

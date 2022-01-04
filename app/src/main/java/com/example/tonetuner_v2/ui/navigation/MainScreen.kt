@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2.ui.navigation
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -16,12 +17,19 @@ import com.example.tonetuner_v2.toList
 import com.example.tonetuner_v2.ui.composables.BarChart
 import com.example.tonetuner_v2.ui.composables.CircularTuner
 import com.example.tonetuner_v2.ui.composables.TapeMeter
+import com.example.tonetuner_v2.ui.composables.old.XYPlot
+import com.example.tonetuner_v2.ui.navigation.MainLayout.SpectrumType.*
+
+object MainLayout{
+    enum class SpectrumType { FFT, FINGERPRINT }
+}
 
 @Composable
 fun MainScreen(
     modifier: Modifier,
     navController: NavController,
-    color: Color
+    color: Color,
+    spectrumType: MainLayout.SpectrumType
 ){
     Column(
         modifier = modifier,
@@ -51,13 +59,23 @@ fun MainScreen(
             range    = 3,
             allowNegatives = false
         )
-        BarChart(
-            modifier = Modifier.fillMaxSize(),
-            barValues = AppModel.fingerPrint.toFingerPrint(),
-            xTicks = List(AppModel.NUM_HARMONICS){ i -> if (i == 0) 'f' else i+1 },
-            yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
-            barColor = Color.Green,
-            tickColor = Color.White
-        )
+        Box(Modifier.fillMaxSize().clickable { AppModel.changeSpectrumType() }) {
+            when (spectrumType){
+                FFT -> BarChart(
+                    modifier = Modifier.fillMaxSize(),
+                    barValues = AppModel.fingerPrint.toFingerPrint(),
+                    xTicks = List(AppModel.NUM_HARMONICS){ i -> if (i == 0) 'f' else i+1 },
+                    yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
+                    barColor = Color.Green,
+                    tickColor = Color.White
+                )
+                FINGERPRINT -> XYPlot(
+                    modifier = Modifier.fillMaxSize(),
+                    y = AppModel.fft
+                )
+            }
+        }
+
+
     }
 }

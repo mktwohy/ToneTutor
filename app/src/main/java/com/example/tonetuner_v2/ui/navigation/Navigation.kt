@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.tonetuner_v2.app.AppModel
 
 @Composable
 fun Navigation(){
@@ -21,7 +22,8 @@ fun Navigation(){
             MainScreen(
                 modifier = Modifier.fillMaxSize(),
                 navController = navController,
-                color = Color.Green
+                color = Color.Green,
+                spectrumType = AppModel.spectrumType
             )
         }
         composable(
