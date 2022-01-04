@@ -5,9 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.WaveShape
@@ -18,7 +16,6 @@ import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.example.tonetuner_v2.logd
 import com.example.tonetuner_v2.pitchTesting.PitchTest
 import com.example.tonetuner_v2.pitchTesting.createPitchTests
-import com.example.tonetuner_v2.ui.navigation.MainScreen
 import com.example.tonetuner_v2.ui.navigation.Navigation
 
 
@@ -26,7 +23,7 @@ import com.example.tonetuner_v2.ui.navigation.Navigation
 class MainActivity : ComponentActivity() {
     private val audioSource =
         if (AppModel.TEST_MODE)
-            SignalSource(AppModel.NUM_HARMONICS)
+            SignalSource(AppModel.FINGERPRINT_SIZE)
         else
             MicSource()
 

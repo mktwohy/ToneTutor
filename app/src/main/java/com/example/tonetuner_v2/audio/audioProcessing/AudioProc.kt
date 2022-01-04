@@ -1,10 +1,11 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.tonetuner_v2.*
+import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.FFT_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.NOISE_THRESHOLD
-import com.example.tonetuner_v2.app.AppModel.NUM_HARMONICS
+import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_SIZE
 import com.example.tonetuner_v2.app.AppModel.PITCH_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.PROC_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.QUALITY_QUEUE_SIZE
@@ -23,23 +24,20 @@ class AudioProc(
     val bufferSize: Int = PROC_BUFFER_SIZE,
     val pitchAlgo: (List<Harmonic>) -> Float
 ) : Runnable {
-    private val fftQueue:       BlockingQueue<List<Float>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
+    private val fftQueue:       BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
     private val fingerPrintQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FINGERPRINT_QUEUE_SIZE)
-    private val pitchQueue:     BlockingQueue<Float>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
-    private val qualityQueue:   BlockingQueue<Float>       = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
+    private val pitchQueue: BlockingQueue<Float> = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
+    private val qualityQueue: BlockingQueue<Float> = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
     private var running = false
 
-    val fft: List<Float>
-        get() = fftQueue.toList().sumLists().map { it / FFT_QUEUE_SIZE }
+    val fft: List<Harmonic>
+        get() = fftQueue.toList().average()
     val pitch: Float
         get() = pitchQueue.average().toFloat()
     val quality: Float
         get() = qualityQueue.average().toFloat()
     val fingerPrint: List<Harmonic>
-        get() = fingerPrintQueue.run {
-            val queue = this.toList()
-            queue.sumLists().onEach { it.mag /= queue.size }
-        }
+        get() = fingerPrintQueue.toList().average()
 
     init {
         running = true
@@ -53,8 +51,8 @@ class AudioProc(
         var audioSample = AudioSample(pitchAlgo = pitchAlgo)
         val pitchDefault = 0f
         val qualityDefault = 0f
-        val fftDefault = List(512){ 0f }
-        val fingerPrintDefault = List(NUM_HARMONICS){ Harmonic(0f, 0f ) }
+        val fingerPrintDefault = List(FINGERPRINT_SIZE){ Harmonic(0f, 0f ) }
+        val fftDefault = List(CAPTURE_BUFFER_SIZE){ Harmonic(0f, 0f ) }
 
         while (running) {
             // Fetch [bufferSize] elements from the audioCapture

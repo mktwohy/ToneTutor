@@ -11,10 +11,7 @@ import kotlin.math.sqrt
 /**
  * An Audio Sample class to hold and process audio data
  *
- * @constructor other tasty stuff
- * @property fft Fourier transform of the audio signal
- * @property harmonics
- * @author gtruch
+ * @author gtruch and Michael Twohy
  */
 class AudioSample(
     audioData: MutableList<Float> = mutableListOf(),
@@ -22,10 +19,10 @@ class AudioSample(
     var pitchAlgo: (List<Harmonic>) -> Float = PitchAlgorithms.twm
 ): MutableList<Float> by audioData {
     val time        by lazy { calcTime() }
-    val fft         by lazy { calcFFT() }
-    val harmonics   by lazy { calcHarmonics() }
+    val fftMag      by lazy { calcFftMag() }
+    val fft         by lazy { calcFft() }
     val fftFreq     by lazy { calcFftFreq() }
-    val pitch       by lazy { pitchAlgo.invoke(harmonics) }
+    val pitch       by lazy { pitchAlgo.invoke(fft) }
     val fingerprint by lazy { calcFingerprint() }
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
@@ -74,11 +71,11 @@ class AudioSample(
 
     private fun calcTime(): List<Float> {
         val s = sampleRate.toFloat()
-        return arange(1/s,this.size/s,1/s)
+        return arange(1f/s,this.size/s,1f/s)
     }
 
-    /** The fourier transform of the audio data */
-    private fun calcFFT(): List<Float> {
+    /** The fourier transform of the audio data (list size == PROC_BUFFER_SIZE / 2 )*/
+    private fun calcFftMag(): List<Float> {
         val fwdTransform = this.toFloatArray()
         FloatFFT_1D(fwdTransform.size.toLong()).realForward(fwdTransform)
         return fwdTransform
@@ -88,21 +85,20 @@ class AudioSample(
             .toList()
     }
 
-    /** The frequencies associated with fft (list size: 1024 */
+    /** The frequencies associated with fft (list size: 1024) */
     private fun calcFftFreq(): List<Float> {
-        return arange(fft.size.toFloat()).map { it*sampleRate/(fft.size*2) }
+        return arange(fftMag.size.toFloat()).map { it*sampleRate/(fftMag.size*2) }
     }
-
 
     //todo does this work correctly? you're creating a list of Spectrums
     /** The harmonics extracted from the fourier transform */
-    private fun calcHarmonics(): List<Harmonic> {
+    private fun calcFft(): List<Harmonic> {
         data class Spectrum(val freqs: List<Float>, val mags: List<Float>)
 
-        val maxMag = fft.maxOrNull() ?: 0f
-        return fft.slice(0 until fft.size - 2).asSequence()
+        val maxMag = fftMag.maxOrNull() ?: 0f
+        return fftMag.slice(0 until fftMag.size - 2).asSequence()
             .mapIndexed { index, _ ->
-                Spectrum(fftFreq.slice(index..index + 2), fft.slice(index..index + 2))
+                Spectrum(fftFreq.slice(index..index + 2), fftMag.slice(index..index + 2))
             }.filter {
                 it.mags[0] < it.mags[1] && it.mags[2] < it.mags[1]
             }.map {
@@ -122,8 +118,8 @@ class AudioSample(
 
     /** Calculate the harmonic fingerprint */
     private fun calcNonNormalizedFingerprint(): List<Harmonic>
-        = (1..AppModel.NUM_HARMONICS).map { h ->
-            val i = (h * pitch * fft.size * 2 / sampleRate).roundToInt()
+        = (1..AppModel.FINGERPRINT_SIZE).map { h ->
+            val i = (h * pitch * fftMag.size * 2 / sampleRate).roundToInt()
             if (i > fftFreq.size - 2)
                 Harmonic(0f,0f)
             else
@@ -132,7 +128,7 @@ class AudioSample(
                     quadInterp(
                         h * pitch,
                         fftFreq.slice(i-1..i+1),
-                        fft.slice(i-1..i+1)
+                        fftMag.slice(i-1..i+1)
                     )
                 )
         }
@@ -143,8 +139,8 @@ class AudioSample(
         return fingerprint.map { it.freq*it.mag }.sum()
     }
 
-    operator fun get(index: IntRange): AudioSample {
-        return AudioSample(index.map { this[it] }.toMutableList())
+    operator fun get(range: IntRange): AudioSample {
+        return AudioSample(range.map { this[it] }.toMutableList())
     }
 }
 

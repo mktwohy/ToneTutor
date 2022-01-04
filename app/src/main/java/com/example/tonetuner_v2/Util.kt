@@ -8,11 +8,36 @@ import com.example.signallib.enums.Note.Companion.plus
 import com.example.tonetuner_v2.app.AppModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import java.util.*
 import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+fun List<List<Harmonic>>.average() =
+    this
+        .flatten()
+        .groupBy { it.freq }
+        .map { (freq, harmonics) ->
+            Harmonic(freq, harmonics.map { it.mag }.average().toFloat())
+        }
+
+fun List<Harmonic>.assignMagsToIndices(): List<Float>{
+    if (this.isEmpty()) return listOf()
+
+    val indexToValue = this.map { it.freq.toInt() to it.mag }
+    val size = indexToValue.maxOf { it.first } + 1
+
+    val ret = FloatArray(size)
+    for ((index, value) in indexToValue){
+        ret[index] = value
+    }
+    return ret.toList()
+}
+
+fun main() {
+    val h = listOf<Harmonic>()
+    println(h.assignMagsToIndices())
+}
 
 fun Int.fact() =
     (1..this).reduce { acc, i -> acc * i }
@@ -32,7 +57,7 @@ fun getAllOrderedPairs(l1: List<Any>, l2: List<Any>): List<Pair<Any, Any>>{
 
 fun List<Harmonic>.toFingerPrint(): List<Float> {
     val f = this.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
-    return List(AppModel.NUM_HARMONICS){ i -> f[i] ?: 0f }
+    return List(AppModel.FINGERPRINT_SIZE){ i -> f[i] ?: 0f }
 }
 
 fun ClosedRange<Float>.toList(step: Float): List<Float>{

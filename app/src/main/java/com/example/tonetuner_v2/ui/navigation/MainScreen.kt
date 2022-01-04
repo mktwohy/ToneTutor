@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.assignMagsToIndices
 import com.example.tonetuner_v2.toFingerPrint
 import com.example.tonetuner_v2.toList
 import com.example.tonetuner_v2.ui.composables.BarChart
@@ -64,14 +65,14 @@ fun MainScreen(
                 FFT -> BarChart(
                     modifier = Modifier.fillMaxSize(),
                     barValues = AppModel.fingerPrint.toFingerPrint(),
-                    xTicks = List(AppModel.NUM_HARMONICS){ i -> if (i == 0) 'f' else i+1 },
+                    xTicks = List(AppModel.FINGERPRINT_SIZE){ i -> if (i == 0) 'f' else i+1 },
                     yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
                     barColor = Color.Green,
                     tickColor = Color.White
                 )
                 FINGERPRINT -> XYPlot(
                     modifier = Modifier.fillMaxSize(),
-                    y = AppModel.fft
+                    y = AppModel.fft.assignMagsToIndices()
                 )
             }
         }

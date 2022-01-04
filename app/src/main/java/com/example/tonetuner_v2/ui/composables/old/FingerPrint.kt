@@ -24,7 +24,7 @@ fun FingerPrint(
     if(fingerPrint.isEmpty()) return
 
     val f = fingerPrint.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
-    val bars = List(AppModel.NUM_HARMONICS){ i -> f[i] ?: 0f }
+    val bars = List(AppModel.FINGERPRINT_SIZE){ i -> f[i] ?: 0f }
 
     Box(modifier = modifier, contentAlignment = Alignment.Center){
         Canvas(modifier = Modifier
