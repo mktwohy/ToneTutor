@@ -38,7 +38,7 @@ class AudioProc(
     val fingerPrint: List<Harmonic>
         get() = fingerPrintQueue.run {
             val queue = this.toList()
-            queue.sumLists().apply { forEach { it.mag /= queue.size } }
+            queue.sumLists().onEach { it.mag /= queue.size }
         }
 
     init {

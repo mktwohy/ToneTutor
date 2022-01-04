@@ -8,6 +8,7 @@ import com.example.signallib.enums.Note.Companion.plus
 import com.example.tonetuner_v2.app.AppModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.*
 import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
@@ -82,20 +83,20 @@ fun List<List<Harmonic>>.sumLists(): List<Harmonic> =
             }
     }
 
+fun <T> List<List<T>>.elementsAtIndex(index: Int): List<T> {
+    val elements = mutableListOf<T>()
+    for(list in this){
+        if (index in list.indices) elements += list[index]
+    }
+    return elements
+}
+
+fun <T> List<List<T>>.groupByIndex() =
+    List(this.maxOf { it.size } ){ this.elementsAtIndex(it) }
+
 @JvmName("sumListsDouble")
 fun List<List<Double>>.sumLists(): List<Double> =
-    when(size){
-        0 -> listOf()
-        1 -> this[0]
-        else ->
-            List(this.minOf { it.size } ){ index ->
-            var sum = 0.0
-            for(list in this){
-                sum += list[index]
-            }
-            sum
-        }
-    }
+    this.groupByIndex().map { it.sum() }
 
 operator fun Color.plus(that: Color) =
     Color(
