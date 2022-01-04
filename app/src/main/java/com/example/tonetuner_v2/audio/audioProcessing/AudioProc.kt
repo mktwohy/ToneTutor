@@ -31,13 +31,13 @@ class AudioProc(
     private var running = false
 
     val fft: List<Harmonic>
-        get() = fftQueue.toList().average()
+        get() = fftQueue.toList().averageLists().normalizeBySum()
     val pitch: Float
         get() = pitchQueue.average().toFloat()
     val quality: Float
         get() = qualityQueue.average().toFloat()
     val fingerPrint: List<Harmonic>
-        get() = fingerPrintQueue.toList().average()
+        get() = fingerPrintQueue.toList().averageLists()
 
     init {
         running = true

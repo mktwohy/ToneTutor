@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.app.AppModel.FFT_MAX_FREQ
 import com.example.tonetuner_v2.assignMagsToIndices
 import com.example.tonetuner_v2.toFingerPrint
 import com.example.tonetuner_v2.toList
@@ -72,7 +73,7 @@ fun MainScreen(
                 )
                 FINGERPRINT -> XYPlot(
                     modifier = Modifier.fillMaxSize(),
-                    y = AppModel.fft.assignMagsToIndices()
+                    y = AppModel.fft.assignMagsToIndices(FFT_MAX_FREQ)
                 )
             }
         }

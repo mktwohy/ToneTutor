@@ -85,7 +85,7 @@ class AudioSample(
             .toList()
     }
 
-    /** The frequencies associated with fft (list size: 1024) */
+    /** The frequencies associated with fft (list size == PROC_BUFFER_SIZE / 2 ) */
     private fun calcFftFreq(): List<Float> {
         return arange(fftMag.size.toFloat()).map { it*sampleRate/(fftMag.size*2) }
     }

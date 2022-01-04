@@ -13,7 +13,7 @@ import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
-fun List<List<Harmonic>>.average() =
+fun List<List<Harmonic>>.averageLists() =
     this
         .flatten()
         .groupBy { it.freq }
@@ -21,22 +21,26 @@ fun List<List<Harmonic>>.average() =
             Harmonic(freq, harmonics.map { it.mag }.average().toFloat())
         }
 
-fun List<Harmonic>.assignMagsToIndices(): List<Float>{
-    if (this.isEmpty()) return listOf()
-
-    val indexToValue = this.map { it.freq.toInt() to it.mag }
-    val size = indexToValue.maxOf { it.first } + 1
-
-    val ret = FloatArray(size)
-    for ((index, value) in indexToValue){
-        ret[index] = value
-    }
-    return ret.toList()
+fun List<Harmonic>.normalizeBySum(): List<Harmonic> {
+    val magSum = this.map { it.mag }.sum()
+    return this.onEach { it.mag /= magSum }
 }
 
-fun main() {
-    val h = listOf<Harmonic>()
-    println(h.assignMagsToIndices())
+
+
+fun List<Harmonic>.assignMagsToIndices(size: Int): List<Float>{
+    if (this.isEmpty()) return listOf()
+
+    val ret = FloatArray(size)
+
+    val indexToValue = this.map { it.freq.toInt() to it.mag }
+//    val size = indexToValue.maxOf { it.first } + 1
+
+    for ((index, value) in indexToValue){
+        if (index < size)
+            ret[index] = value
+    }
+    return ret.toList()
 }
 
 fun Int.fact() =
@@ -270,9 +274,4 @@ fun MutableList<Float>.normalize(
     for (i in indices) {
         this[i] = ((boundRange * (this[i] - minValue)) / valueRange) + lowerBound
     }
-}
-
-fun List<Float>.normalizeBySum(): List<Float> {
-    val norm = this.sum()
-    return this.map { it / norm }
 }
