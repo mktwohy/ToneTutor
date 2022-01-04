@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.tonetuner_v2.*
+import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.FFT_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_QUEUE_SIZE
@@ -10,6 +11,7 @@ import com.example.tonetuner_v2.app.AppModel.PITCH_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.PROC_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.QUALITY_QUEUE_SIZE
 import com.example.tonetuner_v2.audio.audioSources.AudioSource
+import com.example.tonetuner_v2.ui.navigation.MainLayout
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 /**
@@ -61,15 +63,21 @@ class AudioProc(
             audioSample = audioSample.dropAndAdd(audioData)
 
             // Calculate audioSample attributes and add them to their respective queue
-            fftQueue.forcedOffer(audioSample.fft)
+
+            if (AppModel.spectrumType == MainLayout.SpectrumType.FFT)
+                fftQueue.forcedOffer(audioSample.fft)
+
             if (audioSample.maxOrNull() ?: 0f < NOISE_THRESHOLD) {
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
-                fingerPrintQueue.forcedOffer(fingerPrintDefault)
+                if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
+                    fingerPrintQueue.forcedOffer(fingerPrintDefault)
             } else {
                 qualityQueue.forcedOffer(audioSample.benya)
                 pitchQueue.forcedOffer(audioSample.pitch)
-                fingerPrintQueue.forcedOffer(audioSample.fingerprint)
+
+                if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
+                    fingerPrintQueue.forcedOffer(audioSample.fingerprint)
             }
         }
     }

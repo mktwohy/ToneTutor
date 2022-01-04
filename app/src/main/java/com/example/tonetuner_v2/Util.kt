@@ -203,7 +203,7 @@ fun avgTimeNano(repeat: Int, block: () -> Any?): Float {
 }
 
 // todo deconstruction and if else assignment
-fun arange(start: Float, stop: Float? = null, step: Float = 1f): List<Float> {
+fun arangeOLD(start: Float, stop: Float? = null, step: Float = 1f): List<Float> {
     val lStart: Float
     val lStop: Float
 
@@ -215,6 +215,17 @@ fun arange(start: Float, stop: Float? = null, step: Float = 1f): List<Float> {
         lStart = start
         lStop = stop
     }
+
+    val size = ((lStop-lStart)/step).roundToInt() + 1
+    return List(size) { index -> step*index + lStart }
+}
+
+fun arange(start: Float, stop: Float? = null, step: Float = 1f): List<Float> {
+    val (lStart, lStop) =
+        if (stop == null)
+            0f to start - 1f
+        else
+            start to stop
 
     val size = ((lStop-lStart)/step).roundToInt() + 1
     return List(size) { index -> step*index + lStart }

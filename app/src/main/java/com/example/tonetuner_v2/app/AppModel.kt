@@ -20,7 +20,7 @@ object AppModel{
     var note by mutableStateOf<Note?>(null)
     var cents by mutableStateOf(0)
 
-    var spectrumType by mutableStateOf(FFT)
+    var spectrumType by mutableStateOf(FINGERPRINT)
 
     // Settings (requires app restart)
     const val PROC_BUFFER_SIZE      = 2048    // values < 512 cause crash

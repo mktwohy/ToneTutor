@@ -63,7 +63,7 @@ fun MainScreen(
         )
         Box(Modifier.fillMaxSize().clickable { AppModel.changeSpectrumType() }) {
             when (spectrumType){
-                FFT -> BarChart(
+                FINGERPRINT -> BarChart(
                     modifier = Modifier.fillMaxSize(),
                     barValues = AppModel.fingerPrint.toFingerPrint(),
                     xTicks = List(AppModel.FINGERPRINT_SIZE){ i -> if (i == 0) 'f' else i+1 },
@@ -71,7 +71,7 @@ fun MainScreen(
                     barColor = Color.Green,
                     tickColor = Color.White
                 )
-                FINGERPRINT -> XYPlot(
+                FFT -> XYPlot(
                     modifier = Modifier.fillMaxSize(),
                     y = AppModel.fft.assignMagsToIndices(FFT_MAX_FREQ)
                 )
