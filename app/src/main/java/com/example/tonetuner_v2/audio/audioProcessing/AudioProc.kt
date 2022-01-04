@@ -36,16 +36,10 @@ class AudioProc(
     val quality: Double
         get() = qualityQueue.average()
     val fingerPrint: List<Harmonic>
-        get() = fingerPrintQueue
-            .toList()
-            .sumLists()
-            .apply {
-                val max = this.maxByOrNull { it.mag }?.mag ?: 1.0
-                if(max > 1.0)
-                    this.forEach{ it.mag /= max }
-            }
-
-
+        get() = fingerPrintQueue.run {
+            val queue = this.toList()
+            queue.sumLists().apply { forEach { it.mag /= queue.size } }
+        }
 
     init {
         running = true

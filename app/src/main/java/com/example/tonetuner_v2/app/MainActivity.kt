@@ -18,7 +18,8 @@ import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.example.tonetuner_v2.logd
 import com.example.tonetuner_v2.pitchTesting.PitchTest
 import com.example.tonetuner_v2.pitchTesting.createPitchTests
-import com.example.tonetuner_v2.ui.navigation.NavMain
+import com.example.tonetuner_v2.ui.navigation.MainScreen
+import com.example.tonetuner_v2.ui.navigation.Navigation
 
 class MainActivity : ComponentActivity() {
     private val audioSource =
@@ -27,7 +28,10 @@ class MainActivity : ComponentActivity() {
         else
             MicSource()
 
-    private val audioProc = AudioProc(audioSource = audioSource, pitchAlgo = PitchAlgorithms.twm)
+    private val audioProc = AudioProc(
+        audioSource = audioSource,
+        pitchAlgo = PitchAlgorithms.twm
+    )
 
     private val pitchTests = createPitchTests(
         notes = AppModel.NOTE_RANGE,
@@ -40,48 +44,27 @@ class MainActivity : ComponentActivity() {
         filters = HarmonicFilter.values().toList()
     )
 
+    private val audioUpdateThread = Thread{
+        var counter = 0
+        while(true){
+            if(audioSource is SignalSource) {
+                if (counter == 300){
+                    audioSource.startNextTest(pitchTests.poll() as PitchTest.SignalPitchTest)
+                    counter = 0
+                }
+                else{
+                    counter += 1
+                }
+            }
+            AppModel.updateAppModel(audioProc)
+            Thread.sleep(AppModel.UI_LAG)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // request audio permissions. the app will begin recording audio
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                if (audioSource is MicSource) {
-                    audioSource.startCapture()
-                }
-                if (audioSource is SignalSource){
-                    audioSource.generateRandom()
-                }
-                logd("Capture Started")
-            } else {
-                logd("Microphone Permission Denied")
-            }
-        }.launch(Manifest.permission.RECORD_AUDIO)
-
-        var counter = 0
-        Thread{
-            while(true){
-                if(audioSource is SignalSource) {
-                    if (counter == 300){
-                        val test = pitchTests.poll() as PitchTest.SignalPitchTest
-
-                        audioSource.notes = setOf(test.note)
-                        audioSource.pitchBend = test.pitchBend
-                        audioSource.amp = test.amp
-                        audioSource.signalSettings.waveShape = test.waveShape
-                        test.updateHarmonicSeries(audioSource.signalSettings.harmonicSeries)
-                        counter = 0
-                    }
-                    else{
-                        counter += 1
-                    }
-                }
-                AppModel.updateAppModel(audioProc)
-                Thread.sleep(AppModel.UI_LAG)
-            }
-        }.start()
+        startAudioInput()
 
         setContent {
             if (audioSource is SignalSource){
@@ -91,11 +74,36 @@ class MainActivity : ComponentActivity() {
                     color = Color.White
                 )
             }
-            NavMain(
-                modifier = Modifier.fillMaxSize(),
-                color = if(AppModel.note != null) Color.Green else Color.Gray
-            )
+//            MainScreen(
+//                modifier = Modifier.fillMaxSize(),
+//                color = if(AppModel.note != null) Color.Green else Color.Gray
+//            )
+            Navigation()
         }
+    }
+
+    private fun SignalSource.startNextTest(test: PitchTest.SignalPitchTest) {
+        this.notes = setOf(test.note)
+        this.pitchBend = test.pitchBend
+        this.amp = test.amp
+        this.signalSettings.waveShape = test.waveShape
+        test.updateHarmonicSeries(this.signalSettings.harmonicSeries)
+    }
+
+    private fun startAudioInput(){
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                if (audioSource is MicSource) audioSource.startCapture()
+                if (audioSource is SignalSource) audioSource.generateRandom()
+                logd("Capture Started")
+            } else {
+                logd("Microphone Permission Denied")
+            }
+        }.launch(Manifest.permission.RECORD_AUDIO)
+
+        audioUpdateThread.start()
     }
 
 }

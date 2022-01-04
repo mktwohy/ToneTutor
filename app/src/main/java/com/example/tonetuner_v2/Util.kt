@@ -241,3 +241,8 @@ fun MutableList<Float>.normalize(
         this[i] = ((boundRange * (this[i] - minValue)) / valueRange) + lowerBound
     }
 }
+
+fun List<Float>.normalizeBySum(): List<Float> {
+    val norm = this.sum()
+    return this.map { it / norm }
+}

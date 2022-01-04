@@ -7,6 +7,7 @@ import com.example.signallib.enums.Note
 import com.example.tonetuner_v2.Harmonic
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.normalize
+import com.example.tonetuner_v2.normalizeBySum
 import com.example.tonetuner_v2.toNoteAndCents
 
 object AppModel{
@@ -36,8 +37,9 @@ object AppModel{
         pitch       = audioProc.pitch
         quality     = audioProc.quality
         fingerPrint = audioProc.fingerPrint
-        fft = audioProc.fft.map { it.toFloat() }.normalize(0f, 1f)
-
+        fft = audioProc.fft.run {
+            map { it.toFloat() }.normalizeBySum()
+        }
         val (newNote, newCents) = pitch.toNoteAndCents()
         note = newNote
         cents = newCents
