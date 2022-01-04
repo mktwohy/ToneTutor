@@ -21,20 +21,20 @@ import java.util.concurrent.BlockingQueue
 class AudioProc(
     val audioSource: AudioSource,
     val bufferSize: Int = PROC_BUFFER_SIZE,
-    val pitchAlgo: (List<Harmonic>) -> Double
+    val pitchAlgo: (List<Harmonic>) -> Float
 ) : Runnable {
-    private val fftQueue:       BlockingQueue<List<Double>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
+    private val fftQueue:       BlockingQueue<List<Float>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
     private val fingerPrintQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FINGERPRINT_QUEUE_SIZE)
-    private val pitchQueue:     BlockingQueue<Double>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
-    private val qualityQueue:   BlockingQueue<Double>       = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
+    private val pitchQueue:     BlockingQueue<Float>       = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
+    private val qualityQueue:   BlockingQueue<Float>       = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
     private var running = false
 
-    val fft: List<Double>
-        get() = fftQueue.toList().sumLists().map { it/FFT_QUEUE_SIZE }
-    val pitch: Double
-        get() = pitchQueue.average()
-    val quality: Double
-        get() = qualityQueue.average()
+    val fft: List<Float>
+        get() = fftQueue.toList().sumLists().map { it / FFT_QUEUE_SIZE }
+    val pitch: Float
+        get() = pitchQueue.average().toFloat()
+    val quality: Float
+        get() = qualityQueue.average().toFloat()
     val fingerPrint: List<Harmonic>
         get() = fingerPrintQueue.run {
             val queue = this.toList()
@@ -51,10 +51,10 @@ class AudioProc(
     override fun run() {
         // todo once audioSample is properly mutable, make it a public property
         var audioSample = AudioSample(pitchAlgo = pitchAlgo)
-        val pitchDefault = 0.0
-        val qualityDefault = 0.0
-        val fftDefault = List(512){ 0.0 }
-        val fingerPrintDefault = List(NUM_HARMONICS){ Harmonic(0.0, 0.0 ) }
+        val pitchDefault = 0f
+        val qualityDefault = 0f
+        val fftDefault = List(512){ 0f }
+        val fingerPrintDefault = List(NUM_HARMONICS){ Harmonic(0f, 0f ) }
 
         while (running) {
             // Fetch [bufferSize] elements from the audioCapture
@@ -64,7 +64,7 @@ class AudioProc(
             audioSample = audioSample.dropAndAdd(audioData)
 
             // Calculate audioSample attributes and add them to their respective queue
-            if (audioSample.maxOrNull() ?: 0.0 < NOISE_THRESHOLD) {
+            if (audioSample.maxOrNull() ?: 0f < NOISE_THRESHOLD) {
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
                 fftQueue.forcedOffer(fftDefault)

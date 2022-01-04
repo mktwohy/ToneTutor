@@ -21,7 +21,7 @@ class SignalSource(numHarmonics: Int): AudioSource {
 
     private var audioBuffer = FloatArray(AppModel.CAPTURE_BUFFER_SIZE)
 
-    override fun getAudio(bufferSize: Int): List<Double> {
+    override fun getAudio(bufferSize: Int): List<Float> {
         if (bufferSize != audioBuffer.size)
             audioBuffer = FloatArray(bufferSize)
 
@@ -31,7 +31,7 @@ class SignalSource(numHarmonics: Int): AudioSource {
             pitchBend   = this.pitchBend,
             amp         = this.amp
         )
-        return audioBuffer.map { it.toDouble() }
+        return audioBuffer.map { it }
     }
 
     fun generateRandom(){

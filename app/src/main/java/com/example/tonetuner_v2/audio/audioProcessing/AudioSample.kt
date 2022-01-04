@@ -3,7 +3,7 @@ package com.example.tonetuner_v2.audio.audioProcessing
 import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
-import org.jtransforms.fft.DoubleFFT_1D
+import org.jtransforms.fft.FloatFFT_1D
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -12,15 +12,15 @@ import kotlin.math.sqrt
  * An Audio Sample class to hold and process audio data
  *
  * @constructor other tasty stuff
- * @property fft A List<Double> that holds the Fourier transform of the audio signal
+ * @property fft Fourier transform of the audio signal
  * @property harmonics
  * @author gtruch
  */
 class AudioSample(
-    audioData: MutableList<Double> = mutableListOf(),
+    audioData: MutableList<Float> = mutableListOf(),
     val sampleRate: Int = SAMPLE_RATE,
-    var pitchAlgo: (List<Harmonic>) -> Double = PitchAlgorithms.twm
-): MutableList<Double> by audioData {
+    var pitchAlgo: (List<Harmonic>) -> Float = PitchAlgorithms.twm
+): MutableList<Float> by audioData {
     val time        by lazy { calcTime() }
     val fft         by lazy { calcFFT() }
     val harmonics   by lazy { calcHarmonics() }
@@ -39,7 +39,7 @@ class AudioSample(
      * over complicate things... plus, with the solutions I found on StackOverflow, the authors
      * warned about thread safety. Perhaps the simplest solution is private backing variables.
      */
-    fun dropAndAdd(audioData: List<Double>): AudioSample {
+    fun dropAndAdd(audioData: List<Float>): AudioSample {
         val d = this.drop(audioData.size).toMutableList()
         d.addAll(audioData)
         return AudioSample(d)
@@ -51,7 +51,7 @@ class AudioSample(
      * @param start The start time measured from the beginning of the sample in seconds
      * @param size The number of samples in the subsample
      */
-    fun subSample(start: Double, size: Int): AudioSample {
+    fun subSample(start: Float, size: Int): AudioSample {
         // Calculate the nearest starting index.
         val startIndex = (start * sampleRate).roundToInt()
         val endIndex = startIndex+size
@@ -65,22 +65,22 @@ class AudioSample(
      * @param start The start time measured from the beginning of the sample in seconds
      * @param duration The total elapsed time of the subsample
      */
-    fun subSample(start: Double, duration: Double): AudioSample {
+    fun subSample(start: Float, duration: Float): AudioSample {
         val startIndex = (start * sampleRate).roundToInt()
         val endIndex = (startIndex + duration*sampleRate).toInt()
 
         return this[startIndex..endIndex]
     }
 
-    private fun calcTime(): List<Double> {
-        val s = sampleRate.toDouble()
+    private fun calcTime(): List<Float> {
+        val s = sampleRate.toFloat()
         return arange(1/s,this.size/s,1/s)
     }
 
     /** The fourier transform of the audio data */
-    private fun calcFFT(): List<Double> {
-        val fd = this.toDoubleArray()
-        DoubleFFT_1D(fd.size.toLong()).realForward(fd)
+    private fun calcFFT(): List<Float> {
+        val fd = this.toFloatArray()
+        FloatFFT_1D(fd.size.toLong()).realForward(fd)
         return fd
             .asSequence()
             .chunked(2)
@@ -89,17 +89,17 @@ class AudioSample(
     }
 
     /** The frequencies associated with fft (list size: 1024 */
-    private fun calcFftFreq(): List<Double> {
-        return arange(fft.size.toDouble()).map { it*sampleRate/(fft.size*2) }
+    private fun calcFftFreq(): List<Float> {
+        return arange(fft.size.toFloat()).map { it*sampleRate/(fft.size*2) }
     }
 
 
     //todo does this work correctly? you're creating a list of Spectrums
     /** The harmonics extracted from the fourier transform */
     private fun calcHarmonics(): List<Harmonic> {
-        data class Spectrum(val freqs: List<Double>, val mags: List<Double>)
+        data class Spectrum(val freqs: List<Float>, val mags: List<Float>)
 
-        val maxMag = fft.maxOrNull() ?: 0.0
+        val maxMag = fft.maxOrNull() ?: 0f
         return fft.slice(0 until fft.size - 2).asSequence()
             .mapIndexed { index, _ ->
                 Spectrum(fftFreq.slice(index..index + 2), fft.slice(index..index + 2))
@@ -108,7 +108,7 @@ class AudioSample(
             }.map {
                 poly(it.freqs, it.mags)
             }.filter {
-                it.mag / maxMag > 0.04
+                it.mag / maxMag > 0.04f
             }
             .toList()
     }
@@ -125,10 +125,10 @@ class AudioSample(
         = (1..AppModel.NUM_HARMONICS).map { h ->
             val i = (h * pitch * fft.size * 2 / sampleRate).roundToInt()
             if (i > fftFreq.size - 2)
-                Harmonic(0.0,0.0)
+                Harmonic(0f,0f)
             else
                 Harmonic(
-                    h.toDouble(),
+                    h.toFloat(),
                     quadInterp(
                         h * pitch,
                         fftFreq.slice(i-1..i+1),
@@ -139,7 +139,7 @@ class AudioSample(
 
 
 
-    private fun calcBenya(): Double {
+    private fun calcBenya(): Float {
         return fingerprint.map { it.freq*it.mag }.sum()
     }
 

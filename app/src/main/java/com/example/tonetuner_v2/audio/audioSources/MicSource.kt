@@ -1,9 +1,12 @@
 package com.example.tonetuner_v2.audio.audioSources
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
 import java.util.concurrent.ArrayBlockingQueue
@@ -20,13 +23,14 @@ class MicSource(
     private var record: AudioRecord? = null
     private var recordThread: Thread? = null
     private var running = false
-    private val queue: BlockingQueue<Double> = ArrayBlockingQueue(bufferSize)
+    private val queue: BlockingQueue<Float> = ArrayBlockingQueue(bufferSize)
 
     init {
         /** Open the microphone and create the recording thread.*/
 
         // todo: Figure out how to properly get permissions from user
             // This works now, but I'm not sure why this is still red underlined
+        
         record = AudioRecord(
             MediaRecorder.AudioSource.DEFAULT,
             sampleRate,
@@ -49,7 +53,7 @@ class MicSource(
      * @return An ArrayList of data elements
      */
     override fun getAudio(bufferSize: Int) =
-        List<Double>(bufferSize) { queue.take() }
+        List<Float>(bufferSize) { queue.take() }
 
 
     /**
@@ -76,7 +80,7 @@ class MicSource(
                 audioBuffer.size, AudioRecord.READ_BLOCKING)
 
             // Put data into the blocking queue
-            audioBuffer.forEach { queue.offer(it.toDouble()) }
+            audioBuffer.forEach { queue.offer(it) }
 
             // Todo if something broke, uncomment this:
             // recordThread?.isAlive

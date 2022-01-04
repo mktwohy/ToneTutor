@@ -25,7 +25,7 @@ import kotlin.math.ln
 fun GaugeTuner(
     note: Note?,
     cents: Int,
-    hz: Double,
+    hz: Float,
     nullNoteMessage: String = "N/A"
 ){
     Column(horizontalAlignment = Alignment.CenterHorizontally) {

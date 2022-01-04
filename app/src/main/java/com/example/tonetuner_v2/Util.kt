@@ -55,7 +55,7 @@ fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
  * like toString(), but it returns a substring a desired length. The end is padded with
  * zeros if needed.
  */
-fun Double.toString(length: Int) =
+fun Float.toString(length: Int) =
     this.toString().padEnd(length, '0').substring(0, length)
 
 /** Similar to offer(), but, if there is no space, it removes an element to make room */
@@ -78,7 +78,7 @@ fun List<List<Harmonic>>.sumLists(): List<Harmonic> =
             .groupBy { it.freq }
             .map { group -> Harmonic(
                     group.key,
-                    group.value.sumOf { it.mag }
+                    group.value.map { it.mag }.sum()
                 )
             }
     }
@@ -97,8 +97,8 @@ fun <T> List<List<T>>.groupByIndex() =
     else
         List(this.maxOf { it.size } ){ this.elementsAtIndex(it) }
 
-@JvmName("sumListsDouble")
-fun List<List<Double>>.sumLists(): List<Double> =
+@JvmName("sumListsFloat")
+fun List<List<Float>>.sumLists(): List<Float> =
     this.groupByIndex().map { it.sum() }
 
 operator fun Color.plus(that: Color) =
@@ -110,7 +110,7 @@ operator fun Color.plus(that: Color) =
     )
 
 /** Converts frequency to closest note estimate*/
-fun Double.toNote(): Note?{
+fun Float.toNote(): Note?{
     // check if frequency is out of bounds
     if(this < Note.C_0.freq || this > Note.B_8.freq) return null
 
@@ -130,7 +130,7 @@ fun Double.toNote(): Note?{
 }
 
 /** Converts frequency to the closest note and its error (cents) */
-fun Double.toNoteAndCents(): Pair<Note?, Int>{
+fun Float.toNoteAndCents(): Pair<Note?, Int>{
     val note = this.toNote() ?: return Pair(null, 0)
     val hzError = this - note.freq
 
@@ -155,31 +155,32 @@ fun logTime(title: String = "", block: () -> Unit){
     measureTimeMillis { block() }.also { logd("$title $it ms") }
 }
 
-fun avgTimeMillis(repeat: Int, block: () -> Unit): Double {
+fun avgTimeMillis(repeat: Int, block: () -> Unit): Float {
     val times = mutableListOf<Long>()
     repeat(repeat){
         measureTimeMillis{ block() }
             .also{ times += it }
     }
-    return times.average()
+    return times.average().toFloat()
 }
 
-fun avgTimeNano(repeat: Int, block: () -> Any?): Double {
+fun avgTimeNano(repeat: Int, block: () -> Any?): Float {
     val times = mutableListOf<Long>()
     repeat(repeat){
         measureNanoTime{ block() }
             .also{ times += it }
     }
-    return times.average()
+    return times.average().toFloat()
 }
 
-fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double> {
-    val lStart: Double
-    val lStop: Double
+// todo deconstruction and if else assignment
+fun arange(start: Float, stop: Float? = null, step: Float = 1f): List<Float> {
+    val lStart: Float
+    val lStop: Float
 
     if (stop == null) {
-        lStart = 0.0
-        lStop = start-1.0
+        lStart = 0f
+        lStop = start-1f
     }
     else {
         lStart = start
@@ -190,9 +191,9 @@ fun arange(start: Double, stop: Double? = null, step: Double = 1.0): List<Double
     return List(size) { index -> step*index + lStart }
 }
 
-data class Harmonic(var freq: Double, var mag: Double)
+data class Harmonic(var freq: Float, var mag: Float)
 
-fun poly(x: List<Double>, y: List<Double>): Harmonic {
+fun poly(x: List<Float>, y: List<Float>): Harmonic {
     val coef = polyFit(x,y)
     val a = coef[0]
     val b = coef[1]
@@ -201,12 +202,12 @@ fun poly(x: List<Double>, y: List<Double>): Harmonic {
     return Harmonic(-b/(2*a), c-b.pow(2)/(4*a))
 }
 
-fun quadInterp(x: Double, xVals: List<Double>, yVals: List<Double>): Double {
-    val coef = polyFit(xVals,yVals)
-    return coef[0]*x.pow(2)+coef[1]*x+coef[2]
+fun quadInterp(x: Float, xVals: List<Float>, yVals: List<Float>): Float {
+    val coef = polyFit(xVals, yVals)
+    return coef[0] * x.pow(2) + coef[1] * x + coef[2]
 }
 
-fun polyFit(x: List<Double>, y: List<Double> ) : List<Double> {
+fun polyFit(x: List<Float>, y: List<Float> ) : List<Float> {
     val denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
     val a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
     val b = (x[2].pow(2) * (y[0] - y[1]) + x[1].pow(2) * (y[2] - y[0]) + x[0].pow(2) * (y[1] - y[2])) / denom

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun TapeMeter(
     modifier: Modifier = Modifier,
-    value: Double = 1.9,
+    value: Float = 1.9f,
     range: Int = 5,
     allowNegatives: Boolean = true
 ){
@@ -111,7 +111,7 @@ fun TestTapeMeter(){
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxSize(.2f),
-            value    = (sliderState * 50).toDouble()
+            value    = (sliderState * 50)
         )
         Slider(
             value = sliderState,

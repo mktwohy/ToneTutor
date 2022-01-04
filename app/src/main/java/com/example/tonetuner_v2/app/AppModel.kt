@@ -16,8 +16,8 @@ object AppModel{
     // State
     var fft by mutableStateOf(listOf<Float>())
     var fingerPrint by mutableStateOf(listOf<Harmonic>())
-    var pitch by mutableStateOf(0.0)
-    var quality by mutableStateOf(0.0)
+    var pitch by mutableStateOf(0f)
+    var quality by mutableStateOf(0f)
     var note by mutableStateOf<Note?>(null)
     var cents by mutableStateOf(0)
 
