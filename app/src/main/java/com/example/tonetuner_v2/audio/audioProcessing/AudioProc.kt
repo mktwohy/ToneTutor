@@ -45,7 +45,6 @@ class AudioProc(
     }
 
     //todo add method to stop thread
-
     override fun run() {
         // todo once audioSample is properly mutable, make it a public property
         var audioSample = AudioSample(pitchAlgo = pitchAlgo)
@@ -62,15 +61,14 @@ class AudioProc(
             audioSample = audioSample.dropAndAdd(audioData)
 
             // Calculate audioSample attributes and add them to their respective queue
+            fftQueue.forcedOffer(audioSample.fft)
             if (audioSample.maxOrNull() ?: 0f < NOISE_THRESHOLD) {
                 qualityQueue.forcedOffer(qualityDefault)
                 pitchQueue.forcedOffer(pitchDefault)
-                fftQueue.forcedOffer(fftDefault)
                 fingerPrintQueue.forcedOffer(fingerPrintDefault)
             } else {
                 qualityQueue.forcedOffer(audioSample.benya)
                 pitchQueue.forcedOffer(audioSample.pitch)
-                fftQueue.forcedOffer(audioSample.fft)
                 fingerPrintQueue.forcedOffer(audioSample.fingerprint)
             }
         }
