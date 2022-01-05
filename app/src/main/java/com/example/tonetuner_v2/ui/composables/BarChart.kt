@@ -1,6 +1,7 @@
 package com.example.tonetuner_v2.ui.composables
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -10,6 +11,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun BarChart(
@@ -32,8 +35,9 @@ fun BarChart(
             Column {
                 BarChartNoAxis(
                     modifier = Modifier
-                        .fillMaxHeight(0.95f)
-                        .fillMaxWidth(),
+                        .fillMaxHeight(0.96f)
+                        .fillMaxWidth()
+                        .border(2.dp, Color.White),
                     barValues = barValues,
                     barColor = barColor
                 )
@@ -55,8 +59,7 @@ fun BarChartNoAxis(
 ){
     Box(modifier = modifier, contentAlignment = Alignment.Center){
         Canvas(modifier = Modifier
-            .fillMaxHeight(0.9f)
-            .fillMaxWidth()
+            .fillMaxSize()
         ) {
             val barWidth = this.size.width / barValues.size
 
@@ -101,7 +104,8 @@ fun XAxis(
                 ){
                     Text(
                         text = t.toString(),
-                        color = color
+                        color = color,
+                        fontSize = 10.sp
                     )
                 }
             }
