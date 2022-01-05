@@ -8,4 +8,3 @@ This Android app has two goals:
 - [ToneTutor src](https://github.com/mktwohy/ToneTutor/tree/master/app/src/main/java/com/example/tonetuner_v2)
 - [SignalLib](https://github.com/mktwohy/Synth/tree/Main/SignalLib/src/main/java/com/example/signallib)
 (from my [Synth Repository](https://github.com/mktwohy/Synth))
-s
