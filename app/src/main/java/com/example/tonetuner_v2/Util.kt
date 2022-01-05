@@ -82,6 +82,13 @@ fun List<Float>.normalizeBySum(): List<Float> {
     return this.map { it / sum }
 }
 
+fun <T> List<Pair<Int, T>>.mapToIndices(defaultValue: T): List<T> =
+    this.toMap()
+        .let { indexToValue ->
+            val maxIndex = indexToValue.maxOfOrNull { it.key } ?: 0
+            MutableList(maxIndex + 1){ indexToValue[it] ?: defaultValue }
+        }
+
 fun List<Harmonic>.toGraphRepr() =
     this.asSequence()
         .onEach { it.freq = freqToPitch(it.freq) } // convert frequencies to pitch
@@ -91,11 +98,7 @@ fun List<Harmonic>.toGraphRepr() =
         .map { (index, harmonics) ->                // map so output is List<index to max freq>
             index to harmonics.maxOf { it.second }
         }
-        .toMap()
-        .let { indexToValue ->
-            val maxIndex = indexToValue.maxOfOrNull { it.key } ?: 0
-            MutableList(maxIndex + 1){ indexToValue[it] ?: 0f }
-        }
+        .mapToIndices(0f)
         .normalizeBySum()
 
 
