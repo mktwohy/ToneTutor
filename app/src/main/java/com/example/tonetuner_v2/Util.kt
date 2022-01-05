@@ -21,10 +21,10 @@ fun List<List<Harmonic>>.averageLists() =
             Harmonic(freq, harmonics.map { it.mag }.average().toFloat())
         }
 
-fun List<Harmonic>.normalizeBySum(): List<Harmonic> {
-    val magSum = this.map { it.mag }.sum()
-    return this.onEach { it.mag /= magSum }
-}
+//fun List<Harmonic>.normalizeBySum(): List<Harmonic> {
+//    val magSum = this.map { it.mag }.sum()
+//    return this.onEach { it.mag /= magSum }
+//}
 
 
 
@@ -77,8 +77,30 @@ fun Float.toRadian() = this * Math.PI.toFloat() / 180
 
 fun Float.toDegree() = this * 180 / Math.PI.toFloat()
 
+fun List<Float>.normalizeBySum(): List<Float> {
+    val sum = this.sum()
+    return this.map { it / sum }
+}
+
+fun List<Harmonic>.toGraphRepr() =
+    this.asSequence()
+        .onEach { it.freq = freqToPitch(it.freq) } // convert frequencies to pitch
+        .map { it.freq.toInt() to it.mag }          // convert pitches to Int indices
+        .groupBy { it.first }                       // group by index
+        .filter { it.key >= 0 }                      // filter positive indices
+        .map { (index, harmonics) ->                // map so output is List<index to max freq>
+            index to harmonics.maxOf { it.second }
+        }
+        .toMap()
+        .let { indexToValue ->
+            val maxIndex = indexToValue.maxOfOrNull { it.key } ?: 0
+            MutableList(maxIndex + 1){ indexToValue[it] ?: 0f }
+        }
+        .normalizeBySum()
+
+
 /** from https://psychology.wikia.org/wiki/Pitch_perception */
-fun freqToPitch(freq: Float) = 69 + 12 * log(2f, freq/440f)
+fun freqToPitch(freq: Float) = 69 + 12 * log(freq/440f, 2f)
 
 /**
  * like toString(), but it returns a substring a desired length. The end is padded with

@@ -33,7 +33,7 @@ class AudioProc(
     private var running = false
 
     val fft: List<Harmonic>
-        get() = fftQueue.toList().averageLists().normalizeBySum()
+        get() = fftQueue.toList().averageLists()
     val pitch: Float
         get() = pitchQueue.average().toFloat()
     val quality: Float
