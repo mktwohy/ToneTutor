@@ -19,6 +19,7 @@ object AppModel{
     var quality by mutableStateOf(0f)
     var note by mutableStateOf<Note?>(null)
     var cents by mutableStateOf(0)
+    var playState by mutableStateOf(true)
 
     var spectrumType by mutableStateOf(FINGERPRINT)
 

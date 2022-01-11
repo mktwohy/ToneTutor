@@ -15,7 +15,7 @@ import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.ui.composables.old.XYPlot
 
 @Composable
-fun DetailScreen(
+fun SettingsScreen(
     name: String?,
     navController: NavController
 ){

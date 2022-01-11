@@ -46,16 +46,18 @@ class MainActivity : ComponentActivity() {
     private val audioUpdateThread = Thread{
         var counter = 0
         while(true){
-            if(audioSource is SignalSource) {
-                if (counter == 300){
-                    audioSource.startNextTest(pitchTests.poll() as PitchTest.SignalPitchTest)
-                    counter = 0
+            if (AppModel.playState){
+                if(audioSource is SignalSource) {
+                    if (counter == 300){
+                        audioSource.startNextTest(pitchTests.poll() as PitchTest.SignalPitchTest)
+                        counter = 0
+                    }
+                    else{
+                        counter += 1
+                    }
                 }
-                else{
-                    counter += 1
-                }
+                AppModel.updateAppModel(audioProc)
             }
-            AppModel.updateAppModel(audioProc)
             Thread.sleep(AppModel.UI_LAG)
         }
     }

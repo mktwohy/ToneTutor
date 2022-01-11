@@ -36,7 +36,7 @@ fun Navigation(){
                 }
             )
         ){ entry ->
-            DetailScreen(
+            SettingsScreen(
                 name = entry.arguments?.getString("name"),
                 navController = navController
             )

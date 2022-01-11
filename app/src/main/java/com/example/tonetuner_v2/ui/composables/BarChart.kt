@@ -37,7 +37,7 @@ fun BarChart(
                     modifier = Modifier
                         .fillMaxHeight(0.96f)
                         .fillMaxWidth()
-                        .border(2.dp, Color.White),
+                        .border(1.dp, Color.White),
                     barValues = barValues,
                     barColor = barColor
                 )
@@ -90,7 +90,7 @@ fun BarChartNoAxis(
 @Composable
 fun XAxis(
     modifier: Modifier = Modifier,
-    ticks: List<Any> = listOf('f',1,2,3,4,5,6,7,8,9,10),
+    ticks: List<Any>,
     color: Color = Color.White
 ){
     BoxWithConstraints(modifier = modifier) {

@@ -1,5 +1,6 @@
 package com.example.tonetuner_v2.ui.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tonetuner_v2.*
@@ -37,12 +39,33 @@ fun MainScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround
     ) {
-        Button(
-            onClick = {
-                navController.navigate(Screen.DetailScreen.withArgs("Michael"))
+//        Button(
+//            onClick = {
+//                navController.navigate(Screen.DetailScreen.withArgs("Michael"))
+//            }
+//        ) {
+//            Text(text = "To Detail Screen")
+//        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.05f),
+            contentAlignment = Alignment.BottomEnd
+        ){
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.2f)
+                    .fillMaxHeight()
+                    .background(Color.DarkGray)
+                    .clickable { AppModel.playState = !AppModel.playState  },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = if(AppModel.playState) "ON" else "OFF",
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
             }
-        ) {
-            Text(text = "To Detail Screen")
         }
         CircularTuner(
             modifier = Modifier
