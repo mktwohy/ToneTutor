@@ -2,6 +2,7 @@ package com.example.tonetuner_v2.app
 
 import android.Manifest
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +27,8 @@ class MainActivity : ComponentActivity() {
             SignalSource(AppModel.FINGERPRINT_SIZE)
         else
             MicSource()
+
+
 
     private val audioProc = AudioProc(
         audioSource = audioSource,
@@ -66,6 +69,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         startAudioInput()
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
         setContent {
             if (audioSource is SignalSource){
