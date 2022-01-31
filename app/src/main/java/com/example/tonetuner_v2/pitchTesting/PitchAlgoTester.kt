@@ -17,6 +17,9 @@ import org.json.JSONStringer
 import kotlin.math.absoluteValue
 import kotlin.math.exp
 
+
+
+
 fun main() {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
@@ -40,18 +43,6 @@ fun main() {
         test.updateHarmonicSeries(signalSettings.harmonicSeries)
     }
 
-    fun calcFreq(note: Note, cents: Int): Float {
-        val sign = if (cents > 0) 1 else -1
-        val noteNeighbor = note + sign
-        val centsAsHz = sign * ((note.freq - noteNeighbor.freq) * cents / 100).absoluteValue
-        return note.freq + centsAsHz
-    }
-
-    fun calcError(expected: Number, actual: Number): Float {
-        expected as Float
-        actual as Float
-        return ((actual - expected) / expected) * 100
-    }
 
     Thread {
         for (test in pitchTests.take(20)){

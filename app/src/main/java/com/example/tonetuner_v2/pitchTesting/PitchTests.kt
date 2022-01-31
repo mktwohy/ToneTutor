@@ -17,6 +17,11 @@ sealed class PitchTest{
     ): PitchTest()
 }
 
+data class PitchTestResults(
+    val test: PitchTest,
+    val pitch: Float
+)
+
 fun createPitchTests(
     numSamples: Int,
     notes: List<Note>,
