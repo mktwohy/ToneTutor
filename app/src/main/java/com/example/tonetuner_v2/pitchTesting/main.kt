@@ -26,7 +26,7 @@ fun main() {
         filters = HarmonicFilter.values().toList()
     )
 
-    println("running tests... ")
+    print("running tests...\n\tprogress: ")
     val results = pitchTests.runTests()
 
     println("\nwriting to file...")
