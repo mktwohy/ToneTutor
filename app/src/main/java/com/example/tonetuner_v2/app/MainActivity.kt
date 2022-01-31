@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
     )
 
     private val pitchTests = createPitchTests(
+        numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
         pitchBends = listOf(-0.25f, 0f, 0.25f),
         amps = listOf(1f),

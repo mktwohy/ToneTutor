@@ -8,6 +8,7 @@ import java.util.*
 
 sealed class PitchTest{
     data class SignalPitchTest(
+        val numSamples: Int,
         val note: Note,
         val pitchBend: Float,
         val amp: Float,
@@ -17,6 +18,7 @@ sealed class PitchTest{
 }
 
 fun createPitchTests(
+    numSamples: Int,
     notes: List<Note>,
     pitchBends: List<Float>,
     amps: List<Float>,
@@ -51,6 +53,7 @@ fun createPitchTests(
                     for (hsUpdate in harmonicSeriesUpdates){
                         tests.add(
                             PitchTest.SignalPitchTest(
+                                numSamples,
                                 note,
                                 pitchBend,
                                 amp,

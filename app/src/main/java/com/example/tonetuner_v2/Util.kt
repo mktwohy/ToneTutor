@@ -192,7 +192,7 @@ fun Float.toNoteAndCents(): Pair<Note?, Int>{
         if(hzError > 0){
             val hzToNextNote = (note + 1).freq - note.freq
             (100 * hzError/hzToNextNote).toInt()
-        } else{
+        } else {
             if(note == Note.C_0){ 0 }
             else{
                 val hzToPrevNote =  note.freq - (note - 1).freq
