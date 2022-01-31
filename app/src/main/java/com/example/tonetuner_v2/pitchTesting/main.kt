@@ -27,7 +27,7 @@ fun main() {
     )
 
     print("running tests...\n\tprogress: ")
-    val results = pitchTests.runTests()
+    val results = pitchTests.take(20).runTests()
 
     println("\nwriting to file...")
     writeToFile("output.json", results.toJson())
