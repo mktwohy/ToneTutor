@@ -74,16 +74,16 @@ fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Results{
 }
 
 fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
-    fun StringBuilder.append(c: Char, times: Int){
-        repeat(times){ this.append(c) }
+    fun StringBuilder.repeatAppend(c: Char, times: Int){
+        repeat(times){ append(c) }
     }
 
     with(StringBuilder()){
-        val numFilled = (size * (percent / 100)).roundToInt()
+        if (clear) repeatAppend('\b', times = size)
 
-        if (clear) append('\b', times = size)
-        append('#', times = numFilled)
-        append('_', times = size - numFilled)
+        val numFilled = (size * (percent / 100)).roundToInt()
+        repeatAppend('#', times = numFilled)
+        repeatAppend('_', times = size - numFilled)
 
         print(this.toString())
     }
@@ -95,11 +95,10 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Results> {
 
     return this.mapIndexed { index, test ->
         when (test){
-            is PitchTest.Input.SignalInput ->
-                signalSource.runTest(test)
+            is PitchTest.Input.SignalInput -> signalSource.runTest(test)
         }.also {
             printAsciiProgressBar(
-                size = 10,
+                size = 20,
                 percent = ((index + 1) / this.size.toFloat()) * 100,
                 clear = index != 0
             )
