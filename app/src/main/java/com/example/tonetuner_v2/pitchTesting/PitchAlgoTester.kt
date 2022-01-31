@@ -12,8 +12,6 @@ import java.io.File
 
 // to clean up file: https://jsonformatter.org/json-pretty-print
 fun main() {
-    val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
-
     val pitchTests = createPitchTests(
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
@@ -26,12 +24,7 @@ fun main() {
         filters = HarmonicFilter.values().toList()
     )
 
-    val results = pitchTests.take(20).map { test ->
-        when (test){
-            is PitchTest.SignalPitchTest ->
-                signalSource.runTest(test)
-        }
-    }
+    val results = pitchTests.runTests()
 
     writeToFile("pitchTestResults.json", results.toJson())
 }
@@ -61,4 +54,16 @@ fun SignalSource.runTest(test: PitchTest.SignalPitchTest): PitchTestResults{
     val audio = this.getAudio(test.numSamples).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
     return PitchTestResults(test, sample.pitch)
+}
+
+
+fun Collection<PitchTest>.runTests(): List<PitchTestResults> {
+    val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
+
+    return this.map { test ->
+        when (test){
+            is PitchTest.SignalPitchTest ->
+                signalSource.runTest(test)
+        }
+    }
 }
