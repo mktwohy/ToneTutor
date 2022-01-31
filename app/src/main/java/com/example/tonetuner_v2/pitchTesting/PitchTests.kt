@@ -5,9 +5,10 @@ import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.plus
 import com.example.signallib.enums.WaveShape
+import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 import kotlin.math.absoluteValue
-
 
 sealed class PitchTest{
     data class SignalPitchTest(
@@ -16,15 +17,18 @@ sealed class PitchTest{
         val pitchBend: Float,
         val amp: Float,
         val waveShape: WaveShape,
-        val updateHarmonicSeries: (HarmonicSeries) -> Unit
-    ): PitchTest() 
-    { val expectedPitch = calcFreq(this.note, (this.pitchBend * 100).toInt()) }
+        val updateHarmonicSeries: (HarmonicSeries) -> Unit,
+    ): PitchTest() {
+        val expectedPitch = calcFreq(note, (pitchBend * 100).toInt())
+    }
 }
 
 data class PitchTestResults(
     val test: PitchTest.SignalPitchTest,
-    val actualPitch: Float
-){ val error = calcError(test.expectedPitch, actualPitch) }
+    val actualPitch: Float,
+){
+    val error: Float = calcError(test.expectedPitch, actualPitch)
+}
 
 fun calcFreq(note: Note, cents: Int): Float {
     val sign = if (cents > 0) 1 else -1

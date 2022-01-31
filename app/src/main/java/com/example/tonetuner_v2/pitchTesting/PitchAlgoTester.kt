@@ -7,11 +7,13 @@ import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import org.json.JSONObject
 import java.io.File
 
 
 // to clean up file: https://jsonformatter.org/json-pretty-print
 fun main() {
+    println("creating pitch tests...")
     val pitchTests = createPitchTests(
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
@@ -24,13 +26,18 @@ fun main() {
         filters = HarmonicFilter.values().toList()
     )
 
-    val results = pitchTests.runTests()
+    println("running tests...")
+    val results = pitchTests.take(20).runTests()
 
+    println("writing to file...")
     writeToFile("pitchTestResults.json", results.toJson())
+
+    println("done!")
 }
 
-fun Any.toJson(): String
-        = jacksonObjectMapper().writeValueAsString(this)
+fun Any.toJson(): String =
+    jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this)
+
 
 fun writeToFile(name: String, text: String) {
     val dir = System.getProperty("user.dir") ?: return
