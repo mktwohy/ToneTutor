@@ -26,7 +26,7 @@ class PitchTest{
         ): Input()
     }
 
-    data class Results(
+    data class Output(
         val input: Input.SignalInput,
         val actualPitch: Float,
     ){

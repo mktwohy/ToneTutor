@@ -6,6 +6,7 @@ import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
+import com.example.tonetuner_v2.median
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.lang.StringBuilder
@@ -17,7 +18,7 @@ fun main() {
     val localPath = System.getProperty("user.dir") +
             "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
 
-    println("creating pitch tests...")
+    println("Creating pitch tests...")
     val pitchTests = PitchTest.allInputPermutations(
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
@@ -30,14 +31,15 @@ fun main() {
         filters = HarmonicFilter.values().toList()
     )
 
-    print("running tests...\n\tprogress: ")
-    val results = pitchTests.take(20).runTests()
+    print("Running tests...\n\tprogress: ")
+    val output = pitchTests.take(20).runTests()
 
-    println("\nwriting to file...")
+    println("\nWriting to file...")
+    writeToFile("output.json", output.toJson(), localPath)
 
-    writeToFile("output.json", results.toJson(), localPath)
+    println("Done!")
 
-    println("done!")
+    output.printSummary()
 }
 
 fun Any.toJson(): String =
@@ -66,11 +68,11 @@ fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     }
 }
 
-fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Results{
+fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Output{
     this.applyTest(test)
     val audio = this.getAudio(test.numSamples).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-    return PitchTest.Results(test, sample.pitch)
+    return PitchTest.Output(test, sample.pitch)
 }
 
 fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
@@ -90,7 +92,7 @@ fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
 
 }
 
-fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Results> {
+fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Output> {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
     return this.mapIndexed { index, test ->
@@ -104,4 +106,18 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Results> {
             )
         }
     }
+}
+
+fun Collection<PitchTest.Output>.printSummary(){
+    val errors = this.map { it.error }
+    val avgError    = errors.average()
+    val medianError = errors.median()
+
+    val numOctaveError = errors.filter { it.roundToInt() in 95..105}.size
+    val numOctaveErrorPercent = (numOctaveError / this.size.toFloat()) * 100
+
+    println("\nSummary:")
+    println("\taverage error: $avgError%")
+    println("\tmedian error: $medianError")
+    println("\toctave errors: $numOctaveError ($numOctaveErrorPercent%)")
 }

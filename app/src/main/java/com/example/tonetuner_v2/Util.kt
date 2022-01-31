@@ -26,6 +26,11 @@ fun calcError(expected: Number, actual: Number): Float {
     return ((actual - expected) / expected) * 100
 }
 
+fun <T> Collection<T>.median(): T where T: Comparable<T> {
+    val midIndex = (this.size / 2f).roundToInt()
+    return this.toList().sorted()[midIndex]
+}
+
 fun List<List<Harmonic>>.averageLists() =
     this
         .flatten()
