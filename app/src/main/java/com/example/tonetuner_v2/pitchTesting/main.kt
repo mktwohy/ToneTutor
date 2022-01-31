@@ -12,7 +12,11 @@ import java.lang.StringBuilder
 import kotlin.math.roundToInt
 
 
+
 fun main() {
+    val localPath = System.getProperty("user.dir") +
+            "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
+
     println("creating pitch tests...")
     val pitchTests = PitchTest.allInputPermutations(
         numSamples = AppModel.PROC_BUFFER_SIZE,
@@ -30,7 +34,8 @@ fun main() {
     val results = pitchTests.take(20).runTests()
 
     println("\nwriting to file...")
-    writeToFile("output.json", results.toJson())
+
+    writeToFile("output.json", results.toJson(), localPath)
 
     println("done!")
 }
@@ -39,10 +44,8 @@ fun Any.toJson(): String =
     jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this)
 
 
-fun writeToFile(name: String, text: String) {
-    val dir = System.getProperty("user.dir") ?: return
-    val path = "$dir/app/src/main/java/com/example/tonetuner_v2/pitchTesting/$name"
-    with(File(path)){
+fun writeToFile(name: String, text: String, dir: String) {
+    with(File("$dir/$name")){
         writeText(text)
         createNewFile()
     }
@@ -71,20 +74,20 @@ fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Results{
 }
 
 fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
-    val sb = StringBuilder()
-    val numFilled = (size * (percent / 100)).roundToInt()
-    if (clear){
-        repeat(size){
-            sb.append('\b')
-        }
+    fun StringBuilder.append(c: Char, times: Int){
+        repeat(times){ this.append(c) }
     }
-    repeat(numFilled){
-        sb.append('#')
+
+    with(StringBuilder()){
+        val numFilled = (size * (percent / 100)).roundToInt()
+
+        if (clear) append('\b', times = size)
+        append('#', times = numFilled)
+        append('_', times = size - numFilled)
+
+        print(this.toString())
     }
-    repeat(size - numFilled){
-        sb.append('_')
-    }
-    print(sb.toString())
+
 }
 
 fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Results> {
