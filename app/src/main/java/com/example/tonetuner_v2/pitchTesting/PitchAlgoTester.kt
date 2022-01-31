@@ -51,7 +51,14 @@ fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     pitchBend = test.pitchBend
     amp = test.amp
     signalSettings.waveShape = test.waveShape
-    test.updateHarmonicSeries(signalSettings.harmonicSeries)
+    signalSettings.harmonicSeries.apply {
+        this.generate(
+            decayRate = test.harmonicSeriesSettings.decayRate,
+            floor = test.harmonicSeriesSettings.floor,
+            ceiling = test.harmonicSeriesSettings.ceiling,
+            filter = test.harmonicSeriesSettings.filter.function
+        )
+    }
 }
 
 fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Results{

@@ -1,18 +1,20 @@
 package com.example.tonetuner_v2.pitchTesting
 
-import com.example.signallib.HarmonicSeries
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.Note
-import com.example.signallib.enums.Note.Companion.plus
 import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.calcError
 import com.example.tonetuner_v2.calcFreq
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
-import kotlin.math.absoluteValue
 
 class PitchTest{
+    data class HarmonicSeriesSettings(
+        val decayRate: Float,
+        val floor: Float,
+        val ceiling: Float,
+        val filter: HarmonicFilter
+    )
+
     sealed class Input{
         data class SignalInput(
             val numSamples: Int,
@@ -20,17 +22,16 @@ class PitchTest{
             val pitchBend: Float,
             val amp: Float,
             val waveShape: WaveShape,
-            val updateHarmonicSeries: (HarmonicSeries) -> Unit,
-        ): Input() {
-            val expectedPitch = calcFreq(note, (pitchBend * 100).toInt())
-        }
+            val harmonicSeriesSettings: HarmonicSeriesSettings,
+        ): Input()
     }
 
     data class Results(
-        val test: Input.SignalInput,
+        val input: Input.SignalInput,
         val actualPitch: Float,
     ){
-        val error: Float = calcError(test.expectedPitch, actualPitch)
+        val expectedPitch = calcFreq(input.note, (input.pitchBend * 100).toInt())
+        val error: Float = calcError(expectedPitch, actualPitch)
     }
 
     companion object {
@@ -47,27 +48,27 @@ class PitchTest{
         ): LinkedList<Input> {
             // todo this is super ugly, but I don't know how else to do it
 
-            val harmonicSeriesUpdates = mutableListOf<(HarmonicSeries) -> Unit>()
+            val hsSettings = mutableListOf<HarmonicSeriesSettings>()
 
             for (decayRate in decayRates){
                 for (floor in floors){
                     for (ceiling in ceilings){
                         for (filter in filters){
-                            harmonicSeriesUpdates.add { h: HarmonicSeries ->
-                                h.generate(decayRate, floor, ceiling, filter.function)
-                            }
+                            hsSettings.add(
+                                HarmonicSeriesSettings(decayRate, floor, ceiling, filter)
+                            )
                         }
                     }
                 }
             }
 
-            val tests = LinkedList<PitchTest.Input>()
+            val tests = LinkedList<Input>()
 
             for (note in notes){
                 for (pitchBend in pitchBends){
                     for (amp in amps){
                         for (waveShape in waveShapes){
-                            for (hsUpdate in harmonicSeriesUpdates){
+                            for (hsUpdate in hsSettings){
                                 tests.add(
                                     Input.SignalInput(
                                         numSamples,

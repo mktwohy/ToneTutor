@@ -1,281 +1,341 @@
 [ {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "FUNDAMENTAL"
+    }
   },
   "actualPitch" : 31.725,
+  "expectedPitch" : 32.2425,
   "error" : -1.6050242
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
   },
   "actualPitch" : 78.365,
+  "expectedPitch" : 32.2425,
   "error" : 143.04877
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
   },
   "actualPitch" : 39.035,
+  "expectedPitch" : 32.2425,
   "error" : 21.066914
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
   },
   "actualPitch" : 64.665,
+  "expectedPitch" : 32.2425,
   "error" : 100.558266
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "NONE"
+    }
   },
   "actualPitch" : 64.365005,
+  "expectedPitch" : 32.2425,
   "error" : 99.62784
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "FUNDAMENTAL"
+    }
   },
   "actualPitch" : 39.635002,
+  "expectedPitch" : 32.2425,
   "error" : 22.927818
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
   },
   "actualPitch" : 32.425,
+  "expectedPitch" : 32.2425,
   "error" : 0.5660198
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
   },
   "actualPitch" : 64.665,
+  "expectedPitch" : 32.2425,
   "error" : 100.558266
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "NONE"
+    }
   },
   "actualPitch" : 47.075,
+  "expectedPitch" : 32.2425,
   "error" : 46.00295
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "FUNDAMENTAL"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "NONE"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "FUNDAMENTAL"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 }, {
-  "test" : {
+  "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
-    "updateHarmonicSeries" : {
-      "arity" : 1
-    },
-    "expectedPitch" : 32.2425
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "NONE"
+    }
   },
   "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
   "error" : -0.054281868
 } ]
