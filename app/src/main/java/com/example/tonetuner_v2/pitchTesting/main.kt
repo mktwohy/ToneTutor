@@ -8,6 +8,8 @@ import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
+import java.lang.StringBuilder
+import kotlin.math.roundToInt
 
 
 fun main() {
@@ -24,11 +26,11 @@ fun main() {
         filters = HarmonicFilter.values().toList()
     )
 
-    println("running tests...")
-    val results = pitchTests.take(20).runTests()
+    println("running tests... ")
+    val results = pitchTests.runTests()
 
-    println("writing to file...")
-    writeToFile("pitchTestResults.json", results.toJson())
+    println("\nwriting to file...")
+    writeToFile("output.json", results.toJson())
 
     println("done!")
 }
@@ -68,14 +70,36 @@ fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Results{
     return PitchTest.Results(test, sample.pitch)
 }
 
+fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
+    val sb = StringBuilder()
+    val numFilled = (size * (percent / 100)).roundToInt()
+    if (clear){
+        repeat(size){
+            sb.append('\b')
+        }
+    }
+    repeat(numFilled){
+        sb.append('#')
+    }
+    repeat(size - numFilled){
+        sb.append('_')
+    }
+    print(sb.toString())
+}
 
 fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Results> {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
-    return this.map { test ->
+    return this.mapIndexed { index, test ->
         when (test){
             is PitchTest.Input.SignalInput ->
                 signalSource.runTest(test)
+        }.also {
+            printAsciiProgressBar(
+                size = 10,
+                percent = ((index + 1) / this.size.toFloat()) * 100,
+                clear = index != 0
+            )
         }
     }
 }

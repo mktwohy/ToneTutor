@@ -84,50 +84,8 @@ class PitchTest{
                     }
                 }
             }
-
             return tests
         }
     }
 
 }
-
-
-
-
-//private fun initPitchTests(): MutableList<PitchTest> {
-//    val tests = mutableListOf<PitchTest>()
-//
-//    var note        = Note.A_4
-//    var pitchBend   = 0f
-//    var amp         = 1f
-//    var waveShape   = WaveShape.SINE
-//    var updateHarmonicSeries = { h: HarmonicSeries ->
-//        h.generate(
-//            decayRate = 15f,
-//            floor = 0f,
-//            ceiling = 1f,
-//            filter = HarmonicFilter.ALL.function
-//        )
-//    }
-//
-//    fun addTestForEachNote(notes: Collection<Note> = Note.notes){
-//        for(n in notes){
-//            tests.add(
-//                SignalPitchTest(
-//                    note        = n,
-//                    pitchBend   = pitchBend,
-//                    amp         = amp,
-//                    waveShape   = waveShape,
-//                    updateHarmonicSeries = updateHarmonicSeries
-//                )
-//            )
-//        }
-//    }
-//
-//
-//    addTestForEachNote()
-//
-//    return tests
-//
-//
-//}
