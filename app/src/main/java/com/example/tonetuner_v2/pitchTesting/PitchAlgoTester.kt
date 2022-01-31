@@ -7,14 +7,12 @@ import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import org.json.JSONObject
 import java.io.File
 
 
-// to clean up file: https://jsonformatter.org/json-pretty-print
 fun main() {
     println("creating pitch tests...")
-    val pitchTests = createPitchTests(
+    val pitchTests = PitchTest.createPitchTests(
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
         pitchBends = listOf(-0.25f, 0f, 0.25f),
@@ -48,7 +46,7 @@ fun writeToFile(name: String, text: String) {
     }
 }
 
-fun SignalSource.applyTest(test: PitchTest.SignalPitchTest) {
+fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     notes = setOf(test.note)
     pitchBend = test.pitchBend
     amp = test.amp
@@ -56,20 +54,20 @@ fun SignalSource.applyTest(test: PitchTest.SignalPitchTest) {
     test.updateHarmonicSeries(signalSettings.harmonicSeries)
 }
 
-fun SignalSource.runTest(test: PitchTest.SignalPitchTest): PitchTestResults{
+fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Results{
     this.applyTest(test)
     val audio = this.getAudio(test.numSamples).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-    return PitchTestResults(test, sample.pitch)
+    return PitchTest.Results(test, sample.pitch)
 }
 
 
-fun Collection<PitchTest>.runTests(): List<PitchTestResults> {
+fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Results> {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
     return this.map { test ->
         when (test){
-            is PitchTest.SignalPitchTest ->
+            is PitchTest.Input.SignalInput ->
                 signalSource.runTest(test)
         }
     }

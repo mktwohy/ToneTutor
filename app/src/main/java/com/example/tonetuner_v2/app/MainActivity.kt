@@ -8,15 +8,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.Text
 import androidx.compose.ui.graphics.Color
-import com.example.signallib.enums.HarmonicFilter
-import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.MicSource
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.example.tonetuner_v2.logd
-import com.example.tonetuner_v2.pitchTesting.PitchTest
-import com.example.tonetuner_v2.pitchTesting.createPitchTests
 import com.example.tonetuner_v2.ui.navigation.Navigation
 
 
@@ -29,37 +25,14 @@ class MainActivity : ComponentActivity() {
             MicSource()
 
 
-
     private val audioProc = AudioProc(
         audioSource = audioSource,
         pitchAlgo = PitchAlgorithms.twm
     )
 
-    private val pitchTests = createPitchTests(
-        numSamples = AppModel.PROC_BUFFER_SIZE,
-        notes = AppModel.NOTE_RANGE,
-        pitchBends = listOf(-0.25f, 0f, 0.25f),
-        amps = listOf(1f),
-        waveShapes = WaveShape.values().toList(),
-        decayRates = listOf(0f),
-        floors = listOf(0f),
-        ceilings = listOf(1f),
-        filters = HarmonicFilter.values().toList()
-    )
-
     private val audioUpdateThread = Thread{
-        var counter = 0
         while(true){
             if (AppModel.playState){
-                if(audioSource is SignalSource) {
-                    if (counter == 300){
-                        audioSource.startNextTest(pitchTests.poll() as PitchTest.SignalPitchTest)
-                        counter = 0
-                    }
-                    else{
-                        counter += 1
-                    }
-                }
                 AppModel.updateAppModel(audioProc)
             }
             Thread.sleep(AppModel.UI_LAG)
@@ -90,14 +63,6 @@ class MainActivity : ComponentActivity() {
 //            )
             Navigation()
         }
-    }
-
-    private fun SignalSource.startNextTest(test: PitchTest.SignalPitchTest) {
-        this.notes = setOf(test.note)
-        this.pitchBend = test.pitchBend
-        this.amp = test.amp
-        this.signalSettings.waveShape = test.waveShape
-        test.updateHarmonicSeries(this.signalSettings.harmonicSeries)
     }
 
     private fun startAudioInput(){

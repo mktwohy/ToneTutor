@@ -13,6 +13,19 @@ import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
+fun calcFreq(note: Note, cents: Int): Float {
+    val sign = if (cents > 0) 1 else -1
+    val noteNeighbor = note + sign
+    val centsAsHz = sign * ((note.freq - noteNeighbor.freq) * cents / 100).absoluteValue
+    return note.freq + centsAsHz
+}
+
+fun calcError(expected: Number, actual: Number): Float {
+    expected as Float
+    actual as Float
+    return ((actual - expected) / expected) * 100
+}
+
 fun List<List<Harmonic>>.averageLists() =
     this
         .flatten()
