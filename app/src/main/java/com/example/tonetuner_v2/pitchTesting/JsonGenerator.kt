@@ -2,8 +2,9 @@ package com.example.tonetuner_v2.pitchTesting
 
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.plus
-import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
-import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
+import com.fasterxml.jackson.module.kotlin.jacksonMapperBuilder
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.jsonMapper
 import java.lang.StringBuilder
 import kotlin.math.absoluteValue
 
@@ -20,18 +21,14 @@ fun calcError(expected: Number, actual: Number): Float {
     return ((actual - expected) / expected) * 100
 }
 
+
+// https://stackabuse.com/reading-and-writing-json-in-kotlin-with-jackson/
 fun Collection<PitchTestResults>.toJson(): String {
     val sb = StringBuilder()
-    sb.append("{\n")
+    val jsonMapper = jacksonObjectMapper()
+
     this.forEach {
-        when (it.test){
-            is PitchTest.SignalPitchTest -> {
-                val expectedPitch = calcFreq(it.test.note, (it.test.pitchBend * 100).toInt())
-                val actualPitch = it.pitch
-                val error = calcError(expectedPitch, actualPitch)
-                println("expected: $expectedPitch actual: $actualPitch, error: $error")
-            }
-        }
+        sb.append(jsonMapper.writeValueAsString(it))
     }
 
 

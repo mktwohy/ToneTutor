@@ -15,12 +15,13 @@ sealed class PitchTest{
         val waveShape: WaveShape,
         val updateHarmonicSeries: (HarmonicSeries) -> Unit
     ): PitchTest()
+    { val expectedPitch = calcFreq(this.note, (this.pitchBend * 100).toInt()) }
 }
 
 data class PitchTestResults(
-    val test: PitchTest,
-    val pitch: Float
-)
+    val test: PitchTest.SignalPitchTest,
+    val actualPitch: Float
+){ val error = calcError(test.expectedPitch, actualPitch) }
 
 fun createPitchTests(
     numSamples: Int,

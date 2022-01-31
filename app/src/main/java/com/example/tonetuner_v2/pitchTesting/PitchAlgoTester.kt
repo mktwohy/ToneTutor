@@ -45,19 +45,19 @@ fun main() {
 
 
     Thread {
+        val results = mutableListOf<PitchTestResults>()
         for (test in pitchTests.take(20)){
-            when (test){
+            val result = when (test){
                 is PitchTest.SignalPitchTest -> {
                     signalSource.applyTest(test)
                     val audio = signalSource.getAudio(test.numSamples).toMutableList()
                     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-                    val expectedPitch = calcFreq(test.note, (test.pitchBend * 100).toInt())
-                    val actualPitch = sample.pitch
-                    val error = calcError(expectedPitch, actualPitch)
-                    println("expected: $expectedPitch actual: $actualPitch, error: $error")
+                    PitchTestResults(test, sample.pitch)
                 }
             }
+            results.add(result)
         }
+        println(results.toJson())
     }.start()
 
 
