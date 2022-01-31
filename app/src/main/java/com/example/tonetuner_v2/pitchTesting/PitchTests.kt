@@ -35,7 +35,7 @@ class PitchTest{
     }
 
     companion object {
-        fun createPitchTests(
+        fun allInputPermutations(
             numSamples: Int,
             notes: List<Note>,
             pitchBends: List<Float>,

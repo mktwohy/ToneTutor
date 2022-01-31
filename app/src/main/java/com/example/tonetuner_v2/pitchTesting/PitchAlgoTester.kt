@@ -12,7 +12,7 @@ import java.io.File
 
 fun main() {
     println("creating pitch tests...")
-    val pitchTests = PitchTest.createPitchTests(
+    val pitchTests = PitchTest.allInputPermutations(
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
         pitchBends = listOf(-0.25f, 0f, 0.25f),
