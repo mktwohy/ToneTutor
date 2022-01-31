@@ -1,25 +1,16 @@
 package com.example.tonetuner_v2.pitchTesting
 
 import com.example.signallib.enums.HarmonicFilter
-import com.example.signallib.enums.Note
-import com.example.signallib.enums.Note.Companion.plus
-import com.example.signallib.enums.Note.Companion.minus
-
 import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
-import com.example.tonetuner_v2.toNoteAndCents
-import org.json.JSONObject
-import org.json.JSONStringer
-import kotlin.math.absoluteValue
-import kotlin.math.exp
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import java.io.File
 
 
-
-
+// to clean up file: https://jsonformatter.org/json-pretty-print
 fun main() {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
@@ -35,33 +26,39 @@ fun main() {
         filters = HarmonicFilter.values().toList()
     )
 
-    fun SignalSource.applyTest(test: PitchTest.SignalPitchTest) {
-        notes = setOf(test.note)
-        pitchBend = test.pitchBend
-        amp = test.amp
-        signalSettings.waveShape = test.waveShape
-        test.updateHarmonicSeries(signalSettings.harmonicSeries)
+    val results = pitchTests.take(20).map { test ->
+        when (test){
+            is PitchTest.SignalPitchTest ->
+                signalSource.runTest(test)
+        }
     }
 
+    writeToFile("pitchTestResults.json", results.toJson())
+}
 
-    Thread {
-        val results = mutableListOf<PitchTestResults>()
-        for (test in pitchTests.take(20)){
-            val result = when (test){
-                is PitchTest.SignalPitchTest -> {
-                    signalSource.applyTest(test)
-                    val audio = signalSource.getAudio(test.numSamples).toMutableList()
-                    val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-                    PitchTestResults(test, sample.pitch)
-                }
-            }
-            results.add(result)
-        }
-        println(results.toJson())
-    }.start()
+fun Any.toJson(): String
+        = jacksonObjectMapper().writeValueAsString(this)
 
+fun writeToFile(name: String, text: String) {
+    val dir = System.getProperty("user.dir") ?: return
+    val path = "$dir/app/src/main/java/com/example/tonetuner_v2/pitchTesting/$name"
+    with(File(path)){
+        writeText(text)
+        createNewFile()
+    }
+}
 
+fun SignalSource.applyTest(test: PitchTest.SignalPitchTest) {
+    notes = setOf(test.note)
+    pitchBend = test.pitchBend
+    amp = test.amp
+    signalSettings.waveShape = test.waveShape
+    test.updateHarmonicSeries(signalSettings.harmonicSeries)
+}
 
-
-
+fun SignalSource.runTest(test: PitchTest.SignalPitchTest): PitchTestResults{
+    this.applyTest(test)
+    val audio = this.getAudio(test.numSamples).toMutableList()
+    val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
+    return PitchTestResults(test, sample.pitch)
 }

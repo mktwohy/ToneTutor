@@ -3,8 +3,11 @@ package com.example.tonetuner_v2.pitchTesting
 import com.example.signallib.HarmonicSeries
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.Note
+import com.example.signallib.enums.Note.Companion.plus
 import com.example.signallib.enums.WaveShape
 import java.util.*
+import kotlin.math.absoluteValue
+
 
 sealed class PitchTest{
     data class SignalPitchTest(
@@ -14,7 +17,7 @@ sealed class PitchTest{
         val amp: Float,
         val waveShape: WaveShape,
         val updateHarmonicSeries: (HarmonicSeries) -> Unit
-    ): PitchTest()
+    ): PitchTest() 
     { val expectedPitch = calcFreq(this.note, (this.pitchBend * 100).toInt()) }
 }
 
@@ -22,6 +25,19 @@ data class PitchTestResults(
     val test: PitchTest.SignalPitchTest,
     val actualPitch: Float
 ){ val error = calcError(test.expectedPitch, actualPitch) }
+
+fun calcFreq(note: Note, cents: Int): Float {
+    val sign = if (cents > 0) 1 else -1
+    val noteNeighbor = note + sign
+    val centsAsHz = sign * ((note.freq - noteNeighbor.freq) * cents / 100).absoluteValue
+    return note.freq + centsAsHz
+}
+
+fun calcError(expected: Number, actual: Number): Float {
+    expected as Float
+    actual as Float
+    return ((actual - expected) / expected) * 100
+}
 
 fun createPitchTests(
     numSamples: Int,
@@ -75,6 +91,7 @@ fun createPitchTests(
 
     return tests
 }
+
 
 //private fun initPitchTests(): MutableList<PitchTest> {
 //    val tests = mutableListOf<PitchTest>()
