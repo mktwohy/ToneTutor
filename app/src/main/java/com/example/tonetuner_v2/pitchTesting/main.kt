@@ -31,10 +31,10 @@ fun main() {
         floors = listOf(0f),
         ceilings = listOf(1f),
         filters = listOf(ALL, ODD, EVEN)
-    )
+    ).take(100)
 
     print("Running tests...\n\tprogress: ")
-    val output = pitchTests.take(pitchTests.size / 10).runTests()
+    val output = pitchTests.runTests()
 
     println("\nWriting to file...")
     output.toJson().writeToFile(localPath, "output.json",)
