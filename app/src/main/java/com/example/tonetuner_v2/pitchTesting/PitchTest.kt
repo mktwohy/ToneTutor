@@ -14,18 +14,18 @@ class PitchTest{
         val filter: HarmonicFilter
     )
 
-    private interface PitchTestInput{ val note: Note ; val pitchBend: Float ; val pitch: Float }
+    private interface PitchTestInput{ val note: Note ; val cents: Int ; val pitch: Float }
 
     sealed class Input: PitchTestInput {
         data class SignalInput(
             override val note: Note,
-            override val pitchBend: Float,
+            override val cents: Int,
             val numSamples: Int,
             val amp: Float,
             val waveShape: WaveShape,
             val harmonicSettings: HarmonicSettings,
         ): Input() {
-            override val pitch = calcFreq(note, (pitchBend * 100).toInt())
+            override val pitch = calcFreq(note, cents)
         }
     }
 
@@ -55,7 +55,7 @@ class PitchTest{
         fun allInputPermutations(
             numSamples: Int,
             notes: List<Note>,
-            pitchBends: List<Float>,
+            cents: List<Int>,
             amps: List<Float>,
             waveShapes: List<WaveShape>,
             decayRates: List<Float>,
@@ -65,13 +65,13 @@ class PitchTest{
         ): LinkedList<Input> {
             // todo this is super ugly, but I don't know how else to do it
 
-            val hsSettings = mutableListOf<HarmonicSettings>()
+            val harmonicSettings = mutableListOf<HarmonicSettings>()
 
             for (decayRate in decayRates){
                 for (floor in floors){
                     for (ceiling in ceilings){
                         for (filter in filters){
-                            hsSettings.add(
+                            harmonicSettings.add(
                                 HarmonicSettings(decayRate, floor, ceiling, filter)
                             )
                         }
@@ -82,18 +82,18 @@ class PitchTest{
             val tests = LinkedList<Input>()
 
             for (note in notes){
-                for (pitchBend in pitchBends){
+                for (numCents in cents){
                     for (amp in amps){
                         for (waveShape in waveShapes){
-                            for (hsUpdate in hsSettings){
+                            for (harmSettings in harmonicSettings){
                                 tests.add(
                                     Input.SignalInput(
-                                        note,
-                                        pitchBend,
-                                        numSamples,
-                                        amp,
-                                        waveShape,
-                                        hsUpdate
+                                        note = note,
+                                        cents = numCents,
+                                        numSamples = numSamples,
+                                        amp = amp,
+                                        waveShape = waveShape,
+                                        harmonicSettings = harmSettings
                                     )
                                 )
                             }

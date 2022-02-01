@@ -1,7 +1,7 @@
 [ {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -23,7 +23,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -45,7 +45,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -67,7 +67,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -89,7 +89,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -111,7 +111,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -133,7 +133,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -155,7 +155,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -177,7 +177,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -199,7 +199,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -221,7 +221,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -243,7 +243,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -265,7 +265,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -287,7 +287,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -309,7 +309,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -331,7 +331,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -353,7 +353,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -375,7 +375,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -397,7 +397,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -419,7 +419,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -441,7 +441,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -463,7 +463,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -485,7 +485,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -507,7 +507,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -529,7 +529,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -551,7 +551,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -573,7 +573,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -595,7 +595,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -617,7 +617,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -639,7 +639,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -661,7 +661,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -683,7 +683,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -705,7 +705,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -727,7 +727,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -749,7 +749,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -771,7 +771,7 @@
 }, {
   "input" : {
     "note" : "C_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -793,7 +793,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -815,7 +815,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -837,7 +837,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -859,7 +859,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -881,7 +881,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -903,7 +903,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -925,7 +925,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -947,7 +947,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -969,7 +969,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -991,7 +991,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1013,7 +1013,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1035,7 +1035,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1057,7 +1057,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1079,7 +1079,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1101,7 +1101,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1123,7 +1123,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1145,7 +1145,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1167,7 +1167,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1189,7 +1189,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1211,7 +1211,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1233,7 +1233,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1255,7 +1255,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1277,7 +1277,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1299,7 +1299,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1321,7 +1321,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1343,7 +1343,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1365,7 +1365,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1387,7 +1387,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1409,7 +1409,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1431,7 +1431,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1453,7 +1453,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1475,7 +1475,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1497,7 +1497,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1519,7 +1519,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1541,7 +1541,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1563,7 +1563,7 @@
 }, {
   "input" : {
     "note" : "Cs1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1585,7 +1585,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1607,7 +1607,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1629,7 +1629,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1651,7 +1651,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1673,7 +1673,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1695,7 +1695,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1717,7 +1717,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1739,7 +1739,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1761,7 +1761,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -1783,7 +1783,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1805,7 +1805,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1827,7 +1827,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : -0.25,
+    "cents" : -25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -1849,7 +1849,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1871,7 +1871,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1893,7 +1893,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -1915,7 +1915,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1937,7 +1937,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1959,7 +1959,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -1981,7 +1981,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -2003,7 +2003,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -2025,7 +2025,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -2047,7 +2047,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -2069,7 +2069,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -2091,7 +2091,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.0,
+    "cents" : 0,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -2113,7 +2113,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -2135,7 +2135,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -2157,7 +2157,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -2179,7 +2179,7 @@
 }, {
   "input" : {
     "note" : "D_1",
-    "pitchBend" : 0.25,
+    "cents" : 25,
     "numSamples" : 2048,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",

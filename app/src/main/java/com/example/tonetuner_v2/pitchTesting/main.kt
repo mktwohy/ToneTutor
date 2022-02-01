@@ -21,7 +21,7 @@ fun main() {
     val pitchTests = PitchTest.allInputPermutations(
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
-        pitchBends = listOf(-0.25f, 0f, 0.25f),
+        cents = listOf(-25, 0, 25),
         amps = listOf(1f),
         waveShapes = listOf(SINE, SAWTOOTH, SQUARE, TRIANGLE),
         decayRates = listOf(0f),
@@ -54,7 +54,7 @@ fun String.writeToFile(dir: String, name: String) {
 
 fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     notes = setOf(test.note)
-    pitchBend = test.pitchBend
+    pitchBend = test.cents / 100f
     amp = test.amp
     signalSettings.waveShape = test.waveShape
     signalSettings.harmonicSeries.apply {
@@ -134,9 +134,5 @@ fun Collection<PitchTest.TestSummary>.printSummary(){
     println("\nSummary:")
     println("\tscore: $score%")
     println("\terror distribution:\n$errorDistribution")
-}
-
-fun getSummary(input: PitchTest.Input, output: PitchTest.Output){
-
 }
 
