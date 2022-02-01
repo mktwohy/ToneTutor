@@ -1,21 +1,23 @@
 package com.example.tonetuner_v2.pitchTesting
 
-import com.example.signallib.enums.HarmonicFilter
-import com.example.signallib.enums.WaveShape
+import com.example.signallib.enums.HarmonicFilter.*
+import com.example.signallib.enums.Interval
+import com.example.signallib.enums.Note
+import com.example.signallib.enums.Note.Companion.plus
+import com.example.signallib.enums.Note.Companion.minus
+import com.example.signallib.enums.WaveShape.*
+import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
-import com.example.tonetuner_v2.median
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.lang.StringBuilder
 import kotlin.math.roundToInt
 
-
-
 fun main() {
-    val localPath = System.getProperty("user.dir") +
+    val localPath = System.getProperty("user.dir")!! +
             "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
 
     println("Creating pitch tests...")
@@ -24,15 +26,15 @@ fun main() {
         notes = AppModel.NOTE_RANGE,
         pitchBends = listOf(-0.25f, 0f, 0.25f),
         amps = listOf(1f),
-        waveShapes = WaveShape.values().toList(),
+        waveShapes = listOf(SINE, SAWTOOTH, SQUARE, TRIANGLE),
         decayRates = listOf(0f),
         floors = listOf(0f),
         ceilings = listOf(1f),
-        filters = HarmonicFilter.values().toList()
+        filters = listOf(ALL, ODD, EVEN)
     )
 
     print("Running tests...\n\tprogress: ")
-    val output = pitchTests.take(20).runTests()
+    val output = pitchTests.take(pitchTests.size / 10).runTests()
 
     println("\nWriting to file...")
     writeToFile("output.json", output.toJson(), localPath)
@@ -108,16 +110,36 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Output> {
     }
 }
 
-fun Collection<PitchTest.Output>.printSummary(){
-    val errors = this.map { it.error }
-    val avgError    = errors.average()
-    val medianError = errors.median()
+fun <T, R> List<Pair<T, R>>.toPrettyString(
+    indentLevel: Int = 0,
+    preLine: String = "",
+    postLine: String = ""
+): String {
+    val sb = StringBuilder()
+    for ((first, second) in this){
+        repeat(indentLevel){ sb.append("\t") }
+        sb.append("$preLine$first: $second$postLine\n")
+    }
+    return sb.toString()
+}
 
-    val numOctaveError = errors.filter { it.roundToInt() in 95..105}.size
-    val numOctaveErrorPercent = (numOctaveError / this.size.toFloat()) * 100
+fun Collection<PitchTest.Output>.printSummary(){
+    val intervalErrorToPercent =
+        this.groupBy { it.intervalError }
+            .map { it.key to percentage(it.value.size, this.size) }
+            .sortedBy { it.second }
+            .reversed()
+
+    val score = intervalErrorToPercent.toMap()[Interval.PER_1] ?: 0f
+
+    val errorDistribution = intervalErrorToPercent.toPrettyString(2, postLine = "%")
 
     println("\nSummary:")
-    println("\taverage error: $avgError%")
-    println("\tmedian error: $medianError")
-    println("\toctave errors: $numOctaveError ($numOctaveErrorPercent%)")
+    println("\tscore: $score%")
+    println("\terror distribution:\n$errorDistribution")
 }
+
+fun getSummary(input: PitchTest.Input, output: PitchTest.Output){
+
+}
+

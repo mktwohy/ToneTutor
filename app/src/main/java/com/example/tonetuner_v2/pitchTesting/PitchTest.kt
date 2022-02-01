@@ -5,6 +5,8 @@ import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.calcError
 import com.example.tonetuner_v2.calcFreq
+import com.example.tonetuner_v2.calcInterval
+import com.example.tonetuner_v2.toNote
 import java.util.*
 
 class PitchTest{
@@ -32,7 +34,14 @@ class PitchTest{
     ){
         val expectedPitch = calcFreq(input.note, (input.pitchBend * 100).toInt())
         val error: Float = calcError(expectedPitch, actualPitch)
+        val intervalError = actualPitch.toNote()?.let { input.note.calcInterval(it) }
     }
+
+    data class Summary(
+        val averageError: Float,
+        val medianError: Float,
+        val percentOctaveErrors: Float
+    )
 
     companion object {
         fun allInputPermutations(

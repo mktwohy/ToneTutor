@@ -9,12 +9,13 @@
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "FUNDAMENTAL"
+      "filter" : "ALL"
     }
   },
-  "actualPitch" : 31.725,
+  "actualPitch" : 181.4,
   "expectedPitch" : 32.2425,
-  "error" : -1.6050242
+  "error" : 462.61145,
+  "intervalError" : "PER_4"
 }, {
   "input" : {
     "numSamples" : 2048,
@@ -29,9 +30,10 @@
       "filter" : "ODD"
     }
   },
-  "actualPitch" : 78.365,
+  "actualPitch" : 33.525,
   "expectedPitch" : 32.2425,
-  "error" : 143.04877
+  "error" : 3.977673,
+  "intervalError" : "PER_1"
 }, {
   "input" : {
     "numSamples" : 2048,
@@ -46,13 +48,608 @@
       "filter" : "EVEN"
     }
   },
-  "actualPitch" : 39.035,
+  "actualPitch" : 37.52,
   "expectedPitch" : 32.2425,
-  "error" : 21.066914
+  "error" : 16.368147,
+  "intervalError" : "MIN_2"
 }, {
   "input" : {
     "numSamples" : 2048,
     "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
+  "error" : -0.054281868,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
+  "error" : -0.054281868,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
+  "error" : -0.054281868,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.225,
+  "expectedPitch" : 32.2425,
+  "error" : -0.054281868,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 36.62,
+  "expectedPitch" : 32.2425,
+  "error" : 13.576797,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 38.835,
+  "expectedPitch" : 32.2425,
+  "error" : 20.446611,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 33.125,
+  "expectedPitch" : 32.2425,
+  "error" : 2.7370696,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 64.865005,
+  "expectedPitch" : 32.2425,
+  "error" : 101.17859,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.325,
+  "expectedPitch" : 32.2425,
+  "error" : 0.25587487,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 413.65,
+  "expectedPitch" : 32.7,
+  "error" : 1164.9846,
+  "intervalError" : "PER_5"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 32.825,
+  "expectedPitch" : 32.7,
+  "error" : 0.38226297,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.025,
+  "expectedPitch" : 32.7,
+  "error" : -2.0642178,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.125,
+  "expectedPitch" : 32.7,
+  "error" : -1.7584121,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 65.365005,
+  "expectedPitch" : 32.7,
+  "error" : 99.89298,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.725,
+  "expectedPitch" : 32.7,
+  "error" : 0.0764456,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.725,
+  "expectedPitch" : 32.7,
+  "error" : 0.0764456,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 32.7,
+  "error" : -2.9816525,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.725,
+  "expectedPitch" : 32.7,
+  "error" : 0.0764456,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 54.664997,
+  "expectedPitch" : 32.7,
+  "error" : 67.17124,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 32.725,
+  "expectedPitch" : 32.7,
+  "error" : 0.0764456,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.625,
+  "expectedPitch" : 32.7,
+  "error" : 2.828744,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 95.284996,
+  "expectedPitch" : 33.1875,
+  "error" : 187.1111,
+  "intervalError" : "TRITONE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 553.99,
+  "expectedPitch" : 33.1875,
+  "error" : 1569.273,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 658.96,
+  "expectedPitch" : 33.1875,
+  "error" : 1885.5669,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 37.935,
+  "expectedPitch" : 33.1875,
+  "error" : 14.305089,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 39.835,
+  "expectedPitch" : 33.1875,
+  "error" : 20.030128,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 31.925001,
+  "expectedPitch" : 33.1875,
+  "error" : -3.8041399,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 34.22,
+  "expectedPitch" : 33.1875,
+  "error" : 3.1111147,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 33.72,
+  "expectedPitch" : 33.1875,
+  "error" : 1.6045235,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.425,
+  "expectedPitch" : 33.1875,
+  "error" : -2.2975543,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 34.72,
+  "expectedPitch" : 33.1875,
+  "error" : 4.617706,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 61.405,
+  "expectedPitch" : 33.1875,
+  "error" : 85.024475,
+  "intervalError" : "MAJ_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "C_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.225,
+  "expectedPitch" : 33.1875,
+  "error" : 0.11298975,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -63,13 +660,14 @@
       "filter" : "ALL"
     }
   },
-  "actualPitch" : 64.665,
-  "expectedPitch" : 32.2425,
-  "error" : 100.558266
+  "actualPitch" : 82.46001,
+  "expectedPitch" : 34.162502,
+  "error" : 141.37578,
+  "intervalError" : "MAJ_2"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "Cs1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SINE",
@@ -77,16 +675,143 @@
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "NONE"
+      "filter" : "ODD"
     }
   },
-  "actualPitch" : 64.365005,
-  "expectedPitch" : 32.2425,
-  "error" : 99.62784
+  "actualPitch" : 164.71,
+  "expectedPitch" : 34.162502,
+  "error" : 382.1368,
+  "intervalError" : "MAJ_2"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 96.585,
+  "expectedPitch" : 34.162502,
+  "error" : 182.72226,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 58.335,
+  "expectedPitch" : 34.162502,
+  "error" : 70.75739,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 34.120003,
+  "expectedPitch" : 34.162502,
+  "error" : -0.124404065,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 58.335,
+  "expectedPitch" : 34.162502,
+  "error" : 70.75739,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 58.335,
+  "expectedPitch" : 34.162502,
+  "error" : 70.75739,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 34.120003,
+  "expectedPitch" : 34.162502,
+  "error" : -0.124404065,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 58.335,
+  "expectedPitch" : 34.162502,
+  "error" : 70.75739,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
@@ -94,19 +819,2288 @@
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "FUNDAMENTAL"
+      "filter" : "ALL"
     }
   },
-  "actualPitch" : 39.635002,
-  "expectedPitch" : 32.2425,
-  "error" : 22.927818
+  "actualPitch" : 46.475,
+  "expectedPitch" : 34.162502,
+  "error" : 36.040966,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "Cs1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 31.825,
+  "expectedPitch" : 34.162502,
+  "error" : -6.842302,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.025,
+  "expectedPitch" : 34.162502,
+  "error" : -6.2568626,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 36.719997,
+  "expectedPitch" : 34.65,
+  "error" : 5.974014,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 171.51501,
+  "expectedPitch" : 34.65,
+  "error" : 394.99283,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 195.975,
+  "expectedPitch" : 34.65,
+  "error" : 465.5844,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 34.620003,
+  "expectedPitch" : 34.65,
+  "error" : -0.08657656,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 69.340004,
+  "expectedPitch" : 34.65,
+  "error" : 100.11544,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 69.340004,
+  "expectedPitch" : 34.65,
+  "error" : 100.11544,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 34.620003,
+  "expectedPitch" : 34.65,
+  "error" : -0.08657656,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 34.620003,
+  "expectedPitch" : 34.65,
+  "error" : -0.08657656,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 34.620003,
+  "expectedPitch" : 34.65,
+  "error" : -0.08657656,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 57.035,
+  "expectedPitch" : 34.65,
+  "error" : 64.603165,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 34.72,
+  "expectedPitch" : 34.65,
+  "error" : 0.2020193,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 34.22,
+  "expectedPitch" : 34.65,
+  "error" : -1.240982,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 310.38,
+  "expectedPitch" : 35.165,
+  "error" : 782.639,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 52.964996,
+  "expectedPitch" : 35.165,
+  "error" : 50.6185,
+  "intervalError" : "TRITONE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 74.54,
+  "expectedPitch" : 35.165,
+  "error" : 111.97213,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 35.165,
+  "error" : -9.782455,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 34.020004,
+  "expectedPitch" : 35.165,
+  "error" : -3.2560687,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 35.165,
+  "error" : -9.782455,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 35.22,
+  "expectedPitch" : 35.165,
+  "error" : 0.15640639,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 36.32,
+  "expectedPitch" : 35.165,
+  "error" : 3.2845125,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.325,
+  "expectedPitch" : 35.165,
+  "error" : -8.076213,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.625,
+  "expectedPitch" : 35.165,
+  "error" : -7.2230935,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 55.265,
+  "expectedPitch" : 35.165,
+  "error" : 57.159103,
+  "intervalError" : "PER_5"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Cs1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 49.644997,
+  "expectedPitch" : 35.165,
+  "error" : 41.17729,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 827.115,
+  "expectedPitch" : 36.195,
+  "error" : 2185.1636,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 164.81,
+  "expectedPitch" : 36.195,
+  "error" : 355.3391,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 464.69998,
+  "expectedPitch" : 36.195,
+  "error" : 1183.8789,
+  "intervalError" : "PER_5"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.625,
+  "expectedPitch" : 36.195,
+  "error" : -9.86324,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 33.525,
+  "expectedPitch" : 36.195,
+  "error" : -7.376704,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 35.72,
+  "expectedPitch" : 36.195,
+  "error" : -1.3123318,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.125,
+  "expectedPitch" : 36.195,
+  "error" : -11.244646,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 33.525,
+  "expectedPitch" : 36.195,
+  "error" : -7.376704,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.425,
+  "expectedPitch" : 36.195,
+  "error" : -10.415804,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 41.074997,
+  "expectedPitch" : 36.195,
+  "error" : 13.482517,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 31.925001,
+  "expectedPitch" : 36.195,
+  "error" : -11.797205,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 35.22,
+  "expectedPitch" : 36.195,
+  "error" : -2.693738,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 328.33002,
+  "expectedPitch" : 36.71,
+  "error" : 794.38855,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 130.81999,
+  "expectedPitch" : 36.71,
+  "error" : 256.36066,
+  "intervalError" : "MIN_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 127.119995,
+  "expectedPitch" : 36.71,
+  "error" : 246.28168,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 73.439995,
+  "expectedPitch" : 36.71,
+  "error" : 100.05447,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 73.439995,
+  "expectedPitch" : 36.71,
+  "error" : 100.05447,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 73.34,
+  "expectedPitch" : 36.71,
+  "error" : 99.782074,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 36.719997,
+  "expectedPitch" : 36.71,
+  "error" : 0.02723596,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 36.719997,
+  "expectedPitch" : 36.71,
+  "error" : 0.02723596,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 36.719997,
+  "expectedPitch" : 36.71,
+  "error" : 0.02723596,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 52.265,
+  "expectedPitch" : 36.71,
+  "error" : 42.372654,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 46.875,
+  "expectedPitch" : 36.71,
+  "error" : 27.690006,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 52.265,
+  "expectedPitch" : 36.71,
+  "error" : 42.372654,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 390.65,
+  "expectedPitch" : 37.254997,
+  "error" : 948.5841,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 134.47,
+  "expectedPitch" : 37.254997,
+  "error" : 260.94485,
+  "intervalError" : "MIN_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 128.52,
+  "expectedPitch" : 37.254997,
+  "error" : 244.97388,
+  "intervalError" : "MIN_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 35.020004,
+  "expectedPitch" : 37.254997,
+  "error" : -5.999176,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 35.020004,
+  "expectedPitch" : 37.254997,
+  "error" : -5.999176,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 31.925001,
+  "expectedPitch" : 37.254997,
+  "error" : -14.306795,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.125,
+  "expectedPitch" : 37.254997,
+  "error" : -13.769958,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 37.254997,
+  "error" : -14.843638,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 35.020004,
+  "expectedPitch" : 37.254997,
+  "error" : -5.999176,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 46.075,
+  "expectedPitch" : 37.254997,
+  "error" : 23.674686,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 31.825,
+  "expectedPitch" : 37.254997,
+  "error" : -14.575216,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "D_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 38.735,
+  "expectedPitch" : 37.254997,
+  "error" : 3.9726305,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 38.435,
+  "expectedPitch" : 38.345,
+  "error" : 0.23471157,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 146.765,
+  "expectedPitch" : 38.345,
+  "error" : 282.74872,
+  "intervalError" : "MAJ_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 150.935,
+  "expectedPitch" : 38.345,
+  "error" : 293.62366,
+  "intervalError" : "MAJ_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 38.345,
+  "error" : -17.264313,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 32.825,
+  "expectedPitch" : 38.345,
+  "error" : -14.39562,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.225,
+  "expectedPitch" : 38.345,
+  "error" : -13.352464,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 49.144997,
+  "expectedPitch" : 38.345,
+  "error" : 28.165329,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 49.144997,
+  "expectedPitch" : 38.345,
+  "error" : 28.165329,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.225,
+  "expectedPitch" : 38.345,
+  "error" : -15.960367,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 49.144997,
+  "expectedPitch" : 38.345,
+  "error" : 28.165329,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 49.144997,
+  "expectedPitch" : 38.345,
+  "error" : 28.165329,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 49.144997,
+  "expectedPitch" : 38.345,
+  "error" : 28.165329,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 48.245,
+  "expectedPitch" : 38.89,
+  "error" : 24.055027,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 778.68,
+  "expectedPitch" : 38.89,
+  "error" : 1902.2627,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 698.3951,
+  "expectedPitch" : 38.89,
+  "error" : 1695.8218,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 77.765,
+  "expectedPitch" : 38.89,
+  "error" : 99.96143,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 77.765,
+  "expectedPitch" : 38.89,
+  "error" : 99.96143,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 77.765,
+  "expectedPitch" : 38.89,
+  "error" : 99.96143,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 39.135002,
+  "expectedPitch" : 38.89,
+  "error" : 0.629989,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 39.135002,
+  "expectedPitch" : 38.89,
+  "error" : 0.629989,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 38.735,
+  "expectedPitch" : 38.89,
+  "error" : -0.3985569,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 38.835,
+  "expectedPitch" : 38.89,
+  "error" : -0.14142531,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 38.935,
+  "expectedPitch" : 38.89,
+  "error" : 0.115716085,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 38.735,
+  "expectedPitch" : 38.89,
+  "error" : -0.3985569,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 46.875,
+  "expectedPitch" : 39.4675,
+  "error" : 18.76861,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 83.16,
+  "expectedPitch" : 39.4675,
+  "error" : 110.70503,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 463.5,
+  "expectedPitch" : 39.4675,
+  "error" : 1074.384,
+  "intervalError" : "TRITONE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.025,
+  "expectedPitch" : 39.4675,
+  "error" : -18.85728,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 32.025,
+  "expectedPitch" : 39.4675,
+  "error" : -18.85728,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 39.4675,
+  "error" : -19.617403,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 31.825,
+  "expectedPitch" : 39.4675,
+  "error" : -19.364029,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 31.825,
+  "expectedPitch" : 39.4675,
+  "error" : -19.364029,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 34.22,
+  "expectedPitch" : 39.4675,
+  "error" : -13.295744,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.025,
+  "expectedPitch" : 39.4675,
+  "error" : -18.85728,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 39.435,
+  "expectedPitch" : 39.4675,
+  "error" : -0.08233967,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Ds1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.725,
+  "expectedPitch" : 39.4675,
+  "error" : -17.083677,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 493.795,
+  "expectedPitch" : 40.6225,
+  "error" : 1115.5702,
+  "intervalError" : "TRITONE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 226.15,
+  "expectedPitch" : 40.6225,
+  "error" : 456.71115,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 462.8,
+  "expectedPitch" : 40.6225,
+  "error" : 1039.27,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 33.325,
+  "expectedPitch" : 40.6225,
+  "error" : -17.964182,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 33.820004,
+  "expectedPitch" : 40.6225,
+  "error" : -16.74564,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.325,
+  "expectedPitch" : 40.6225,
+  "error" : -17.964182,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 33.820004,
+  "expectedPitch" : 40.6225,
+  "error" : -16.74564,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 45.875,
+  "expectedPitch" : 40.6225,
+  "error" : 12.930022,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.820004,
+  "expectedPitch" : 40.6225,
+  "error" : -16.74564,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 48.745,
+  "expectedPitch" : 40.6225,
+  "error" : 19.99507,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 45.875,
+  "expectedPitch" : 40.6225,
+  "error" : 12.930022,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 45.975,
+  "expectedPitch" : 40.6225,
+  "error" : 13.1761875,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 391.35,
+  "expectedPitch" : 41.2,
+  "error" : 849.8786,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 42.475,
+  "expectedPitch" : 41.2,
+  "error" : 3.0946546,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 146.465,
+  "expectedPitch" : 41.2,
+  "error" : 255.49757,
+  "intervalError" : "MIN_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 82.46001,
+  "expectedPitch" : 41.2,
+  "error" : 100.14564,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 82.46001,
+  "expectedPitch" : 41.2,
+  "error" : 100.14564,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 82.46001,
+  "expectedPitch" : 41.2,
+  "error" : 100.14564,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 41.175,
+  "expectedPitch" : 41.2,
+  "error" : -0.060683314,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 41.175,
+  "expectedPitch" : 41.2,
+  "error" : -0.060683314,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 41.175,
+  "expectedPitch" : 41.2,
+  "error" : -0.060683314,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 41.175,
+  "expectedPitch" : 41.2,
+  "error" : -0.060683314,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 41.274998,
+  "expectedPitch" : 41.2,
+  "error" : 0.18203142,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 41.175,
+  "expectedPitch" : 41.2,
+  "error" : -0.060683314,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 135.87,
+  "expectedPitch" : 41.8125,
+  "error" : 224.95067,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 60.905,
+  "expectedPitch" : 41.8125,
+  "error" : 45.662178,
+  "intervalError" : "TRITONE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 246.895,
+  "expectedPitch" : 41.8125,
+  "error" : 490.48132,
+  "intervalError" : "TRITONE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 31.725,
+  "expectedPitch" : 41.8125,
+  "error" : -24.125559,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
     "harmonicSeriesSettings" : {
       "decayRate" : 0.0,
       "floor" : 0.0,
@@ -115,15 +3109,16 @@
     }
   },
   "actualPitch" : 32.425,
-  "expectedPitch" : 32.2425,
-  "error" : 0.5660198
+  "expectedPitch" : 41.8125,
+  "error" : -22.451422,
+  "intervalError" : "MIN_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
-    "pitchBend" : -0.25,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
     "amp" : 1.0,
-    "waveShape" : "TRIANGLE",
+    "waveShape" : "SAWTOOTH",
     "harmonicSeriesSettings" : {
       "decayRate" : 0.0,
       "floor" : 0.0,
@@ -131,14 +3126,69 @@
       "filter" : "EVEN"
     }
   },
-  "actualPitch" : 64.665,
-  "expectedPitch" : 32.2425,
-  "error" : 100.558266
+  "actualPitch" : 31.725,
+  "expectedPitch" : 41.8125,
+  "error" : -24.125559,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
-    "pitchBend" : -0.25,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 32.825,
+  "expectedPitch" : 41.8125,
+  "error" : -21.494766,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 32.325,
+  "expectedPitch" : 41.8125,
+  "error" : -22.69058,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.825,
+  "expectedPitch" : 41.8125,
+  "error" : -21.494766,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
     "harmonicSeriesSettings" : {
@@ -148,30 +3198,104 @@
       "filter" : "ALL"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 35.92,
+  "expectedPitch" : 41.8125,
+  "error" : -14.092679,
+  "intervalError" : "MIN_2"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
-    "pitchBend" : -0.25,
+    "note" : "E_1",
+    "pitchBend" : 0.25,
     "amp" : 1.0,
     "waveShape" : "TRIANGLE",
     "harmonicSeriesSettings" : {
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "NONE"
+      "filter" : "ODD"
     }
   },
-  "actualPitch" : 47.075,
-  "expectedPitch" : 32.2425,
-  "error" : 46.00295
+  "actualPitch" : 46.275,
+  "expectedPitch" : 41.8125,
+  "error" : 10.672649,
+  "intervalError" : "MIN_2"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "E_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.72,
+  "expectedPitch" : 41.8125,
+  "error" : -19.354258,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 111.329994,
+  "expectedPitch" : 43.037502,
+  "error" : 158.68137,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 391.75,
+  "expectedPitch" : 43.037502,
+  "error" : 810.2527,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 34.820004,
+  "expectedPitch" : 43.037502,
+  "error" : -19.09381,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -179,16 +3303,17 @@
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "FUNDAMENTAL"
+      "filter" : "ALL"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 32.325,
+  "expectedPitch" : 43.037502,
+  "error" : -24.891087,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "F_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -199,13 +3324,14 @@
       "filter" : "ODD"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 32.325,
+  "expectedPitch" : 43.037502,
+  "error" : -24.891087,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "F_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SAWTOOTH",
@@ -216,47 +3342,14 @@
       "filter" : "EVEN"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 32.325,
+  "expectedPitch" : 43.037502,
+  "error" : -24.891087,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
-    "pitchBend" : -0.25,
-    "amp" : 1.0,
-    "waveShape" : "SAWTOOTH",
-    "harmonicSeriesSettings" : {
-      "decayRate" : 0.0,
-      "floor" : 0.0,
-      "ceiling" : 1.0,
-      "filter" : "ALL"
-    }
-  },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
-}, {
-  "input" : {
-    "numSamples" : 2048,
-    "note" : "C_1",
-    "pitchBend" : -0.25,
-    "amp" : 1.0,
-    "waveShape" : "SAWTOOTH",
-    "harmonicSeriesSettings" : {
-      "decayRate" : 0.0,
-      "floor" : 0.0,
-      "ceiling" : 1.0,
-      "filter" : "NONE"
-    }
-  },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
-}, {
-  "input" : {
-    "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "F_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -264,16 +3357,17 @@
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "FUNDAMENTAL"
+      "filter" : "ALL"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 32.325,
+  "expectedPitch" : 43.037502,
+  "error" : -24.891087,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "F_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -284,13 +3378,14 @@
       "filter" : "ODD"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 32.325,
+  "expectedPitch" : 43.037502,
+  "error" : -24.891087,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "F_1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -301,13 +3396,608 @@
       "filter" : "EVEN"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 32.325,
+  "expectedPitch" : 43.037502,
+  "error" : -24.891087,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "F_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 43.050003,
+  "expectedPitch" : 43.037502,
+  "error" : 0.029046208,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 43.15,
+  "expectedPitch" : 43.037502,
+  "error" : 0.26139814,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 43.050003,
+  "expectedPitch" : 43.037502,
+  "error" : 0.029046208,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 43.850002,
+  "expectedPitch" : 43.65,
+  "error" : 0.4581919,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 42.65,
+  "expectedPitch" : 43.65,
+  "error" : -2.2909508,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 43.350002,
+  "expectedPitch" : 43.65,
+  "error" : -0.68728346,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 87.314995,
+  "expectedPitch" : 43.65,
+  "error" : 100.03435,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 87.314995,
+  "expectedPitch" : 43.65,
+  "error" : 100.03435,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 87.314995,
+  "expectedPitch" : 43.65,
+  "error" : 100.03435,
+  "intervalError" : "OCTAVE"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 43.65,
+  "expectedPitch" : 43.65,
+  "error" : 0.0,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 43.65,
+  "expectedPitch" : 43.65,
+  "error" : 0.0,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 43.65,
+  "expectedPitch" : 43.65,
+  "error" : 0.0,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 43.65,
+  "expectedPitch" : 43.65,
+  "error" : 0.0,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 43.65,
+  "expectedPitch" : 43.65,
+  "error" : 0.0,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 43.45,
+  "expectedPitch" : 43.65,
+  "error" : -0.4581919,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 219.65999,
+  "expectedPitch" : 44.300003,
+  "error" : 395.84644,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 227.95,
+  "expectedPitch" : 44.300003,
+  "error" : 414.55978,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 551.89,
+  "expectedPitch" : 44.300003,
+  "error" : 1145.8014,
+  "intervalError" : "PER_5"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 44.350002,
+  "expectedPitch" : 44.300003,
+  "error" : 0.11286508,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 33.225,
+  "expectedPitch" : 44.300003,
+  "error" : -25.00001,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.225,
+  "expectedPitch" : 44.300003,
+  "error" : -25.00001,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 31.825,
+  "expectedPitch" : 44.300003,
+  "error" : -28.160275,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 33.225,
+  "expectedPitch" : 44.300003,
+  "error" : -25.00001,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 35.22,
+  "expectedPitch" : 44.300003,
+  "error" : -20.496616,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 44.250004,
+  "expectedPitch" : 44.300003,
+  "error" : -0.11286508,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 44.250004,
+  "expectedPitch" : 44.300003,
+  "error" : -0.11286508,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "F_1",
+    "pitchBend" : 0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 32.525,
+  "expectedPitch" : 44.300003,
+  "error" : -26.580137,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 40.774998,
+  "expectedPitch" : 45.6,
+  "error" : -10.581142,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 83.16,
+  "expectedPitch" : 45.6,
+  "error" : 82.36843,
+  "intervalError" : "MIN_7"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 35.92,
+  "expectedPitch" : 45.6,
+  "error" : -21.228071,
+  "intervalError" : "MIN_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 34.120003,
+  "expectedPitch" : 45.6,
+  "error" : -25.175432,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 34.120003,
+  "expectedPitch" : 45.6,
+  "error" : -25.175432,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 33.125,
+  "expectedPitch" : 45.6,
+  "error" : -27.357452,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -318,13 +4008,14 @@
       "filter" : "ALL"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 34.620003,
+  "expectedPitch" : 45.6,
+  "error" : -24.078938,
+  "intervalError" : "MAJ_3"
 }, {
   "input" : {
     "numSamples" : 2048,
-    "note" : "C_1",
+    "note" : "Fs1",
     "pitchBend" : -0.25,
     "amp" : 1.0,
     "waveShape" : "SQUARE",
@@ -332,10 +4023,191 @@
       "decayRate" : 0.0,
       "floor" : 0.0,
       "ceiling" : 1.0,
-      "filter" : "NONE"
+      "filter" : "ODD"
     }
   },
-  "actualPitch" : 32.225,
-  "expectedPitch" : 32.2425,
-  "error" : -0.054281868
+  "actualPitch" : 35.120003,
+  "expectedPitch" : 45.6,
+  "error" : -22.982447,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "SQUARE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 34.620003,
+  "expectedPitch" : 45.6,
+  "error" : -24.078938,
+  "intervalError" : "MAJ_3"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 33.525,
+  "expectedPitch" : 45.6,
+  "error" : -26.480257,
+  "intervalError" : "PER_4"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 40.875,
+  "expectedPitch" : 45.6,
+  "error" : -10.361839,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : -0.25,
+    "amp" : 1.0,
+    "waveShape" : "TRIANGLE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 40.875,
+  "expectedPitch" : 45.6,
+  "error" : -10.361839,
+  "intervalError" : "MIN_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 439.91998,
+  "expectedPitch" : 46.25,
+  "error" : 851.17834,
+  "intervalError" : "MAJ_2"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 310.98,
+  "expectedPitch" : 46.25,
+  "error" : 572.3892,
+  "intervalError" : "MIN_6"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SINE",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 48.144997,
+  "expectedPitch" : 46.25,
+  "error" : 4.09729,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ALL"
+    }
+  },
+  "actualPitch" : 46.275,
+  "expectedPitch" : 46.25,
+  "error" : 0.054057356,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "ODD"
+    }
+  },
+  "actualPitch" : 46.275,
+  "expectedPitch" : 46.25,
+  "error" : 0.054057356,
+  "intervalError" : "PER_1"
+}, {
+  "input" : {
+    "numSamples" : 2048,
+    "note" : "Fs1",
+    "pitchBend" : 0.0,
+    "amp" : 1.0,
+    "waveShape" : "SAWTOOTH",
+    "harmonicSeriesSettings" : {
+      "decayRate" : 0.0,
+      "floor" : 0.0,
+      "ceiling" : 1.0,
+      "filter" : "EVEN"
+    }
+  },
+  "actualPitch" : 46.275,
+  "expectedPitch" : 46.25,
+  "error" : 0.054057356,
+  "intervalError" : "PER_1"
 } ]

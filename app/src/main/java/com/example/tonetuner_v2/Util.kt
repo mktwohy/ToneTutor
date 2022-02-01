@@ -2,9 +2,11 @@ package com.example.tonetuner_v2
 
 import android.util.Log
 import androidx.compose.ui.graphics.Color
+import com.example.signallib.enums.Interval
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.minus
 import com.example.signallib.enums.Note.Companion.plus
+import com.example.signallib.enums.PitchClass
 import com.example.tonetuner_v2.app.AppModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -12,6 +14,23 @@ import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+fun percentage(value: Number, total: Number): Float {
+    return (value.toFloat() / total.toFloat()) * 100f
+}
+
+fun Note.calcInterval(other: Note): Interval{
+    if (this == other) return Interval.PER_1
+
+    val distance = abs(Note.notes.indexOf(this) - Note.notes.indexOf(other))
+    val index = (distance % 12).let { if (it == 0) 12 else it } - 1
+    return Interval.values()[index]
+}
+
+fun main() {
+    println(Note.A_0.calcInterval(Note.A_1))
+}
+
 
 fun calcFreq(note: Note, cents: Int): Float {
     val sign = if (cents > 0) 1 else -1
