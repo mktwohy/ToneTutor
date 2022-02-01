@@ -14,7 +14,7 @@
   },
   "actualPitch" : 181.4,
   "expectedPitch" : 32.2425,
-  "error" : 462.61145,
+  "percentError" : 462.61145,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -32,7 +32,7 @@
   },
   "actualPitch" : 33.525,
   "expectedPitch" : 32.2425,
-  "error" : 3.977673,
+  "percentError" : 3.977673,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -50,7 +50,7 @@
   },
   "actualPitch" : 37.52,
   "expectedPitch" : 32.2425,
-  "error" : 16.368147,
+  "percentError" : 16.368147,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -68,7 +68,7 @@
   },
   "actualPitch" : 32.225,
   "expectedPitch" : 32.2425,
-  "error" : -0.054281868,
+  "percentError" : -0.054281868,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -86,7 +86,7 @@
   },
   "actualPitch" : 32.225,
   "expectedPitch" : 32.2425,
-  "error" : -0.054281868,
+  "percentError" : -0.054281868,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -104,7 +104,7 @@
   },
   "actualPitch" : 32.225,
   "expectedPitch" : 32.2425,
-  "error" : -0.054281868,
+  "percentError" : -0.054281868,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -122,7 +122,7 @@
   },
   "actualPitch" : 32.225,
   "expectedPitch" : 32.2425,
-  "error" : -0.054281868,
+  "percentError" : -0.054281868,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -140,7 +140,7 @@
   },
   "actualPitch" : 36.62,
   "expectedPitch" : 32.2425,
-  "error" : 13.576797,
+  "percentError" : 13.576797,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -158,7 +158,7 @@
   },
   "actualPitch" : 38.835,
   "expectedPitch" : 32.2425,
-  "error" : 20.446611,
+  "percentError" : 20.446611,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -176,7 +176,7 @@
   },
   "actualPitch" : 33.125,
   "expectedPitch" : 32.2425,
-  "error" : 2.7370696,
+  "percentError" : 2.7370696,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -194,7 +194,7 @@
   },
   "actualPitch" : 64.865005,
   "expectedPitch" : 32.2425,
-  "error" : 101.17859,
+  "percentError" : 101.17859,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -212,7 +212,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 32.2425,
-  "error" : 0.25587487,
+  "percentError" : 0.25587487,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -230,7 +230,7 @@
   },
   "actualPitch" : 413.65,
   "expectedPitch" : 32.7,
-  "error" : 1164.9846,
+  "percentError" : 1164.9846,
   "intervalError" : "PER_5"
 }, {
   "input" : {
@@ -248,7 +248,7 @@
   },
   "actualPitch" : 32.825,
   "expectedPitch" : 32.7,
-  "error" : 0.38226297,
+  "percentError" : 0.38226297,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -266,7 +266,7 @@
   },
   "actualPitch" : 32.025,
   "expectedPitch" : 32.7,
-  "error" : -2.0642178,
+  "percentError" : -2.0642178,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -284,7 +284,7 @@
   },
   "actualPitch" : 32.125,
   "expectedPitch" : 32.7,
-  "error" : -1.7584121,
+  "percentError" : -1.7584121,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -302,7 +302,7 @@
   },
   "actualPitch" : 65.365005,
   "expectedPitch" : 32.7,
-  "error" : 99.89298,
+  "percentError" : 99.89298,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -320,7 +320,7 @@
   },
   "actualPitch" : 32.725,
   "expectedPitch" : 32.7,
-  "error" : 0.0764456,
+  "percentError" : 0.0764456,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -338,7 +338,7 @@
   },
   "actualPitch" : 32.725,
   "expectedPitch" : 32.7,
-  "error" : 0.0764456,
+  "percentError" : 0.0764456,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -356,7 +356,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 32.7,
-  "error" : -2.9816525,
+  "percentError" : -2.9816525,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -374,7 +374,7 @@
   },
   "actualPitch" : 32.725,
   "expectedPitch" : 32.7,
-  "error" : 0.0764456,
+  "percentError" : 0.0764456,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -392,7 +392,7 @@
   },
   "actualPitch" : 54.664997,
   "expectedPitch" : 32.7,
-  "error" : 67.17124,
+  "percentError" : 67.17124,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -410,7 +410,7 @@
   },
   "actualPitch" : 32.725,
   "expectedPitch" : 32.7,
-  "error" : 0.0764456,
+  "percentError" : 0.0764456,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -428,7 +428,7 @@
   },
   "actualPitch" : 33.625,
   "expectedPitch" : 32.7,
-  "error" : 2.828744,
+  "percentError" : 2.828744,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -446,7 +446,7 @@
   },
   "actualPitch" : 95.284996,
   "expectedPitch" : 33.1875,
-  "error" : 187.1111,
+  "percentError" : 187.1111,
   "intervalError" : "TRITONE"
 }, {
   "input" : {
@@ -464,7 +464,7 @@
   },
   "actualPitch" : 553.99,
   "expectedPitch" : 33.1875,
-  "error" : 1569.273,
+  "percentError" : 1569.273,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -482,7 +482,7 @@
   },
   "actualPitch" : 658.96,
   "expectedPitch" : 33.1875,
-  "error" : 1885.5669,
+  "percentError" : 1885.5669,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -500,7 +500,7 @@
   },
   "actualPitch" : 37.935,
   "expectedPitch" : 33.1875,
-  "error" : 14.305089,
+  "percentError" : 14.305089,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -518,7 +518,7 @@
   },
   "actualPitch" : 39.835,
   "expectedPitch" : 33.1875,
-  "error" : 20.030128,
+  "percentError" : 20.030128,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -536,7 +536,7 @@
   },
   "actualPitch" : 31.925001,
   "expectedPitch" : 33.1875,
-  "error" : -3.8041399,
+  "percentError" : -3.8041399,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -554,7 +554,7 @@
   },
   "actualPitch" : 34.22,
   "expectedPitch" : 33.1875,
-  "error" : 3.1111147,
+  "percentError" : 3.1111147,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -572,7 +572,7 @@
   },
   "actualPitch" : 33.72,
   "expectedPitch" : 33.1875,
-  "error" : 1.6045235,
+  "percentError" : 1.6045235,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -590,7 +590,7 @@
   },
   "actualPitch" : 32.425,
   "expectedPitch" : 33.1875,
-  "error" : -2.2975543,
+  "percentError" : -2.2975543,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -608,7 +608,7 @@
   },
   "actualPitch" : 34.72,
   "expectedPitch" : 33.1875,
-  "error" : 4.617706,
+  "percentError" : 4.617706,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -626,7 +626,7 @@
   },
   "actualPitch" : 61.405,
   "expectedPitch" : 33.1875,
-  "error" : 85.024475,
+  "percentError" : 85.024475,
   "intervalError" : "MAJ_7"
 }, {
   "input" : {
@@ -644,7 +644,7 @@
   },
   "actualPitch" : 33.225,
   "expectedPitch" : 33.1875,
-  "error" : 0.11298975,
+  "percentError" : 0.11298975,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -662,7 +662,7 @@
   },
   "actualPitch" : 82.46001,
   "expectedPitch" : 34.162502,
-  "error" : 141.37578,
+  "percentError" : 141.37578,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -680,7 +680,7 @@
   },
   "actualPitch" : 164.71,
   "expectedPitch" : 34.162502,
-  "error" : 382.1368,
+  "percentError" : 382.1368,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -698,7 +698,7 @@
   },
   "actualPitch" : 96.585,
   "expectedPitch" : 34.162502,
-  "error" : 182.72226,
+  "percentError" : 182.72226,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -716,7 +716,7 @@
   },
   "actualPitch" : 58.335,
   "expectedPitch" : 34.162502,
-  "error" : 70.75739,
+  "percentError" : 70.75739,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -734,7 +734,7 @@
   },
   "actualPitch" : 34.120003,
   "expectedPitch" : 34.162502,
-  "error" : -0.124404065,
+  "percentError" : -0.124404065,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -752,7 +752,7 @@
   },
   "actualPitch" : 58.335,
   "expectedPitch" : 34.162502,
-  "error" : 70.75739,
+  "percentError" : 70.75739,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -770,7 +770,7 @@
   },
   "actualPitch" : 58.335,
   "expectedPitch" : 34.162502,
-  "error" : 70.75739,
+  "percentError" : 70.75739,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -788,7 +788,7 @@
   },
   "actualPitch" : 34.120003,
   "expectedPitch" : 34.162502,
-  "error" : -0.124404065,
+  "percentError" : -0.124404065,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -806,7 +806,7 @@
   },
   "actualPitch" : 58.335,
   "expectedPitch" : 34.162502,
-  "error" : 70.75739,
+  "percentError" : 70.75739,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -824,7 +824,7 @@
   },
   "actualPitch" : 46.475,
   "expectedPitch" : 34.162502,
-  "error" : 36.040966,
+  "percentError" : 36.040966,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -842,7 +842,7 @@
   },
   "actualPitch" : 31.825,
   "expectedPitch" : 34.162502,
-  "error" : -6.842302,
+  "percentError" : -6.842302,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -860,7 +860,7 @@
   },
   "actualPitch" : 32.025,
   "expectedPitch" : 34.162502,
-  "error" : -6.2568626,
+  "percentError" : -6.2568626,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -878,7 +878,7 @@
   },
   "actualPitch" : 36.719997,
   "expectedPitch" : 34.65,
-  "error" : 5.974014,
+  "percentError" : 5.974014,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -896,7 +896,7 @@
   },
   "actualPitch" : 171.51501,
   "expectedPitch" : 34.65,
-  "error" : 394.99283,
+  "percentError" : 394.99283,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -914,7 +914,7 @@
   },
   "actualPitch" : 195.975,
   "expectedPitch" : 34.65,
-  "error" : 465.5844,
+  "percentError" : 465.5844,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -932,7 +932,7 @@
   },
   "actualPitch" : 34.620003,
   "expectedPitch" : 34.65,
-  "error" : -0.08657656,
+  "percentError" : -0.08657656,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -950,7 +950,7 @@
   },
   "actualPitch" : 69.340004,
   "expectedPitch" : 34.65,
-  "error" : 100.11544,
+  "percentError" : 100.11544,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -968,7 +968,7 @@
   },
   "actualPitch" : 69.340004,
   "expectedPitch" : 34.65,
-  "error" : 100.11544,
+  "percentError" : 100.11544,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -986,7 +986,7 @@
   },
   "actualPitch" : 34.620003,
   "expectedPitch" : 34.65,
-  "error" : -0.08657656,
+  "percentError" : -0.08657656,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1004,7 +1004,7 @@
   },
   "actualPitch" : 34.620003,
   "expectedPitch" : 34.65,
-  "error" : -0.08657656,
+  "percentError" : -0.08657656,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1022,7 +1022,7 @@
   },
   "actualPitch" : 34.620003,
   "expectedPitch" : 34.65,
-  "error" : -0.08657656,
+  "percentError" : -0.08657656,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1040,7 +1040,7 @@
   },
   "actualPitch" : 57.035,
   "expectedPitch" : 34.65,
-  "error" : 64.603165,
+  "percentError" : 64.603165,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -1058,7 +1058,7 @@
   },
   "actualPitch" : 34.72,
   "expectedPitch" : 34.65,
-  "error" : 0.2020193,
+  "percentError" : 0.2020193,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1076,7 +1076,7 @@
   },
   "actualPitch" : 34.22,
   "expectedPitch" : 34.65,
-  "error" : -1.240982,
+  "percentError" : -1.240982,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1094,7 +1094,7 @@
   },
   "actualPitch" : 310.38,
   "expectedPitch" : 35.165,
-  "error" : 782.639,
+  "percentError" : 782.639,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1112,7 +1112,7 @@
   },
   "actualPitch" : 52.964996,
   "expectedPitch" : 35.165,
-  "error" : 50.6185,
+  "percentError" : 50.6185,
   "intervalError" : "TRITONE"
 }, {
   "input" : {
@@ -1130,7 +1130,7 @@
   },
   "actualPitch" : 74.54,
   "expectedPitch" : 35.165,
-  "error" : 111.97213,
+  "percentError" : 111.97213,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1148,7 +1148,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 35.165,
-  "error" : -9.782455,
+  "percentError" : -9.782455,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1166,7 +1166,7 @@
   },
   "actualPitch" : 34.020004,
   "expectedPitch" : 35.165,
-  "error" : -3.2560687,
+  "percentError" : -3.2560687,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1184,7 +1184,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 35.165,
-  "error" : -9.782455,
+  "percentError" : -9.782455,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1202,7 +1202,7 @@
   },
   "actualPitch" : 35.22,
   "expectedPitch" : 35.165,
-  "error" : 0.15640639,
+  "percentError" : 0.15640639,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1220,7 +1220,7 @@
   },
   "actualPitch" : 36.32,
   "expectedPitch" : 35.165,
-  "error" : 3.2845125,
+  "percentError" : 3.2845125,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1238,7 +1238,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 35.165,
-  "error" : -8.076213,
+  "percentError" : -8.076213,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1256,7 +1256,7 @@
   },
   "actualPitch" : 32.625,
   "expectedPitch" : 35.165,
-  "error" : -7.2230935,
+  "percentError" : -7.2230935,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1274,7 +1274,7 @@
   },
   "actualPitch" : 55.265,
   "expectedPitch" : 35.165,
-  "error" : 57.159103,
+  "percentError" : 57.159103,
   "intervalError" : "PER_5"
 }, {
   "input" : {
@@ -1292,7 +1292,7 @@
   },
   "actualPitch" : 49.644997,
   "expectedPitch" : 35.165,
-  "error" : 41.17729,
+  "percentError" : 41.17729,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -1310,7 +1310,7 @@
   },
   "actualPitch" : 827.115,
   "expectedPitch" : 36.195,
-  "error" : 2185.1636,
+  "percentError" : 2185.1636,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -1328,7 +1328,7 @@
   },
   "actualPitch" : 164.81,
   "expectedPitch" : 36.195,
-  "error" : 355.3391,
+  "percentError" : 355.3391,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1346,7 +1346,7 @@
   },
   "actualPitch" : 464.69998,
   "expectedPitch" : 36.195,
-  "error" : 1183.8789,
+  "percentError" : 1183.8789,
   "intervalError" : "PER_5"
 }, {
   "input" : {
@@ -1364,7 +1364,7 @@
   },
   "actualPitch" : 32.625,
   "expectedPitch" : 36.195,
-  "error" : -9.86324,
+  "percentError" : -9.86324,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1382,7 +1382,7 @@
   },
   "actualPitch" : 33.525,
   "expectedPitch" : 36.195,
-  "error" : -7.376704,
+  "percentError" : -7.376704,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1400,7 +1400,7 @@
   },
   "actualPitch" : 35.72,
   "expectedPitch" : 36.195,
-  "error" : -1.3123318,
+  "percentError" : -1.3123318,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1418,7 +1418,7 @@
   },
   "actualPitch" : 32.125,
   "expectedPitch" : 36.195,
-  "error" : -11.244646,
+  "percentError" : -11.244646,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1436,7 +1436,7 @@
   },
   "actualPitch" : 33.525,
   "expectedPitch" : 36.195,
-  "error" : -7.376704,
+  "percentError" : -7.376704,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1454,7 +1454,7 @@
   },
   "actualPitch" : 32.425,
   "expectedPitch" : 36.195,
-  "error" : -10.415804,
+  "percentError" : -10.415804,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1472,7 +1472,7 @@
   },
   "actualPitch" : 41.074997,
   "expectedPitch" : 36.195,
-  "error" : 13.482517,
+  "percentError" : 13.482517,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1490,7 +1490,7 @@
   },
   "actualPitch" : 31.925001,
   "expectedPitch" : 36.195,
-  "error" : -11.797205,
+  "percentError" : -11.797205,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1508,7 +1508,7 @@
   },
   "actualPitch" : 35.22,
   "expectedPitch" : 36.195,
-  "error" : -2.693738,
+  "percentError" : -2.693738,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1526,7 +1526,7 @@
   },
   "actualPitch" : 328.33002,
   "expectedPitch" : 36.71,
-  "error" : 794.38855,
+  "percentError" : 794.38855,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1544,7 +1544,7 @@
   },
   "actualPitch" : 130.81999,
   "expectedPitch" : 36.71,
-  "error" : 256.36066,
+  "percentError" : 256.36066,
   "intervalError" : "MIN_7"
 }, {
   "input" : {
@@ -1562,7 +1562,7 @@
   },
   "actualPitch" : 127.119995,
   "expectedPitch" : 36.71,
-  "error" : 246.28168,
+  "percentError" : 246.28168,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -1580,7 +1580,7 @@
   },
   "actualPitch" : 73.439995,
   "expectedPitch" : 36.71,
-  "error" : 100.05447,
+  "percentError" : 100.05447,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -1598,7 +1598,7 @@
   },
   "actualPitch" : 73.439995,
   "expectedPitch" : 36.71,
-  "error" : 100.05447,
+  "percentError" : 100.05447,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -1616,7 +1616,7 @@
   },
   "actualPitch" : 73.34,
   "expectedPitch" : 36.71,
-  "error" : 99.782074,
+  "percentError" : 99.782074,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -1634,7 +1634,7 @@
   },
   "actualPitch" : 36.719997,
   "expectedPitch" : 36.71,
-  "error" : 0.02723596,
+  "percentError" : 0.02723596,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1652,7 +1652,7 @@
   },
   "actualPitch" : 36.719997,
   "expectedPitch" : 36.71,
-  "error" : 0.02723596,
+  "percentError" : 0.02723596,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1670,7 +1670,7 @@
   },
   "actualPitch" : 36.719997,
   "expectedPitch" : 36.71,
-  "error" : 0.02723596,
+  "percentError" : 0.02723596,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1688,7 +1688,7 @@
   },
   "actualPitch" : 52.265,
   "expectedPitch" : 36.71,
-  "error" : 42.372654,
+  "percentError" : 42.372654,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -1706,7 +1706,7 @@
   },
   "actualPitch" : 46.875,
   "expectedPitch" : 36.71,
-  "error" : 27.690006,
+  "percentError" : 27.690006,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -1724,7 +1724,7 @@
   },
   "actualPitch" : 52.265,
   "expectedPitch" : 36.71,
-  "error" : 42.372654,
+  "percentError" : 42.372654,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -1742,7 +1742,7 @@
   },
   "actualPitch" : 390.65,
   "expectedPitch" : 37.254997,
-  "error" : 948.5841,
+  "percentError" : 948.5841,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -1760,7 +1760,7 @@
   },
   "actualPitch" : 134.47,
   "expectedPitch" : 37.254997,
-  "error" : 260.94485,
+  "percentError" : 260.94485,
   "intervalError" : "MIN_7"
 }, {
   "input" : {
@@ -1778,7 +1778,7 @@
   },
   "actualPitch" : 128.52,
   "expectedPitch" : 37.254997,
-  "error" : 244.97388,
+  "percentError" : 244.97388,
   "intervalError" : "MIN_7"
 }, {
   "input" : {
@@ -1796,7 +1796,7 @@
   },
   "actualPitch" : 35.020004,
   "expectedPitch" : 37.254997,
-  "error" : -5.999176,
+  "percentError" : -5.999176,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1814,7 +1814,7 @@
   },
   "actualPitch" : 35.020004,
   "expectedPitch" : 37.254997,
-  "error" : -5.999176,
+  "percentError" : -5.999176,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1832,7 +1832,7 @@
   },
   "actualPitch" : 31.925001,
   "expectedPitch" : 37.254997,
-  "error" : -14.306795,
+  "percentError" : -14.306795,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1850,7 +1850,7 @@
   },
   "actualPitch" : 32.125,
   "expectedPitch" : 37.254997,
-  "error" : -13.769958,
+  "percentError" : -13.769958,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1868,7 +1868,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 37.254997,
-  "error" : -14.843638,
+  "percentError" : -14.843638,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -1886,7 +1886,7 @@
   },
   "actualPitch" : 35.020004,
   "expectedPitch" : 37.254997,
-  "error" : -5.999176,
+  "percentError" : -5.999176,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1904,7 +1904,7 @@
   },
   "actualPitch" : 46.075,
   "expectedPitch" : 37.254997,
-  "error" : 23.674686,
+  "percentError" : 23.674686,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -1922,7 +1922,7 @@
   },
   "actualPitch" : 31.825,
   "expectedPitch" : 37.254997,
-  "error" : -14.575216,
+  "percentError" : -14.575216,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -1940,7 +1940,7 @@
   },
   "actualPitch" : 38.735,
   "expectedPitch" : 37.254997,
-  "error" : 3.9726305,
+  "percentError" : 3.9726305,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1958,7 +1958,7 @@
   },
   "actualPitch" : 38.435,
   "expectedPitch" : 38.345,
-  "error" : 0.23471157,
+  "percentError" : 0.23471157,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -1976,7 +1976,7 @@
   },
   "actualPitch" : 146.765,
   "expectedPitch" : 38.345,
-  "error" : 282.74872,
+  "percentError" : 282.74872,
   "intervalError" : "MAJ_7"
 }, {
   "input" : {
@@ -1994,7 +1994,7 @@
   },
   "actualPitch" : 150.935,
   "expectedPitch" : 38.345,
-  "error" : 293.62366,
+  "percentError" : 293.62366,
   "intervalError" : "MAJ_7"
 }, {
   "input" : {
@@ -2012,7 +2012,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 38.345,
-  "error" : -17.264313,
+  "percentError" : -17.264313,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2030,7 +2030,7 @@
   },
   "actualPitch" : 32.825,
   "expectedPitch" : 38.345,
-  "error" : -14.39562,
+  "percentError" : -14.39562,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2048,7 +2048,7 @@
   },
   "actualPitch" : 33.225,
   "expectedPitch" : 38.345,
-  "error" : -13.352464,
+  "percentError" : -13.352464,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2066,7 +2066,7 @@
   },
   "actualPitch" : 49.144997,
   "expectedPitch" : 38.345,
-  "error" : 28.165329,
+  "percentError" : 28.165329,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2084,7 +2084,7 @@
   },
   "actualPitch" : 49.144997,
   "expectedPitch" : 38.345,
-  "error" : 28.165329,
+  "percentError" : 28.165329,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2102,7 +2102,7 @@
   },
   "actualPitch" : 32.225,
   "expectedPitch" : 38.345,
-  "error" : -15.960367,
+  "percentError" : -15.960367,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2120,7 +2120,7 @@
   },
   "actualPitch" : 49.144997,
   "expectedPitch" : 38.345,
-  "error" : 28.165329,
+  "percentError" : 28.165329,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2138,7 +2138,7 @@
   },
   "actualPitch" : 49.144997,
   "expectedPitch" : 38.345,
-  "error" : 28.165329,
+  "percentError" : 28.165329,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2156,7 +2156,7 @@
   },
   "actualPitch" : 49.144997,
   "expectedPitch" : 38.345,
-  "error" : 28.165329,
+  "percentError" : 28.165329,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2174,7 +2174,7 @@
   },
   "actualPitch" : 48.245,
   "expectedPitch" : 38.89,
-  "error" : 24.055027,
+  "percentError" : 24.055027,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2192,7 +2192,7 @@
   },
   "actualPitch" : 778.68,
   "expectedPitch" : 38.89,
-  "error" : 1902.2627,
+  "percentError" : 1902.2627,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2210,7 +2210,7 @@
   },
   "actualPitch" : 698.3951,
   "expectedPitch" : 38.89,
-  "error" : 1695.8218,
+  "percentError" : 1695.8218,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -2228,7 +2228,7 @@
   },
   "actualPitch" : 77.765,
   "expectedPitch" : 38.89,
-  "error" : 99.96143,
+  "percentError" : 99.96143,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -2246,7 +2246,7 @@
   },
   "actualPitch" : 77.765,
   "expectedPitch" : 38.89,
-  "error" : 99.96143,
+  "percentError" : 99.96143,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -2264,7 +2264,7 @@
   },
   "actualPitch" : 77.765,
   "expectedPitch" : 38.89,
-  "error" : 99.96143,
+  "percentError" : 99.96143,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -2282,7 +2282,7 @@
   },
   "actualPitch" : 39.135002,
   "expectedPitch" : 38.89,
-  "error" : 0.629989,
+  "percentError" : 0.629989,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2300,7 +2300,7 @@
   },
   "actualPitch" : 39.135002,
   "expectedPitch" : 38.89,
-  "error" : 0.629989,
+  "percentError" : 0.629989,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2318,7 +2318,7 @@
   },
   "actualPitch" : 38.735,
   "expectedPitch" : 38.89,
-  "error" : -0.3985569,
+  "percentError" : -0.3985569,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2336,7 +2336,7 @@
   },
   "actualPitch" : 38.835,
   "expectedPitch" : 38.89,
-  "error" : -0.14142531,
+  "percentError" : -0.14142531,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2354,7 +2354,7 @@
   },
   "actualPitch" : 38.935,
   "expectedPitch" : 38.89,
-  "error" : 0.115716085,
+  "percentError" : 0.115716085,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2372,7 +2372,7 @@
   },
   "actualPitch" : 38.735,
   "expectedPitch" : 38.89,
-  "error" : -0.3985569,
+  "percentError" : -0.3985569,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2390,7 +2390,7 @@
   },
   "actualPitch" : 46.875,
   "expectedPitch" : 39.4675,
-  "error" : 18.76861,
+  "percentError" : 18.76861,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2408,7 +2408,7 @@
   },
   "actualPitch" : 83.16,
   "expectedPitch" : 39.4675,
-  "error" : 110.70503,
+  "percentError" : 110.70503,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2426,7 +2426,7 @@
   },
   "actualPitch" : 463.5,
   "expectedPitch" : 39.4675,
-  "error" : 1074.384,
+  "percentError" : 1074.384,
   "intervalError" : "TRITONE"
 }, {
   "input" : {
@@ -2444,7 +2444,7 @@
   },
   "actualPitch" : 32.025,
   "expectedPitch" : 39.4675,
-  "error" : -18.85728,
+  "percentError" : -18.85728,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2462,7 +2462,7 @@
   },
   "actualPitch" : 32.025,
   "expectedPitch" : 39.4675,
-  "error" : -18.85728,
+  "percentError" : -18.85728,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2480,7 +2480,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 39.4675,
-  "error" : -19.617403,
+  "percentError" : -19.617403,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2498,7 +2498,7 @@
   },
   "actualPitch" : 31.825,
   "expectedPitch" : 39.4675,
-  "error" : -19.364029,
+  "percentError" : -19.364029,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2516,7 +2516,7 @@
   },
   "actualPitch" : 31.825,
   "expectedPitch" : 39.4675,
-  "error" : -19.364029,
+  "percentError" : -19.364029,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2534,7 +2534,7 @@
   },
   "actualPitch" : 34.22,
   "expectedPitch" : 39.4675,
-  "error" : -13.295744,
+  "percentError" : -13.295744,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -2552,7 +2552,7 @@
   },
   "actualPitch" : 32.025,
   "expectedPitch" : 39.4675,
-  "error" : -18.85728,
+  "percentError" : -18.85728,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2570,7 +2570,7 @@
   },
   "actualPitch" : 39.435,
   "expectedPitch" : 39.4675,
-  "error" : -0.08233967,
+  "percentError" : -0.08233967,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2588,7 +2588,7 @@
   },
   "actualPitch" : 32.725,
   "expectedPitch" : 39.4675,
-  "error" : -17.083677,
+  "percentError" : -17.083677,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2606,7 +2606,7 @@
   },
   "actualPitch" : 493.795,
   "expectedPitch" : 40.6225,
-  "error" : 1115.5702,
+  "percentError" : 1115.5702,
   "intervalError" : "TRITONE"
 }, {
   "input" : {
@@ -2624,7 +2624,7 @@
   },
   "actualPitch" : 226.15,
   "expectedPitch" : 40.6225,
-  "error" : 456.71115,
+  "percentError" : 456.71115,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -2642,7 +2642,7 @@
   },
   "actualPitch" : 462.8,
   "expectedPitch" : 40.6225,
-  "error" : 1039.27,
+  "percentError" : 1039.27,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -2660,7 +2660,7 @@
   },
   "actualPitch" : 33.325,
   "expectedPitch" : 40.6225,
-  "error" : -17.964182,
+  "percentError" : -17.964182,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2678,7 +2678,7 @@
   },
   "actualPitch" : 33.820004,
   "expectedPitch" : 40.6225,
-  "error" : -16.74564,
+  "percentError" : -16.74564,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2696,7 +2696,7 @@
   },
   "actualPitch" : 33.325,
   "expectedPitch" : 40.6225,
-  "error" : -17.964182,
+  "percentError" : -17.964182,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -2714,7 +2714,7 @@
   },
   "actualPitch" : 33.820004,
   "expectedPitch" : 40.6225,
-  "error" : -16.74564,
+  "percentError" : -16.74564,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2732,7 +2732,7 @@
   },
   "actualPitch" : 45.875,
   "expectedPitch" : 40.6225,
-  "error" : 12.930022,
+  "percentError" : 12.930022,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -2750,7 +2750,7 @@
   },
   "actualPitch" : 33.820004,
   "expectedPitch" : 40.6225,
-  "error" : -16.74564,
+  "percentError" : -16.74564,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2768,7 +2768,7 @@
   },
   "actualPitch" : 48.745,
   "expectedPitch" : 40.6225,
-  "error" : 19.99507,
+  "percentError" : 19.99507,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2786,7 +2786,7 @@
   },
   "actualPitch" : 45.875,
   "expectedPitch" : 40.6225,
-  "error" : 12.930022,
+  "percentError" : 12.930022,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -2804,7 +2804,7 @@
   },
   "actualPitch" : 45.975,
   "expectedPitch" : 40.6225,
-  "error" : 13.1761875,
+  "percentError" : 13.1761875,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -2822,7 +2822,7 @@
   },
   "actualPitch" : 391.35,
   "expectedPitch" : 41.2,
-  "error" : 849.8786,
+  "percentError" : 849.8786,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -2840,7 +2840,7 @@
   },
   "actualPitch" : 42.475,
   "expectedPitch" : 41.2,
-  "error" : 3.0946546,
+  "percentError" : 3.0946546,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2858,7 +2858,7 @@
   },
   "actualPitch" : 146.465,
   "expectedPitch" : 41.2,
-  "error" : 255.49757,
+  "percentError" : 255.49757,
   "intervalError" : "MIN_7"
 }, {
   "input" : {
@@ -2876,7 +2876,7 @@
   },
   "actualPitch" : 82.46001,
   "expectedPitch" : 41.2,
-  "error" : 100.14564,
+  "percentError" : 100.14564,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -2894,7 +2894,7 @@
   },
   "actualPitch" : 82.46001,
   "expectedPitch" : 41.2,
-  "error" : 100.14564,
+  "percentError" : 100.14564,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -2912,7 +2912,7 @@
   },
   "actualPitch" : 82.46001,
   "expectedPitch" : 41.2,
-  "error" : 100.14564,
+  "percentError" : 100.14564,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -2930,7 +2930,7 @@
   },
   "actualPitch" : 41.175,
   "expectedPitch" : 41.2,
-  "error" : -0.060683314,
+  "percentError" : -0.060683314,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2948,7 +2948,7 @@
   },
   "actualPitch" : 41.175,
   "expectedPitch" : 41.2,
-  "error" : -0.060683314,
+  "percentError" : -0.060683314,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2966,7 +2966,7 @@
   },
   "actualPitch" : 41.175,
   "expectedPitch" : 41.2,
-  "error" : -0.060683314,
+  "percentError" : -0.060683314,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -2984,7 +2984,7 @@
   },
   "actualPitch" : 41.175,
   "expectedPitch" : 41.2,
-  "error" : -0.060683314,
+  "percentError" : -0.060683314,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3002,7 +3002,7 @@
   },
   "actualPitch" : 41.274998,
   "expectedPitch" : 41.2,
-  "error" : 0.18203142,
+  "percentError" : 0.18203142,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3020,7 +3020,7 @@
   },
   "actualPitch" : 41.175,
   "expectedPitch" : 41.2,
-  "error" : -0.060683314,
+  "percentError" : -0.060683314,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3038,7 +3038,7 @@
   },
   "actualPitch" : 135.87,
   "expectedPitch" : 41.8125,
-  "error" : 224.95067,
+  "percentError" : 224.95067,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -3056,7 +3056,7 @@
   },
   "actualPitch" : 60.905,
   "expectedPitch" : 41.8125,
-  "error" : 45.662178,
+  "percentError" : 45.662178,
   "intervalError" : "TRITONE"
 }, {
   "input" : {
@@ -3074,7 +3074,7 @@
   },
   "actualPitch" : 246.895,
   "expectedPitch" : 41.8125,
-  "error" : 490.48132,
+  "percentError" : 490.48132,
   "intervalError" : "TRITONE"
 }, {
   "input" : {
@@ -3092,7 +3092,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 41.8125,
-  "error" : -24.125559,
+  "percentError" : -24.125559,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3110,7 +3110,7 @@
   },
   "actualPitch" : 32.425,
   "expectedPitch" : 41.8125,
-  "error" : -22.451422,
+  "percentError" : -22.451422,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3128,7 +3128,7 @@
   },
   "actualPitch" : 31.725,
   "expectedPitch" : 41.8125,
-  "error" : -24.125559,
+  "percentError" : -24.125559,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3146,7 +3146,7 @@
   },
   "actualPitch" : 32.825,
   "expectedPitch" : 41.8125,
-  "error" : -21.494766,
+  "percentError" : -21.494766,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3164,7 +3164,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 41.8125,
-  "error" : -22.69058,
+  "percentError" : -22.69058,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3182,7 +3182,7 @@
   },
   "actualPitch" : 32.825,
   "expectedPitch" : 41.8125,
-  "error" : -21.494766,
+  "percentError" : -21.494766,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3200,7 +3200,7 @@
   },
   "actualPitch" : 35.92,
   "expectedPitch" : 41.8125,
-  "error" : -14.092679,
+  "percentError" : -14.092679,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -3218,7 +3218,7 @@
   },
   "actualPitch" : 46.275,
   "expectedPitch" : 41.8125,
-  "error" : 10.672649,
+  "percentError" : 10.672649,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -3236,7 +3236,7 @@
   },
   "actualPitch" : 33.72,
   "expectedPitch" : 41.8125,
-  "error" : -19.354258,
+  "percentError" : -19.354258,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -3254,7 +3254,7 @@
   },
   "actualPitch" : 111.329994,
   "expectedPitch" : 43.037502,
-  "error" : 158.68137,
+  "percentError" : 158.68137,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3272,7 +3272,7 @@
   },
   "actualPitch" : 391.75,
   "expectedPitch" : 43.037502,
-  "error" : 810.2527,
+  "percentError" : 810.2527,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -3290,7 +3290,7 @@
   },
   "actualPitch" : 34.820004,
   "expectedPitch" : 43.037502,
-  "error" : -19.09381,
+  "percentError" : -19.09381,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3308,7 +3308,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 43.037502,
-  "error" : -24.891087,
+  "percentError" : -24.891087,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3326,7 +3326,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 43.037502,
-  "error" : -24.891087,
+  "percentError" : -24.891087,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3344,7 +3344,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 43.037502,
-  "error" : -24.891087,
+  "percentError" : -24.891087,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3362,7 +3362,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 43.037502,
-  "error" : -24.891087,
+  "percentError" : -24.891087,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3380,7 +3380,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 43.037502,
-  "error" : -24.891087,
+  "percentError" : -24.891087,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3398,7 +3398,7 @@
   },
   "actualPitch" : 32.325,
   "expectedPitch" : 43.037502,
-  "error" : -24.891087,
+  "percentError" : -24.891087,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3416,7 +3416,7 @@
   },
   "actualPitch" : 43.050003,
   "expectedPitch" : 43.037502,
-  "error" : 0.029046208,
+  "percentError" : 0.029046208,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3434,7 +3434,7 @@
   },
   "actualPitch" : 43.15,
   "expectedPitch" : 43.037502,
-  "error" : 0.26139814,
+  "percentError" : 0.26139814,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3452,7 +3452,7 @@
   },
   "actualPitch" : 43.050003,
   "expectedPitch" : 43.037502,
-  "error" : 0.029046208,
+  "percentError" : 0.029046208,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3470,7 +3470,7 @@
   },
   "actualPitch" : 43.850002,
   "expectedPitch" : 43.65,
-  "error" : 0.4581919,
+  "percentError" : 0.4581919,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3488,7 +3488,7 @@
   },
   "actualPitch" : 42.65,
   "expectedPitch" : 43.65,
-  "error" : -2.2909508,
+  "percentError" : -2.2909508,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3506,7 +3506,7 @@
   },
   "actualPitch" : 43.350002,
   "expectedPitch" : 43.65,
-  "error" : -0.68728346,
+  "percentError" : -0.68728346,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3524,7 +3524,7 @@
   },
   "actualPitch" : 87.314995,
   "expectedPitch" : 43.65,
-  "error" : 100.03435,
+  "percentError" : 100.03435,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -3542,7 +3542,7 @@
   },
   "actualPitch" : 87.314995,
   "expectedPitch" : 43.65,
-  "error" : 100.03435,
+  "percentError" : 100.03435,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -3560,7 +3560,7 @@
   },
   "actualPitch" : 87.314995,
   "expectedPitch" : 43.65,
-  "error" : 100.03435,
+  "percentError" : 100.03435,
   "intervalError" : "OCTAVE"
 }, {
   "input" : {
@@ -3578,7 +3578,7 @@
   },
   "actualPitch" : 43.65,
   "expectedPitch" : 43.65,
-  "error" : 0.0,
+  "percentError" : 0.0,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3596,7 +3596,7 @@
   },
   "actualPitch" : 43.65,
   "expectedPitch" : 43.65,
-  "error" : 0.0,
+  "percentError" : 0.0,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3614,7 +3614,7 @@
   },
   "actualPitch" : 43.65,
   "expectedPitch" : 43.65,
-  "error" : 0.0,
+  "percentError" : 0.0,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3632,7 +3632,7 @@
   },
   "actualPitch" : 43.65,
   "expectedPitch" : 43.65,
-  "error" : 0.0,
+  "percentError" : 0.0,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3650,7 +3650,7 @@
   },
   "actualPitch" : 43.65,
   "expectedPitch" : 43.65,
-  "error" : 0.0,
+  "percentError" : 0.0,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3668,7 +3668,7 @@
   },
   "actualPitch" : 43.45,
   "expectedPitch" : 43.65,
-  "error" : -0.4581919,
+  "percentError" : -0.4581919,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3686,7 +3686,7 @@
   },
   "actualPitch" : 219.65999,
   "expectedPitch" : 44.300003,
-  "error" : 395.84644,
+  "percentError" : 395.84644,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3704,7 +3704,7 @@
   },
   "actualPitch" : 227.95,
   "expectedPitch" : 44.300003,
-  "error" : 414.55978,
+  "percentError" : 414.55978,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3722,7 +3722,7 @@
   },
   "actualPitch" : 551.89,
   "expectedPitch" : 44.300003,
-  "error" : 1145.8014,
+  "percentError" : 1145.8014,
   "intervalError" : "PER_5"
 }, {
   "input" : {
@@ -3740,7 +3740,7 @@
   },
   "actualPitch" : 44.350002,
   "expectedPitch" : 44.300003,
-  "error" : 0.11286508,
+  "percentError" : 0.11286508,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3758,7 +3758,7 @@
   },
   "actualPitch" : 33.225,
   "expectedPitch" : 44.300003,
-  "error" : -25.00001,
+  "percentError" : -25.00001,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3776,7 +3776,7 @@
   },
   "actualPitch" : 33.225,
   "expectedPitch" : 44.300003,
-  "error" : -25.00001,
+  "percentError" : -25.00001,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3794,7 +3794,7 @@
   },
   "actualPitch" : 31.825,
   "expectedPitch" : 44.300003,
-  "error" : -28.160275,
+  "percentError" : -28.160275,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3812,7 +3812,7 @@
   },
   "actualPitch" : 33.225,
   "expectedPitch" : 44.300003,
-  "error" : -25.00001,
+  "percentError" : -25.00001,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3830,7 +3830,7 @@
   },
   "actualPitch" : 35.22,
   "expectedPitch" : 44.300003,
-  "error" : -20.496616,
+  "percentError" : -20.496616,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3848,7 +3848,7 @@
   },
   "actualPitch" : 44.250004,
   "expectedPitch" : 44.300003,
-  "error" : -0.11286508,
+  "percentError" : -0.11286508,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3866,7 +3866,7 @@
   },
   "actualPitch" : 44.250004,
   "expectedPitch" : 44.300003,
-  "error" : -0.11286508,
+  "percentError" : -0.11286508,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -3884,7 +3884,7 @@
   },
   "actualPitch" : 32.525,
   "expectedPitch" : 44.300003,
-  "error" : -26.580137,
+  "percentError" : -26.580137,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3902,7 +3902,7 @@
   },
   "actualPitch" : 40.774998,
   "expectedPitch" : 45.6,
-  "error" : -10.581142,
+  "percentError" : -10.581142,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -3920,7 +3920,7 @@
   },
   "actualPitch" : 83.16,
   "expectedPitch" : 45.6,
-  "error" : 82.36843,
+  "percentError" : 82.36843,
   "intervalError" : "MIN_7"
 }, {
   "input" : {
@@ -3938,7 +3938,7 @@
   },
   "actualPitch" : 35.92,
   "expectedPitch" : 45.6,
-  "error" : -21.228071,
+  "percentError" : -21.228071,
   "intervalError" : "MIN_3"
 }, {
   "input" : {
@@ -3956,7 +3956,7 @@
   },
   "actualPitch" : 34.120003,
   "expectedPitch" : 45.6,
-  "error" : -25.175432,
+  "percentError" : -25.175432,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3974,7 +3974,7 @@
   },
   "actualPitch" : 34.120003,
   "expectedPitch" : 45.6,
-  "error" : -25.175432,
+  "percentError" : -25.175432,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -3992,7 +3992,7 @@
   },
   "actualPitch" : 33.125,
   "expectedPitch" : 45.6,
-  "error" : -27.357452,
+  "percentError" : -27.357452,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -4010,7 +4010,7 @@
   },
   "actualPitch" : 34.620003,
   "expectedPitch" : 45.6,
-  "error" : -24.078938,
+  "percentError" : -24.078938,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -4028,7 +4028,7 @@
   },
   "actualPitch" : 35.120003,
   "expectedPitch" : 45.6,
-  "error" : -22.982447,
+  "percentError" : -22.982447,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -4046,7 +4046,7 @@
   },
   "actualPitch" : 34.620003,
   "expectedPitch" : 45.6,
-  "error" : -24.078938,
+  "percentError" : -24.078938,
   "intervalError" : "MAJ_3"
 }, {
   "input" : {
@@ -4064,7 +4064,7 @@
   },
   "actualPitch" : 33.525,
   "expectedPitch" : 45.6,
-  "error" : -26.480257,
+  "percentError" : -26.480257,
   "intervalError" : "PER_4"
 }, {
   "input" : {
@@ -4082,7 +4082,7 @@
   },
   "actualPitch" : 40.875,
   "expectedPitch" : 45.6,
-  "error" : -10.361839,
+  "percentError" : -10.361839,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -4100,7 +4100,7 @@
   },
   "actualPitch" : 40.875,
   "expectedPitch" : 45.6,
-  "error" : -10.361839,
+  "percentError" : -10.361839,
   "intervalError" : "MIN_2"
 }, {
   "input" : {
@@ -4118,7 +4118,7 @@
   },
   "actualPitch" : 439.91998,
   "expectedPitch" : 46.25,
-  "error" : 851.17834,
+  "percentError" : 851.17834,
   "intervalError" : "MAJ_2"
 }, {
   "input" : {
@@ -4136,7 +4136,7 @@
   },
   "actualPitch" : 310.98,
   "expectedPitch" : 46.25,
-  "error" : 572.3892,
+  "percentError" : 572.3892,
   "intervalError" : "MIN_6"
 }, {
   "input" : {
@@ -4154,7 +4154,7 @@
   },
   "actualPitch" : 48.144997,
   "expectedPitch" : 46.25,
-  "error" : 4.09729,
+  "percentError" : 4.09729,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -4172,7 +4172,7 @@
   },
   "actualPitch" : 46.275,
   "expectedPitch" : 46.25,
-  "error" : 0.054057356,
+  "percentError" : 0.054057356,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -4190,7 +4190,7 @@
   },
   "actualPitch" : 46.275,
   "expectedPitch" : 46.25,
-  "error" : 0.054057356,
+  "percentError" : 0.054057356,
   "intervalError" : "PER_1"
 }, {
   "input" : {
@@ -4208,6 +4208,6 @@
   },
   "actualPitch" : 46.275,
   "expectedPitch" : 46.25,
-  "error" : 0.054057356,
+  "percentError" : 0.054057356,
   "intervalError" : "PER_1"
 } ]

@@ -33,7 +33,7 @@ class PitchTest{
         val actualPitch: Float,
     ){
         val expectedPitch = calcFreq(input.note, (input.pitchBend * 100).toInt())
-        val error: Float = calcError(expectedPitch, actualPitch)
+        val percentError: Float = calcError(expectedPitch, actualPitch)
         val intervalError = actualPitch.toNote()?.let { input.note.calcInterval(it) }
     }
 

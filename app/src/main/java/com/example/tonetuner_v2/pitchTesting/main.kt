@@ -37,7 +37,7 @@ fun main() {
     val output = pitchTests.take(pitchTests.size / 10).runTests()
 
     println("\nWriting to file...")
-    writeToFile("output.json", output.toJson(), localPath)
+    output.toJson().writeToFile(localPath, "output.json",)
 
     println("Done!")
 
@@ -48,9 +48,9 @@ fun Any.toJson(): String =
     jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this)
 
 
-fun writeToFile(name: String, text: String, dir: String) {
+fun String.writeToFile(dir: String, name: String) {
     with(File("$dir/$name")){
-        writeText(text)
+        writeText(this@writeToFile)
         createNewFile()
     }
 }
