@@ -3,45 +3,53 @@ package com.example.tonetuner_v2.pitchTesting
 import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape
-import com.example.tonetuner_v2.calcError
-import com.example.tonetuner_v2.calcFreq
-import com.example.tonetuner_v2.calcInterval
-import com.example.tonetuner_v2.toNote
+import com.example.tonetuner_v2.*
 import java.util.*
 
 class PitchTest{
-    data class HarmonicSeriesSettings(
+    data class HarmonicSettings(
         val decayRate: Float,
         val floor: Float,
         val ceiling: Float,
         val filter: HarmonicFilter
     )
 
-    sealed class Input{
+    private interface PitchTestInput{ val note: Note ; val pitchBend: Float ; val pitch: Float }
+
+    sealed class Input: PitchTestInput {
         data class SignalInput(
+            override val note: Note,
+            override val pitchBend: Float,
             val numSamples: Int,
-            val note: Note,
-            val pitchBend: Float,
             val amp: Float,
             val waveShape: WaveShape,
-            val harmonicSeriesSettings: HarmonicSeriesSettings,
-        ): Input()
+            val harmonicSettings: HarmonicSettings,
+        ): Input() {
+            override val pitch = calcFreq(note, (pitchBend * 100).toInt())
+        }
     }
 
     data class Output(
-        val input: Input.SignalInput,
-        val actualPitch: Float,
+        val pitch: Float,
     ){
-        val expectedPitch = calcFreq(input.note, (input.pitchBend * 100).toInt())
-        val percentError: Float = calcError(expectedPitch, actualPitch)
-        val intervalError = actualPitch.toNote()?.let { input.note.calcInterval(it) }
+        val note: Note?
+        val cents: Int?
+
+        init {
+            val (n, c) = pitch.toNoteAndCents()
+            note = n
+            cents = c
+        }
     }
 
-    data class Summary(
-        val averageError: Float,
-        val medianError: Float,
-        val percentOctaveErrors: Float
-    )
+    data class TestSummary(
+        val input: Input,
+        val output: Output
+    ){
+        val percentError: Float = calcError(input.pitch, output.pitch)
+        val intervalError = output.pitch.toNote()?.let { input.note.calcInterval(it) }
+    }
+
 
     companion object {
         fun allInputPermutations(
@@ -57,14 +65,14 @@ class PitchTest{
         ): LinkedList<Input> {
             // todo this is super ugly, but I don't know how else to do it
 
-            val hsSettings = mutableListOf<HarmonicSeriesSettings>()
+            val hsSettings = mutableListOf<HarmonicSettings>()
 
             for (decayRate in decayRates){
                 for (floor in floors){
                     for (ceiling in ceilings){
                         for (filter in filters){
                             hsSettings.add(
-                                HarmonicSeriesSettings(decayRate, floor, ceiling, filter)
+                                HarmonicSettings(decayRate, floor, ceiling, filter)
                             )
                         }
                     }
@@ -80,9 +88,9 @@ class PitchTest{
                             for (hsUpdate in hsSettings){
                                 tests.add(
                                     Input.SignalInput(
-                                        numSamples,
                                         note,
                                         pitchBend,
+                                        numSamples,
                                         amp,
                                         waveShape,
                                         hsUpdate

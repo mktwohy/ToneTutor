@@ -2,9 +2,6 @@ package com.example.tonetuner_v2.pitchTesting
 
 import com.example.signallib.enums.HarmonicFilter.*
 import com.example.signallib.enums.Interval
-import com.example.signallib.enums.Note
-import com.example.signallib.enums.Note.Companion.plus
-import com.example.signallib.enums.Note.Companion.minus
 import com.example.signallib.enums.WaveShape.*
 import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
@@ -37,7 +34,7 @@ fun main() {
     val output = pitchTests.runTests()
 
     println("\nWriting to file...")
-    output.toJson().writeToFile(localPath, "output.json",)
+    output.toJson().writeToFile(localPath, "output.json")
 
     println("Done!")
 
@@ -62,10 +59,10 @@ fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     signalSettings.waveShape = test.waveShape
     signalSettings.harmonicSeries.apply {
         this.generate(
-            decayRate = test.harmonicSeriesSettings.decayRate,
-            floor = test.harmonicSeriesSettings.floor,
-            ceiling = test.harmonicSeriesSettings.ceiling,
-            filter = test.harmonicSeriesSettings.filter.function
+            decayRate = test.harmonicSettings.decayRate,
+            floor = test.harmonicSettings.floor,
+            ceiling = test.harmonicSettings.ceiling,
+            filter = test.harmonicSettings.filter.function
         )
     }
 }
@@ -74,7 +71,7 @@ fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Output{
     this.applyTest(test)
     val audio = this.getAudio(test.numSamples).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-    return PitchTest.Output(test, sample.pitch)
+    return PitchTest.Output(sample.pitch)
 }
 
 fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
@@ -94,19 +91,19 @@ fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
 
 }
 
-fun Collection<PitchTest.Input>.runTests(): List<PitchTest.Output> {
+fun Collection<PitchTest.Input>.runTests(): List<PitchTest.TestSummary> {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
-    return this.mapIndexed { index, test ->
-        when (test){
-            is PitchTest.Input.SignalInput -> signalSource.runTest(test)
-        }.also {
-            printAsciiProgressBar(
-                size = 20,
-                percent = ((index + 1) / this.size.toFloat()) * 100,
-                clear = index != 0
-            )
+    return this.mapIndexed { index, testInput ->
+        printAsciiProgressBar(
+            size = 20,
+            percent = ((index + 1) / this.size.toFloat()) * 100,
+            clear = index != 0
+        )
+        val testOutput = when (testInput){
+            is PitchTest.Input.SignalInput -> signalSource.runTest(testInput)
         }
+        PitchTest.TestSummary(testInput, testOutput)
     }
 }
 
@@ -123,7 +120,7 @@ fun <T, R> List<Pair<T, R>>.toPrettyString(
     return sb.toString()
 }
 
-fun Collection<PitchTest.Output>.printSummary(){
+fun Collection<PitchTest.TestSummary>.printSummary(){
     val intervalErrorToPercent =
         this.groupBy { it.intervalError }
             .map { it.key to percentage(it.value.size, this.size) }
