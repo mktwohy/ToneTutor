@@ -22,11 +22,11 @@ fun main() {
         numSamples = AppModel.PROC_BUFFER_SIZE,
         notes = AppModel.NOTE_RANGE,
         cents = listOf(-25, 0, 25),
-        amps = listOf(1f),
+        amps = listOf(1f, 0.5f, 0.25f),
         waveShapes = listOf(SINE, SAWTOOTH, SQUARE, TRIANGLE),
-        decayRates = listOf(0f),
-        floors = listOf(0f),
-        ceilings = listOf(1f),
+        decayRates = listOf(1f, 0.75f, 0.5f, 0.25f, 0f),
+        floors = listOf(0f, 0.25f, 0.5f),
+        ceilings = listOf(1f, 0.75f, 0.5f),
         filters = listOf(ALL, ODD, EVEN)
     ).take(100)
 
