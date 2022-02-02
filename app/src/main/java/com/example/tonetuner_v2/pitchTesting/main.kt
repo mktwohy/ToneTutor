@@ -91,7 +91,7 @@ fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
 
 }
 
-fun Collection<PitchTest.Input>.runTests(): List<PitchTest.TestSummary> {
+fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
     val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
 
     return this.mapIndexed { index, testInput ->
@@ -103,7 +103,7 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.TestSummary> {
         val testOutput = when (testInput){
             is PitchTest.Input.SignalInput -> signalSource.runTest(testInput)
         }
-        PitchTest.TestSummary(testInput, testOutput)
+        PitchTest.CsvCase(testInput, testOutput)
     }
 }
 
@@ -120,7 +120,7 @@ fun <T, R> List<Pair<T, R>>.toPrettyString(
     return sb.toString()
 }
 
-fun Collection<PitchTest.TestSummary>.printSummary(){
+fun Collection<PitchTest.CsvCase>.printSummary(){
     val intervalErrorToPercent =
         this.groupBy { it.intervalError }
             .map { it.key to percentage(it.value.size, this.size) }

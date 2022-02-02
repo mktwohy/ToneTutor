@@ -42,12 +42,47 @@ class PitchTest{
         }
     }
 
-    data class TestSummary(
-        val input: Input,
-        val output: Output
+    class CsvCase(
+        input: Input,
+        output: Output
     ){
-        val percentError: Float = calcError(input.pitch, output.pitch)
-        val intervalError = output.pitch.toNote()?.let { input.note.calcInterval(it) }
+        val expectedNote    = input.note
+        val expectedCents   = input.cents
+        val expectedPitch   = input.pitch
+        val actualNote      = output.note
+        val actualCents     = output.cents
+        val actualPitch     = output.pitch
+        val percentError    = calcError(input.pitch, output.pitch)
+        val intervalError   = output.pitch.toNote()?.let { input.note.calcInterval(it) }
+        val numSamples: Int?
+        val amp: Float?
+        val waveShape: WaveShape?
+        val harmonicDecayRate: Float?
+        val harmonicFloor: Float?
+        val harmonicCeiling: Float?
+        val harmonicFilter: HarmonicFilter?
+
+        init {
+
+            if (input is Input.SignalInput){
+                numSamples          = input.numSamples
+                amp                 = input.amp
+                waveShape           = input.waveShape
+                harmonicDecayRate   = input.harmonicSettings.decayRate
+                harmonicFloor       = input.harmonicSettings.floor
+                harmonicCeiling     = input.harmonicSettings.ceiling
+                harmonicFilter      = input.harmonicSettings.filter
+            }
+            else {
+                numSamples          = null
+                amp                 = null
+                waveShape           = null
+                harmonicDecayRate   = null
+                harmonicFloor       = null
+                harmonicCeiling     = null
+                harmonicFilter      = null
+            }
+        }
     }
 
 
