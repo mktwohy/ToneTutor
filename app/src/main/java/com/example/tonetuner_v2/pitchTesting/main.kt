@@ -2,6 +2,7 @@ package com.example.tonetuner_v2.pitchTesting
 
 import com.example.signallib.enums.HarmonicFilter.*
 import com.example.signallib.enums.Interval
+import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape.*
 import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
@@ -11,24 +12,54 @@ import com.example.tonetuner_v2.audio.audioSources.SignalSource
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.lang.StringBuilder
+import java.util.concurrent.ThreadPoolExecutor
 import kotlin.math.roundToInt
 
+fun printThreads(){
+    val threads: Set<Thread> = Thread.getAllStackTraces().keys
+    println("size: ${threads.size}")
+    for (t in threads) {
+        val name = t.name
+        val state = t.state
+        val priority = t.priority
+        val type = if (t.isDaemon) "Daemon" else "Normal"
+        System.out.printf("%-20s \t %s \t %d \t %s\n", name, state, priority, type)
+    }
+}
+
 fun main() {
+    println(Thread.activeCount())
+
     val localPath = System.getProperty("user.dir")!! +
             "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
 
     println("Creating pitch tests...")
-    val pitchTests = PitchTest.allInputPermutations(
-        numSamples = AppModel.PROC_BUFFER_SIZE,
-        notes = AppModel.NOTE_RANGE,
-        cents = listOf(-25, 0, 25),
-        amps = listOf(1f, 0.5f, 0.25f),
-        waveShapes = listOf(SINE, SAWTOOTH, SQUARE, TRIANGLE),
-        decayRates = listOf(1f, 0.75f, 0.5f, 0.25f, 0f),
-        floors = listOf(0f, 0.25f, 0.5f),
-        ceilings = listOf(1f, 0.75f, 0.5f),
+//    val pitchTests = PitchTest.createTestInputPermutations(
+//        numSamples = AppModel.PROC_BUFFER_SIZE,
+//        notes = AppModel.NOTE_RANGE,
+//        cents = listOf(-25, 0, 25),
+//        amps = listOf(1f, 0.5f, 0.25f),
+//        waveShapes = listOf(SINE, SAWTOOTH, SQUARE, TRIANGLE),
+//        decayRates = listOf(1f, 0.75f, 0.5f, 0.25f),
+//        floors = listOf(0f, 0.25f),
+//        ceilings = listOf(1f, 0.75f),
+//        filters = listOf(ALL, ODD, EVEN)
+//    ).shuffled().take(50)
+
+    val pitchTests = PitchTest.createRandomTestInputs(
+        numTests = 50,
+        numSamples = 1024..4096,
+        notes = Note.notes,
+        cents = -50..50,
+        amps = 0.25f..1f,
+        waveShapes = listOf(SINE),
+        decayRates = 0f..1f,
+        floors = 0f..0.4f,
+        ceilings = 0.5f..1f,
         filters = listOf(ALL, ODD, EVEN)
-    ).take(100)
+    )
+
+    printThreads()
 
     print("Running tests...\n\tprogress: ")
     val output = pitchTests.runTests()
@@ -38,7 +69,10 @@ fun main() {
 
     println("Done!")
 
-    output.printSummary()
+    printThreads()
+
+//    output.printSummary()
+
 }
 
 fun Any.toJson(): String =
@@ -92,7 +126,7 @@ fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
 }
 
 fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
-    val signalSource = SignalSource(AppModel.FINGERPRINT_SIZE)
+    val signalSource = SignalSource(40)
 
     return this.mapIndexed { index, testInput ->
         printAsciiProgressBar(
@@ -100,9 +134,11 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
             percent = ((index + 1) / this.size.toFloat()) * 100,
             clear = index != 0
         )
+
         val testOutput = when (testInput){
             is PitchTest.Input.SignalInput -> signalSource.runTest(testInput)
         }
+
         PitchTest.CsvCase(testInput, testOutput)
     }
 }

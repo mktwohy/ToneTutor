@@ -81,6 +81,7 @@ class AudioSample(
         return fwdTransform
             .asSequence()
             .chunked(2)
+            .filter { it.size == 2 }
             .map { sqrt(it[0].pow(2) + it[1].pow(2)) }
             .toList()
     }
