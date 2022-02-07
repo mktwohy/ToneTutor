@@ -46,6 +46,7 @@ class AudioProc(
         start()
     }
 
+    // todo use double buffer to store fft
     //todo add method to stop thread
     fun start(){
         Thread{
@@ -64,24 +65,38 @@ class AudioProc(
                 audioSample = audioSample.dropAndAdd(audioData)
 
                 // Calculate audioSample attributes and add them to their respective queue
-
-                if (AppModel.spectrumType == MainLayout.SpectrumType.FFT)
-                    fftQueue.forcedOffer(audioSample.fft)
-
-                if (audioSample.maxOrNull() ?: 0f < NOISE_THRESHOLD) {
-                    qualityQueue.forcedOffer(qualityDefault)
-                    pitchQueue.forcedOffer(pitchDefault)
-                    if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
-                        fingerPrintQueue.forcedOffer(fingerPrintDefault)
-                } else {
-                    qualityQueue.forcedOffer(audioSample.benya)
-                    pitchQueue.forcedOffer(audioSample.pitch)
-
-                    if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
-                        fingerPrintQueue.forcedOffer(audioSample.fingerprint)
+                if ((audioSample.maxOrNull() ?: 0f) < NOISE_THRESHOLD){
+                    updateQueues(
+                        pitch = pitchDefault,
+                        quality = qualityDefault,
+                        fingerPrint = fingerPrintDefault,
+                        fft = fftDefault
+                    )
+                }
+                else {
+                    updateQueues(
+                        pitch = audioSample.pitch,
+                        quality = audioSample.benya,
+                        fingerPrint = audioSample.fingerprint,
+                        fft = audioSample.fft
+                    )
                 }
             }
         }.start()
+    }
+
+    private fun updateQueues(
+        pitch: Float,
+        quality: Float,
+        fingerPrint: List<Harmonic>,
+        fft: List<Harmonic>
+    ){
+        pitchQueue.forcedOffer(pitch)
+        qualityQueue.forcedOffer(quality)
+        when (AppModel.spectrumType){
+            MainLayout.SpectrumType.FINGERPRINT -> fingerPrintQueue.forcedOffer(fingerPrint)
+            MainLayout.SpectrumType.FFT         -> fftQueue.forcedOffer(fft)
+        }
     }
 }
 
