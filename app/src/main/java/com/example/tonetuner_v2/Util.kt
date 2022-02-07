@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.graphics.Color
 import androidx.core.app.ActivityCompat
 import com.example.signallib.enums.Interval
@@ -18,6 +20,21 @@ import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+/**
+ * calls [checkMicPermission] to ensure permission isn't already granted. If permission denied,
+ * it launches a permission request, and callback will be invoked with the result
+ * (true if permission granted) as its input.
+ */
+fun requestMicPermission(context: ComponentActivity, callback: (Boolean) -> Unit = { } ){
+    if (checkMicPermission(context)) return
+
+    context.registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+        callback(it)
+    }.launch(Manifest.permission.RECORD_AUDIO)
+}
 
 fun checkMicPermission(context: Context): Boolean{
     val status = ActivityCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)

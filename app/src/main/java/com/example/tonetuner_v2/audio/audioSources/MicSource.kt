@@ -7,6 +7,7 @@ import android.media.MediaRecorder
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
 import com.example.tonetuner_v2.checkMicPermission
+import com.example.tonetuner_v2.logd
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
@@ -22,29 +23,31 @@ class MicSource(
     private var running = false
     private val queue: BlockingQueue<Float> = ArrayBlockingQueue(bufferSize)
 
-    init {
-        startCapture()
-    }
+    init { startCapture() }
 
-    /**
-     * Retrieve audio data from the buffer.
-     * @param n The number of elements to take
-     * @return An ArrayList of data elements
-     */
     override fun getAudio(bufferSize: Int) =
         List<Float>(bufferSize) { queue.take() }
 
-
-    /** Begin capturing and buffering audio */
+    /**
+     * Begin capturing and buffering audio. Must grant RECORD_AUDIO permission before calling
+     * this function. If permission is denied, audio will not be captured
+     * */
     fun startCapture() {
-        if (running) return
+        logd("attempt start")
+        if (running) {
+            logd("already running")
+            return
+        }
 
         if (!checkMicPermission(context)){
+            logd("permission denied")
             running = false
             return
         }
 
+        running = true
         Thread {
+            logd("thread start")
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO)
 
             val buffer = FloatArray(bufferSize)
@@ -57,7 +60,6 @@ class MicSource(
             )
 
             ar.startRecording()
-            running = true
             while (running) {
                 // Fetch data from the microphone
                 ar.read(buffer, 0,
@@ -68,10 +70,10 @@ class MicSource(
             }
             ar.stop()
             ar.release()
+            logd("thread stop")
         }.start()
+
     }
 
     fun stopCapture(){ running = false }
-
-
 }
