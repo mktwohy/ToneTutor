@@ -25,8 +25,8 @@ class AudioProc(
     val audioSource: AudioSource,
     val bufferSize: Int = PROC_BUFFER_SIZE,
     val pitchAlgo: (List<Harmonic>) -> Float
-) : Runnable {
-    private val fftQueue:       BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
+) {
+    private val fftQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FFT_QUEUE_SIZE)
     private val fingerPrintQueue: BlockingQueue<List<Harmonic>> = ArrayBlockingQueue(FINGERPRINT_QUEUE_SIZE)
     private val pitchQueue: BlockingQueue<Float> = ArrayBlockingQueue(PITCH_QUEUE_SIZE)
     private val qualityQueue: BlockingQueue<Float> = ArrayBlockingQueue(QUALITY_QUEUE_SIZE)
@@ -43,43 +43,45 @@ class AudioProc(
 
     init {
         running = true
-        Thread(this).start()
+        start()
     }
 
     //todo add method to stop thread
-    override fun run() {
-        // todo once audioSample is properly mutable, make it a public property
-        var audioSample = AudioSample(pitchAlgo = pitchAlgo)
-        val pitchDefault = 0f
-        val qualityDefault = 0f
-        val fingerPrintDefault = List(FINGERPRINT_SIZE){ Harmonic(0f, 0f ) }
-        val fftDefault = List(CAPTURE_BUFFER_SIZE){ Harmonic(0f, 0f ) }
+    fun start(){
+        Thread{
+            // todo once audioSample is properly mutable, make it a public property
+            var audioSample = AudioSample(pitchAlgo = pitchAlgo)
+            val pitchDefault = 0f
+            val qualityDefault = 0f
+            val fingerPrintDefault = List(FINGERPRINT_SIZE){ Harmonic(0f, 0f ) }
+            val fftDefault = List(CAPTURE_BUFFER_SIZE){ Harmonic(0f, 0f ) }
 
-        while (running) {
-            // Fetch [bufferSize] elements from the audioCapture
-            val audioData = audioSource.getAudio(bufferSize)
+            while (running) {
+                // Fetch [bufferSize] elements from the audioCapture
+                val audioData = audioSource.getAudio(bufferSize)
 
-            // Feed them to the audioSample
-            audioSample = audioSample.dropAndAdd(audioData)
+                // Feed them to the audioSample
+                audioSample = audioSample.dropAndAdd(audioData)
 
-            // Calculate audioSample attributes and add them to their respective queue
+                // Calculate audioSample attributes and add them to their respective queue
 
-            if (AppModel.spectrumType == MainLayout.SpectrumType.FFT)
-                fftQueue.forcedOffer(audioSample.fft)
+                if (AppModel.spectrumType == MainLayout.SpectrumType.FFT)
+                    fftQueue.forcedOffer(audioSample.fft)
 
-            if (audioSample.maxOrNull() ?: 0f < NOISE_THRESHOLD) {
-                qualityQueue.forcedOffer(qualityDefault)
-                pitchQueue.forcedOffer(pitchDefault)
-                if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
-                    fingerPrintQueue.forcedOffer(fingerPrintDefault)
-            } else {
-                qualityQueue.forcedOffer(audioSample.benya)
-                pitchQueue.forcedOffer(audioSample.pitch)
+                if (audioSample.maxOrNull() ?: 0f < NOISE_THRESHOLD) {
+                    qualityQueue.forcedOffer(qualityDefault)
+                    pitchQueue.forcedOffer(pitchDefault)
+                    if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
+                        fingerPrintQueue.forcedOffer(fingerPrintDefault)
+                } else {
+                    qualityQueue.forcedOffer(audioSample.benya)
+                    pitchQueue.forcedOffer(audioSample.pitch)
 
-                if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
-                    fingerPrintQueue.forcedOffer(audioSample.fingerprint)
+                    if (AppModel.spectrumType == MainLayout.SpectrumType.FINGERPRINT)
+                        fingerPrintQueue.forcedOffer(audioSample.fingerprint)
+                }
             }
-        }
+        }.start()
     }
 }
 
