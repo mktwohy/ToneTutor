@@ -18,26 +18,10 @@ import com.example.tonetuner_v2.ui.navigation.Navigation
 
 
 class MainActivity : ComponentActivity() {
-    private val audioSource =
-        if (AppModel.TEST_MODE)
-            SignalSource(AppModel.FINGERPRINT_SIZE)
-        else
-            MicSource()
-
-
     private val audioProc = AudioProc(
-        audioSource = audioSource,
+        audioSource = MicSource(),
         pitchAlgo = PitchAlgorithms.twm
     )
-
-    private val audioUpdateThread = Thread{
-        while(true){
-            if (AppModel.playState){
-                AppModel.updateAppModel(audioProc)
-            }
-            Thread.sleep(AppModel.UI_LAG)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,13 +34,6 @@ class MainActivity : ComponentActivity() {
         )
 
         setContent {
-            if (audioSource is SignalSource){
-                Text(
-                    text = "Note: ${audioSource.notes.toString().substring(1..3)} " +
-                            "\nBend: ${(audioSource.pitchBend * 100).toInt()} cents",
-                    color = Color.White
-                )
-            }
 //            MainScreen(
 //                modifier = Modifier.fillMaxSize(),
 //                color = if(AppModel.note != null) Color.Green else Color.Gray
@@ -66,15 +43,22 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun startAudioInput(){
+        val audioUpdateThread = Thread{
+            while(true){
+                if (AppModel.playState){
+                    AppModel.updateAppModel(audioProc)
+                }
+                Thread.sleep(AppModel.UI_LAG)
+            }
+        }
+
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                if (audioSource is MicSource) audioSource.startCapture()
-                if (audioSource is SignalSource) audioSource.generateRandom()
-                logd("Capture Started")
-            } else {
-                logd("Microphone Permission Denied")
+                with(audioProc.audioSource) {
+                    if (this is MicSource) this.startCapture()
+                }
             }
         }.launch(Manifest.permission.RECORD_AUDIO)
 
