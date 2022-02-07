@@ -1,14 +1,13 @@
 package com.example.tonetuner_v2.audio.audioSources
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.content.Context
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.util.Log
-import androidx.core.app.ActivityCompat
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.checkMicPermission
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
@@ -17,10 +16,11 @@ import java.util.concurrent.BlockingQueue
  * @author gtruch
  */
 class MicSource(
+    val context: Context,
     val sampleRate: Int = SAMPLE_RATE,
     val bufferSize: Int = CAPTURE_BUFFER_SIZE,
 ) : Runnable, AudioSource {
-    private var record: AudioRecord? = null
+    private var recorder: AudioRecord? = null
     private var recordThread: Thread? = null
     private var running = false
     private val queue: BlockingQueue<Float> = ArrayBlockingQueue(bufferSize)
@@ -30,21 +30,36 @@ class MicSource(
 
         // todo: Figure out how to properly get permissions from user
             // This works now, but I'm not sure why this is still red underlined
-        
-        record = AudioRecord(
-            MediaRecorder.AudioSource.DEFAULT,
-            sampleRate,
-            AudioFormat.CHANNEL_IN_MONO,
-            AudioFormat.ENCODING_PCM_FLOAT,
-            bufferSize)
 
-        recordThread = Thread(this)
+        startCapture()
     }
 
     /** Begin capturing and buffering audio */
     fun startCapture() {
+        if (running) return
+
+        if (!checkMicPermission(context)){
+            running = false
+            return
+        }
+
+        if (recorder == null){
+            recorder = AudioRecord(
+                MediaRecorder.AudioSource.DEFAULT,
+                sampleRate,
+                AudioFormat.CHANNEL_IN_MONO,
+                AudioFormat.ENCODING_PCM_FLOAT,
+                bufferSize
+            )
+        }
+
+
+        if (recordThread == null ) {
+            recordThread = Thread(this)
+            recordThread?.start()
+        }
+
         running = true
-        recordThread?.start()
     }
 
     /**
@@ -64,11 +79,11 @@ class MicSource(
     override fun run() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO)
 
-        if (record?.state != AudioRecord.STATE_INITIALIZED) {
+        if (recorder?.state != AudioRecord.STATE_INITIALIZED) {
             Log.e("AudioProc", "Audio Record can't initialize!")
             return
         }
-        record?.startRecording()
+        recorder?.startRecording()
 
         Log.v("AudioProc", "Start recording")
 
@@ -76,7 +91,7 @@ class MicSource(
         while (running) {
 
             // Fetch data from the microphone
-            val numread = record?.read(audioBuffer, 0,
+            val numread = recorder?.read(audioBuffer, 0,
                 audioBuffer.size, AudioRecord.READ_BLOCKING)
 
             // Put data into the blocking queue
@@ -85,7 +100,7 @@ class MicSource(
             // Todo if something broke, uncomment this:
             // recordThread?.isAlive
         }
-        record?.stop()
-        record?.release()
+        recorder?.stop()
+        recorder?.release()
     }
 }

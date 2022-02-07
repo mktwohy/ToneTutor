@@ -1,7 +1,11 @@
 package com.example.tonetuner_v2
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
 import androidx.compose.ui.graphics.Color
+import androidx.core.app.ActivityCompat
 import com.example.signallib.enums.Interval
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.minus
@@ -14,6 +18,11 @@ import java.util.concurrent.BlockingQueue
 import kotlin.math.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
+
+fun checkMicPermission(context: Context): Boolean{
+    val status = ActivityCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)
+    return status == PackageManager.PERMISSION_GRANTED
+}
 
 fun percentage(value: Number, total: Number): Float {
     return (value.toFloat() / total.toFloat()) * 100f

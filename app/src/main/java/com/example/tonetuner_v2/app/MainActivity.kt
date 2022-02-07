@@ -18,15 +18,18 @@ import com.example.tonetuner_v2.ui.navigation.Navigation
 
 
 class MainActivity : ComponentActivity() {
-    private val audioProc = AudioProc(
-        audioSource = MicSource(),
-        pitchAlgo = PitchAlgorithms.twm
-    )
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        startAudioInput()
+        val audioProc = AudioProc(
+            audioSource = MicSource(this.application),
+            pitchAlgo = PitchAlgorithms.twm
+        )
+
+        startAudioInput(audioProc)
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -42,7 +45,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun startAudioInput(){
+    private fun startAudioInput(audioProc: AudioProc){
         val audioUpdateThread = Thread{
             while(true){
                 if (AppModel.playState){
