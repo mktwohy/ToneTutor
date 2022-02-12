@@ -30,6 +30,7 @@ fun List<Harmonic>.assignMagsToIndices(size: Int): List<Float>{
     return ret.toList()
 }
 
+
 fun List<Harmonic>.toGraphRepr() =
     this.asSequence()
         .onEach { it.freq = freqToPitch(it.freq) } // convert frequencies to pitch

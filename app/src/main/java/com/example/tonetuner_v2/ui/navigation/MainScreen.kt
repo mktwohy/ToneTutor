@@ -16,9 +16,7 @@ import androidx.navigation.NavController
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.audio.audioProcessing.toFingerPrint
 import com.example.tonetuner_v2.audio.audioProcessing.toGraphRepr
-import com.example.tonetuner_v2.ui.composables.BarChart
-import com.example.tonetuner_v2.ui.composables.CircularTuner
-import com.example.tonetuner_v2.ui.composables.TapeMeter
+import com.example.tonetuner_v2.ui.composables.*
 import com.example.tonetuner_v2.ui.composables.old.XYPlot
 import com.example.tonetuner_v2.ui.navigation.MainLayout.SpectrumType.*
 import com.example.tonetuner_v2.util.toList
@@ -38,7 +36,8 @@ fun MainScreen(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround
-    ) {
+    ){
+// simple test for android navigation.
 //        Button(
 //            onClick = {
 //                navController.navigate(Screen.DetailScreen.withArgs("Michael"))
@@ -46,27 +45,12 @@ fun MainScreen(
 //        ) {
 //            Text(text = "To Detail Screen")
 //        }
-        Box(
+        // On/Off/Freeze button
+        FreezeButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.05f),
-            contentAlignment = Alignment.BottomEnd
-        ){
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.2f)
-                    .fillMaxHeight()
-                    .background(Color.DarkGray)
-                    .clickable { AppModel.playState = !AppModel.playState  },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = if(AppModel.playState) "ON" else "OFF",
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
+                .fillMaxHeight(0.05f)
+        )
         CircularTuner(
             modifier = Modifier
                 .fillMaxWidth()
@@ -83,26 +67,6 @@ fun MainScreen(
             range    = 3,
             allowNegatives = false
         )
-        Box(
-            Modifier
-                .fillMaxSize()
-                .clickable { AppModel.changeSpectrumType() }) {
-            when (spectrumType){
-                FINGERPRINT -> BarChart(
-                    modifier = Modifier.fillMaxSize(),
-                    barValues = AppModel.fingerPrint.toFingerPrint(),
-                    xTicks = List(AppModel.FINGERPRINT_SIZE){ i -> if (i == 0) 'f' else i+1 },
-                    yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
-                    barColor = Color.Green,
-                    tickColor = Color.White
-                )
-                FFT -> XYPlot(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.9f),
-                    y = AppModel.fft.toGraphRepr()
-                )
-            }
-        }
+        FftOrSpectrumViewer(modifier = Modifier.fillMaxSize())
     }
 }
