@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import com.example.signallib.enums.Note
-import com.example.tonetuner_v2.toString
+import com.example.tonetuner_v2.util.toString
 import kotlin.math.ln
 
 @Composable

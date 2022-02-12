@@ -3,6 +3,9 @@ package com.example.tonetuner_v2.audio.audioProcessing
 import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.util.arange
+import com.example.tonetuner_v2.util.poly
+import com.example.tonetuner_v2.util.quadInterp
 import org.jtransforms.fft.FloatFFT_1D
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -19,13 +22,15 @@ class AudioSample(
     var pitchAlgo: (List<Harmonic>) -> Float = PitchAlgorithms.twm
 ): MutableList<Float> by audioData {
     val time        by lazy { calcTime() }
-    val fftMag      by lazy { calcFftMag() }
     val fft         by lazy { calcFft() }
-    val fftFreq     by lazy { calcFftFreq() }
     val pitch       by lazy { pitchAlgo.invoke(fft) }
     val fingerprint by lazy { calcFingerprint() }
     val benya       by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
+    private val fftMag  by lazy { calcFftMag() }
+    private val fftFreq by lazy { calcFftFreq() }
+
+
 
     // todo: I don't think drop and add works correctly. Whenever you drop, you end up deleting the whole list
     // todo: This should not create a new object every time.
@@ -106,8 +111,7 @@ class AudioSample(
                 poly(it.freqs, it.mags)
             }.filter {
                 it.mag / maxMag > 0.04f
-            }
-            .toList()
+            }.toList()
     }
 
 

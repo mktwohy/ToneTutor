@@ -13,15 +13,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.app.AppModel.FFT_MAX_FREQ
+import com.example.tonetuner_v2.audio.audioProcessing.toFingerPrint
+import com.example.tonetuner_v2.audio.audioProcessing.toGraphRepr
 import com.example.tonetuner_v2.ui.composables.BarChart
 import com.example.tonetuner_v2.ui.composables.CircularTuner
 import com.example.tonetuner_v2.ui.composables.TapeMeter
 import com.example.tonetuner_v2.ui.composables.old.XYPlot
 import com.example.tonetuner_v2.ui.navigation.MainLayout.SpectrumType.*
-import kotlin.math.ln
+import com.example.tonetuner_v2.util.toList
 
 object MainLayout{
     enum class SpectrumType { FFT, FINGERPRINT }

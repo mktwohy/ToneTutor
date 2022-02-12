@@ -6,8 +6,7 @@ import kotlin.math.roundToLong
 
 import com.example.signallib.enums.Note.Companion.bend
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.Harmonic
-import com.example.tonetuner_v2.arange
+import com.example.tonetuner_v2.util.arange
 import kotlin.math.ln
 
 

@@ -1,18 +1,14 @@
 package com.example.tonetuner_v2.app
 
-import android.Manifest
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.MicSource
-import com.example.tonetuner_v2.checkMicPermission
-import com.example.tonetuner_v2.requestMicPermission
 import com.example.tonetuner_v2.ui.navigation.Navigation
-
+import com.example.tonetuner_v2.util.requestMicPermission
 
 
 class MainActivity : ComponentActivity() {

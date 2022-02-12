@@ -1,4 +1,6 @@
 # based off of https://www.geeksforgeeks.org/convert-json-to-csv-in-python/
+# python files can't run inside Android Studio unfortunately.
+# you'll have to open this in your favorite text editor, IDE, or run it in the terminal
 
 import json
 import csv

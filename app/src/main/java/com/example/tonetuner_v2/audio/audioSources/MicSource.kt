@@ -6,8 +6,8 @@ import android.media.AudioRecord
 import android.media.MediaRecorder
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
-import com.example.tonetuner_v2.checkMicPermission
-import com.example.tonetuner_v2.logd
+import com.example.tonetuner_v2.util.checkMicPermission
+import com.example.tonetuner_v2.util.logd
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 

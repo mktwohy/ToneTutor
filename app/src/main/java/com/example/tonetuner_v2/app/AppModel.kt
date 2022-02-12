@@ -4,12 +4,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.signallib.enums.Note
-import com.example.tonetuner_v2.Harmonic
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
-import com.example.tonetuner_v2.logd
-import com.example.tonetuner_v2.normalizeBySum
-import com.example.tonetuner_v2.toNoteAndCents
+import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 import com.example.tonetuner_v2.ui.navigation.MainLayout.SpectrumType.*
+import com.example.tonetuner_v2.util.toNoteAndCents
 
 object AppModel{
     // State

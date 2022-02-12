@@ -12,7 +12,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.Harmonic
+import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 
 
 @Composable
