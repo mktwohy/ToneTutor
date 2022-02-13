@@ -7,7 +7,7 @@ import com.example.tonetuner_v2.util.*
 import java.util.*
 import kotlin.random.Random
 
-object PitchTest{
+object SynthPitchTest{
     data class HarmonicSettings(
         val decayRate: Float,
         val floor: Float,
@@ -15,19 +15,16 @@ object PitchTest{
         val filter: HarmonicFilter
     )
 
-    private interface InputInterface{ val note: Note ; val cents: Int ; val pitch: Float }
 
-    sealed class Input: InputInterface {
-        data class SignalInput(
-            override val note: Note,
-            override val cents: Int,
-            val numSamples: Int,
-            val amp: Float,
-            val waveShape: WaveShape,
-            val harmonicSettings: HarmonicSettings,
-        ): Input() {
-            override val pitch = calcFreq(note, cents)
-        }
+    data class Input(
+        val note: Note,
+        val cents: Int,
+        val numSamples: Int,
+        val amp: Float,
+        val waveShape: WaveShape,
+        val harmonicSettings: HarmonicSettings,
+    ){
+        val pitch = calcFreq(note, cents)
     }
 
     data class Output(
@@ -64,25 +61,13 @@ object PitchTest{
         val harmonicFilter: HarmonicFilter?
 
         init {
-
-            if (input is Input.SignalInput){
-                numSamples          = input.numSamples
-                amp                 = input.amp
-                waveShape           = input.waveShape
-                harmonicDecayRate   = input.harmonicSettings.decayRate
-                harmonicFloor       = input.harmonicSettings.floor
-                harmonicCeiling     = input.harmonicSettings.ceiling
-                harmonicFilter      = input.harmonicSettings.filter
-            }
-            else {
-                numSamples          = null
-                amp                 = null
-                waveShape           = null
-                harmonicDecayRate   = null
-                harmonicFloor       = null
-                harmonicCeiling     = null
-                harmonicFilter      = null
-            }
+            numSamples          = input.numSamples
+            amp                 = input.amp
+            waveShape           = input.waveShape
+            harmonicDecayRate   = input.harmonicSettings.decayRate
+            harmonicFloor       = input.harmonicSettings.floor
+            harmonicCeiling     = input.harmonicSettings.ceiling
+            harmonicFilter      = input.harmonicSettings.filter
         }
     }
 
@@ -121,7 +106,7 @@ object PitchTest{
                     for (waveShape in waveShapes){
                         for (harmSettings in harmonicSettings){
                             tests.add(
-                                Input.SignalInput(
+                                Input(
                                     note = note,
                                     cents = numCents,
                                     numSamples = numSamples,
@@ -155,7 +140,7 @@ object PitchTest{
         filters: List<HarmonicFilter>
     ): List<Input>{
         return List(numTests){
-            Input.SignalInput(
+            Input(
                 numSamples = numSamples.random(),
                 note = notes.random(),
                 cents = cents.random(),

@@ -5,7 +5,6 @@ import com.example.signallib.enums.Interval
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape.*
 import com.example.tonetuner_v2.*
-import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
@@ -13,7 +12,6 @@ import com.example.tonetuner_v2.util.percentage
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.lang.StringBuilder
-import java.util.concurrent.ThreadPoolExecutor
 import kotlin.math.roundToInt
 
 fun printThreads(){
@@ -47,7 +45,7 @@ fun main() {
 //        filters = listOf(ALL, ODD, EVEN)
 //    ).shuffled().take(50)
 
-    val pitchTests = PitchTest.createRandomTestInputs(
+    val pitchTests = SynthPitchTest.createRandomTestInputs(
         numTests = 50,
         numSamples = 1024..4096,
         notes = Note.notes,
@@ -87,7 +85,7 @@ fun String.writeToFile(dir: String, name: String) {
     }
 }
 
-fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
+fun SignalSource.applyTest(test: SynthPitchTest.Input) {
     notes = setOf(test.note)
     pitchBend = test.cents / 100f
     amp = test.amp
@@ -102,11 +100,11 @@ fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     }
 }
 
-fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Output{
+fun SignalSource.runTest(test: SynthPitchTest.Input): SynthPitchTest.Output{
     this.applyTest(test)
     val audio = this.getAudio(test.numSamples).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-    return PitchTest.Output(sample.pitch)
+    return SynthPitchTest.Output(sample.pitch)
 }
 
 fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
@@ -126,7 +124,7 @@ fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
 
 }
 
-fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
+fun Collection<SynthPitchTest.Input>.runTests(): List<SynthPitchTest.CsvCase> {
     val signalSource = SignalSource(40)
 
     return this.mapIndexed { index, testInput ->
@@ -136,11 +134,10 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
             clear = index != 0
         )
 
-        val testOutput = when (testInput){
-            is PitchTest.Input.SignalInput -> signalSource.runTest(testInput)
-        }
+        val testOutput = signalSource.runTest(testInput)
 
-        PitchTest.CsvCase(testInput, testOutput)
+
+        SynthPitchTest.CsvCase(testInput, testOutput)
     }
 }
 
@@ -157,7 +154,7 @@ fun <T, R> List<Pair<T, R>>.toPrettyString(
     return sb.toString()
 }
 
-fun Collection<PitchTest.CsvCase>.printSummary(){
+fun Collection<SynthPitchTest.CsvCase>.printSummary(){
     val intervalErrorToPercent =
         this.groupBy { it.intervalError }
             .map { it.key to percentage(it.value.size, this.size) }
