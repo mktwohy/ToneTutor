@@ -29,7 +29,7 @@ import com.example.tonetuner_v2.ui.theme.noteTextPaint
 fun CircularTuner(
     modifier: Modifier = Modifier,
     note: Note?,
-    centsErr: Int,
+    cents: Int?,
 ) {
     Box(modifier){
         Canvas(modifier = Modifier.fillMaxSize()){
@@ -53,9 +53,9 @@ fun CircularTuner(
                 textPaint = noteTextPaint,
                 customToString = { it.name.replace('s','#') }
             )
-            if (note != null){
+            if (note != null && cents != null){
                 drawPieNeedle(
-                    angle = calcTunerAngle(note, centsErr),
+                    angle = calcTunerAngle(note, cents),
                     sweepAngle = 360f/12,
                     radius = outerRadius,
                     color = Color.Green
@@ -94,7 +94,7 @@ fun TestCircularTuner(){
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f),
             note = note,
-            centsErr = sliderToCents()
+            cents = sliderToCents()
         )
         Text(
             text = "Note: $note \nCents: ${sliderToCents()}",

@@ -16,7 +16,7 @@ object AppModel{
     var pitch by mutableStateOf(0f)
     var quality by mutableStateOf(0f)
     var note by mutableStateOf<Note?>(null)
-    var cents by mutableStateOf(0)
+    var cents by mutableStateOf<Int?>(null)
     var playState by mutableStateOf(true)
 
     var spectrumType by mutableStateOf(FINGERPRINT)
@@ -35,6 +35,7 @@ object AppModel{
     const val FFT_MAX_FREQ          = 20000
     const val TEST_MODE             = false
     val NOTE_RANGE = Note.toList(Note.C_1, Note.E_6) // drop C (bass) high E string (guitar)
+    val GUITAR_STRINGS = listOf(Note.E_2, Note.A_2, Note.D_3, Note.G_3, Note.B_3, Note.E_4)
 
     fun changeSpectrumType(){
         spectrumType = if (spectrumType == FFT) FINGERPRINT else FFT

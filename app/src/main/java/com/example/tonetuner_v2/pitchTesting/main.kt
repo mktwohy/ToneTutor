@@ -1,14 +1,19 @@
 package com.example.tonetuner_v2.pitchTesting
 
+import com.example.signallib.HarmonicSeries
+import com.example.signallib.SignalSettings
 import com.example.signallib.enums.HarmonicFilter.*
-import com.example.signallib.enums.Interval
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape.*
+import com.example.signallib.signalCollections.HarmonicSignal
 import com.example.tonetuner_v2.*
+import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
+import com.example.tonetuner_v2.util.arange
 import com.example.tonetuner_v2.util.percentage
+import com.example.tonetuner_v2.util.toHarmonicSeries
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.lang.StringBuilder
@@ -27,7 +32,7 @@ fun printThreads(){
 }
 
 fun main() {
-    println(Thread.activeCount())
+//    println(Thread.activeCount())
 
     val localPath = System.getProperty("user.dir")!! +
             "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
@@ -47,18 +52,11 @@ fun main() {
 
     val pitchTests = SynthPitchTest.createRandomTestInputs(
         numTests = 50,
-        numSamples = 1024..4096,
-        notes = Note.notes,
-        cents = -50..50,
-        amps = 0.25f..1f,
-        waveShapes = listOf(SINE),
-        decayRates = 0f..1f,
-        floors = 0f..0.4f,
-        ceilings = 0.5f..1f,
-        filters = listOf(ALL, ODD, EVEN)
+        frequencies = AppModel.GUITAR_STRINGS.run { (arange(this.first().freq, this.last().freq, 1f)) },
+        bufferSizes = listOf(512, 1024, 2048, 4096)
+
     )
 
-    printThreads()
 
     print("Running tests...\n\tprogress: ")
     val output = pitchTests.runTests()
@@ -68,7 +66,7 @@ fun main() {
 
     println("Done!")
 
-    printThreads()
+//    printThreads()
 
 //    output.printSummary()
 
@@ -86,23 +84,14 @@ fun String.writeToFile(dir: String, name: String) {
 }
 
 fun SignalSource.applyTest(test: SynthPitchTest.Input) {
-    notes = setOf(test.note)
-    pitchBend = test.cents / 100f
-    amp = test.amp
-    signalSettings.waveShape = test.waveShape
-    signalSettings.harmonicSeries.apply {
-        this.generate(
-            decayRate = test.harmonicSettings.decayRate,
-            floor = test.harmonicSettings.floor,
-            ceiling = test.harmonicSettings.ceiling,
-            filter = test.harmonicSettings.filter.function
-        )
-    }
+    notes = if (test.note != null) setOf(test.note) else setOf()
+    pitchBend = (test.cents ?: 0 ) / 100f
+    signalSettings.harmonicSeries = test.harmonicFingerprint.toHarmonicSeries()
 }
 
 fun SignalSource.runTest(test: SynthPitchTest.Input): SynthPitchTest.Output{
     this.applyTest(test)
-    val audio = this.getAudio(test.numSamples).toMutableList()
+    val audio = this.getAudio(test.bufferSize).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
     return SynthPitchTest.Output(sample.pitch)
 }
@@ -136,7 +125,6 @@ fun Collection<SynthPitchTest.Input>.runTests(): List<SynthPitchTest.CsvCase> {
 
         val testOutput = signalSource.runTest(testInput)
 
-
         SynthPitchTest.CsvCase(testInput, testOutput)
     }
 }
@@ -152,21 +140,5 @@ fun <T, R> List<Pair<T, R>>.toPrettyString(
         sb.append("$preLine$first: $second$postLine\n")
     }
     return sb.toString()
-}
-
-fun Collection<SynthPitchTest.CsvCase>.printSummary(){
-    val intervalErrorToPercent =
-        this.groupBy { it.intervalError }
-            .map { it.key to percentage(it.value.size, this.size) }
-            .sortedBy { it.second }
-            .reversed()
-
-    val score = intervalErrorToPercent.toMap()[Interval.PER_1] ?: 0f
-
-    val errorDistribution = intervalErrorToPercent.toPrettyString(2, postLine = "%")
-
-    println("\nSummary:")
-    println("\tscore: $score%")
-    println("\terror distribution:\n$errorDistribution")
 }
 

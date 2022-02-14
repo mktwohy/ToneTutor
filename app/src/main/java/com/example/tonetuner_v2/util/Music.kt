@@ -1,18 +1,21 @@
 package com.example.tonetuner_v2.util
 
+import com.example.signallib.HarmonicSeries
 import com.example.signallib.enums.Interval
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.Note.Companion.minus
 import com.example.signallib.enums.Note.Companion.plus
-import com.example.tonetuner_v2.app.AppModel
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.log
 
-fun Note.calcInterval(other: Note): Interval {
-    if (this == other) return Interval.PER_1
+fun calcDistance(note1: Note, note2: Note): Int =
+    abs(Note.notes.indexOf(note1) - Note.notes.indexOf(note2))
 
-    val distance = abs(Note.notes.indexOf(this) - Note.notes.indexOf(other))
+fun calcInterval(note1: Note, note2: Note): Interval {
+    if (note1 == note2) return Interval.PER_1
+
+    val distance = calcDistance(note1, note2)
     val index = (distance % 12).let { if (it == 0) 12 else it } - 1
     return Interval.values()[index]
 }
@@ -49,8 +52,8 @@ fun Float.toNote(): Note?{
 }
 
 /** Converts frequency to the closest note and its error (cents) */
-fun Float.toNoteAndCents(): Pair<Note?, Int>{
-    val note = this.toNote() ?: return Pair(null, 0)
+fun Float.toNoteAndCents(): Pair<Note?, Int?>{
+    val note = this.toNote() ?: return Pair(null, null)
     val hzError = this - note.freq
 
     val centsError =
@@ -66,4 +69,17 @@ fun Float.toNoteAndCents(): Pair<Note?, Int>{
 
         }
     return Pair(note, centsError)
+}
+
+
+fun List<Float>.toHarmonicSeries() = HarmonicSeries(this.size).apply {
+    this@toHarmonicSeries.forEachIndexed { index, mag ->
+        this[index + 1] = mag
+    }
+}
+
+fun harmonicSeriesOf(vararg mag: Float) = HarmonicSeries(mag.size).apply {
+    mag.forEachIndexed { index, mag ->
+        this[index + 1] = mag
+    }
 }
