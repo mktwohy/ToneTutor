@@ -2,7 +2,10 @@ package com.example.tonetuner_v2.util
 
 import androidx.compose.ui.graphics.Color
 import java.util.concurrent.BlockingQueue
+import kotlin.random.Random
 
+private fun ClosedRange<Float>.random(): Float =
+    Random.nextDouble(this.start.toDouble(), this.endInclusive.toDouble()).toFloat()
 
 fun <T> List<Pair<Int, T>>.mapToIndices(defaultValue: T): List<T> =
     this.toMap()

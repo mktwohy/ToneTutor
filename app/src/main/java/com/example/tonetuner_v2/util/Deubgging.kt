@@ -27,3 +27,28 @@ fun avgTimeNano(repeat: Int, block: () -> Any?): Float {
     }
     return times.average().toFloat()
 }
+
+fun printThreads(){
+    val threads: Set<Thread> = Thread.getAllStackTraces().keys
+    println("numThreads: ${threads.size}")
+    for (t in threads) {
+        val name = t.name
+        val state = t.state
+        val priority = t.priority
+        val type = if (t.isDaemon) "Daemon" else "Normal"
+        System.out.printf("%-20s \t %s \t %d \t %s\n", name, state, priority, type)
+    }
+}
+
+fun <T, R> List<Pair<T, R>>.toPrettyString(
+    indentLevel: Int = 0,
+    preLine: String = "",
+    postLine: String = ""
+): String {
+    val sb = StringBuilder()
+    for ((first, second) in this){
+        repeat(indentLevel){ sb.append("\t") }
+        sb.append("$preLine$first: $second$postLine\n")
+    }
+    return sb.toString()
+}
