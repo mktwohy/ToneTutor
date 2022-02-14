@@ -22,6 +22,8 @@ object SynthPitchTest{
 
     data class Output(
         val pitch: Float,
+        val audio: List<Float>,
+        val sampleRate: Int
     ){
         val note: Note?
         val cents: Int?
@@ -49,6 +51,8 @@ object SynthPitchTest{
         val intervalError =
             if (expectedNote != null && actualNote != null) calcInterval(expectedNote, actualNote)
             else null
+        val sampleRate = output.sampleRate
+        val audio = output.audio
     }
 
     fun createRandomTestInputs(

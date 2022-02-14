@@ -22,9 +22,11 @@ fun main() {
     println("Creating pitch tests...")
 
     val pitchTests = SynthPitchTest.createRandomTestInputs(
-        numTests = 50,
-        frequencies = (Note.E_2.freq..Note.E_4.freq).toList(1f),
-        bufferSizes = listOf(512, 1024, 2048, 4096),
+        numTests = 10,
+//        frequencies = (Note.E_2.freq..Note.E_4.freq).toList(1f),
+        frequencies = listOf(Note.A_3.freq),
+        bufferSizes = listOf(4096),
+//        bufferSizes = listOf(1024, 2048, 4096),
         fingerPrints = Fingerprint.values().toList()
     )
 
@@ -49,7 +51,8 @@ fun String.writeToFile(dir: String, name: String) {
 }
 
 fun Collection<SynthPitchTest.Input>.runTests(): List<SynthPitchTest.CsvCase> {
-    val signalSource = SignalSource(40)
+    val numHarmonics = Fingerprint.values().maxOf { it.harmonicSeries.numHarmonics }
+    val signalSource = SignalSource(numHarmonics)
 
     return this.mapIndexed { index, testInput ->
         printAsciiProgressBar(
@@ -66,9 +69,14 @@ fun Collection<SynthPitchTest.Input>.runTests(): List<SynthPitchTest.CsvCase> {
 
 fun SignalSource.runTest(test: SynthPitchTest.Input): SynthPitchTest.Output{
     this.applyTest(test)
+    val sampleRate = AppModel.SAMPLE_RATE
     val audio = this.getAudio(test.bufferSize).toMutableList()
-    val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
-    return SynthPitchTest.Output(sample.pitch)
+    val sample = AudioSample(
+        audioData = audio,
+        pitchAlgo = PitchAlgorithms.twm,
+        sampleRate = sampleRate
+    )
+    return SynthPitchTest.Output(sample.pitch, audio, sampleRate)
 }
 
 fun SignalSource.applyTest(test: SynthPitchTest.Input) {
