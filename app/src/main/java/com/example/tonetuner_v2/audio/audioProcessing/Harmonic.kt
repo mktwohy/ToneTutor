@@ -19,10 +19,8 @@ fun List<Harmonic>.assignMagsToIndices(size: Int): List<Float> {
     if (this.isEmpty()) return listOf()
 
     val ret = FloatArray(size)
-
     val indexToValue = this.map { it.freq.toInt() to it.mag }
 //    val size = indexToValue.maxOf { it.first } + 1
-
     for ((index, value) in indexToValue) {
         if (index < size)
             ret[index] = value
@@ -57,8 +55,8 @@ fun List<List<Harmonic>>.sumLists(): List<Harmonic> =
                 .groupBy { it.freq }
                 .map { group ->
                     Harmonic(
-                        group.key,
-                        group.value.map { it.mag }.sum()
+                        freq = group.key,
+                        mag = group.value.map { it.mag }.sum()
                     )
                 }
     }

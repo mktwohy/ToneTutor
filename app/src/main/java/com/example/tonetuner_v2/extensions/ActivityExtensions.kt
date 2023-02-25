@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -62,10 +63,18 @@ fun Activity.writeToExternalStorage(uri: Uri, content: String) {
 fun ComponentActivity.requestPermission(permission: String, callback: (hasPermission: Boolean) -> Unit) {
     if (hasPermission(permission)) {
         callback(true)
+        return
     }
     registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
         callback(it)
     }.launch(permission)
+}
+
+fun Activity.requestFullscreen() {
+    window.setFlags(
+        WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        WindowManager.LayoutParams.FLAG_FULLSCREEN
+    )
 }
