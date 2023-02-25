@@ -2,9 +2,9 @@ package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.extensions.step
 import com.example.tonetuner_v2.util.poly
 import com.example.tonetuner_v2.util.quadInterp
-import com.example.tonetuner_v2.util.step
 import org.jtransforms.fft.FloatFFT_1D
 import kotlin.math.pow
 import kotlin.math.roundToInt

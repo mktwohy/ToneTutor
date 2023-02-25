@@ -2,7 +2,7 @@ package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.signallib.enums.Note.Companion.bend
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.util.step
+import com.example.tonetuner_v2.extensions.step
 import kotlin.math.abs
 import kotlin.math.ln
 import kotlin.math.pow

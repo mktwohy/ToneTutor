@@ -1,9 +1,9 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.extensions.normalizeBySum
 import com.example.tonetuner_v2.util.freqToPitch
 import com.example.tonetuner_v2.util.mapToIndices
-import com.example.tonetuner_v2.util.normalizeBySum
 
 data class Harmonic(var freq: Float, var mag: Float)
 
@@ -43,7 +43,7 @@ fun List<Harmonic>.toGraphRepr() =
         .normalizeBySum()
 
 fun List<Harmonic>.toFingerPrint(): List<Float> {
-    val f = this.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
+    val f = this.associate { it.freq.toInt() to it.mag }
     return List(AppModel.FINGERPRINT_SIZE) { i -> f[i] ?: 0f }
 }
 
