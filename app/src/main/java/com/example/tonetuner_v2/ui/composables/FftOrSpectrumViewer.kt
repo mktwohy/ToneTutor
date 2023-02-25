@@ -13,7 +13,6 @@ import com.example.tonetuner_v2.app.AppModel.spectrumType
 import com.example.tonetuner_v2.audio.audioProcessing.toFingerPrint
 import com.example.tonetuner_v2.audio.audioProcessing.toGraphRepr
 import com.example.tonetuner_v2.extensions.step
-import com.example.tonetuner_v2.ui.composables.old.XYPlot
 import com.example.tonetuner_v2.ui.navigation.MainLayout
 
 // todo Composable is too stateful.

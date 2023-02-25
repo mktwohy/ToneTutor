@@ -1,4 +1,4 @@
-package com.example.tonetuner_v2.ui.composables.old
+package com.example.tonetuner_v2.ui.composables
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
