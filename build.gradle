@@ -6,6 +6,7 @@ buildscript {
         compose_navigation_version = '2.5.3'
         activity_version = '1.6.1'
         material_ui_version = '1.8.0'
+        lifecycle_version = '2.5.1'
     }
     repositories {
         google()

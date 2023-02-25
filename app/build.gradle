@@ -55,7 +55,7 @@ dependencies {
     // Android
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.appcompat:appcompat:$activity_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Compose/UI
