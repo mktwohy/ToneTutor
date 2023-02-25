@@ -19,16 +19,16 @@ import com.example.tonetuner_v2.util.toList
 // todo Composable is too stateful.
 // todo fft does not plot correctly
 @Composable
-fun FftOrSpectrumViewer(modifier: Modifier){
+fun FftOrSpectrumViewer(modifier: Modifier) {
     Box(
         modifier.clickable { AppModel.changeSpectrumType() }
     ) {
-        when (spectrumType){
+        when (spectrumType) {
             MainLayout.SpectrumType.FINGERPRINT ->
                 BarChart(
                     modifier = Modifier.fillMaxSize(),
                     barValues = AppModel.fingerPrint.toFingerPrint(),
-                    xTicks = List(AppModel.FINGERPRINT_SIZE){ i -> if (i == 0) 'f' else i+1 },
+                    xTicks = List(AppModel.FINGERPRINT_SIZE) { i -> if (i == 0) 'f' else i + 1 },
                     yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
                     barColor = Color.Green,
                     tickColor = Color.White

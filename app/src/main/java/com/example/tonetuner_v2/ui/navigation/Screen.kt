@@ -1,6 +1,6 @@
 package com.example.tonetuner_v2.ui.navigation
 
-sealed class Screen(val route: String){
+sealed class Screen(val route: String) {
     object MainScreen : Screen("main_screen")
     object DetailScreen : Screen("detail_screen")
 

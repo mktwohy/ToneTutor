@@ -17,21 +17,22 @@ fun XYPlot(
     color: Color = Color.Green,
     strokeWidth: Float = 3f,
 ) {
-    if(y.isEmpty()) return
-    Box(modifier = modifier, contentAlignment = Alignment.Center){
-        Canvas(modifier = Modifier
-            .fillMaxHeight(0.9f)
-            .fillMaxWidth()
+    if (y.isEmpty()) return
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxHeight(0.9f)
+                .fillMaxWidth()
         ) {
-            for(i in 0..y.size-2){
+            for (i in 0..y.size - 2) {
                 drawLine(
                     start = Offset(
-                        x = i * size.width / (y.size-1),
+                        x = i * size.width / (y.size - 1),
                         y = size.height - (y[i] * size.height)
                     ),
                     end = Offset(
-                        x = (i+1) * size.width / (y.size-1),
-                        y = size.height - (y[i+1] * size.height)
+                        x = (i + 1) * size.width / (y.size - 1),
+                        y = size.height - (y[i + 1] * size.height)
                     ),
                     color = color,
                     strokeWidth = strokeWidth

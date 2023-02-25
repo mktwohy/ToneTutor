@@ -39,7 +39,7 @@ class MicSource(
             return
         }
 
-        if (!checkMicPermission(context)){
+        if (!checkMicPermission(context)) {
             logd("permission denied")
             running = false
             return
@@ -62,8 +62,10 @@ class MicSource(
             ar.startRecording()
             while (running) {
                 // Fetch data from the microphone
-                ar.read(buffer, 0,
-                    buffer.size, AudioRecord.READ_BLOCKING)
+                ar.read(
+                    buffer, 0,
+                    buffer.size, AudioRecord.READ_BLOCKING
+                )
 
                 // Put data into the blocking queue
                 buffer.forEach { queue.offer(it) }
@@ -72,8 +74,7 @@ class MicSource(
             ar.release()
             logd("thread stop")
         }.start()
-
     }
 
-    fun stopCapture(){ running = false }
+    fun stopCapture() { running = false }
 }

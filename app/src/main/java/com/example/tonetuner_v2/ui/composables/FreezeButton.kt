@@ -16,21 +16,21 @@ import com.example.tonetuner_v2.app.AppModel
 @Composable
 fun FreezeButton(
     modifier: Modifier
-){
+) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.BottomEnd
-    ){
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.2f)
                 .fillMaxHeight()
                 .background(Color.DarkGray)
-                .clickable { AppModel.playState = !AppModel.playState  },
+                .clickable { AppModel.playState = !AppModel.playState },
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = if(AppModel.playState) "ON" else "OFF",
+                text = if (AppModel.playState) "ON" else "OFF",
                 color = Color.White,
                 textAlign = TextAlign.Center
             )

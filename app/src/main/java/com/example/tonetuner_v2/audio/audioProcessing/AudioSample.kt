@@ -1,6 +1,5 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
-import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
 import com.example.tonetuner_v2.util.arange
@@ -20,22 +19,20 @@ class AudioSample(
     audioData: MutableList<Float> = mutableListOf(),
     val sampleRate: Int = SAMPLE_RATE,
     var pitchAlgo: (List<Harmonic>) -> Float = PitchAlgorithms.twm
-): MutableList<Float> by audioData {
-    val time        by lazy { calcTime() }
-    val fft         by lazy { calcFft() }
-    val pitch       by lazy { pitchAlgo.invoke(fft) }
+) : MutableList<Float> by audioData {
+    val time by lazy { calcTime() }
+    val fft by lazy { calcFft() }
+    val pitch by lazy { pitchAlgo.invoke(fft) }
     val fingerprint by lazy { calcFingerprint() }
-    val benya       by lazy { calcBenya() }
+    val benya by lazy { calcBenya() }
     val nonNormalizedFingerprint by lazy { calcNonNormalizedFingerprint() }
-    private val fftMag  by lazy { calcFftMag() }
+    private val fftMag by lazy { calcFftMag() }
     private val fftFreq by lazy { calcFftFreq() }
-
-
 
     // todo: I don't think drop and add works correctly. Whenever you drop, you end up deleting the whole list
     // todo: This should not create a new object every time.
     // todo: achieve same laziness with more memory efficiency
-        // whenever data is updated, set attrs to null
+    // whenever data is updated, set attrs to null
     /* This is more difficult than I thought. lazy delegates cannot be reset, since the property
      * must be immutable. I was looking into making my own delegate class, but I think this will
      * over complicate things... plus, with the solutions I found on StackOverflow, the authors
@@ -56,7 +53,7 @@ class AudioSample(
     fun subSample(start: Float, size: Int): AudioSample {
         // Calculate the nearest starting index.
         val startIndex = (start * sampleRate).roundToInt()
-        val endIndex = startIndex+size
+        val endIndex = startIndex + size
 
         return this[startIndex..endIndex]
     }
@@ -69,14 +66,14 @@ class AudioSample(
      */
     fun subSample(start: Float, duration: Float): AudioSample {
         val startIndex = (start * sampleRate).roundToInt()
-        val endIndex = (startIndex + duration*sampleRate).toInt()
+        val endIndex = (startIndex + duration * sampleRate).toInt()
 
         return this[startIndex..endIndex]
     }
 
     private fun calcTime(): List<Float> {
         val s = sampleRate.toFloat()
-        return arange(1f/s,this.size/s,1f/s)
+        return arange(1f / s, this.size / s, 1f / s)
     }
 
     /** The fourier transform of the audio data (list size == PROC_BUFFER_SIZE / 2 )*/
@@ -93,10 +90,10 @@ class AudioSample(
 
     /** The frequencies associated with fft (list size == PROC_BUFFER_SIZE / 2 ) */
     private fun calcFftFreq(): List<Float> {
-        return arange(fftMag.size.toFloat()).map { it*sampleRate/(fftMag.size*2) }
+        return arange(fftMag.size.toFloat()).map { it * sampleRate / (fftMag.size * 2) }
     }
 
-    //todo does this work correctly? you're creating a list of Spectrums
+    // todo does this work correctly? you're creating a list of Spectrums
     /** The harmonics extracted from the fourier transform */
     private fun calcFft(): List<Harmonic> {
         data class Spectrum(val freqs: List<Float>, val mags: List<Float>)
@@ -114,38 +111,34 @@ class AudioSample(
             }.toList()
     }
 
-
     /** Calculate the harmonic fingerprint normalized to the total power */
     private fun calcFingerprint(): List<Harmonic> {
         val norm = nonNormalizedFingerprint.map { it.mag }.sum() // todo shouldn't this be maxOf { it } ?
-        return nonNormalizedFingerprint.map { Harmonic(it.freq,it.mag / norm) }
+        return nonNormalizedFingerprint.map { Harmonic(it.freq, it.mag / norm) }
     }
 
     /** Calculate the harmonic fingerprint */
-    private fun calcNonNormalizedFingerprint(): List<Harmonic>
-        = (1..AppModel.FINGERPRINT_SIZE).map { h ->
+    private fun calcNonNormalizedFingerprint(): List<Harmonic> =
+        (1..AppModel.FINGERPRINT_SIZE).map { h ->
             val i = (h * pitch * fftMag.size * 2 / sampleRate).roundToInt()
             if (i > fftFreq.size - 2)
-                Harmonic(0f,0f)
+                Harmonic(0f, 0f)
             else
                 Harmonic(
                     h.toFloat(),
                     quadInterp(
                         h * pitch,
-                        fftFreq.slice(i-1..i+1),
-                        fftMag.slice(i-1..i+1)
+                        fftFreq.slice(i - 1..i + 1),
+                        fftMag.slice(i - 1..i + 1)
                     )
                 )
         }
 
-
-
     private fun calcBenya(): Float {
-        return fingerprint.map { it.freq*it.mag }.sum()
+        return fingerprint.map { it.freq * it.mag }.sum()
     }
 
     operator fun get(range: IntRange): AudioSample {
         return AudioSample(range.map { this[it] }.toMutableList())
     }
 }
-

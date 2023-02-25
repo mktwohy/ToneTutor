@@ -1,12 +1,14 @@
 package com.example.tonetuner_v2.audio.audioSources
 
-import com.example.signallib.*
+import com.example.signallib.HarmonicSeries
+import com.example.signallib.SignalManager
+import com.example.signallib.SignalSettings
 import com.example.signallib.enums.Note
 import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.app.AppModel
 import kotlin.random.Random
 
-class SignalSource(numHarmonics: Int): AudioSource {
+class SignalSource(numHarmonics: Int) : AudioSource {
     var notes = setOf(Note.A_4)
     var pitchBend = 0f
     var amp = 1f
@@ -26,15 +28,15 @@ class SignalSource(numHarmonics: Int): AudioSource {
             audioBuffer = FloatArray(bufferSize)
 
         signalManager.renderToBuffer(
-            buffer      = audioBuffer,
-            notes       = this.notes,
-            pitchBend   = this.pitchBend,
-            amp         = this.amp
+            buffer = audioBuffer,
+            notes = this.notes,
+            pitchBend = this.pitchBend,
+            amp = this.amp
         )
         return audioBuffer.map { it }
     }
 
-    fun generateRandom(){
+    fun generateRandom() {
         this.notes = setOf(AppModel.NOTE_RANGE.random())
         this.pitchBend = Random.nextDouble(-0.5, 0.5).toFloat()
         this.signalSettings.harmonicSeries.generateRandom()

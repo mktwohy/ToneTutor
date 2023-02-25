@@ -10,7 +10,6 @@ import com.example.tonetuner_v2.audio.audioSources.MicSource
 import com.example.tonetuner_v2.ui.navigation.Navigation
 import com.example.tonetuner_v2.util.requestMicPermission
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +35,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun startAppUpdateThread(audioProc: AudioProc){
-        requestMicPermission(this){ isGranted ->
-            if (isGranted){
-                with (audioProc.audioSource){
+    private fun startAppUpdateThread(audioProc: AudioProc) {
+        requestMicPermission(this) { isGranted ->
+            if (isGranted) {
+                with(audioProc.audioSource) {
                     if (this is MicSource) this.startCapture()
                 }
             }
         }
 
-        Thread{
-            while(true){
+        Thread {
+            while (true) {
                 if (AppModel.playState)
                     AppModel.updateAppModel(audioProc)
                 Thread.sleep(AppModel.UI_LAG)

@@ -1,11 +1,9 @@
 package com.example.tonetuner_v2.pitchTesting
 
-import com.example.signallib.enums.HarmonicFilter.*
+import com.example.signallib.enums.HarmonicFilter
 import com.example.signallib.enums.Interval
 import com.example.signallib.enums.Note
-import com.example.signallib.enums.WaveShape.*
-import com.example.tonetuner_v2.*
-import com.example.tonetuner_v2.app.AppModel
+import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.audio.audioProcessing.AudioSample
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.SignalSource
@@ -13,10 +11,9 @@ import com.example.tonetuner_v2.util.percentage
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.lang.StringBuilder
-import java.util.concurrent.ThreadPoolExecutor
 import kotlin.math.roundToInt
 
-fun printThreads(){
+fun printThreads() {
     val threads: Set<Thread> = Thread.getAllStackTraces().keys
     println("size: ${threads.size}")
     for (t in threads) {
@@ -32,7 +29,7 @@ fun main() {
     println(Thread.activeCount())
 
     val localPath = System.getProperty("user.dir")!! +
-            "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
+        "/app/src/main/java/com/example/tonetuner_v2/pitchTesting/"
 
     println("Creating pitch tests...")
 //    val pitchTests = PitchTest.createTestInputPermutations(
@@ -53,11 +50,11 @@ fun main() {
         notes = Note.notes,
         cents = -50..50,
         amps = 0.25f..1f,
-        waveShapes = listOf(SINE),
+        waveShapes = listOf(WaveShape.SINE),
         decayRates = 0f..1f,
         floors = 0f..0.4f,
         ceilings = 0.5f..1f,
-        filters = listOf(ALL, ODD, EVEN)
+        filters = listOf(HarmonicFilter.ALL, HarmonicFilter.ODD, HarmonicFilter.EVEN)
     )
 
     printThreads()
@@ -73,15 +70,13 @@ fun main() {
     printThreads()
 
 //    output.printSummary()
-
 }
 
 fun Any.toJson(): String =
     jacksonObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this)
 
-
 fun String.writeToFile(dir: String, name: String) {
-    with(File("$dir/$name")){
+    with(File("$dir/$name")) {
         writeText(this@writeToFile)
         createNewFile()
     }
@@ -102,19 +97,19 @@ fun SignalSource.applyTest(test: PitchTest.Input.SignalInput) {
     }
 }
 
-fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Output{
+fun SignalSource.runTest(test: PitchTest.Input.SignalInput): PitchTest.Output {
     this.applyTest(test)
     val audio = this.getAudio(test.numSamples).toMutableList()
     val sample = AudioSample(audioData = audio, pitchAlgo = PitchAlgorithms.twm)
     return PitchTest.Output(sample.pitch)
 }
 
-fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
-    fun StringBuilder.repeatAppend(c: Char, times: Int){
-        repeat(times){ append(c) }
+fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean) {
+    fun StringBuilder.repeatAppend(c: Char, times: Int) {
+        repeat(times) { append(c) }
     }
 
-    with(StringBuilder()){
+    with(StringBuilder()) {
         if (clear) repeatAppend('\b', times = size)
 
         val numFilled = (size * (percent / 100)).roundToInt()
@@ -123,7 +118,6 @@ fun printAsciiProgressBar(size: Int, percent: Float, clear: Boolean){
 
         print(this.toString())
     }
-
 }
 
 fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
@@ -136,7 +130,7 @@ fun Collection<PitchTest.Input>.runTests(): List<PitchTest.CsvCase> {
             clear = index != 0
         )
 
-        val testOutput = when (testInput){
+        val testOutput = when (testInput) {
             is PitchTest.Input.SignalInput -> signalSource.runTest(testInput)
         }
 
@@ -150,14 +144,14 @@ fun <T, R> List<Pair<T, R>>.toPrettyString(
     postLine: String = ""
 ): String {
     val sb = StringBuilder()
-    for ((first, second) in this){
-        repeat(indentLevel){ sb.append("\t") }
+    for ((first, second) in this) {
+        repeat(indentLevel) { sb.append("\t") }
         sb.append("$preLine$first: $second$postLine\n")
     }
     return sb.toString()
 }
 
-fun Collection<PitchTest.CsvCase>.printSummary(){
+fun Collection<PitchTest.CsvCase>.printSummary() {
     val intervalErrorToPercent =
         this.groupBy { it.intervalError }
             .map { it.key to percentage(it.value.size, this.size) }
@@ -172,4 +166,3 @@ fun Collection<PitchTest.CsvCase>.printSummary(){
     println("\tscore: $score%")
     println("\terror distribution:\n$errorDistribution")
 }
-

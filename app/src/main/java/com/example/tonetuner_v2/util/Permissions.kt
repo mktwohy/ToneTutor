@@ -12,7 +12,7 @@ import androidx.core.app.ActivityCompat
  * it launches a permission request, and callback will be invoked with the result
  * (true if permission granted) as its input.
  */
-fun requestMicPermission(context: ComponentActivity, callback: (Boolean) -> Unit = { } ){
+fun requestMicPermission(context: ComponentActivity, callback: (Boolean) -> Unit = { }) {
     if (checkMicPermission(context)) return
 
     context.registerForActivityResult(
@@ -22,7 +22,7 @@ fun requestMicPermission(context: ComponentActivity, callback: (Boolean) -> Unit
     }.launch(Manifest.permission.RECORD_AUDIO)
 }
 
-fun checkMicPermission(context: Context): Boolean{
+fun checkMicPermission(context: Context): Boolean {
     val status = ActivityCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)
     return status == PackageManager.PERMISSION_GRANTED
 }

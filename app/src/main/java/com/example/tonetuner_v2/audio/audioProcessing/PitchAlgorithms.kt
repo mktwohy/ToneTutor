@@ -1,18 +1,16 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
-import kotlin.math.abs
-import kotlin.math.pow
-import kotlin.math.roundToLong
-
 import com.example.signallib.enums.Note.Companion.bend
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.util.arange
+import kotlin.math.abs
 import kotlin.math.ln
-
+import kotlin.math.pow
+import kotlin.math.roundToLong
 
 // Should I store this as an enum class?
 
-object PitchAlgorithms{
+object PitchAlgorithms {
 
     /** The pitch (fundamental frequency) of the audio sample */
     val twm: (List<Harmonic>) -> Float = { harmonics ->
@@ -26,12 +24,12 @@ object PitchAlgorithms{
 
         // define the range of frequencies that are in that note ( +- 1/2 semitone)
         val minFreq = noteEst.bend(-0.50f) // 50 cents  flat
-        val maxFreq = noteEst.bend(0.50f)  // 50 cents sharp
+        val maxFreq = noteEst.bend(0.50f) // 50 cents sharp
 
         // refine closest note's frequency and return
         arange(minFreq, maxFreq, 0.1f)
             .map { it to calcScores(it) }
-            .minByOrNull { it.second}?.first!!
+            .minByOrNull { it.second }?.first!!
     }
 
     val twmOLD: (List<Harmonic>) -> Float? = { harmonics ->
@@ -39,9 +37,9 @@ object PitchAlgorithms{
         val calcScores = twmScore(harmonics)
 
         // todo what do each of these steps do?
-        val pass1 = arange(-29f, 7f)      // generate range from -29.0..7.0
-            .map { 440 * 2f.pow(it / 12) }         // ????
-            .map { Harmonic(it, calcScores(it)) }       //
+        val pass1 = arange(-29f, 7f) // generate range from -29.0..7.0
+            .map { 440 * 2f.pow(it / 12) } // ????
+            .map { Harmonic(it, calcScores(it)) } //
             .minByOrNull { it.mag }?.freq!!
 
         val n = 12f * ln(pass1 / 440f) / ln(2f)
@@ -71,12 +69,13 @@ object PitchAlgorithms{
      *
      * @return A function that takes a fundamental frequency as input and returns the score
      */
-    private fun twmScore(harmonics: List<Harmonic>,
-                         p: Float = 0.2f,
-                         q: Float = 1.4f,
-                         r: Float = 1f,
-                         mtopOnly: Boolean = false,
-                         ptomOnly: Boolean = false
+    private fun twmScore(
+        harmonics: List<Harmonic>,
+        p: Float = 0.2f,
+        q: Float = 1.4f,
+        r: Float = 1f,
+        mtopOnly: Boolean = false,
+        ptomOnly: Boolean = false
     ): (Float) -> Float {
 
         // Calculate the predicted harmonics of the fundamental frequency
@@ -101,13 +100,13 @@ object PitchAlgorithms{
             val err_mtop = harmonics.map { h ->
                 val ph = predictedHarmonics.minByOrNull { abs(h.freq - it) } ?: 0f
                 val df = abs(h.freq - ph)
-                df * h.freq.pow(-p) + (h.mag / maxMag) *(q * df * h.freq.pow(-p) - r)
+                df * h.freq.pow(-p) + (h.mag / maxMag) * (q * df * h.freq.pow(-p) - r)
             }.sum()
 
-            when{
+            when {
                 ptomOnly -> err_ptom
                 mtopOnly -> err_mtop
-                else     -> err_ptom / numHarmonics + (0.33f) * err_mtop / harmonics.size
+                else -> err_ptom / numHarmonics + (0.33f) * err_mtop / harmonics.size
             }
         }
     }
