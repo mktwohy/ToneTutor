@@ -8,10 +8,9 @@ import androidx.core.content.ContextCompat
 import java.io.FileNotFoundException
 import java.io.IOException
 
-fun Context.hasPermission(permissionType: String): Boolean {
-    return ContextCompat.checkSelfPermission(this, permissionType) ==
+fun Context.hasPermission(permissionType: String): Boolean =
+    ContextCompat.checkSelfPermission(this, permissionType) ==
         PackageManager.PERMISSION_GRANTED
-}
 
 val Context.layoutInflater: LayoutInflater get() =
     getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import android.Manifest
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.MicSource
+import com.example.tonetuner_v2.extensions.requestPermission
 import com.example.tonetuner_v2.ui.navigation.Navigation
 import com.example.tonetuner_v2.util.Logger
-import com.example.tonetuner_v2.util.requestMicPermission
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
 
     @SuppressLint("MissingPermission")
     private fun startAppUpdateThread(audioProc: AudioProc) {
-        requestMicPermission(this) { isGranted ->
+        requestPermission(Manifest.permission.RECORD_AUDIO) { isGranted ->
             if (isGranted) {
                 with(audioProc.audioSource) {
                     if (this is MicSource) this.startCapture()
