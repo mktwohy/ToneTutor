@@ -1,12 +1,11 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
-import com.example.tonetuner_v2.*
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.FFT_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_QUEUE_SIZE
-import com.example.tonetuner_v2.app.AppModel.NOISE_THRESHOLD
 import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_SIZE
+import com.example.tonetuner_v2.app.AppModel.NOISE_THRESHOLD
 import com.example.tonetuner_v2.app.AppModel.PITCH_QUEUE_SIZE
 import com.example.tonetuner_v2.app.AppModel.PROC_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.QUALITY_QUEUE_SIZE
@@ -48,15 +47,15 @@ class AudioProc(
     }
 
     // todo use double buffer to store fft
-    //todo add method to stop thread
-    fun start(){
-        Thread{
+    // todo add method to stop thread
+    fun start() {
+        Thread {
             // todo once audioSample is properly mutable, make it a public property
             var audioSample = AudioSample(pitchAlgo = pitchAlgo)
             val pitchDefault = 0f
             val qualityDefault = 0f
-            val fingerPrintDefault = List(FINGERPRINT_SIZE){ Harmonic(0f, 0f ) }
-            val fftDefault = List(CAPTURE_BUFFER_SIZE){ Harmonic(0f, 0f ) }
+            val fingerPrintDefault = List(FINGERPRINT_SIZE) { Harmonic(0f, 0f) }
+            val fftDefault = List(CAPTURE_BUFFER_SIZE) { Harmonic(0f, 0f) }
 
             while (running) {
                 // Fetch [bufferSize] elements from the audioCapture
@@ -66,15 +65,14 @@ class AudioProc(
                 audioSample = audioSample.dropAndAdd(audioData)
 
                 // Calculate audioSample attributes and add them to their respective queue
-                if ((audioSample.maxOrNull() ?: 0f) < NOISE_THRESHOLD){
+                if ((audioSample.maxOrNull() ?: 0f) < NOISE_THRESHOLD) {
                     updateQueues(
                         pitch = pitchDefault,
                         quality = qualityDefault,
                         fingerPrint = fingerPrintDefault,
                         fft = fftDefault
                     )
-                }
-                else {
+                } else {
                     updateQueues(
                         pitch = audioSample.pitch,
                         quality = audioSample.benya,
@@ -91,14 +89,12 @@ class AudioProc(
         quality: Float,
         fingerPrint: List<Harmonic>,
         fft: List<Harmonic>
-    ){
+    ) {
         pitchQueue.forcedOffer(pitch)
         qualityQueue.forcedOffer(quality)
-        when (AppModel.spectrumType){
+        when (AppModel.spectrumType) {
             MainLayout.SpectrumType.FINGERPRINT -> fingerPrintQueue.forcedOffer(fingerPrint)
-            MainLayout.SpectrumType.FFT         -> fftQueue.forcedOffer(fft)
+            MainLayout.SpectrumType.FFT -> fftQueue.forcedOffer(fft)
         }
     }
 }
-
-

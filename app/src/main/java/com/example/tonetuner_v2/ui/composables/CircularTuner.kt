@@ -2,11 +2,22 @@ package com.example.tonetuner_v2.ui.composables
 
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.Slider
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -23,7 +34,6 @@ import com.example.signallib.enums.Note.Companion.plus
 import com.example.signallib.enums.PitchClass
 import com.example.tonetuner_v2.ui.theme.noteTextPaint
 
-
 // todo what if you could turn off certain notes? it would limit what notes the pitch algo tests
 @Composable
 fun CircularTuner(
@@ -31,9 +41,9 @@ fun CircularTuner(
     note: Note?,
     centsErr: Int,
 ) {
-    Box(modifier){
-        Canvas(modifier = Modifier.fillMaxSize()){
-            val outerRadius = this.size.minDimension/2
+    Box(modifier) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val outerRadius = this.size.minDimension / 2
             val innerRadius = outerRadius * 0.65f
             val centerRadius = outerRadius * 0.2f
 
@@ -49,14 +59,14 @@ fun CircularTuner(
             )
             drawElementsInCircle(
                 elements = PitchClass.classes,
-                radius = (outerRadius + innerRadius)/2,
+                radius = (outerRadius + innerRadius) / 2,
                 textPaint = noteTextPaint,
-                customToString = { it.name.replace('s','#') }
+                customToString = { it.name.replace('s', '#') }
             )
-            if (note != null){
+            if (note != null) {
                 drawPieNeedle(
                     angle = calcTunerAngle(note, centsErr),
-                    sweepAngle = 360f/12,
+                    sweepAngle = 360f / 12,
                     radius = outerRadius,
                     color = Color.Green
                 )
@@ -66,11 +76,11 @@ fun CircularTuner(
                 radius = centerRadius,
             )
         }
-        if (note != null){
+        if (note != null) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
-            ){
+            ) {
                 Text(
                     text = note.octave.toString(),
                     color = Color.White
@@ -80,9 +90,8 @@ fun CircularTuner(
     }
 }
 
-
 @Composable
-fun TestCircularTuner(){
+fun TestCircularTuner() {
     var note by remember { mutableStateOf(Note.A_4) }
     var sliderState by remember { mutableStateOf(0.5f) }
 
@@ -104,7 +113,7 @@ fun TestCircularTuner(){
 
         Spacer(modifier = Modifier.fillMaxHeight(0.25f))
 
-        Row{
+        Row {
             Button(onClick = { note -= 1 }) {
                 Text(text = "Prev Note", color = Color.White)
             }
@@ -116,7 +125,6 @@ fun TestCircularTuner(){
             }
         }
 
-
         Spacer(modifier = Modifier.fillMaxHeight(0.25f))
 
         Slider(value = sliderState, onValueChange = { sliderState = it })
@@ -124,7 +132,7 @@ fun TestCircularTuner(){
 }
 
 fun calcTunerAngle(note: Note, cents: Int) =
-    when(note.pitchClass){
+    when (note.pitchClass) {
         PitchClass.Ds -> 0f
         PitchClass.E -> 30f
         PitchClass.F -> 60f
@@ -137,7 +145,7 @@ fun calcTunerAngle(note: Note, cents: Int) =
         PitchClass.C -> 270f
         PitchClass.Cs -> 300f
         PitchClass.D -> 330f
-    } + (cents / 100f * 360f/12)
+    } + (cents / 100f * 360f / 12)
 
 fun DrawScope.drawPieNeedle(
     angle: Float,
@@ -145,11 +153,11 @@ fun DrawScope.drawPieNeedle(
     radius: Float,
     color: Color,
     center: Offset = this.center
-){
-    rotate(angle){
+) {
+    rotate(angle) {
         drawArc(
             topLeft = Offset(center.x - radius, center.y - radius),
-            size = Size(radius*2, radius*2),
+            size = Size(radius * 2, radius * 2),
             color = color,
             startAngle = -1f * (sweepAngle / 2f),
             sweepAngle = sweepAngle,
@@ -157,7 +165,6 @@ fun DrawScope.drawPieNeedle(
             alpha = 0.4f
         )
     }
-
 }
 
 fun DrawScope.drawPie(
@@ -166,20 +173,20 @@ fun DrawScope.drawPie(
     circleColor: Color,
     lineColor: Color,
     strokeWidth: Float = 4f
-){
+) {
     drawCircle(
         color = circleColor,
         radius = radius,
     )
 
-    val pieSliceInnerAngle = 360f/numSlices
-    for (i in 0 until numSlices){
+    val pieSliceInnerAngle = 360f / numSlices
+    for (i in 0 until numSlices) {
         val rotateAngle = (i * pieSliceInnerAngle) + (pieSliceInnerAngle / 2)
-        rotate(rotateAngle){
+        rotate(rotateAngle) {
             drawLine(
                 color = lineColor,
                 start = this.center,
-                end   = Offset(this.center.x, this.center.y - radius),
+                end = Offset(this.center.x, this.center.y - radius),
                 strokeWidth = strokeWidth
             )
         }

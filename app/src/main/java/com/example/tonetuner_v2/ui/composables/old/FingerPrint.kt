@@ -14,26 +14,26 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 
-
 @Composable
 fun FingerPrint(
     modifier: Modifier = Modifier,
     fingerPrint: List<Harmonic>,
     color: Color = Color.Green,
 ) {
-    if(fingerPrint.isEmpty()) return
+    if (fingerPrint.isEmpty()) return
 
     val f = fingerPrint.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
-    val bars = List(AppModel.FINGERPRINT_SIZE){ i -> f[i] ?: 0f }
+    val bars = List(AppModel.FINGERPRINT_SIZE) { i -> f[i] ?: 0f }
 
-    Box(modifier = modifier, contentAlignment = Alignment.Center){
-        Canvas(modifier = Modifier
-            .fillMaxHeight(0.9f)
-            .fillMaxWidth()
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxHeight(0.9f)
+                .fillMaxWidth()
         ) {
             val barWidth = this.size.width / bars.size
 
-            for(i in bars.indices){
+            for (i in bars.indices) {
                 val barHeight = bars[i] * this.size.height
                 drawRect(
                     topLeft = Offset(

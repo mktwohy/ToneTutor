@@ -12,13 +12,13 @@ import androidx.navigation.navArgument
 import com.example.tonetuner_v2.app.AppModel
 
 @Composable
-fun Navigation(){
+fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = Screen.MainScreen.route
-    ){
-        composable(route = Screen.MainScreen.route){
+    ) {
+        composable(route = Screen.MainScreen.route) {
             MainScreen(
                 modifier = Modifier.fillMaxSize(),
                 navController = navController,
@@ -29,13 +29,13 @@ fun Navigation(){
         composable(
             route = Screen.DetailScreen.route + "/{name}",
             arguments = listOf(
-                navArgument("name"){
+                navArgument("name") {
                     type = NavType.StringType
                     defaultValue = "World"
-                    nullable =  true
+                    nullable = true
                 }
             )
-        ){ entry ->
+        ) { entry ->
             SettingsScreen(
                 name = entry.arguments?.getString("name"),
                 navController = navController

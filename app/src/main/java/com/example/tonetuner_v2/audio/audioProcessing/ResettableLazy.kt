@@ -8,7 +8,7 @@ package com.example.tonetuner_v2.audio.audioProcessing
  */
 class ResettableLazy<T>(
     private val initializer: () -> T
-){
+) {
     val value: T
         get() = cache ?: initializer.invoke().also { cache = it }
 
@@ -17,7 +17,7 @@ class ResettableLazy<T>(
     /** Invalidates cache.
      * This ensures that, the next time [value] is accessed, it will recalculate cache by re-invoking [initializer]
      */
-    fun reset(){
+    fun reset() {
         cache = null
     }
 }

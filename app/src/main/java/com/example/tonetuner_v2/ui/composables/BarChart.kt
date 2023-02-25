@@ -2,7 +2,14 @@ package com.example.tonetuner_v2.ui.composables
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,10 +29,10 @@ fun BarChart(
     yTicks: List<Any>,
     tickColor: Color,
     barColor: Color
-){
+) {
 
     BoxWithConstraints(modifier) {
-        Row{
+        Row {
             YAxis(
                 modifier = Modifier
                     .fillMaxHeight(0.95f)
@@ -56,14 +63,15 @@ fun BarChartNoAxis(
     modifier: Modifier,
     barValues: List<Float>,
     barColor: Color
-){
-    Box(modifier = modifier, contentAlignment = Alignment.Center){
-        Canvas(modifier = Modifier
-            .fillMaxSize()
+) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             val barWidth = this.size.width / barValues.size
 
-            for(i in barValues.indices){
+            for (i in barValues.indices) {
                 val barHeight = barValues[i] * this.size.height
                 drawRect(
                     topLeft = Offset(
@@ -92,16 +100,16 @@ fun XAxis(
     modifier: Modifier = Modifier,
     ticks: List<Any>,
     color: Color = Color.White
-){
+) {
     BoxWithConstraints(modifier = modifier) {
         val tickWidth = this.maxWidth / ticks.size
         val tickHeight = this.maxHeight
         Row {
-            for (t in ticks){
+            for (t in ticks) {
                 Box(
                     modifier = Modifier.size(tickWidth, tickHeight),
                     contentAlignment = Alignment.Center
-                ){
+                ) {
                     Text(
                         text = t.toString(),
                         color = color,
@@ -118,16 +126,16 @@ fun YAxis(
     modifier: Modifier,
     ticks: List<Any>,
     color: Color = Color.White
-){
+) {
     BoxWithConstraints(modifier = modifier) {
         val tickWidth = this.maxWidth
         val tickHeight = this.maxHeight / ticks.size
         Column {
-            for (t in ticks.reversed()){
+            for (t in ticks.reversed()) {
                 Box(
                     modifier = Modifier.size(tickWidth, tickHeight),
                     contentAlignment = Alignment.Center
-                ){
+                ) {
                     Text(
                         text = t.toString(),
                         color = color
@@ -137,7 +145,3 @@ fun YAxis(
         }
     }
 }
-
-
-
-
