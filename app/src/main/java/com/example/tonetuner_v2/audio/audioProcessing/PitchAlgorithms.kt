@@ -32,24 +32,24 @@ object PitchAlgorithms {
             .minByOrNull { it.second }?.first!!
     }
 
-    val twmOLD: (List<Harmonic>) -> Float? = { harmonics ->
-        // Generate function for comparing different fundamental frequencies
-        val calcScores = twmScore(harmonics)
-
-        // todo what do each of these steps do?
-        val pass1 = (-29f..7f step 1f) // generate range from -29.0..7.0
-            .map { 440 * 2f.pow(it / 12) } // ????
-            .map { Harmonic(it, calcScores(it)) } //
-            .minByOrNull { it.mag }?.freq!!
-
-        val n = 12f * ln(pass1 / 440f) / ln(2f)
-
-        // return
-        ((n - 1f)..(n + 1f) step 0.1f)
-            .map { 440 * 2f.pow(it / 12) }
-            .map { Harmonic(it, calcScores(it)) }
-            .minByOrNull { it.mag }?.freq
-    }
+//    val twmOLD: (List<Harmonic>) -> Float? = { harmonics ->
+//        // Generate function for comparing different fundamental frequencies
+//        val calcScores = twmScore(harmonics)
+//
+//        // todo what do each of these steps do?
+//        val pass1 = (-29f..7f step 1f) // generate range from -29.0..7.0
+//            .map { 440 * 2f.pow(it / 12) } // ????
+//            .map { Harmonic(it, calcScores(it)) } //
+//            .minByOrNull { it.mag }?.freq!!
+//
+//        val n = 12f * ln(pass1 / 440f) / ln(2f)
+//
+//        // return
+//        ((n - 1f)..(n + 1f) step 0.1f)
+//            .map { 440 * 2f.pow(it / 12) }
+//            .map { Harmonic(it, calcScores(it)) }
+//            .minByOrNull { it.mag }?.freq
+//    }
 
     /**
      * Generates a function to calculate Two Way Mismatch scores for pitch detection of an audio signal.
