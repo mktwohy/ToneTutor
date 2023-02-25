@@ -8,6 +8,9 @@ buildscript {
         material_ui_version = '1.8.0'
         lifecycle_version = '2.5.1'
         ktx_version = '1.9.0'
+        jackson_version = '2.12.1'
+        ktlint_version = '0.43.2'
+        timber_version = '5.0.1'
 
         // testing
         junit_version = '4.13.2'
