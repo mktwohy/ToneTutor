@@ -1,13 +1,15 @@
 package com.example.tonetuner_v2.audio.audioSources
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
+import androidx.annotation.RequiresPermission
 import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.util.Logger
 import com.example.tonetuner_v2.util.checkMicPermission
-import com.example.tonetuner_v2.util.logd
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
@@ -15,6 +17,7 @@ import java.util.concurrent.BlockingQueue
  * Opens the microphone and buffers audio data
  * @author gtruch
  */
+@SuppressLint("MissingPermission")
 class MicSource(
     val context: Context,
     val sampleRate: Int = SAMPLE_RATE,
@@ -32,22 +35,23 @@ class MicSource(
      * Begin capturing and buffering audio. Must grant RECORD_AUDIO permission before calling
      * this function. If permission is denied, audio will not be captured
      * */
+    @RequiresPermission("android.permission.RECORD_AUDIO")
     fun startCapture() {
-        logd("attempt start")
+        Logger.i("Attempt start MicSource")
         if (running) {
-            logd("already running")
+            Logger.i("MicSource already running")
             return
         }
 
         if (!checkMicPermission(context)) {
-            logd("permission denied")
+            Logger.e("Microphone permission denied")
             running = false
             return
         }
 
         running = true
         Thread {
-            logd("thread start")
+            Logger.i("Start microphone capture")
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO)
 
             val buffer = FloatArray(bufferSize)
@@ -72,7 +76,7 @@ class MicSource(
             }
             ar.stop()
             ar.release()
-            logd("thread stop")
+            Logger.i("End microphone capture")
         }.start()
     }
 

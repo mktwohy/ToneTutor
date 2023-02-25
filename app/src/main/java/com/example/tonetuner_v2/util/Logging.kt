@@ -1,29 +1,60 @@
 package com.example.tonetuner_v2.util
 
-import android.util.Log
+import timber.log.Timber
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
-fun logd(message: Any) { Log.d("m_tag", message.toString()) }
-
-fun logTime(title: String = "", block: () -> Unit) {
-    measureTimeMillis { block() }.also { logd("$title $it ms") }
-}
-
-fun avgTimeMillis(repeat: Int, block: () -> Unit): Float {
-    val times = mutableListOf<Long>()
-    repeat(repeat) {
-        measureTimeMillis { block() }
-            .also { times += it }
+object Logger {
+    fun init() {
+        Timber.plant(Timber.DebugTree())
     }
-    return times.average().toFloat()
-}
 
-fun avgTimeNano(repeat: Int, block: () -> Any?): Float {
-    val times = mutableListOf<Long>()
-    repeat(repeat) {
-        measureNanoTime { block() }
-            .also { times += it }
+    fun d(message: String) {
+        Timber.d(message)
     }
-    return times.average().toFloat()
+
+    fun i(message: String) {
+        Timber.i(message)
+    }
+
+    fun w(message: String) {
+        Timber.w(message)
+    }
+
+    fun e(message: String) {
+        Timber.e(message)
+    }
+
+    fun e(error: Throwable) {
+        Timber.e(error)
+    }
+
+    fun v(message: String) {
+        Timber.v(message)
+    }
+
+    fun measureTimeMillis(title: String? = null, block: () -> Unit) {
+        measureTimeMillis(block).also { d("$title $it ms") }
+    }
+
+    fun measureAvgTimeMillis(repeat: Int, title: String? = null, block: () -> Unit) {
+        val measuredTimes = List(repeat) { measureTimeMillis(block) }
+        val message = avgTimeMessage(title, measuredTimes.average(), "ms")
+        d(message)
+    }
+
+    fun measureAvgTimeNano(repeat: Int, title: String? = null, block: () -> Unit) {
+        val measuredTimes = List(repeat) { measureNanoTime(block) }
+        val message = avgTimeMessage(title, measuredTimes.average(), "ns")
+        d(message)
+    }
+
+    private fun avgTimeMessage(title: String?, avgTime: Double, unit: String): String =
+        buildString {
+            append("Measure average time")
+            if (title != null) {
+                append(" for $title")
+            }
+            append(": $avgTime $unit")
+        }
 }
