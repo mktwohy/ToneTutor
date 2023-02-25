@@ -1,11 +1,10 @@
 package com.example.tonetuner_v2.app
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import android.Manifest
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.MicSource

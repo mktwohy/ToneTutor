@@ -53,7 +53,6 @@ fun <T> List<List<T>>.groupByIndex() =
     else
         List(this.maxOf { it.size }) { this.elementsAtIndex(it) }
 
-
 @JvmName("sumListsFloat")
 fun List<List<Float>>.sumLists(): List<Float> =
     this.groupByIndex().map { it.sum() }

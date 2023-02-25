@@ -15,7 +15,7 @@ operator fun Color.plus(other: Color): Color {
     return Color(r01, g01, b01, a01)
 }
 
-//operator fun Color.plus(other: Color): Color =
+// operator fun Color.plus(other: Color): Color =
 //    Color(
 //        red = average(this.red, other.red),
 //        green = average(this.green, other.green),
@@ -23,11 +23,11 @@ operator fun Color.plus(other: Color): Color {
 //        alpha = average(this.alpha, other.alpha)
 //    )
 
-//@ColorInt
-//private fun Color.toColorInt(): Int {
+// @ColorInt
+// private fun Color.toColorInt(): Int {
 //    val a = (255 * alpha).roundToInt() shl 32 and -0x1000000
 //    val r = (255 * red).roundToInt() shl 16 and 0x00FF0000
 //    val g = (255 * green).roundToInt() shl 8 and 0x0000FF00
 //    val b = (255 * blue).roundToInt() and 0x000000FF
 //    return a or r or g or b
-//}
+// }
