@@ -6,8 +6,8 @@ import com.example.signallib.enums.WaveShape
 import com.example.tonetuner_v2.util.calcError
 import com.example.tonetuner_v2.util.calcFreq
 import com.example.tonetuner_v2.util.calcInterval
-import com.example.tonetuner_v2.util.toNote
-import com.example.tonetuner_v2.util.toNoteAndCents
+import com.example.tonetuner_v2.util.freqToClosestNote
+import com.example.tonetuner_v2.util.freqToNoteAndCents
 import java.util.LinkedList
 import kotlin.random.Random
 
@@ -41,7 +41,7 @@ object PitchTest {
         val cents: Int?
 
         init {
-            val (n, c) = pitch.toNoteAndCents()
+            val (n, c) = freqToNoteAndCents(pitch)
             note = n
             cents = c
         }
@@ -58,7 +58,7 @@ object PitchTest {
         val actualCents = output.cents
         val actualPitch = output.pitch
         val percentError = calcError(input.pitch, output.pitch)
-        val intervalError = output.pitch.toNote()?.let { input.note.calcInterval(it) }
+        val intervalError = freqToClosestNote(output.pitch)?.let { input.note.calcInterval(it) }
         val numSamples: Int?
         val amp: Float?
         val waveShape: WaveShape?

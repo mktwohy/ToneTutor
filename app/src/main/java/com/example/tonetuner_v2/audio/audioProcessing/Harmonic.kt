@@ -1,9 +1,9 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.extensions.mapToIndices
+import com.example.tonetuner_v2.extensions.normalizeBySum
 import com.example.tonetuner_v2.util.freqToPitch
-import com.example.tonetuner_v2.util.mapToIndices
-import com.example.tonetuner_v2.util.normalizeBySum
 
 data class Harmonic(var freq: Float, var mag: Float)
 
@@ -19,10 +19,8 @@ fun List<Harmonic>.assignMagsToIndices(size: Int): List<Float> {
     if (this.isEmpty()) return listOf()
 
     val ret = FloatArray(size)
-
     val indexToValue = this.map { it.freq.toInt() to it.mag }
 //    val size = indexToValue.maxOf { it.first } + 1
-
     for ((index, value) in indexToValue) {
         if (index < size)
             ret[index] = value
@@ -43,7 +41,7 @@ fun List<Harmonic>.toGraphRepr() =
         .normalizeBySum()
 
 fun List<Harmonic>.toFingerPrint(): List<Float> {
-    val f = this.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
+    val f = this.associate { it.freq.toInt() to it.mag }
     return List(AppModel.FINGERPRINT_SIZE) { i -> f[i] ?: 0f }
 }
 
@@ -57,8 +55,8 @@ fun List<List<Harmonic>>.sumLists(): List<Harmonic> =
                 .groupBy { it.freq }
                 .map { group ->
                     Harmonic(
-                        group.key,
-                        group.value.map { it.mag }.sum()
+                        freq = group.key,
+                        mag = group.value.map { it.mag }.sum()
                     )
                 }
     }

@@ -12,9 +12,8 @@ import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.spectrumType
 import com.example.tonetuner_v2.audio.audioProcessing.toFingerPrint
 import com.example.tonetuner_v2.audio.audioProcessing.toGraphRepr
-import com.example.tonetuner_v2.ui.composables.old.XYPlot
+import com.example.tonetuner_v2.extensions.step
 import com.example.tonetuner_v2.ui.navigation.MainLayout
-import com.example.tonetuner_v2.util.toList
 
 // todo Composable is too stateful.
 // todo fft does not plot correctly
@@ -29,7 +28,7 @@ fun FftOrSpectrumViewer(modifier: Modifier) {
                     modifier = Modifier.fillMaxSize(),
                     barValues = AppModel.fingerPrint.toFingerPrint(),
                     xTicks = List(AppModel.FINGERPRINT_SIZE) { i -> if (i == 0) 'f' else i + 1 },
-                    yTicks = (0.0f..1.0f).toList(0.1f).map { it.toString().substring(0..2) },
+                    yTicks = (0.0f..1.0f step 0.1f).map { it.toString().substring(0..2) },
                     barColor = Color.Green,
                     tickColor = Color.White
                 )

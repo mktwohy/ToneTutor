@@ -7,7 +7,7 @@ import com.example.signallib.enums.Note
 import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 import com.example.tonetuner_v2.ui.navigation.MainLayout
-import com.example.tonetuner_v2.util.toNoteAndCents
+import com.example.tonetuner_v2.util.freqToNoteAndCents
 
 object AppModel {
     // State
@@ -49,7 +49,7 @@ object AppModel {
         quality = audioProc.quality
         fingerPrint = audioProc.fingerPrint
         fft = audioProc.fft
-        val (newNote, newCents) = pitch.toNoteAndCents()
+        val (newNote, newCents) = freqToNoteAndCents(pitch)
         note = newNote
         cents = newCents
     }
