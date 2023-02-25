@@ -1,7 +1,5 @@
 package com.example.tonetuner_v2.extensions
 
-import com.example.tonetuner_v2.util.groupByIndex
-
 fun List<Float>.normalize(
     lowerBound: Float = -1f,
     upperBound: Float = 1f
@@ -41,6 +39,28 @@ fun MutableList<Float>.normalize(
     }
 }
 
+fun <T> List<List<T>>.elementsAtIndex(index: Int): List<T> {
+    val elements = mutableListOf<T>()
+    for (list in this) {
+        if (index in list.indices) elements += list[index]
+    }
+    return elements
+}
+
+fun <T> List<List<T>>.groupByIndex() =
+    if (this.isEmpty())
+        listOf()
+    else
+        List(this.maxOf { it.size }) { this.elementsAtIndex(it) }
+
+
 @JvmName("sumListsFloat")
 fun List<List<Float>>.sumLists(): List<Float> =
     this.groupByIndex().map { it.sum() }
+
+fun <T> List<Pair<Int, T>>.mapToIndices(defaultValue: T): List<T> =
+    this.toMap()
+        .let { indexToValue ->
+            val maxIndex = indexToValue.maxOfOrNull { it.key } ?: 0
+            MutableList(maxIndex + 1) { indexToValue[it] ?: defaultValue }
+        }

@@ -4,6 +4,9 @@ import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 import com.example.tonetuner_v2.extensions.factorial
 import kotlin.math.pow
 
+fun <T> average(vararg numbers: T): Float where T : Number =
+    numbers.map { it.toFloat() }.sum() / numbers.size
+
 fun percentage(value: Number, total: Number): Float =
     (value.toFloat() / total.toFloat()) * 100f
 
