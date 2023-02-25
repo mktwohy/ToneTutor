@@ -2,7 +2,7 @@ package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.signallib.enums.Note.Companion.bend
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.util.arange
+import com.example.tonetuner_v2.util.step
 import kotlin.math.abs
 import kotlin.math.ln
 import kotlin.math.pow
@@ -27,7 +27,7 @@ object PitchAlgorithms {
         val maxFreq = noteEst.bend(0.50f) // 50 cents sharp
 
         // refine closest note's frequency and return
-        arange(minFreq, maxFreq, 0.1f)
+        (minFreq..maxFreq step 0.1f)
             .map { it to calcScores(it) }
             .minByOrNull { it.second }?.first!!
     }
@@ -37,7 +37,7 @@ object PitchAlgorithms {
         val calcScores = twmScore(harmonics)
 
         // todo what do each of these steps do?
-        val pass1 = arange(-29f, 7f) // generate range from -29.0..7.0
+        val pass1 = (-29f..7f step 1f) // generate range from -29.0..7.0
             .map { 440 * 2f.pow(it / 12) } // ????
             .map { Harmonic(it, calcScores(it)) } //
             .minByOrNull { it.mag }?.freq!!
@@ -45,7 +45,7 @@ object PitchAlgorithms {
         val n = 12f * ln(pass1 / 440f) / ln(2f)
 
         // return
-        arange(n - 1f, n + 1f, 0.1f)
+        ((n - 1f)..(n + 1f) step 0.1f)
             .map { 440 * 2f.pow(it / 12) }
             .map { Harmonic(it, calcScores(it)) }
             .minByOrNull { it.mag }?.freq
@@ -87,7 +87,7 @@ object PitchAlgorithms {
             val numHarmonics = (maxFreq / fund).roundToLong()
 
             // Generate the harmonics of the given fundamental
-            val predictedHarmonics = arange(start = fund, stop = numHarmonics * fund, step = fund)
+            val predictedHarmonics = (fund..(numHarmonics * fund) step fund)
 
             // Error based on the distance between each predicted harmonic and its closest measured harmonic
             val err_ptom = predictedHarmonics.map { ph ->

@@ -27,13 +27,16 @@ fun Int.fact() =
 fun combinations(n: Int, k: Int) =
     n.fact() / k.fact() * (n - k).fact()
 
-fun ClosedRange<Float>.toList(step: Float): List<Float> {
-    val df = DecimalFormat("#.#")
-    df.roundingMode = RoundingMode.HALF_DOWN
-    val size = ((endInclusive - start) / step).roundToInt() + 1
-    return List(size) { index ->
-        (step * index + start).also { df.format(it) }
+infix fun ClosedRange<Float>.step(step: Float): Iterable<Float> {
+    require(start.isFinite())
+    require(endInclusive.isFinite())
+    require(step > 0.0) { "Step must be positive, was: $step." }
+    val sequence = generateSequence(start) { previous ->
+        if (previous == Float.POSITIVE_INFINITY) return@generateSequence null
+        val next = previous + step
+        if (next > endInclusive) null else next
     }
+    return sequence.asIterable()
 }
 
 fun Float.toRadian() = this * Math.PI.toFloat() / 180
@@ -48,17 +51,6 @@ fun List<Float>.normalizeBySum(): List<Float> {
 @JvmName("sumListsFloat")
 fun List<List<Float>>.sumLists(): List<Float> =
     this.groupByIndex().map { it.sum() }
-
-fun arange(start: Float, stop: Float? = null, step: Float = 1f): List<Float> {
-    val (lStart, lStop) =
-        if (stop == null)
-            0f to start - 1f
-        else
-            start to stop
-
-    val size = ((lStop - lStart) / step).roundToInt() + 1
-    return List(size) { index -> step * index + lStart }
-}
 
 fun poly(x: List<Float>, y: List<Float>): Harmonic {
     val coef = polyFit(x, y)

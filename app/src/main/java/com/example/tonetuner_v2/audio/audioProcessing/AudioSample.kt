@@ -2,9 +2,9 @@ package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.tonetuner_v2.app.AppModel
 import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
-import com.example.tonetuner_v2.util.arange
 import com.example.tonetuner_v2.util.poly
 import com.example.tonetuner_v2.util.quadInterp
+import com.example.tonetuner_v2.util.step
 import org.jtransforms.fft.FloatFFT_1D
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -72,8 +72,8 @@ class AudioSample(
     }
 
     private fun calcTime(): List<Float> {
-        val s = sampleRate.toFloat()
-        return arange(1f / s, this.size / s, 1f / s)
+        val inverseSampleRate = 1f / sampleRate
+        return (inverseSampleRate..(size.toFloat() / sampleRate) step inverseSampleRate).toList()
     }
 
     /** The fourier transform of the audio data (list size == PROC_BUFFER_SIZE / 2 )*/
@@ -89,9 +89,8 @@ class AudioSample(
     }
 
     /** The frequencies associated with fft (list size == PROC_BUFFER_SIZE / 2 ) */
-    private fun calcFftFreq(): List<Float> {
-        return arange(fftMag.size.toFloat()).map { it * sampleRate / (fftMag.size * 2) }
-    }
+    private fun calcFftFreq(): List<Float> =
+        (0..fftMag.size).map { it.toFloat() * sampleRate / (fftMag.size * 2) }
 
     // todo does this work correctly? you're creating a list of Spectrums
     /** The harmonics extracted from the fourier transform */
