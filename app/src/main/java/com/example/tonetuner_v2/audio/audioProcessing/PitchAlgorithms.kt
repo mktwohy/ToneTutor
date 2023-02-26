@@ -1,7 +1,7 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
 import com.example.signallib.enums.Note.Companion.bend
-import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.app.AppSettings
 import com.example.tonetuner_v2.extensions.step
 import kotlin.math.abs
 import kotlin.math.pow
@@ -17,7 +17,7 @@ object PitchAlgorithms {
         val calcScores = twmScore(harmonics)
 
         // estimate the closest note
-        val noteEst = AppModel.NOTE_RANGE
+        val noteEst = AppSettings.NOTE_RANGE
             .map { it to calcScores(it.freq) }
             .minByOrNull { it.second }?.first!!
 

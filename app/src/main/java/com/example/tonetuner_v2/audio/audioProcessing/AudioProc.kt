@@ -1,17 +1,15 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
-import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
-import com.example.tonetuner_v2.app.AppModel.FFT_QUEUE_SIZE
-import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_QUEUE_SIZE
-import com.example.tonetuner_v2.app.AppModel.FINGERPRINT_SIZE
-import com.example.tonetuner_v2.app.AppModel.NOISE_THRESHOLD
-import com.example.tonetuner_v2.app.AppModel.PITCH_QUEUE_SIZE
-import com.example.tonetuner_v2.app.AppModel.PROC_BUFFER_SIZE
-import com.example.tonetuner_v2.app.AppModel.QUALITY_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppSettings.CAPTURE_BUFFER_SIZE
+import com.example.tonetuner_v2.app.AppSettings.FFT_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppSettings.FINGERPRINT_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppSettings.FINGERPRINT_SIZE
+import com.example.tonetuner_v2.app.AppSettings.NOISE_THRESHOLD
+import com.example.tonetuner_v2.app.AppSettings.PITCH_QUEUE_SIZE
+import com.example.tonetuner_v2.app.AppSettings.PROC_BUFFER_SIZE
+import com.example.tonetuner_v2.app.AppSettings.QUALITY_QUEUE_SIZE
 import com.example.tonetuner_v2.audio.audioSources.AudioSource
 import com.example.tonetuner_v2.extensions.forcedOffer
-import com.example.tonetuner_v2.ui.navigation.MainLayout
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 /**
@@ -92,9 +90,11 @@ class AudioProc(
     ) {
         pitchQueue.forcedOffer(pitch)
         qualityQueue.forcedOffer(quality)
-        when (AppModel.spectrumType) {
-            MainLayout.SpectrumType.FINGERPRINT -> fingerPrintQueue.forcedOffer(fingerPrint)
-            MainLayout.SpectrumType.FFT -> fftQueue.forcedOffer(fft)
-        }
+//        when (AppModel.spectrumType) {
+//            MainLayout.SpectrumType.FINGERPRINT -> fingerPrintQueue.forcedOffer(fingerPrint)
+//            MainLayout.SpectrumType.FFT -> fftQueue.forcedOffer(fft)
+//        }
+        fingerPrintQueue.forcedOffer(fingerPrint)
+        fftQueue.forcedOffer(fft)
     }
 }

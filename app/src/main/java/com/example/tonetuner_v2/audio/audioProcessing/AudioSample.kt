@@ -1,7 +1,7 @@
 package com.example.tonetuner_v2.audio.audioProcessing
 
-import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.app.AppSettings
+import com.example.tonetuner_v2.app.AppSettings.SAMPLE_RATE
 import com.example.tonetuner_v2.extensions.step
 import com.example.tonetuner_v2.util.poly
 import com.example.tonetuner_v2.util.quadInterp
@@ -118,7 +118,7 @@ class AudioSample(
 
     /** Calculate the harmonic fingerprint */
     private fun calcNonNormalizedFingerprint(): List<Harmonic> =
-        (1..AppModel.FINGERPRINT_SIZE).map { h ->
+        (1..AppSettings.FINGERPRINT_SIZE).map { h ->
             val i = (h * pitch * fftMag.size * 2 / sampleRate).roundToInt()
             if (i > fftFreq.size - 2)
                 Harmonic(0f, 0f)

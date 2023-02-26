@@ -2,14 +2,14 @@ package com.example.tonetuner_v2.audio.audioSources
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import androidx.annotation.RequiresPermission
-import com.example.tonetuner_v2.app.AppModel.CAPTURE_BUFFER_SIZE
-import com.example.tonetuner_v2.app.AppModel.SAMPLE_RATE
+import com.example.tonetuner_v2.app.AppSettings.CAPTURE_BUFFER_SIZE
+import com.example.tonetuner_v2.app.AppSettings.SAMPLE_RATE
 import com.example.tonetuner_v2.extensions.hasPermission
+import com.example.tonetuner_v2.util.ContextHolder
 import com.example.tonetuner_v2.util.Logger
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
@@ -20,7 +20,6 @@ import java.util.concurrent.BlockingQueue
  */
 @SuppressLint("MissingPermission")
 class MicSource(
-    val context: Context, // TODO add ContextHolder
     val sampleRate: Int = SAMPLE_RATE,
     val bufferSize: Int = CAPTURE_BUFFER_SIZE,
 ) : AudioSource {
@@ -44,7 +43,7 @@ class MicSource(
             return
         }
 
-        if (!context.hasPermission(Manifest.permission.RECORD_AUDIO)) {
+        if (!ContextHolder.get().hasPermission(Manifest.permission.RECORD_AUDIO)) {
             Logger.e("Microphone permission denied")
             running = false
             return
