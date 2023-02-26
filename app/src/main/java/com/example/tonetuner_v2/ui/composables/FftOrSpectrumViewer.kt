@@ -9,35 +9,48 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.tonetuner_v2.app.AppModel
-import com.example.tonetuner_v2.app.AppModel.spectrumType
+import com.example.tonetuner_v2.app.MainViewModel
+import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 import com.example.tonetuner_v2.audio.audioProcessing.toFingerPrint
 import com.example.tonetuner_v2.audio.audioProcessing.toGraphRepr
 import com.example.tonetuner_v2.extensions.step
-import com.example.tonetuner_v2.ui.navigation.MainLayout
 
 // todo Composable is too stateful.
 // todo fft does not plot correctly
 @Composable
-fun FftOrSpectrumViewer(modifier: Modifier) {
+fun FftOrSpectrumViewer(
+    fingerPrint: List<Harmonic>?,
+    fft: List<Harmonic>?,
+    spectrumType: MainViewModel.SpectrumType,
+    onSpectrumTypeChange: (MainViewModel.SpectrumType) -> Unit,
+    modifier: Modifier
+) {
     Box(
-        modifier.clickable { AppModel.changeSpectrumType() }
+        modifier.clickable {
+            onSpectrumTypeChange(
+                when (spectrumType) {
+                    MainViewModel.SpectrumType.FFT -> MainViewModel.SpectrumType.FINGERPRINT
+                    MainViewModel.SpectrumType.FINGERPRINT -> MainViewModel.SpectrumType.FFT
+                }
+            )
+        }
     ) {
         when (spectrumType) {
-            MainLayout.SpectrumType.FINGERPRINT ->
+            MainViewModel.SpectrumType.FINGERPRINT ->
                 BarChart(
                     modifier = Modifier.fillMaxSize(),
-                    barValues = AppModel.fingerPrint.toFingerPrint(),
+                    barValues = fingerPrint!!.toFingerPrint(),
                     xTicks = List(AppModel.FINGERPRINT_SIZE) { i -> if (i == 0) 'f' else i + 1 },
                     yTicks = (0.0f..1.0f step 0.1f).map { it.toString().substring(0..2) },
                     barColor = Color.Green,
                     tickColor = Color.White
                 )
-            MainLayout.SpectrumType.FFT ->
+            MainViewModel.SpectrumType.FFT ->
                 XYPlot(
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f),
-                    y = AppModel.fft.toGraphRepr()
+                    y = fft!!.toGraphRepr()
                 )
         }
     }

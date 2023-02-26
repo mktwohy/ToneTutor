@@ -11,23 +11,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.app.MainViewModel
 import com.example.tonetuner_v2.ui.composables.CircularTuner
 import com.example.tonetuner_v2.ui.composables.FftOrSpectrumViewer
 import com.example.tonetuner_v2.ui.composables.FreezeButton
 import com.example.tonetuner_v2.ui.composables.TapeMeter
 
-object MainLayout {
-    enum class SpectrumType { FFT, FINGERPRINT }
-}
+
 
 @Composable
 fun MainScreen(
+    viewModel: MainViewModel,
     modifier: Modifier,
-    navController: NavController,
-    color: Color,
-    spectrumType: MainLayout.SpectrumType
+//    navController: NavController,
 ) {
     Column(
         modifier = modifier,
@@ -44,6 +40,8 @@ fun MainScreen(
 //        }
         // On/Off/Freeze button
         FreezeButton(
+            isFrozen = viewModel.isFrozen,
+            onIsFrozenChange = { viewModel.isFrozen = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.05f)
@@ -52,18 +50,26 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.3f),
-            note = AppModel.note,
-            centsErr = AppModel.cents
+            note = viewModel.note,
+            centsErr = viewModel.cents
         )
         TapeMeter(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.3f)
                 .border(2.dp, Color.White),
-            value = AppModel.quality,
+            value = viewModel.quality,
             range = 3,
             allowNegatives = false
         )
-        FftOrSpectrumViewer(modifier = Modifier.fillMaxSize())
+        FftOrSpectrumViewer(
+            fingerPrint = viewModel.fingerPrint,
+            fft = viewModel.fft,
+            spectrumType = viewModel.spectrumType,
+            onSpectrumTypeChange = {
+                viewModel.spectrumType = it
+            },
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
