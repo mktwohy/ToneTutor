@@ -11,16 +11,18 @@ import com.example.tonetuner_v2.audio.audioSources.MicSource
 import com.example.tonetuner_v2.extensions.requestFullscreen
 import com.example.tonetuner_v2.extensions.requestPermission
 import com.example.tonetuner_v2.ui.navigation.Navigation
+import com.example.tonetuner_v2.util.ContextHolder
 import com.example.tonetuner_v2.util.Logger
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ContextHolder.hold(this)
         Logger.init()
         requestFullscreen()
         startAppUpdateThread(
             AudioProc(
-                audioSource = MicSource(this),
+                audioSource = MicSource(),
                 pitchAlgo = PitchAlgorithms.twm
             )
         )
