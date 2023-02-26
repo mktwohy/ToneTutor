@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                 if (!viewModel.isFrozen) {
                     viewModel.update(audioProc)
                 }
-                Thread.sleep(AppModel.UI_LAG)
+                Thread.sleep(AppSettings.UI_LAG)
             }
         }.start()
     }

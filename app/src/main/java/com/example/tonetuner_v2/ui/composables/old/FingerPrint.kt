@@ -11,7 +11,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
-import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.app.AppSettings
 import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 
 @Composable
@@ -23,7 +23,7 @@ fun FingerPrint(
     if (fingerPrint.isEmpty()) return
 
     val f = fingerPrint.map { it.freq.toInt() to it.mag.toFloat() }.toMap()
-    val bars = List(AppModel.FINGERPRINT_SIZE) { i -> f[i] ?: 0f }
+    val bars = List(AppSettings.FINGERPRINT_SIZE) { i -> f[i] ?: 0f }
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         Canvas(

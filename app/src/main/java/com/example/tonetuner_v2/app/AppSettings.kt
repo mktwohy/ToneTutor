@@ -2,8 +2,8 @@ package com.example.tonetuner_v2.app
 
 import com.example.signallib.enums.Note
 
-object AppModel {
-    // Settings (requires app restart)
+// TODO use persistent storage
+object AppSettings {
     const val PROC_BUFFER_SIZE = 2048 // values < 512 cause crash
     const val CAPTURE_BUFFER_SIZE = 2048
     const val SAMPLE_RATE = 44100

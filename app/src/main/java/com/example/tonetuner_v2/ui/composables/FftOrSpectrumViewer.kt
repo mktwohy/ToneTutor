@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.tonetuner_v2.app.AppModel
+import com.example.tonetuner_v2.app.AppSettings
 import com.example.tonetuner_v2.app.MainViewModel
 import com.example.tonetuner_v2.audio.audioProcessing.Harmonic
 import com.example.tonetuner_v2.audio.audioProcessing.toFingerPrint
@@ -40,7 +40,7 @@ fun FftOrSpectrumViewer(
                 BarChart(
                     modifier = Modifier.fillMaxSize(),
                     barValues = fingerPrint!!.toFingerPrint(),
-                    xTicks = List(AppModel.FINGERPRINT_SIZE) { i -> if (i == 0) 'f' else i + 1 },
+                    xTicks = List(AppSettings.FINGERPRINT_SIZE) { i -> if (i == 0) 'f' else i + 1 },
                     yTicks = (0.0f..1.0f step 0.1f).map { it.toString().substring(0..2) },
                     barColor = Color.Green,
                     tickColor = Color.White
