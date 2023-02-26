@@ -1,6 +1,5 @@
 package com.example.tonetuner_v2.app
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,10 +11,7 @@ import com.example.tonetuner_v2.audio.audioProcessing.AudioProc
 import com.example.tonetuner_v2.audio.audioProcessing.PitchAlgorithms
 import com.example.tonetuner_v2.audio.audioSources.MicSource
 import com.example.tonetuner_v2.extensions.requestFullscreen
-import com.example.tonetuner_v2.extensions.requestPermission
 import com.example.tonetuner_v2.ui.navigation.MainScreen
-import com.example.tonetuner_v2.util.ContextHolder
-import com.example.tonetuner_v2.util.Logger
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
