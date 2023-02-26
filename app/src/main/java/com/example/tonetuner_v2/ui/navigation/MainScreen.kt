@@ -17,8 +17,6 @@ import com.example.tonetuner_v2.ui.composables.FftOrSpectrumViewer
 import com.example.tonetuner_v2.ui.composables.FreezeButton
 import com.example.tonetuner_v2.ui.composables.TapeMeter
 
-
-
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,

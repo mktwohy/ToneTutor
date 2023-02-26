@@ -1,19 +1,19 @@
 package com.example.tonetuner_v2.ui.navigation
 //
-//import androidx.compose.foundation.layout.fillMaxSize
-//import androidx.compose.runtime.Composable
-//import androidx.compose.ui.Modifier
-//import androidx.compose.ui.graphics.Color
-//import androidx.navigation.NavType
-//import androidx.navigation.compose.NavHost
-//import androidx.navigation.compose.composable
-//import androidx.navigation.compose.rememberNavController
-//import androidx.navigation.navArgument
-//import com.example.tonetuner_v2.app.AppModel
-//import com.example.tonetuner_v2.app.MainViewModel
+// import androidx.compose.foundation.layout.fillMaxSize
+// import androidx.compose.runtime.Composable
+// import androidx.compose.ui.Modifier
+// import androidx.compose.ui.graphics.Color
+// import androidx.navigation.NavType
+// import androidx.navigation.compose.NavHost
+// import androidx.navigation.compose.composable
+// import androidx.navigation.compose.rememberNavController
+// import androidx.navigation.navArgument
+// import com.example.tonetuner_v2.app.AppModel
+// import com.example.tonetuner_v2.app.MainViewModel
 //
-//@Composable
-//fun Navigation(viewModel: MainViewModel) {
+// @Composable
+// fun Navigation(viewModel: MainViewModel) {
 //    val navController = rememberNavController()
 //    NavHost(
 //        navController = navController,
@@ -43,4 +43,4 @@ package com.example.tonetuner_v2.ui.navigation
 //            )
 //        }
 //    }
-//}
+// }
