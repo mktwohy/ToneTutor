@@ -89,4 +89,7 @@ dependencies {
 
     // Timber (logging)
     implementation "com.jakewharton.timber:timber:$timber_version"
+
+    // Permission Handling
+    implementation 'com.google.accompanist:accompanist-permissions:0.28.0'
 }
