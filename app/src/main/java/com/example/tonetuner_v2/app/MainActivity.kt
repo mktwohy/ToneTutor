@@ -20,8 +20,6 @@ import com.example.tonetuner_v2.util.Logger
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ContextHolder.hold(this)
-        Logger.init()
         requestFullscreen()
         startAppUpdateThread(
             AudioProc(
@@ -42,13 +40,6 @@ class MainActivity : ComponentActivity() {
     private fun startAppUpdateThread(audioProc: AudioProc) {
         val viewModel by viewModels<MainViewModel>()
 
-        requestPermission(Manifest.permission.RECORD_AUDIO) { isGranted ->
-            if (isGranted) {
-                when (audioProc.audioSource) {
-                    is MicSource -> audioProc.audioSource.startCapture()
-                }
-            }
-        }
         Thread {
             while (true) {
                 if (!viewModel.isFrozen) {
