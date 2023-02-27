@@ -14,16 +14,13 @@ import com.example.tonetuner_v2.extensions.requestFullscreen
 import com.example.tonetuner_v2.ui.navigation.MainScreen
 
 class MainActivity : ComponentActivity() {
+    private val app by lazy { application as App }
+    private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestFullscreen()
-        startAppUpdateThread(
-            AudioProc(
-                audioSource = MicSource(),
-                pitchAlgo = PitchAlgorithms.twm
-            )
-        )
-        val viewModel by viewModels<MainViewModel>()
+        startAppUpdateThread()
         setContent {
             MainScreen(
                 viewModel = viewModel,
@@ -33,13 +30,11 @@ class MainActivity : ComponentActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun startAppUpdateThread(audioProc: AudioProc) {
-        val viewModel by viewModels<MainViewModel>()
-
+    private fun startAppUpdateThread() {
         Thread {
             while (true) {
                 if (!viewModel.isFrozen) {
-                    viewModel.update(audioProc)
+                    viewModel.update(app.audioProcessor)
                 }
                 Thread.sleep(AppSettings.UI_LAG)
             }
